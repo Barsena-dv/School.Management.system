@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academic Configuration &amp; Rules | EduERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#197fe6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                        "obsidian": "#121212",
+                        "surface": "#1e242b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #293038; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3c4753; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex flex-col min-h-screen">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-solid border-slate-200 dark:border-[#293038] px-10 py-3 bg-white dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">school</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">EduERP Academic</h2>
+</div>
+<nav class="flex items-center gap-6">
+<a class="text-sm font-medium opacity-60 hover:opacity-100 transition-opacity" href="#">Dashboard</a>
+<a class="text-sm font-medium opacity-60 hover:opacity-100 transition-opacity" href="#">Students</a>
+<a class="text-sm font-medium opacity-60 hover:opacity-100 transition-opacity" href="#">Faculty</a>
+<a class="text-sm font-medium text-primary" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<div class="hidden lg:flex items-center bg-slate-100 dark:bg-[#293038] rounded-lg px-3 py-1.5 w-64">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400" placeholder="Search settings..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#293038] rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#293038] rounded-lg">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="size-8 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700">
+<img alt="Admin" class="w-full h-full object-cover" data-alt="Administrator profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpZiiWE5hVukCd_8kRXdrupR4dpTMErfsyLzWia2Q03T8rVt6aZ_D4NzMFFI-6kGtVYqWl2NtSKm1Xz7AKFjeiu-CCEka90rac4Hg9APO2UZhUToFav0xgNMPR9WdmakUf7t0cQ8MNVjban8pVBQTimbgXWltUhmyOgECafGzH6X0nC-VKaS8zeL8FC9X8NywxBVGSdRzJDrPbx7wwWJkc1C7JWQE7eBnLYJjCQ64Cd16L4aDxf5VEBLJ5TTwpwRurSl-uDdpNirM"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-[#293038] flex flex-col p-4 bg-white dark:bg-background-dark">
+<div class="mb-6">
+<p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-4 px-3">Global Administration</p>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium opacity-60 hover:bg-slate-100 dark:hover:bg-[#293038] hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span> General
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium opacity-60 hover:bg-slate-100 dark:hover:bg-[#293038] hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">palette</span> Branding
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium bg-primary/10 text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] fill-current">gavel</span> Academic Rules
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium opacity-60 hover:bg-slate-100 dark:hover:bg-[#293038] hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">lock</span> Permissions
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium opacity-60 hover:bg-slate-100 dark:hover:bg-[#293038] hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">extension</span> Integrations
+                        </a>
+</div>
+</div>
+</aside>
+<!-- Content Area -->
+<div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+<!-- Configuration Panel -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-8 bg-slate-50 dark:bg-background-dark/50">
+<div class="max-w-3xl mx-auto space-y-10">
+<!-- Header Section -->
+<section>
+<h1 class="text-3xl font-black tracking-tight mb-2">Academic Configuration</h1>
+<p class="text-slate-500 dark:text-slate-400">Define the core institutional logic for student tracking, grading ranges, and automated performance alerts.</p>
+</section>
+<!-- General Thresholds -->
+<section class="space-y-6">
+<div class="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-slate-800">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<h2 class="text-lg font-bold">General Thresholds</h2>
+</div>
+<!-- Attendance Slider -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<label class="text-sm font-semibold">Attendance Warning Threshold (%)</label>
+<span class="bg-primary/20 text-primary text-xs font-bold px-2 py-0.5 rounded">Current: 75%</span>
+</div>
+<div class="relative h-6 flex items-center">
+<div class="absolute w-full h-2 bg-slate-200 dark:bg-[#293038] rounded-full"></div>
+<div class="absolute w-[75%] h-2 bg-primary rounded-full"></div>
+<div class="absolute left-[75%] size-4 bg-white border-2 border-primary rounded-full -translate-x-1/2 shadow-lg cursor-pointer"></div>
+</div>
+<p class="text-xs text-slate-500 italic">Alerts are triggered for students whose attendance falls below this percentage in any given month.</p>
+</div>
+<!-- Passing Marks Slider -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<label class="text-sm font-semibold">Minimum Passing Marks (%)</label>
+<span class="bg-primary/20 text-primary text-xs font-bold px-2 py-0.5 rounded">Current: 40%</span>
+</div>
+<div class="relative h-6 flex items-center">
+<div class="absolute w-full h-2 bg-slate-200 dark:bg-[#293038] rounded-full"></div>
+<div class="absolute w-[40%] h-2 bg-primary rounded-full"></div>
+<div class="absolute left-[40%] size-4 bg-white border-2 border-primary rounded-full -translate-x-1/2 shadow-lg cursor-pointer"></div>
+</div>
+</div>
+</section>
+<!-- Grade Scale Editor -->
+<section class="space-y-6">
+<div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">format_list_numbered</span>
+<h2 class="text-lg font-bold">Grade Scale Schema</h2>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">Add Range</button>
+</div>
+<div class="bg-white dark:bg-[#1a2128] rounded-xl border border-slate-200 dark:border-[#293038] overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-[#212830] text-[11px] uppercase tracking-wider text-slate-500 font-bold border-b border-slate-200 dark:border-[#293038]">
+<th class="px-4 py-3">Letter</th>
+<th class="px-4 py-3">From %</th>
+<th class="px-4 py-3">To %</th>
+<th class="px-4 py-3">Status</th>
+<th class="px-4 py-3 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-slate-100 dark:border-[#293038] hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4"><span class="font-bold text-green-500">A+</span></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="95"/></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="100"/></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-500/10 text-green-500 uppercase">Excellent</span></td>
+<td class="px-4 py-4 text-right"><span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-red-500 transition-colors">delete</span></td>
+</tr>
+<tr class="border-b border-slate-100 dark:border-[#293038] hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4"><span class="font-bold text-emerald-400">A</span></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="80"/></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="94"/></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-500 uppercase">Superior</span></td>
+<td class="px-4 py-4 text-right"><span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-red-500 transition-colors">delete</span></td>
+</tr>
+<tr class="border-b border-slate-100 dark:border-[#293038] hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4"><span class="font-bold text-blue-400">B</span></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="65"/></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="79"/></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/10 text-blue-500 uppercase">Average</span></td>
+<td class="px-4 py-4 text-right"><span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-red-500 transition-colors">delete</span></td>
+</tr>
+<tr class="border-b border-slate-100 dark:border-[#293038] hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4"><span class="font-bold text-amber-500">C</span></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="50"/></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="64"/></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-500 uppercase">Pass</span></td>
+<td class="px-4 py-4 text-right"><span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-red-500 transition-colors">delete</span></td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4"><span class="font-bold text-red-500">F</span></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="0"/></td>
+<td class="px-4 py-4"><input class="w-12 h-8 bg-transparent border border-slate-300 dark:border-slate-600 rounded text-center focus:ring-primary focus:border-primary" type="text" value="49"/></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/10 text-red-500 uppercase">Fail</span></td>
+<td class="px-4 py-4 text-right"><span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-red-500 transition-colors">delete</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Actions -->
+<div class="flex items-center gap-4 pt-6">
+<button class="bg-primary text-white px-8 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+                                Save Changes
+                            </button>
+<button class="text-slate-500 dark:text-slate-400 px-8 py-2.5 rounded-lg font-bold text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                                Reset to Defaults
+                            </button>
+</div>
+<div class="h-10"></div>
+</div>
+</div>
+<!-- Live Dashboard Preview (Right Side Sticky) -->
+<div class="w-full md:w-[400px] border-l border-slate-200 dark:border-[#293038] bg-white dark:bg-background-dark p-6 overflow-y-auto hidden md:block">
+<div class="sticky top-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xs font-black uppercase tracking-widest text-slate-400">Live Dashboard Preview</h3>
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+</div>
+<!-- Mockup Preview Container -->
+<div class="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-obsidian overflow-hidden shadow-2xl scale-95 origin-top">
+<!-- Mock Header -->
+<div class="p-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a2128] flex justify-between items-center">
+<div class="flex gap-1.5">
+<div class="size-2 rounded-full bg-red-400"></div>
+<div class="size-2 rounded-full bg-amber-400"></div>
+<div class="size-2 rounded-full bg-green-400"></div>
+</div>
+<div class="size-5 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+</div>
+<!-- Mock Content -->
+<div class="p-4 space-y-4">
+<!-- Warning Alert -->
+<div class="p-3 rounded-lg bg-primary/10 border-l-4 border-primary space-y-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">error</span>
+<span class="text-[11px] font-bold text-primary uppercase">Critical Alert</span>
+</div>
+<p class="text-[12px] leading-tight font-medium">
+<span class="font-bold">12 Students</span> currently fall below the <span class="underline decoration-primary font-black">75%</span> attendance threshold.
+                                    </p>
+</div>
+<!-- Chart Mockup -->
+<div class="bg-white dark:bg-[#1e242b] p-3 rounded-lg border border-slate-200 dark:border-slate-800 space-y-3">
+<p class="text-[10px] font-bold text-slate-400 uppercase">Grade Distribution (Sample Set)</p>
+<div class="flex items-end gap-1.5 h-24 pt-2">
+<div class="flex-1 bg-green-500/30 rounded-t h-[90%] relative group">
+<div class="absolute inset-x-0 bottom-0 bg-green-500 rounded-t h-[40%]"></div>
+</div>
+<div class="flex-1 bg-emerald-500/30 rounded-t h-[75%] relative">
+<div class="absolute inset-x-0 bottom-0 bg-emerald-500 rounded-t h-[60%]"></div>
+</div>
+<div class="flex-1 bg-blue-500/30 rounded-t h-[60%] relative">
+<div class="absolute inset-x-0 bottom-0 bg-blue-500 rounded-t h-[80%]"></div>
+</div>
+<div class="flex-1 bg-amber-500/30 rounded-t h-[40%] relative">
+<div class="absolute inset-x-0 bottom-0 bg-amber-500 rounded-t h-[30%]"></div>
+</div>
+<div class="flex-1 bg-red-500/30 rounded-t h-[20%] relative">
+<div class="absolute inset-x-0 bottom-0 bg-red-500 rounded-t h-[50%]"></div>
+</div>
+</div>
+<div class="flex justify-between px-1 text-[9px] font-black text-slate-500">
+<span>A+</span><span>A</span><span>B</span><span>C</span><span>F</span>
+</div>
+</div>
+<!-- Student Card Mockup -->
+<div class="bg-white dark:bg-[#1e242b] p-3 rounded-lg border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-7 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<div>
+<p class="text-[11px] font-bold">Alex Johnson</p>
+<p class="text-[9px] text-slate-500">ID: #402102</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[11px] font-bold text-primary">A- (88%)</p>
+<p class="text-[9px] text-slate-500">Above Min (40%)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 rounded-xl bg-slate-50 dark:bg-[#1a2128] border border-dashed border-slate-300 dark:border-slate-700">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<div class="space-y-1">
+<p class="text-xs font-bold">Pro Tip</p>
+<p class="text-[11px] text-slate-500 leading-relaxed">Changes to grade scales will retroactively update reports for the current semester. Proceed with caution.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

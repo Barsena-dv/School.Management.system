@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Subject Management &amp; Teacher View - EduManage ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "pearl": "#f9fafb"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .pearl-shadow { box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white antialiased">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex flex-col bg-white dark:bg-[#1a2632] border-r border-[#e5e7eb] dark:border-gray-800">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">school</span>
+</div>
+<div>
+<h1 class="text-base font-bold leading-tight">EduManage</h1>
+<p class="text-xs text-[#617589]">Academic ERP</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-[#617589] hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="text-sm font-medium">Academic Structure</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#617589] hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Student Records</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#617589] hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span class="text-sm font-medium">Faculty</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#617589] hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-[#e5e7eb] dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-gray-200 dark:bg-gray-700 bg-cover bg-center" data-alt="User profile avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD9_0E_oiQhi9JiadgPsBvFalSBiZzFD45Y21OK-mm5_acXTkiKd_h7rrnfIB8W1sldox5FDacLiXBtuluC_I5AfIhw2tp2C2ec88nEnZxtgJoD9swZDv9zkXH8IxDf-_9S5S4E_Qd1ylqcT_pU1C7P9SCi6LuRqDv6nIGu85IvWNp6vc9QkhLuO4Za5rW_hDy6mLwhHstGqPC1oTysm0oZ1_Jqsf8iRcPNVnO8ItyzTgeglZ5A17EHkA7QZvISC2nCHR9FyzAQEBI')"></div>
+<div class="flex-1">
+<p class="text-xs font-bold truncate">Sarah Jenkins</p>
+<p class="text-[10px] text-[#617589]">Administrator</p>
+</div>
+<button class="text-[#617589] hover:text-primary">
+<span class="material-symbols-outlined text-sm">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Top Header -->
+<header class="h-16 flex items-center justify-between px-8 bg-white dark:bg-[#1a2632] border-b border-[#e5e7eb] dark:border-gray-800 shrink-0">
+<div class="flex items-center gap-2 text-sm">
+<a class="text-[#617589] hover:text-primary" href="#">Academic Structure</a>
+<span class="text-gray-300">/</span>
+<span class="font-medium">Subjects</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-background-light dark:bg-background-dark border-none rounded-lg text-sm w-64 focus:ring-1 focus:ring-primary" placeholder="Search subjects..." type="text"/>
+</div>
+<button class="size-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Page Heading -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight">Subject Management</h2>
+<p class="text-[#617589] mt-1">Configure curriculum details and allocate faculty members.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Filters
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:opacity-90 shadow-sm transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+                        New Subject
+                    </button>
+</div>
+</div>
+<!-- Tab Navigation -->
+<div class="border-b border-gray-200 dark:border-gray-700">
+<nav class="flex gap-8 -mb-px">
+<button class="border-b-2 border-primary text-primary px-1 py-4 text-sm font-semibold">Admin Overview</button>
+<button class="border-b-2 border-transparent text-[#617589] hover:text-gray-700 dark:hover:text-gray-300 px-1 py-4 text-sm font-medium">Teacher View (My Subjects)</button>
+<button class="border-b-2 border-transparent text-[#617589] hover:text-gray-700 dark:hover:text-gray-300 px-1 py-4 text-sm font-medium">Departmental Hierarchy</button>
+</nav>
+</div>
+<!-- Dashboard Content: Admin Table -->
+<div class="bg-white dark:bg-[#1a2632] rounded-xl border border-[#e5e7eb] dark:border-gray-800 overflow-hidden pearl-shadow">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-[#151f28] text-xs font-semibold text-[#617589] uppercase tracking-wider">
+<th class="px-6 py-4">Subject &amp; Code</th>
+<th class="px-6 py-4">Department</th>
+<th class="px-6 py-4">Credits</th>
+<th class="px-6 py-4">Assigned Teacher</th>
+<th class="px-6 py-4">Enrolled Students</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr class="hover:bg-pearl dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold text-sm">Advanced Algorithms</div>
+<div class="text-xs text-[#617589]">CS-402</div>
+</td>
+<td class="px-6 py-4 text-sm">Computer Science</td>
+<td class="px-6 py-4 text-sm">4.0</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-primary">DR</div>
+<span class="text-sm">Dr. Robert Chen</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">48 / 50</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit_square</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-pearl dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold text-sm">Linear Algebra</div>
+<div class="text-xs text-[#617589]">MA-201</div>
+</td>
+<td class="px-6 py-4 text-sm">Mathematics</td>
+<td class="px-6 py-4 text-sm">3.0</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded w-fit">
+<span class="material-symbols-outlined text-sm">warning</span>
+<span class="text-[11px] font-bold">UNASSIGNED</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">0 / 60</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-xs font-bold">Assign Faculty</button>
+</td>
+</tr>
+<tr class="hover:bg-pearl dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="font-semibold text-sm">Microeconomics</div>
+<div class="text-xs text-[#617589]">EC-101</div>
+</td>
+<td class="px-6 py-4 text-sm">Economics</td>
+<td class="px-6 py-4 text-sm">3.0</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<img class="size-6 rounded-full border border-gray-200" data-alt="Teacher profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU3_6B4DROn8IXgRG2I7aN0NHmAdbfVubydnL6ILpaI-y5JtEZ2ItqEj_ta4kzPap49iPjDJevjMjv8_pLVvg_LP1beZliraySnKxIsVWWIU9wi6M6jlbcuyDtYhOG7jLbP6O5hZZmyDrbbMGL4b1BJFiQPx6ncPO4WhJeSj44QrLG1Z_YC1ZFA_BRC-L60PYND9JpXU8N-ovhDIG4Sv8nM2LJvGYzTXK5mdzxHSUPAiS613hUF-oGhzrU-FFBupxYEnRtqTaSrlI"/>
+<span class="text-sm">Prof. Elena Gilbert</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">120 / 120</td>
+<td class="px-6 py-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit_square</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 bg-gray-50 dark:bg-[#151f28] border-t border-gray-100 dark:border-gray-800 flex justify-between items-center">
+<p class="text-xs text-[#617589]">Showing 3 of 42 subjects</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs font-medium bg-white dark:bg-gray-800 hover:bg-gray-50">Prev</button>
+<button class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-xs font-medium bg-white dark:bg-gray-800 hover:bg-gray-50">Next</button>
+</div>
+</div>
+</div>
+<!-- Teacher View Section (Grid Layout) -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold">My Teaching Load <span class="text-sm font-normal text-[#617589] ml-2">(Semester 1, 2024)</span></h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Subject Card 1 -->
+<div class="bg-white dark:bg-[#1a2632] border border-[#e5e7eb] dark:border-gray-800 rounded-xl p-6 pearl-shadow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded">LECTURE</span>
+<span class="text-xs font-bold text-[#617589]">CS-402</span>
+</div>
+<h4 class="text-lg font-bold">Advanced Algorithms</h4>
+<p class="text-sm text-[#617589] mt-1 line-clamp-2">Study of complex data structures and algorithm optimization strategies.</p>
+</div>
+<div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] text-[#617589] uppercase font-bold tracking-wider">Students</span>
+<span class="text-lg font-bold">48</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-[#617589] uppercase font-bold tracking-wider">Schedule</span>
+<span class="text-xs font-semibold px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded mt-1">Mon/Wed 09:00 AM</span>
+</div>
+</div>
+</div>
+<!-- Subject Card 2 -->
+<div class="bg-white dark:bg-[#1a2632] border border-[#e5e7eb] dark:border-gray-800 rounded-xl p-6 pearl-shadow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded">LAB</span>
+<span class="text-xs font-bold text-[#617589]">CS-402L</span>
+</div>
+<h4 class="text-lg font-bold">Algorithms Lab</h4>
+<p class="text-sm text-[#617589] mt-1 line-clamp-2">Practical implementation sessions for algorithmic theory in C++.</p>
+</div>
+<div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] text-[#617589] uppercase font-bold tracking-wider">Students</span>
+<span class="text-lg font-bold">24</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-[#617589] uppercase font-bold tracking-wider">Schedule</span>
+<span class="text-xs font-semibold px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded mt-1">Fri 02:00 PM</span>
+</div>
+</div>
+</div>
+<!-- Empty State Placeholder Card -->
+<div class="border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-xl p-6 flex flex-col items-center justify-center text-center opacity-60">
+<div class="size-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400 mb-4">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<h4 class="text-sm font-bold text-gray-500">Slot Available</h4>
+<p class="text-xs text-gray-400 px-4 mt-1">This slot is open for additional subject assignments.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Admin Form Modal Overlay -->
+<div class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+<div class="bg-white dark:bg-[#1a2632] w-full max-w-lg rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+<h3 class="text-xl font-bold">Assign Subject Faculty</h3>
+<button class="text-gray-400 hover:text-gray-600">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="p-6 space-y-5">
+<div>
+<label class="block text-sm font-semibold mb-1.5">Subject Title</label>
+<input class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 rounded-lg text-sm text-[#617589]" readonly="" type="text" value="Linear Algebra"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-semibold mb-1.5">Course Code</label>
+<input class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 rounded-lg text-sm text-[#617589]" readonly="" type="text" value="MA-201"/>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-1.5">Credits</label>
+<input class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 rounded-lg text-sm text-[#617589]" readonly="" type="text" value="3.0"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-1.5">Assign Faculty Member</label>
+<div class="relative">
+<select class="w-full border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-primary">
+<option value="">Select a teacher...</option>
+<option value="1">Dr. Robert Chen (CS)</option>
+<option value="2">Prof. Elena Gilbert (ECO)</option>
+<option value="3">Dr. Marcus Thorne (MATH)</option>
+<option value="4">Dr. Sarah Miller (MATH)</option>
+</select>
+<div class="mt-2 flex flex-wrap gap-2">
+<span class="text-[10px] bg-blue-50 dark:bg-blue-900/30 text-primary px-2 py-0.5 rounded border border-primary/20">Active Tenure</span>
+<span class="text-[10px] bg-green-50 dark:bg-green-900/30 text-green-600 px-2 py-0.5 rounded border border-green-600/20">Qualified for MATH</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-1.5">Preferred Schedule Slot</label>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:border-primary transition-colors flex items-center gap-2">
+<input class="text-primary focus:ring-primary" id="slot1" name="slot" type="radio"/>
+<label class="text-xs font-medium" for="slot1">Tue/Thu 11:00 AM</label>
+</div>
+<div class="p-3 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:border-primary transition-colors flex items-center gap-2">
+<input class="text-primary focus:ring-primary" id="slot2" name="slot" type="radio"/>
+<label class="text-xs font-medium" for="slot2">Mon/Wed 02:00 PM</label>
+</div>
+</div>
+</div>
+</form>
+<div class="p-6 bg-gray-50 dark:bg-[#151f28] flex justify-end gap-3">
+<button class="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-gray-800 transition-colors">Cancel</button>
+<button class="px-6 py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 hover:opacity-90 transition-all">Save Assignment</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

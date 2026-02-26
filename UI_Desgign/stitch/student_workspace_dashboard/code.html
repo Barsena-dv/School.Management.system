@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Workspace Dashboard | Academix ERP</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#db143c",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0f0f0f",
+                        "surface-dark": "#1a1a1a",
+                        "border-dark": "#332628",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .skeleton-shimmer {
+            background: linear-gradient(90deg, #2a1b1d 25%, #3d262a 50%, #2a1b1d 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="flex h-screen overflow-hidden">
+<!-- Side Navigation -->
+<aside class="w-64 flex-shrink-0 bg-white dark:bg-surface-dark border-r border-slate-200 dark:border-border-dark flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight">Academix ERP</h1>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xl">book</span>
+<span class="text-sm font-medium">Academics</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xl">payments</span>
+<span class="text-sm font-medium">Finances</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xl">description</span>
+<span class="text-sm font-medium">Exams</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xl">calendar_today</span>
+<span class="text-sm font-medium">Schedule</span>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-border-dark">
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white py-2.5 rounded-lg text-sm font-semibold transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">badge</span>
+                    Download ID Card
+                </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-slate-200 dark:border-border-dark sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-100 dark:bg-surface-dark border-none focus:ring-1 focus:ring-primary rounded-lg pl-10 pr-4 py-2 text-sm text-slate-200" placeholder="Search for courses, grades, or faculty..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-r border-slate-200 dark:border-border-dark pr-6">
+<button class="text-slate-500 dark:text-slate-400 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full ring-2 ring-background-dark"></span>
+</button>
+<button class="text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="text-xs font-semibold leading-tight">Alex Harrison</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">ID: 2024-STUD-082</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-rose-400 p-0.5">
+<div class="w-full h-full rounded-full bg-surface-dark overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">person</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto w-full">
+<!-- Welcome Banner -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h2 class="text-3xl font-bold tracking-tight mb-1">Welcome back, Alex</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Fall 2024 Semester • Last activity: 42 minutes ago</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary/20 text-primary text-[11px] font-bold rounded uppercase tracking-widest border border-primary/30">Action Required</span>
+<span class="px-3 py-1 bg-slate-100 dark:bg-white/5 text-slate-500 text-[11px] font-bold rounded uppercase tracking-widest">Enrolled</span>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="bg-white dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+<span class="material-symbols-outlined">calendar_check</span>
+</div>
+<span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">+2.4%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Attendance Rate</p>
+<h3 class="text-2xl font-bold">88.5%</h3>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full rounded-full" style="width: 88.5%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<span class="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded">Top 5%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Current GPA</p>
+<h3 class="text-2xl font-bold">3.92<span class="text-sm font-normal text-slate-500">/4.00</span></h3>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 98%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<span class="text-xs font-medium text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded">Due Soon</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Upcoming Exams</p>
+<h3 class="text-2xl font-bold">03</h3>
+<p class="mt-2 text-[10px] text-slate-500">Next: Advanced Calculus (Oct 14)</p>
+</div>
+<div class="bg-white dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-rose-500/10 text-rose-500 flex items-center justify-center">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="text-xs font-medium text-rose-500 bg-rose-500/10 px-2 py-0.5 rounded">Pending</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Fee Balance</p>
+<h3 class="text-2xl font-bold">$1,240.00</h3>
+<p class="mt-2 text-[10px] text-slate-500">Deadline: Oct 20, 2024</p>
+</div>
+</div>
+<!-- Main Grid Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Performance Trend (Loading State) -->
+<div class="lg:col-span-2 bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden flex flex-col">
+<div class="p-6 flex items-center justify-between border-b border-slate-200 dark:border-border-dark">
+<div>
+<h3 class="font-bold text-lg">Academic Performance Growth</h3>
+<p class="text-xs text-slate-500">GPA Trend by Semester</p>
+</div>
+<div class="flex gap-2">
+<div class="px-2 py-1 bg-slate-100 dark:bg-white/5 rounded text-[10px] font-bold uppercase cursor-pointer hover:bg-white/10 transition-colors">YTD</div>
+<div class="px-2 py-1 bg-primary text-white rounded text-[10px] font-bold uppercase cursor-pointer">Max</div>
+</div>
+</div>
+<div class="p-8 flex-1 min-h-[300px] flex flex-col justify-end gap-6">
+<!-- Loading Skeleton for Chart -->
+<div class="flex items-end justify-between h-48 gap-4 px-4">
+<div class="w-full skeleton-shimmer rounded-t-lg opacity-20" style="height: 40%"></div>
+<div class="w-full skeleton-shimmer rounded-t-lg opacity-40" style="height: 65%"></div>
+<div class="w-full skeleton-shimmer rounded-t-lg opacity-30" style="height: 55%"></div>
+<div class="w-full skeleton-shimmer rounded-t-lg opacity-60" style="height: 85%"></div>
+<div class="w-full skeleton-shimmer rounded-t-lg opacity-50" style="height: 75%"></div>
+<div class="w-full skeleton-shimmer rounded-t-lg opacity-90" style="height: 95%"></div>
+</div>
+<div class="flex justify-between px-4">
+<div class="h-2 w-12 skeleton-shimmer rounded opacity-30"></div>
+<div class="h-2 w-12 skeleton-shimmer rounded opacity-30"></div>
+<div class="h-2 w-12 skeleton-shimmer rounded opacity-30"></div>
+<div class="h-2 w-12 skeleton-shimmer rounded opacity-30"></div>
+<div class="h-2 w-12 skeleton-shimmer rounded opacity-30"></div>
+<div class="h-2 w-12 skeleton-shimmer rounded opacity-30"></div>
+</div>
+</div>
+</div>
+<!-- Sidebar Section inside content -->
+<div class="space-y-6">
+<!-- Upcoming Exams -->
+<div class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-border-dark p-6">
+<h3 class="font-bold text-base mb-4">Upcoming Exams</h3>
+<div class="space-y-4">
+<div class="flex gap-4 group cursor-pointer">
+<div class="flex-shrink-0 w-12 h-14 bg-slate-100 dark:bg-white/5 rounded-lg flex flex-col items-center justify-center border border-transparent group-hover:border-primary/30 transition-all">
+<span class="text-[10px] font-bold text-slate-500 uppercase">Oct</span>
+<span class="text-xl font-bold">14</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-semibold group-hover:text-primary transition-colors">Advanced Calculus</h4>
+<p class="text-[11px] text-slate-500 mb-1">Hall A-12 • 09:00 AM</p>
+<div class="w-full bg-slate-100 dark:bg-white/5 h-1 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full w-3/4"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-4 group cursor-pointer">
+<div class="flex-shrink-0 w-12 h-14 bg-slate-100 dark:bg-white/5 rounded-lg flex flex-col items-center justify-center border border-transparent group-hover:border-primary/30 transition-all">
+<span class="text-[10px] font-bold text-slate-500 uppercase">Oct</span>
+<span class="text-xl font-bold">18</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-semibold group-hover:text-primary transition-colors">Applied Physics II</h4>
+<p class="text-[11px] text-slate-500 mb-1">Laboratory West • 01:30 PM</p>
+<div class="w-full bg-slate-100 dark:bg-white/5 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-1/4"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-4 group cursor-pointer">
+<div class="flex-shrink-0 w-12 h-14 bg-slate-100 dark:bg-white/5 rounded-lg flex flex-col items-center justify-center border border-transparent group-hover:border-primary/30 transition-all">
+<span class="text-[10px] font-bold text-slate-500 uppercase">Oct</span>
+<span class="text-xl font-bold">22</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-semibold group-hover:text-primary transition-colors">Data Structures</h4>
+<p class="text-[11px] text-slate-500 mb-1">Main Theatre • 10:00 AM</p>
+<div class="w-full bg-slate-100 dark:bg-white/5 h-1 rounded-full overflow-hidden">
+<div class="bg-slate-300 dark:bg-slate-700 h-full w-0"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 text-xs text-primary font-bold hover:underline">View Exam Calendar</button>
+</div>
+<!-- Quick Actions -->
+<div class="bg-primary/5 rounded-xl border border-primary/20 p-6">
+<h3 class="font-bold text-sm text-primary uppercase tracking-widest mb-4">Quick Links</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary transition-colors cursor-pointer text-center">
+<span class="material-symbols-outlined text-primary">local_library</span>
+<span class="text-[10px] font-bold uppercase">Library</span>
+</div>
+<div class="p-3 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary transition-colors cursor-pointer text-center">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="text-[10px] font-bold uppercase">Webmail</span>
+</div>
+<div class="p-3 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary transition-colors cursor-pointer text-center">
+<span class="material-symbols-outlined text-primary">cloud_download</span>
+<span class="text-[10px] font-bold uppercase">Resources</span>
+</div>
+<div class="p-3 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-lg flex flex-col items-center justify-center gap-2 hover:border-primary transition-colors cursor-pointer text-center">
+<span class="material-symbols-outlined text-primary">campaign</span>
+<span class="text-[10px] font-bold uppercase">Announce</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Latest Results Table -->
+<div class="lg:col-span-3 bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
+<h3 class="font-bold text-lg">Latest Results Preview</h3>
+<button class="text-xs text-slate-500 hover:text-primary flex items-center gap-1">
+                                View Full Transcript <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-white/5">
+<th class="px-6 py-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Subject Name</th>
+<th class="px-6 py-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Code</th>
+<th class="px-6 py-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Score</th>
+<th class="px-6 py-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Grade</th>
+<th class="px-6 py-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-white/5">
+<tr class="hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
+<td class="px-6 py-4 text-sm font-medium">Modern Literature</td>
+<td class="px-6 py-4 text-sm text-slate-500">LIT-402</td>
+<td class="px-6 py-4 text-sm font-semibold">92/100</td>
+<td class="px-6 py-4 text-sm font-bold text-emerald-500 text-center pr-20">A+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-bold rounded uppercase">Passed</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
+<td class="px-6 py-4 text-sm font-medium">Quantitative Methods</td>
+<td class="px-6 py-4 text-sm text-slate-500">MAT-301</td>
+<td class="px-6 py-4 text-sm font-semibold">84/100</td>
+<td class="px-6 py-4 text-sm font-bold text-emerald-500 text-center pr-20">A</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-bold rounded uppercase">Passed</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
+<td class="px-6 py-4 text-sm font-medium">Information Systems</td>
+<td class="px-6 py-4 text-sm text-slate-500">CIS-105</td>
+<td class="px-6 py-4 text-sm font-semibold">78/100</td>
+<td class="px-6 py-4 text-sm font-bold text-amber-500 text-center pr-20">B+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-bold rounded uppercase">Passed</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<footer class="p-8 mt-auto border-t border-slate-200 dark:border-border-dark text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-medium">© 2024 Academix ERP Systems • Student Portal v2.4.1</p>
+</footer>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Appearance &amp; Global Themes | AcademiaERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#197fe6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                        "surface-dark": "#1b252e",
+                        "border-dark": "#293038",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Main Container -->
+<div class="flex flex-col min-h-screen">
+<!-- Header / TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark px-6 lg:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">school</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">AcademiaERP</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Students</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Academics</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Reports</a>
+<a class="text-primary text-sm font-semibold border-b-2 border-primary py-4 -mb-4" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden sm:flex flex-col w-full max-w-64">
+<div class="flex w-full items-stretch rounded-lg bg-slate-100 dark:bg-surface-dark border border-transparent focus-within:border-primary transition-all">
+<div class="text-slate-400 flex items-center justify-center pl-3">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-sm py-2 px-3 text-slate-900 dark:text-white placeholder:text-slate-500" placeholder="Search settings..."/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-surface-dark rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-primary/20" data-alt="User profile avatar of a male administrator" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAixLdniG3Dx17xNjx42OUHzZAal8XbCW3K_IbVeSYnHg91UjeYvJ1egEeVmiu3OJTpL16GtqoO7kisk1himmDt-ssF1jE08jwYyzHKLyevvlKU4Msr6IkFA44H3M3lRm0F-QuwcZfCJnP15LVItiP5oIlAvmfiHYZtPmMHYGypFO7CbPRqONlaSnRaqKanLZbQ_1W-Jyl5FCNcRbZzgxeJdwrGxLXn1eiQVh8nsFq52se_y9CUNK5QIL_Ol1IWXYD5eKCmSH8BrqI");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark flex-shrink-0 hidden lg:flex flex-col p-4 gap-6">
+<div class="space-y-1">
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Institutional Settings</h3>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">home</span>
+<span class="text-sm font-medium">General</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">account_balance</span>
+<span class="text-sm font-medium">Institution Info</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+<span class="text-sm font-semibold">Branding &amp; Themes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">calendar_month</span>
+<span class="text-sm font-medium">Academic Years</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">badge</span>
+<span class="text-sm font-medium">User Roles</span>
+</a>
+</div>
+<div class="mt-auto p-4 bg-slate-100 dark:bg-surface-dark rounded-xl">
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium">Plan Status</p>
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-bold">Enterprise</span>
+<span class="text-[10px] bg-primary text-white px-2 py-0.5 rounded-full font-bold">ACTIVE</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-4/5"></div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-slate-50 dark:bg-background-dark/50">
+<div class="max-w-6xl mx-auto p-6 lg:p-10">
+<!-- Breadcrumbs & Title -->
+<div class="mb-8">
+<nav class="flex text-xs font-medium text-slate-400 mb-3 gap-2 items-center">
+<a class="hover:text-primary" href="#">Settings</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary" href="#">Institution</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-slate-600 dark:text-slate-200">Branding</span>
+</nav>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Appearance &amp; Global Themes</h1>
+<p class="text-slate-500 dark:text-slate-400 max-w-2xl">Configure the visual identity, primary colors, and default theme for your institution's portal across all stakeholders.</p>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<!-- Left: Configuration Panel (7 columns) -->
+<div class="xl:col-span-7 space-y-8">
+<!-- Institutional Default Theme -->
+<section class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">visibility</span>
+<h2 class="text-lg font-bold">Institutional Default</h2>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<!-- Light Mode Option -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="theme-mode" type="radio" value="light"/>
+<div class="p-4 border-2 border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-background-dark hover:border-primary/50 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">light_mode</span>
+<span class="text-sm font-bold">Soft Pearl</span>
+</div>
+</div>
+<div class="absolute top-2 right-2 hidden peer-checked:block">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+</div>
+</label>
+<!-- Dark Mode Option -->
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="theme-mode" type="radio" value="dark"/>
+<div class="p-4 border-2 border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-background-dark hover:border-primary/50 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">dark_mode</span>
+<span class="text-sm font-bold">Obsidian</span>
+</div>
+</div>
+<div class="absolute top-2 right-2 hidden peer-checked:block">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+</div>
+</label>
+<!-- System Sync Option -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="theme-mode" type="radio" value="system"/>
+<div class="p-4 border-2 border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-background-dark hover:border-primary/50 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">devices</span>
+<span class="text-sm font-bold">System Sync</span>
+</div>
+</div>
+<div class="absolute top-2 right-2 hidden peer-checked:block">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-background-dark rounded-lg border border-slate-200 dark:border-border-dark">
+<div class="space-y-0.5">
+<div class="flex items-center gap-1.5">
+<p class="text-sm font-bold">Allow User Overrides</p>
+<span class="material-symbols-outlined text-[16px] text-slate-400 cursor-help" title="Let individual users choose their own theme preference in their profile settings.">info</span>
+</div>
+<p class="text-xs text-slate-500">Enable students and faculty to choose their own visual style.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+<!-- Color Palette Section -->
+<section class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">colorize</span>
+<h2 class="text-lg font-bold">Brand Colors</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-bold mb-2">Primary Color</label>
+<div class="flex gap-3">
+<div class="w-12 h-10 bg-[#197fe6] rounded-lg border border-slate-200 dark:border-slate-700 flex-shrink-0"></div>
+<input class="flex-1 bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-border-dark rounded-lg text-sm font-mono focus:ring-primary focus:border-primary" type="text" value="#197FE6"/>
+</div>
+<p class="text-[10px] text-slate-500 mt-2 italic">Used for buttons, links, and highlights.</p>
+</div>
+<div>
+<label class="block text-sm font-bold mb-2">Accent Color</label>
+<div class="flex gap-3">
+<div class="w-12 h-10 bg-emerald-500 rounded-lg border border-slate-200 dark:border-slate-700 flex-shrink-0"></div>
+<input class="flex-1 bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-border-dark rounded-lg text-sm font-mono focus:ring-primary focus:border-primary" type="text" value="#10B981"/>
+</div>
+<p class="text-[10px] text-slate-500 mt-2 italic">Used for success states and badges.</p>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="flex items-center justify-end gap-4">
+<button class="px-6 py-2.5 rounded-lg border border-slate-200 dark:border-border-dark text-sm font-bold hover:bg-slate-100 dark:hover:bg-background-dark transition-all">Discard Changes</button>
+<button class="px-8 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">Save Institutional Profile</button>
+</div>
+</div>
+<!-- Right: Real-time Preview (5 columns) -->
+<div class="xl:col-span-5 space-y-6">
+<div class="sticky top-24">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-500">Visual Identity Preview</h3>
+<span class="px-2 py-0.5 bg-slate-200 dark:bg-slate-800 text-[10px] font-bold rounded">LIVE</span>
+</div>
+<div class="space-y-6">
+<!-- Obsidian Preview (Current) -->
+<div class="relative bg-background-dark border-2 border-primary p-6 rounded-xl shadow-2xl overflow-hidden group">
+<div class="absolute top-0 right-0 p-2">
+<span class="text-[10px] font-bold bg-primary text-white px-2 py-1 rounded-bl-lg">OBSIDIAN (ACTIVE)</span>
+</div>
+<div class="space-y-4">
+<!-- Sample Stat Card -->
+<div class="bg-surface-dark p-4 rounded-lg border border-border-dark">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs text-slate-400 font-medium">Enrolled Students</span>
+<span class="text-emerald-400 text-[10px] font-bold">+12%</span>
+</div>
+<div class="flex items-end justify-between">
+<p class="text-2xl font-black text-white leading-none">2,840</p>
+<div class="flex gap-0.5 items-end">
+<div class="w-1 bg-primary/20 h-4 rounded-full"></div>
+<div class="w-1 bg-primary/40 h-6 rounded-full"></div>
+<div class="w-1 bg-primary/60 h-8 rounded-full"></div>
+<div class="w-1 bg-primary h-10 rounded-full shadow-[0_0_8px_rgba(25,127,230,0.5)]"></div>
+</div>
+</div>
+</div>
+<!-- Sample Table Item -->
+<div class="space-y-2">
+<p class="text-[10px] font-bold text-slate-500 uppercase">Recent Admissions</p>
+<div class="bg-surface-dark border border-border-dark rounded-lg overflow-hidden">
+<div class="flex items-center gap-3 p-3 border-b border-border-dark">
+<div class="size-8 rounded bg-slate-700 flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="flex-1">
+<p class="text-xs font-bold">John Doe</p>
+<p class="text-[10px] text-slate-500">Computer Science</p>
+</div>
+<span class="text-[9px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-bold border border-emerald-500/20">VERIFIED</span>
+</div>
+<div class="flex items-center gap-3 p-3">
+<div class="size-8 rounded bg-slate-700 flex items-center justify-center text-[10px] font-bold">SM</div>
+<div class="flex-1">
+<p class="text-xs font-bold">Sarah Miller</p>
+<p class="text-[10px] text-slate-500">Economics</p>
+</div>
+<span class="text-[9px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded font-bold border border-amber-500/20">PENDING</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Soft Pearl Preview (Alternative) -->
+<div class="relative bg-white border border-slate-200 p-6 rounded-xl shadow-lg opacity-60 grayscale-[0.2] hover:opacity-100 transition-all cursor-zoom-in">
+<div class="absolute top-0 right-0 p-2">
+<span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded-bl-lg">SOFT PEARL</span>
+</div>
+<div class="space-y-4">
+<!-- Sample Stat Card -->
+<div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs text-slate-500 font-medium">Faculty Strength</span>
+<span class="text-primary text-[10px] font-bold">+2 New</span>
+</div>
+<div class="flex items-end justify-between">
+<p class="text-2xl font-black text-slate-900 leading-none">142</p>
+<div class="flex gap-1">
+<div class="size-2 rounded-full bg-primary"></div>
+<div class="size-2 rounded-full bg-slate-200"></div>
+<div class="size-2 rounded-full bg-slate-200"></div>
+</div>
+</div>
+</div>
+<!-- Table Preview Placeholder -->
+<div class="h-24 bg-slate-50 rounded-lg border border-dashed border-slate-300 flex items-center justify-center">
+<span class="text-[10px] font-bold text-slate-400 italic">Table Preview Condensed</span>
+</div>
+</div>
+</div>
+<!-- Tip Card -->
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-4 flex gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">lightbulb</span>
+<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+<span class="font-bold text-primary">Pro-tip:</span> Choosing high-contrast themes like Obsidian helps reduce eye strain for faculty members during late-night grading sessions.
+                                        </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Global App Shell &amp; Navigation - EduManage SaaS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0f172a",
+                        "surface-dark": "#1e293b",
+                        "border-dark": "#334155"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-transition { transition: width 0.3s ease; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar Navigation (Expanded State) -->
+<aside class="sidebar-transition flex h-full w-64 flex-col border-r border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark z-50">
+<div class="flex h-16 items-center gap-3 px-6 border-b border-slate-200 dark:border-border-dark">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-sm font-bold tracking-tight text-slate-900 dark:text-white leading-none">EduManage</h1>
+<span class="text-[10px] font-medium uppercase tracking-wider text-primary">Academic ERP</span>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+<div class="pb-4">
+<p class="px-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2">Main Menu</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Student Directory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-sm font-medium">Academic Calendar</span>
+</a>
+</div>
+<div class="pb-4">
+<p class="px-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2">Academic</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-sm font-medium">Gradebook</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-medium">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart_4_bars</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+</div>
+<div class="pt-2 border-t border-slate-200 dark:border-border-dark">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-border-dark">
+<button class="flex w-full items-center justify-between rounded-lg bg-slate-100 dark:bg-surface-dark px-3 py-2 text-slate-600 dark:text-slate-400">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">keyboard_double_arrow_left</span>
+<span class="text-xs font-semibold">Collapse</span>
+</div>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex flex-1 flex-col overflow-hidden">
+<!-- Top Navbar -->
+<header class="flex h-16 items-center justify-between border-b border-slate-200 dark:border-border-dark bg-white/80 dark:bg-background-dark/80 px-8 backdrop-blur-md z-40">
+<div class="flex flex-1 items-center gap-4">
+<!-- Global Search Interface Trigger -->
+<div class="relative w-full max-w-md">
+<span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-xl">search</span>
+</span>
+<input class="h-10 w-full rounded-xl border-none bg-slate-100 dark:bg-surface-dark pl-11 pr-4 text-sm font-normal focus:ring-2 focus:ring-primary dark:text-white dark:placeholder-slate-500" placeholder="Search students, classes, or help articles..." readonly="" type="text"/>
+<div class="absolute inset-y-0 right-3 flex items-center">
+<kbd class="hidden rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-1.5 py-0.5 text-[10px] font-bold text-slate-500 sm:inline-block">⌘ K</kbd>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Help Center -->
+<button class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-surface-dark">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<!-- Notifications (Active Indicator) -->
+<div class="relative">
+<button class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-surface-dark">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2.5 h-2 w-2 rounded-full bg-red-500 border-2 border-white dark:border-background-dark"></span>
+</button>
+</div>
+<div class="h-6 w-[1px] bg-slate-200 dark:bg-border-dark"></div>
+<!-- User Profile Dropdown -->
+<button class="flex items-center gap-3 rounded-lg py-1 pl-1 pr-2 hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<div class="h-9 w-9 rounded-full bg-slate-200 bg-cover bg-center ring-2 ring-primary/20" data-alt="User profile avatar of the administrator" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAq8ABLgj-I5MnYN3mEVgvTynZdc1Stob6k5HbqQOhB83Z4pXRzsK5o5N8JpeIPdeAY9UKl56xu2lJw9AaDJZzVtZeZMq5PQRqTp_ZaJidEoluKkQhZqYr6hdHnsBpXTmwUa5J6O-q3_jeU4yjzc2ALV6djsjh4HhgxS_hzGZQwIfO50JaDyD7iFMcLAilwajfKdXqrGwHXAtRmaYNLtbkV1i_g2_lIgyf1g17YYxSUZGgJewLrysSi-b_uNtAMecaliqPeNMslxok')"></div>
+<div class="hidden text-left sm:block">
+<p class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Alex Sterling</p>
+<span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary uppercase">Registrar</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content Scroll Area -->
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<div class="max-w-7xl mx-auto">
+<!-- Role-Based Dashboard Viewport -->
+<div class="mb-8 flex items-center justify-between">
+<div>
+<h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Registrar Overview</h2>
+<p class="text-slate-500 dark:text-slate-400">Manage institutional records and academic operations.</p>
+</div>
+<div class="flex gap-3">
+<button class="inline-flex items-center gap-2 rounded-lg bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm">
+<span class="material-symbols-outlined text-lg">filter_alt</span>
+                                Filter
+                            </button>
+<button class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 hover:bg-primary/90">
+<span class="material-symbols-outlined text-lg">add</span>
+                                Enroll Student
+                            </button>
+</div>
+</div>
+<!-- Layout Preview Cards -->
+<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+<div class="rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="rounded-lg bg-blue-50 dark:bg-blue-900/20 p-2 text-primary">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<span class="text-xs font-bold text-green-500">+12% vs last term</span>
+</div>
+<h3 class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Enrollment</h3>
+<p class="mt-2 text-3xl font-bold text-slate-900 dark:text-white">14,208</p>
+</div>
+<div class="rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="rounded-lg bg-purple-50 dark:bg-purple-900/20 p-2 text-purple-600">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<span class="text-xs font-bold text-amber-500">8 pending reviews</span>
+</div>
+<h3 class="text-sm font-medium text-slate-500 dark:text-slate-400">Degree Audits</h3>
+<p class="mt-2 text-3xl font-bold text-slate-900 dark:text-white">342</p>
+</div>
+<div class="rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="rounded-lg bg-amber-50 dark:bg-amber-900/20 p-2 text-amber-600">
+<span class="material-symbols-outlined">monetization_on</span>
+</div>
+<span class="text-xs font-bold text-red-500">-2.4% deficit</span>
+</div>
+<h3 class="text-sm font-medium text-slate-500 dark:text-slate-400">Tuition Collected</h3>
+<p class="mt-2 text-3xl font-bold text-slate-900 dark:text-white">$2.4M</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Notification Panel Overlay (Fixed/Hidden State simulated as slide-out) -->
+<div class="fixed inset-y-0 right-0 w-80 translate-x-full border-l border-border-dark bg-surface-dark shadow-2xl transition-transform duration-300 ease-in-out z-50">
+<!-- Simulated Notification Content would go here -->
+</div>
+<!-- Global Search Command Palette (Modal Simulation) -->
+<div class="fixed inset-0 z-[60] flex items-start justify-center pt-[15vh] px-4 pointer-events-none opacity-0 transition-opacity">
+<div class="absolute inset-0 bg-slate-950/40 backdrop-blur-sm pointer-events-auto"></div>
+<div class="relative w-full max-w-xl rounded-2xl bg-white dark:bg-surface-dark shadow-2xl ring-1 ring-slate-950/10 dark:ring-white/10 pointer-events-auto overflow-hidden">
+<div class="flex items-center px-4 border-b border-slate-200 dark:border-border-dark">
+<span class="material-symbols-outlined text-slate-400">search</span>
+<input class="h-14 w-full border-none bg-transparent px-4 text-base focus:ring-0 dark:text-white" placeholder="Search students, classes, or help articles..." type="text"/>
+<button class="rounded-md border border-slate-200 dark:border-slate-700 px-1.5 py-0.5 text-[10px] font-bold text-slate-400">ESC</button>
+</div>
+<div class="p-4">
+<p class="px-2 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Recent Searches</p>
+<div class="space-y-1">
+<div class="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">person</span>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Sarah Jenkins</span>
+<span class="text-xs text-slate-500">Student ID: #88329</span>
+</div>
+</div>
+<div class="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">menu_book</span>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Computer Science 101</span>
+<span class="text-xs text-slate-500">Section B • Fall 2024</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Notification Example (Toast) -->
+<div class="fixed bottom-8 right-8 z-50">
+<div class="flex items-start gap-4 rounded-xl border border-primary/20 bg-white dark:bg-surface-dark p-5 shadow-2xl shadow-primary/10 @container min-w-[320px]">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<p class="text-sm font-bold text-slate-900 dark:text-white">New Enrollment Request</p>
+<span class="text-[10px] font-medium text-slate-400">2m ago</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-normal">A new student has applied for the CS101 course. Requires registrar approval.</p>
+<div class="mt-3 flex gap-2">
+<button class="rounded-lg bg-primary px-3 py-1.5 text-xs font-bold text-white transition-opacity hover:opacity-90">View Profile</button>
+<button class="rounded-lg bg-slate-100 dark:bg-slate-800 px-3 py-1.5 text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700">Dismiss</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

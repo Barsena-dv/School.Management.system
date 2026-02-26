@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Personal Fee Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#197fe6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                        "success": "#10b981",
+                        "warning": "#f59e0b",
+                        "error": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-gray-100">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-2 text-white">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<h1 class="font-bold text-lg leading-tight">Academia ERP</h1>
+<p class="text-xs text-gray-500 dark:text-gray-400">Student Portal</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="text-sm font-medium">Academic</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-medium">Fees &amp; Payments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">local_library</span>
+<span class="text-sm font-medium">Library</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3 p-2">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Student profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuALAxLK7tDuLZzlCwzOxgYL0FIuzrRh26hbSDsPp1I3PWwIZxHTRJA4GXxdJfhSYi-w91Bgjj5XeW28G6vTh6Ti5lNZ0HFIj05qEEII3NgtaRBBEw7_2DKDJ6UsANflaouXLZyaa4iKn2czMjjxlEbcPP2J5OpyI4QarKPmlonOOCfN-yyIaRd-LXszfjfjrY0BlQNNc4s7LJA84bPOzoLsQP7zHsQ0osApPp-QYUKjiqlo3_muSbS_UNeYAYBa51SfJm4hFWwHRF0')"></div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold">Alex Johnson</span>
+<span class="text-xs text-gray-500">ID: STU-88291</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="w-full bg-gray-100 dark:bg-gray-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary transition-all" placeholder="Search invoices or transactions..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white dark:border-gray-900"></span>
+</button>
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-8 py-6 space-y-6">
+<!-- Overdue Banner -->
+<div class="bg-error/10 border border-error/20 rounded-xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-error/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<p class="font-bold text-error">Payment Overdue</p>
+<p class="text-sm text-error/80">A balance of $450.00 for "Semester II Lab Fees" was due 2 days ago.</p>
+</div>
+</div>
+<button class="px-4 py-2 bg-error text-white text-sm font-semibold rounded-lg hover:bg-error/90 transition-colors">
+                        Clear Now
+                    </button>
+</div>
+<!-- Financial Hero Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Balance Card -->
+<div class="lg:col-span-2 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16"></div>
+<div class="space-y-4 z-10">
+<div>
+<h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Balance Due</h3>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-4xl font-black text-[#111418] dark:text-white">$1,700.00</span>
+<span class="text-gray-400 font-medium">USD</span>
+</div>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined text-warning text-sm">schedule</span>
+<span class="text-sm font-bold text-gray-700 dark:text-gray-300">Due in: 3 Days, 04:12:10</span>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">payments</span>
+                                    Pay Full Balance
+                                </button>
+<button class="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
+                                    View Details
+                                </button>
+</div>
+</div>
+<div class="flex flex-col items-center gap-4 z-10 w-full md:w-auto">
+<div class="bg-primary/10 p-6 rounded-2xl flex flex-col items-center gap-2 border border-primary/20">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Next Deadline</span>
+<div class="text-center">
+<p class="text-2xl font-black text-primary">OCT 24</p>
+<p class="text-xs font-medium text-gray-500">Fall Semester Installment</p>
+</div>
+</div>
+<div class="flex gap-2">
+<img alt="Visa Logo" class="opacity-50 grayscale hover:grayscale-0 transition-all cursor-help" data-alt="Visa payment icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzP1ULmePUqUfHwaPGMHv1tcE9opLpGw1DEf1_Xk9qZTM2cQ6G4CQorbvZSp7sRuiuDppJqoyrKz8Csc1gQk5k0_i2iaySYKbmzMUEL4TNvo5DcaX14EUJnRuCIiwQJLO8zGMTCeaV-L0GT2Q6ULkCEjmqx9uuoFmaJ0U90DQ6BJiAQsza8Kcv53co3X7fXKKtPu4aMUEDA-ofkW4lH7SPHh1Pw23jRYK86aikkt3aLNU7EWELLLh0lcKTLhvqBkbJtJWq9KzAeCg"/>
+<img alt="Mastercard Logo" class="opacity-50 grayscale hover:grayscale-0 transition-all cursor-help" data-alt="Mastercard payment icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-TwOroReu6fa0z8o8X2-SfXscYUz1TpV8hezv6liy4Wi6RjP8_Xek-CcWWNYptiZIyw20WHMTvXdqS43swqwu65KRnXu82eqsz-BliTlxrOy5k56l9ArUGjLS2IAmSWSDEDC2Iln88jC2DRTOFSxa6ffohD2aUVBD2sLQ7-mpQm0hPfxHo6HXLsppcP7llYx0EJPymGdEKJBipGsPC6q7TMS4h9t3N3bHTz-cdDvBE6wuDDpZ22bFb2AkHkSuioCCQyF3sgEDWsk"/>
+<img alt="Stripe Logo" class="opacity-50 grayscale hover:grayscale-0 transition-all cursor-help" data-alt="Stripe payment icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2TBh09cZARfB0kHrojyToj9Z1h2M5x5f_CockT0Z1QumXjzToiUMcRqe6Jkj24vrGABLlkAqs5NMmDtEJRDga_htgsUTpFTYbmGiSk4tlqENdQtuIsbPs90gYc1vewOuc-AcAMPY_48qZcy-_oqrz5eM_0khB3v7Z_HEdI4dVEsEnXPGdGTc95zaavO39hSP-vCJotPu5Kf2yFZTdznyQNhtGN9uHYzuRR9KqANzL-feOxEaHS_k0I-0IVelhUB2fdUMM65f1SoQ"/>
+</div>
+</div>
+</div>
+<!-- Quick Stats -->
+<div class="flex flex-col gap-4">
+<div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+<p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Total Paid YTD</p>
+<div class="flex items-center justify-between">
+<h4 class="text-2xl font-bold">$12,450.00</h4>
+<div class="text-success flex items-center">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+<p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Scholarship Credits</p>
+<div class="flex items-center justify-between">
+<h4 class="text-2xl font-bold">$3,500.00</h4>
+<span class="material-symbols-outlined text-primary">stars</span>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex items-center justify-between bg-primary/5 cursor-pointer hover:bg-primary/10 transition-colors">
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Financial Aid</p>
+<p class="text-sm font-medium">Inquiry Status: Under Review</p>
+</div>
+<span class="material-symbols-outlined text-primary">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+<!-- Payment History Table -->
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
+<div class="px-6 py-5 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+<div>
+<h3 class="font-bold text-lg">Payment History</h3>
+<p class="text-sm text-gray-500">Transaction logs and downloadable receipts</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                                Filter
+                            </button>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                                Export CSV
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/50 text-xs font-bold text-gray-500 uppercase tracking-wider">
+<th class="px-6 py-4">Transaction ID</th>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4">Description</th>
+<th class="px-6 py-4 text-right">Amount</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-center">Receipt</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4 text-sm font-mono text-gray-500">TXN-99201</td>
+<td class="px-6 py-4 text-sm font-medium">Oct 12, 2023</td>
+<td class="px-6 py-4">
+<p class="text-sm font-bold">Fall Semester Tuition</p>
+<p class="text-xs text-gray-500">2nd Installment</p>
+</td>
+<td class="px-6 py-4 text-sm font-bold text-right">$4,250.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-success/10 text-success">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                            Success
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-primary hover:bg-primary/10 p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">receipt_long</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4 text-sm font-mono text-gray-500">TXN-98512</td>
+<td class="px-6 py-4 text-sm font-medium">Oct 05, 2023</td>
+<td class="px-6 py-4">
+<p class="text-sm font-bold">Annual Library Fee</p>
+<p class="text-xs text-gray-500">Access &amp; Lending Services</p>
+</td>
+<td class="px-6 py-4 text-sm font-bold text-right">$150.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-success/10 text-success">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                            Success
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-primary hover:bg-primary/10 p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">receipt_long</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4 text-sm font-mono text-gray-500">TXN-98104</td>
+<td class="px-6 py-4 text-sm font-medium">Sep 28, 2023</td>
+<td class="px-6 py-4">
+<p class="text-sm font-bold">Lab Equipment Deposit</p>
+<p class="text-xs text-gray-500">Chemistry Dept - Refundable</p>
+</td>
+<td class="px-6 py-4 text-sm font-bold text-right">$300.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-warning/10 text-warning">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                                            Processing
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-gray-300 cursor-not-allowed p-2 rounded-lg" disabled="">
+<span class="material-symbols-outlined">receipt_long</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-6 py-4 text-sm font-mono text-gray-500">TXN-97880</td>
+<td class="px-6 py-4 text-sm font-medium">Sep 20, 2023</td>
+<td class="px-6 py-4">
+<p class="text-sm font-bold">Health Insurance Premium</p>
+<p class="text-xs text-gray-500">Student Care Plan A</p>
+</td>
+<td class="px-6 py-4 text-sm font-bold text-right">$1,200.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-error/10 text-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                            Failed
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-error hover:bg-error/10 p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">report</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-gray-50 dark:bg-gray-800/30 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between">
+<span class="text-xs font-medium text-gray-500">Showing 4 of 24 transactions</span>
+<div class="flex gap-2">
+<button class="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer Support -->
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full text-primary">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div>
+<h4 class="font-bold">Need assistance?</h4>
+<p class="text-sm text-gray-500">Contact the financial aid office for payment plans or disputes.</p>
+<a class="text-sm font-bold text-primary mt-2 inline-block hover:underline" href="#">Contact Support</a>
+</div>
+</div>
+<div class="flex-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 flex items-center gap-4">
+<div class="bg-success/10 p-3 rounded-full text-success">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<h4 class="font-bold">Secure Payments</h4>
+<p class="text-sm text-gray-500">All transactions are encrypted and processed through certified providers.</p>
+<a class="text-sm font-bold text-success mt-2 inline-block hover:underline" href="#">Security Policy</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

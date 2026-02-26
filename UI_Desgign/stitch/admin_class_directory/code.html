@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Class Directory - EduManage ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .soft-pearl-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-gray-100 font-display transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col justify-between py-6">
+<div class="flex flex-col gap-8 px-6">
+<!-- Logo & Brand -->
+<div class="flex items-center gap-3">
+<div class="bg-primary rounded-xl p-2 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">school</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#111418] dark:text-white text-lg font-bold leading-none">EduManage</h1>
+<p class="text-gray-500 dark:text-gray-400 text-xs font-medium">Admin Portal</p>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 text-primary rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px] font-variation-fill">grid_view</span>
+<span class="text-sm font-semibold">Academic Modules</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">person_4</span>
+<span class="text-sm font-medium">Teachers</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">group</span>
+<span class="text-sm font-medium">Students</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">auto_stories</span>
+<span class="text-sm font-medium">Curriculum</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">assessment</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+</nav>
+</div>
+<!-- Support Button -->
+<div class="px-6">
+<button class="w-full bg-primary text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-blue-600 transition-colors">
+<span class="material-symbols-outlined text-lg">support_agent</span>
+                    Support Center
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-background-light dark:bg-background-dark">
+<!-- Top Header/Navbar -->
+<header class="sticky top-0 z-10 flex items-center justify-between bg-white dark:bg-gray-900 px-8 py-4 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+<a class="hover:text-primary transition-colors" href="#">Academic</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-gray-900 dark:text-white font-medium">Classes</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-r border-gray-200 dark:border-gray-800 pr-6">
+<button class="relative p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full transition-all">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 border-2 border-white dark:border-gray-900 rounded-full"></span>
+</button>
+<button class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full transition-all">
+<span class="material-symbols-outlined text-2xl">chat_bubble</span>
+</button>
+</div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="text-sm font-bold text-gray-900 dark:text-white leading-none">Admin User</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">School Principal</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-gray-50 dark:border-gray-800 object-cover" data-alt="Admin user professional headshot avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADmTqhtKUX4VVMbG1-YrMJtOEyC5PPoROGm7BeWBatBmj0_NEQ1EM8XZucaKfcnjeih2gdFlcSUz9E7PjH2AF-8jSR47oRI5Q2YMH6gfKLn37e4vCP8ckEnzACNvmhCaypopLxv2EIo0YXsdvPrx3sYz5EPUEjbnrPSJPij4P4pdPKp_-HKap2oFzUYO-2DaSvAus_AX7c4IPndup7wpRCMpzWeLlFbDkuJONPLjxbufSXiRK1pRr65bfaJDwwI2sRzB3_-3YklPQ"/>
+</div>
+</div>
+</header>
+<!-- Page Title and Primary Actions -->
+<section class="px-8 pt-10 pb-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="text-3xl font-black text-[#111418] dark:text-white tracking-tight">Class Directory</h2>
+<p class="text-gray-500 dark:text-gray-400 mt-1 max-w-lg">Manage and organize academic sections, student allocations, and teacher assignments for the current session.</p>
+</div>
+<button class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+                        Create New Class
+                    </button>
+</div>
+<!-- Filters & Search Bar -->
+<div class="flex flex-wrap items-center gap-4 mt-10">
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl py-3 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white" placeholder="Search by grade, section or teacher..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<select class="appearance-none bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl py-3 pl-10 pr-10 text-sm font-medium text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none cursor-pointer">
+<option>Academic Year: 2023-24</option>
+<option>Academic Year: 2024-25</option>
+<option>Academic Year: 2022-23</option>
+</select>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">calendar_today</span>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
+</div>
+<button class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Class Cards Grid -->
+<section class="px-8 pb-12">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 soft-pearl-shadow hover:shadow-xl hover:border-primary/30 transition-all group flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Grade 10-A</h3>
+<span class="inline-block mt-1 px-2.5 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-[10px] font-bold uppercase tracking-wider rounded-full">Primary Wing</span>
+</div>
+<button class="p-1.5 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-3 my-6">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of class teacher Sarah Jenkins" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcvYXzpZ3aGXR0iMvKyCJYtk0RpGWoaVf75bBvxdINFbfH3nu0lxFZyqahMXQ4mm51DUQY8hnNrczAHW5b1F2qPT868NjYtejhMjHO1s4El0JW9Kec63MhNr_PKwau4BOvqkzf5fs-TL4jSGN0uSEefsr8C1ckck8IDSWQxbWx9c-qgIthIshIJah39mvoTK9oVMjCXd_Fd9cIdXaOM3INGYg4a49w6dlEZsETa6TtlMisJPeNaEMXJNkt2lvF_3ruo7G2fe12G5M"/>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Class Teacher</p>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">Sarah Jenkins</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-gray-50 dark:border-gray-800">
+<div class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined text-lg">group</span>
+<span class="text-sm font-medium">32 Students</span>
+</div>
+<span class="flex h-2.5 w-2.5 rounded-full bg-green-500" title="Full capacity"></span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 soft-pearl-shadow hover:shadow-xl hover:border-primary/30 transition-all group flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Grade 9-B</h3>
+<span class="inline-block mt-1 px-2.5 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-[10px] font-bold uppercase tracking-wider rounded-full">Secondary Wing</span>
+</div>
+<button class="p-1.5 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-3 my-6">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of class teacher David Miller" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXfn8U9FV0u1bL9caUPjmSNYmr9HHgQ9EzTfcT81H5KyCooec7ANKNI0zft2OZH_xMv_Z8aTbrqlJ8XoUpPOwIR3d6MujepCeTFayP9TcB6Zw7qzJBahN8vgNGAt490qOGUlZXsyDQG3pEnr_IaKpPZMkdpSjyiljdWVTpP1GLpcsvcPNBA7K64lvB-zj9MG_KhKoMV6iyl9Daanp4l9OOSecb8M1YK4Kv1DIXa_v94TIlZxPt-1UYVZSv5OdoOmq6PnjgOiTBpx0"/>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Class Teacher</p>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">David Miller</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-gray-50 dark:border-gray-800">
+<div class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined text-lg">group</span>
+<span class="text-sm font-medium">28 Students</span>
+</div>
+<span class="flex h-2.5 w-2.5 rounded-full bg-yellow-500" title="4 spots left"></span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 soft-pearl-shadow hover:shadow-xl hover:border-primary/30 transition-all group flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Grade 11-C</h3>
+<span class="inline-block mt-1 px-2.5 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-[10px] font-bold uppercase tracking-wider rounded-full">Senior Secondary</span>
+</div>
+<button class="p-1.5 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-3 my-6">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of class teacher Elena Rodriguez" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_MYB_7XOoR4ZzI4Ts_L2dBcKWPJVx1DWKFgIF4EkRiWWJO8oWmg8i3iN5AkJF8ZNuy5Je5XeA1xI9Kau2857bxWdbCW7xFUL604DrBrdjVVPaftXSPmmICRjQFvEGkt-jB62iSdyKQvztPVzmF-osccqBTJ-hlBssP2yvs25Auee_M9vkFg0aATd-bHSH04cnW06Xe3WanR0BMwdL0-iXrL5W3qR4TcWbJJYWE1Osy9oy1liD-gnWDg3ITEQoPF59cqYF5TwvKes"/>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Class Teacher</p>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">Elena Rodriguez</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-gray-50 dark:border-gray-800">
+<div class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined text-lg">group</span>
+<span class="text-sm font-medium">35 Students</span>
+</div>
+<span class="flex h-2.5 w-2.5 rounded-full bg-red-500" title="Over capacity"></span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 soft-pearl-shadow hover:shadow-xl hover:border-primary/30 transition-all group flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Grade 8-A</h3>
+<span class="inline-block mt-1 px-2.5 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-[10px] font-bold uppercase tracking-wider rounded-full">Junior Wing</span>
+</div>
+<button class="p-1.5 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-3 my-6">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of class teacher Thomas Clark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs7PzT5Y5pBcak08RVj3SHgsB4xhjf1-ysT9CzXQix-R-nMyMOsl0pUT4_BusTgzh4YmD88K0xe8dntP23yqtFl5osY0Y8tqz3DaDrQkT-dDlMZHAXTK7ULa-FYLjp75kL9G0YHuGuvKvRR59oku7UMEMD4wyZnk8E1Y29DLnojuy6TW9ZrigzlOZmbtD6fd9JiZA2udIRngW5k6Jfw6a_B51obUJYqazRx-59rr8N3r7-zDMqTMGTcnzPDWEciiA4tf58K44k3Ec"/>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Class Teacher</p>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">Thomas Clark</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-gray-50 dark:border-gray-800">
+<div class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined text-lg">group</span>
+<span class="text-sm font-medium">24 Students</span>
+</div>
+<span class="flex h-2.5 w-2.5 rounded-full bg-green-500" title="Optimum capacity"></span>
+</div>
+</div>
+<!-- Card 5 (Unassigned Teacher Example) -->
+<div class="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 soft-pearl-shadow hover:shadow-xl hover:border-primary/30 transition-all group flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Grade 7-D</h3>
+<span class="inline-block mt-1 px-2.5 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-[10px] font-bold uppercase tracking-wider rounded-full">New Section</span>
+</div>
+<button class="p-1.5 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-3 my-6">
+<div class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-400">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Class Teacher</p>
+<p class="text-sm font-semibold text-gray-400 italic">Unassigned</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-gray-50 dark:border-gray-800">
+<div class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined text-lg">group</span>
+<span class="text-sm font-medium">0 Students</span>
+</div>
+<span class="flex h-2.5 w-2.5 rounded-full bg-gray-300 dark:bg-gray-700"></span>
+</div>
+</div>
+<!-- Add Card Placeholder -->
+<div class="border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center text-gray-400 dark:text-gray-600 hover:border-primary hover:text-primary transition-all cursor-pointer group min-h-[220px]">
+<span class="material-symbols-outlined text-4xl mb-2 group-hover:scale-110 transition-transform">add_box</span>
+<p class="text-sm font-bold">Add New Section</p>
+<p class="text-xs mt-1">Quick setup for 2024-25</p>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System Activity Audit Logs - Academic Management Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .soft-pearl-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-slate-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header / Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e5e7eb] dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">school</span>
+</div>
+<h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-tight">Academic Platform</h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Students</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Academics</a>
+<a class="text-sm font-medium text-slate-900 dark:text-white" href="#">Admin Console</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-700">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-semibold text-slate-900 dark:text-white">Admin User</p>
+<p class="text-[10px] text-slate-500">Super Administrator</p>
+</div>
+<img alt="" class="rounded-full size-10 border border-slate-200" data-alt="Portrait of an administrator with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5mIzUvqTM0cqoKvw1_axz3vi2I6rsP0FsSbGeQkoQp2rlZrRNqyHX4d4V9FER8yOnbWf02T_CTkNeVQ4fNC_x4V_MIkh4GUEivl4o_xlFvw6zh3Tyz1S-qV8mqacGnitxEhBVlLPHd43NDtJnIOf4Trk8u-uGRTOxo8x73OzV1VkBO1kdEooDUD14ZQ1rZQP9QD47vnnT4Q_TMHqO7YRzfr0GMs495JFxPoUJubWDkxFV_vmIn71AKiniS5KE970cko3X-X3eB2k"/>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col max-w-[1440px] mx-auto w-full p-6 md:p-10 gap-8">
+<!-- Breadcrumbs & Title -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-500 uppercase tracking-wider">
+<span>Admin Console</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary">System Activity Audit Logs</span>
+</nav>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">System Activity Audit Logs</h1>
+<p class="text-slate-500 dark:text-slate-400">Monitor and audit system-wide actions for compliance, security, and traceability.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Export CSV
+                    </button>
+<button class="flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-blue-600 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-lg">sync</span>
+                        Refresh Logs
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats Bar -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 soft-pearl-shadow">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Total Logs (24h)</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">1,284</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 soft-pearl-shadow">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Academic Actions</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">842</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 soft-pearl-shadow">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">User Management</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">143</p>
+</div>
+<div class="bg-amber-50 dark:bg-amber-950/20 p-5 rounded-xl border border-amber-100 dark:border-amber-900/30 soft-pearl-shadow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-1">Suspicious Events</p>
+<p class="text-2xl font-black text-amber-700 dark:text-amber-500">12</p>
+</div>
+<span class="material-symbols-outlined text-amber-600">report</span>
+</div>
+</div>
+</div>
+<!-- Filters Section -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col lg:flex-row gap-4 soft-pearl-shadow">
+<div class="flex-1 relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary text-sm" placeholder="Search by User, Action, or Target Entity..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 min-w-[180px]">
+<span class="material-symbols-outlined text-slate-400 text-lg">calendar_month</span>
+<span class="text-sm text-slate-600 dark:text-slate-300">Last 7 Days</span>
+<span class="material-symbols-outlined text-slate-400 ml-auto">expand_more</span>
+</div>
+<div class="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 min-w-[160px]">
+<span class="material-symbols-outlined text-slate-400 text-lg">filter_list</span>
+<span class="text-sm text-slate-600 dark:text-slate-300">Action Type: All</span>
+<span class="material-symbols-outlined text-slate-400 ml-auto text-sm">expand_more</span>
+</div>
+<button class="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</div>
+<!-- Main Audit Table Container -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden soft-pearl-shadow">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700">
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest w-[180px]">Timestamp</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest">User</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Action Type</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Target Entity</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Description</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1: Normal Academic -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+<td class="px-6 py-4">
+<p class="text-sm font-medium text-slate-900 dark:text-slate-200">Oct 24, 2023</p>
+<p class="text-xs text-slate-400">10:42 AM</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="" class="size-8 rounded-full border border-slate-200" data-alt="Female user profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA16O2Du6A8LqBt8OdT4xV-j2v2N4Kwx9IjYsUtZSQHJKTr2DUFLUrwxBWGCSv-uuPjhEbSq55qi8SfmcwO-4rQiFmzvbNz3Cd93_r8ZpyaUz-Zfg0MHMk1V01tkFtD2Ds0ruom-bYOnY4eoCUB5VYuYqj2v-Xz-zLk0bxlbtQIayDmGDbY0mfMpx-xRpNWRUnj8g2iBCQ4ChYrJWhwsSdyTf4ZKakNL87ctgjzC3mWNVa6wER4sRXmBD5XkbGo4ZQSctcGsG5n3GI"/>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-200">Sarah Jenkins</p>
+<p class="text-[10px] text-slate-500 font-medium">Registrar</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+                                        Grade Published
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-sm">menu_book</span>
+<p class="text-sm text-slate-600 dark:text-slate-400 font-medium">Class: CS101 - A</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-1">Final grades published for Fall 2023 semester.</p>
+</td>
+</tr>
+<!-- Row 2: Suspicious Highlight -->
+<tr class="bg-slate-100/60 dark:bg-slate-800/60 hover:bg-slate-200/50 dark:hover:bg-slate-800/80 transition-colors">
+<td class="px-6 py-4">
+<p class="text-sm font-medium text-slate-900 dark:text-slate-200">Oct 24, 2023</p>
+<p class="text-xs text-slate-400">09:15 AM</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-300 flex items-center justify-center text-xs font-bold text-slate-600">JD</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-200">John Doe</p>
+<p class="text-[10px] text-slate-500 font-medium">External API</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300">
+                                            Bulk Export
+                                        </span>
+<span class="material-symbols-outlined text-amber-500 text-lg" title="Suspicious activity detected">warning</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-sm">database</span>
+<p class="text-sm text-slate-600 dark:text-slate-400 font-medium">Entire Student Body</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-amber-700 dark:text-amber-500 font-medium italic">High volume data export initiated from unrecognized IP.</p>
+</td>
+</tr>
+<!-- Row 3: Security -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+<td class="px-6 py-4">
+<p class="text-sm font-medium text-slate-900 dark:text-slate-200">Oct 23, 2023</p>
+<p class="text-xs text-slate-400">04:30 PM</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="" class="size-8 rounded-full border border-slate-200" data-alt="Male administrator profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASUZfys-3pZz6OrB7QXtzac-HL6Z9liTlyWfTLg2lz4mtTzD57mM8DGZk_4ZHolvZrupvmWstQDoA0F5Q6TxBrxgu4qj-7-3lTZal5vclH-ME6oOkacGiTmUALs05pK1us2MEaYBBuSNuX3mMwSouvj9Kcwwspa4GednI3A2hn8SkLQfBM66fZ_cz4yHsBQMlw1WEsNbnIGwi6spbMaZIZx_lW-QJHeSytULmavKSBz58fTMyjn18f1He5eswrqhqY73S1UnZFMzI"/>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-200">Michael Ross</p>
+<p class="text-[10px] text-slate-500 font-medium">IT Admin</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+                                        User Permission Change
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-sm">person</span>
+<p class="text-sm text-slate-600 dark:text-slate-400 font-medium">User: t.miller@univ.edu</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-1">Granted 'Financial Records' access to Tom Miller.</p>
+</td>
+</tr>
+<!-- Row 4: Student Life Cycle -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+<td class="px-6 py-4">
+<p class="text-sm font-medium text-slate-900 dark:text-slate-200">Oct 23, 2023</p>
+<p class="text-xs text-slate-400">02:12 PM</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="" class="size-8 rounded-full border border-slate-200" data-alt="Female faculty member profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIw_A8qE8S3VVF8hDQnh5EdAZtS5qLwy_Qz5jmBcFcrG_LVBj7wyZZCUVYVMSow5LXMFyDW4vcZxd5SXbPuuo8kgFNUkTnm2qSIJtc10JcwcxLlUo2yM5hwoaRR6d0nrJcnwIWzYODEKglGiAoPzewA0nOFDO4vyj6CrLg6SEmG8A_doK2xaxJvy5kDHy2Rlo0i6brI74ujIVn1k4dHsAjDKrV4gkpq-wN1KZFB9eVhe7YZN5_H6FUVp1hu6QYFAnxSe-3X54Pijc"/>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-200">Dr. Helena Vance</p>
+<p class="text-[10px] text-slate-500 font-medium">Department Head</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">
+                                        Student Archived
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-sm">account_box</span>
+<p class="text-sm text-slate-600 dark:text-slate-400 font-medium">Student: #2023-991</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-1">Student record archived after graduation clearance.</p>
+</td>
+</tr>
+<!-- Row 5: Login Event -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+<td class="px-6 py-4">
+<p class="text-sm font-medium text-slate-900 dark:text-slate-200">Oct 23, 2023</p>
+<p class="text-xs text-slate-400">01:45 PM</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-300 flex items-center justify-center text-xs font-bold text-slate-600">SM</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-slate-200">System Monitor</p>
+<p class="text-[10px] text-slate-500 font-medium">Automated Task</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                                        User Login
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-sm">login</span>
+<p class="text-sm text-slate-600 dark:text-slate-400 font-medium">Session ID: 88219</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-1">Standard login detected from Vancouver, CA.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 flex items-center justify-between border-t border-slate-200 dark:border-slate-700">
+<p class="text-sm text-slate-500">Showing 1 to 5 of 1,284 results</p>
+<div class="flex items-center gap-1">
+<button class="flex items-center justify-center size-8 rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-400 hover:text-primary transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="flex items-center justify-center size-8 rounded bg-primary text-white text-xs font-bold">1</button>
+<button class="flex items-center justify-center size-8 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-xs font-bold hover:border-primary">2</button>
+<button class="flex items-center justify-center size-8 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-xs font-bold hover:border-primary">3</button>
+<span class="px-1 text-slate-400">...</span>
+<button class="flex items-center justify-center size-8 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-xs font-bold hover:border-primary">257</button>
+<button class="flex items-center justify-center size-8 rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State Concept (Hidden) -->
+<div class="hidden flex-col items-center justify-center py-20 text-center">
+<div class="size-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-slate-400 text-3xl">search_off</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">No matches found</h3>
+<p class="text-slate-500 max-w-xs mx-auto">Try adjusting your filters or search terms to see system activity logs.</p>
+<button class="mt-4 text-primary font-bold text-sm">Clear all filters</button>
+</div>
+</main>
+<!-- Footer Info -->
+<footer class="p-6 text-center border-t border-slate-200 dark:border-slate-800 mt-auto">
+<p class="text-xs text-slate-400 uppercase tracking-widest font-medium">Audit logs are immutable and stored for 7 years as per policy.</p>
+</footer>
+</div>
+</body></html>

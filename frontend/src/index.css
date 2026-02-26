@@ -1,0 +1,40 @@
+/* ── Tailwind base ───────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* ── Design system ───────────────────────────────────────────── */
+@import "./theme/tokens.css";
+@import "./theme/global.css";
+
+/* ── Tailwind v4: map CSS vars → Tailwind utility classes ────── */
+@theme {
+  /* Colors */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-subtle: var(--primary-subtle);
+
+  --color-accent: var(--accent);
+  --color-danger: var(--danger);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-border: var(--border);
+
+  /* Shadows */
+  --shadow-soft: var(--shadow-soft);
+
+  /* Border radius */
+  --radius-sm: var(--radius-sm);
+  --radius-DEFAULT: var(--radius);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-full: var(--radius-full);
+
+  /* Font */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}

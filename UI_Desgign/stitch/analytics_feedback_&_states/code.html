@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics Feedback &amp; States - EduAnalytics ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .skeleton {
+            background: linear-gradient(90deg, #283039 25%, #3b4754 50%, #283039 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#283039] px-6 py-3 bg-white dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">EduAnalytics ERP</h2>
+</div>
+<nav class="hidden lg:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Students</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Academics</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary py-1" href="#">Reports</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-400 flex border-none bg-slate-100 dark:bg-[#283039] items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-slate-100 dark:bg-[#283039] focus:ring-0 text-slate-900 dark:text-white placeholder:text-slate-400 px-4 rounded-r-lg text-sm" placeholder="Search analytics..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="relative flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#283039] text-slate-600 dark:text-white">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 flex h-2 w-2 rounded-full bg-red-500"></span>
+</button>
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Profile photo of the admin user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-4qpgnuUIbbz6R_iWNx0u6O2qfk8KCmctFq7Fu8TzioXccYUt41xEvj6iGyH0UsLvURbu0hp5aYxEvEPJMmtF2U0iVwmZ11VQtBjZXpCAj-_sfngsjF8DSRXamTL5-cMdVNKiHouUImmsDOoRNiJAawEPOfVpebCziEPAoDYDChjCUJPwAP3TjsZMV5zQdOFUeCQS9f5RnV6PQBz7XoMxen2pzG_nlolVvaKzlwtD14YSczOTUsispdCrbmoueXi9c9BYTUeZ9QE"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto p-6 flex flex-col gap-6">
+<!-- Header & State Toggle -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h1 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Analytics System States</h1>
+<p class="text-slate-500 dark:text-[#9dabb9] text-base mt-1">Review UI behavior for edge cases and loading scenarios.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-3 items-center">
+<div class="flex h-11 items-center rounded-xl bg-slate-200 dark:bg-[#283039] p-1 w-full sm:w-auto">
+<button class="px-6 h-full flex items-center justify-center rounded-lg text-sm font-semibold transition-all text-slate-500 dark:text-[#9dabb9]">
+                        Live View
+                    </button>
+<button class="px-6 h-full flex items-center justify-center rounded-lg text-sm font-semibold transition-all bg-white dark:bg-background-dark text-primary shadow-sm">
+                        State Demo
+                    </button>
+</div>
+<button class="flex items-center gap-2 h-11 px-6 bg-primary text-white rounded-xl font-bold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+                    Refresh Data
+                </button>
+</div>
+</div>
+<!-- Metric Stat Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- GPA (Loaded) -->
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border border-slate-200 dark:border-[#3b4754] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Average GPA</p>
+<span class="material-symbols-outlined text-primary">school</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold">3.82</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-emerald-500 text-sm">trending_up</span>
+<p class="text-emerald-500 text-sm font-semibold">+2.1% <span class="text-slate-400 font-normal">vs last term</span></p>
+</div>
+</div>
+<!-- Total Students (Skeleton) -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white dark:bg-background-dark border border-slate-200 dark:border-[#3b4754] shadow-sm">
+<div class="flex justify-between items-start">
+<div class="h-4 w-24 skeleton rounded bg-slate-200 dark:bg-slate-700"></div>
+<span class="material-symbols-outlined text-slate-300">group</span>
+</div>
+<div class="h-9 w-20 skeleton rounded-lg bg-slate-200 dark:bg-slate-700"></div>
+<div class="h-4 w-32 skeleton rounded bg-slate-200 dark:bg-slate-700"></div>
+</div>
+<!-- Attendance (Loaded) -->
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border border-slate-200 dark:border-[#3b4754] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Attendance Rate</p>
+<span class="material-symbols-outlined text-amber-500">event_available</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold">92%</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-rose-500 text-sm">trending_down</span>
+<p class="text-rose-500 text-sm font-semibold">-1.2% <span class="text-slate-400 font-normal">vs average</span></p>
+</div>
+</div>
+<!-- Active Alerts (Skeleton) -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white dark:bg-background-dark border border-slate-200 dark:border-[#3b4754] shadow-sm">
+<div class="flex justify-between items-start">
+<div class="h-4 w-24 skeleton rounded bg-slate-200 dark:bg-slate-700"></div>
+<span class="material-symbols-outlined text-slate-300">warning</span>
+</div>
+<div class="h-9 w-12 skeleton rounded-lg bg-slate-200 dark:bg-slate-700"></div>
+<div class="h-4 w-28 skeleton rounded bg-slate-200 dark:bg-slate-700"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Content Area: Trends (Skeleton State) -->
+<div class="lg:col-span-2 bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-[#3b4754] overflow-hidden flex flex-col">
+<div class="p-6 border-b border-slate-200 dark:border-[#3b4754] flex justify-between items-center">
+<h3 class="font-bold text-lg">Academic Performance Trends</h3>
+<div class="flex gap-2">
+<div class="h-8 w-20 skeleton rounded-lg opacity-50"></div>
+<div class="h-8 w-20 skeleton rounded-lg opacity-50"></div>
+</div>
+</div>
+<div class="p-8 flex flex-col gap-6 flex-1 min-h-[400px]">
+<div class="flex items-end justify-between h-48 gap-4 px-4">
+<div class="w-full skeleton rounded-t-lg opacity-20" style="height: 60%;"></div>
+<div class="w-full skeleton rounded-t-lg opacity-30" style="height: 85%;"></div>
+<div class="w-full skeleton rounded-t-lg opacity-20" style="height: 45%;"></div>
+<div class="w-full skeleton rounded-t-lg opacity-40" style="height: 70%;"></div>
+<div class="w-full skeleton rounded-t-lg opacity-25" style="height: 55%;"></div>
+<div class="w-full skeleton rounded-t-lg opacity-35" style="height: 90%;"></div>
+<div class="w-full skeleton rounded-t-lg opacity-20" style="height: 40%;"></div>
+<div class="w-full skeleton rounded-t-lg opacity-40" style="height: 75%;"></div>
+</div>
+<div class="space-y-4">
+<div class="h-4 w-full skeleton rounded opacity-40"></div>
+<div class="h-4 w-2/3 skeleton rounded opacity-40"></div>
+<div class="h-4 w-3/4 skeleton rounded opacity-40"></div>
+</div>
+</div>
+</div>
+<!-- Sidebar: Insights & Warnings -->
+<div class="flex flex-col gap-6">
+<!-- Low Attendance Warning Overlay Example -->
+<div class="relative bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-900/30 rounded-xl p-6 overflow-hidden">
+<div class="absolute top-0 right-0 p-2">
+<span class="material-symbols-outlined text-amber-500/20 text-6xl rotate-12 select-none">priority_high</span>
+</div>
+<div class="flex flex-col gap-4 relative z-10">
+<div class="h-10 w-10 bg-amber-100 dark:bg-amber-900/40 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-600 dark:text-amber-400">warning</span>
+</div>
+<div>
+<h4 class="font-bold text-amber-800 dark:text-amber-400">Low Attendance Warning</h4>
+<p class="text-amber-700 dark:text-amber-300/80 text-sm mt-1 leading-relaxed">
+                                System detected a 15% drop in Attendance for Grade 10-B over the last 7 days.
+                            </p>
+</div>
+<button class="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-lg transition-colors">
+                            Investigate Class
+                        </button>
+</div>
+</div>
+<!-- Custom Tooltip Demo -->
+<div class="bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-[#3b4754] p-6 shadow-sm">
+<h4 class="font-bold text-sm mb-4 text-slate-500 uppercase tracking-wider">Tooltip Simulation</h4>
+<div class="relative p-6 bg-slate-50 dark:bg-slate-900/50 rounded-lg flex items-center justify-center h-32 border-2 border-dashed border-slate-200 dark:border-slate-800">
+<div class="flex flex-col items-center gap-2">
+<div class="h-10 w-1 bg-primary rounded-full"></div>
+<div class="p-3 bg-slate-900 dark:bg-slate-800 text-white rounded-lg shadow-xl text-xs flex flex-col gap-1 min-w-[140px] z-20">
+<div class="flex justify-between border-b border-slate-700 pb-1 mb-1">
+<span class="font-bold">Student ID: 442</span>
+<span class="text-primary font-bold">88%</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-400">Subject:</span>
+<span>Mathematics</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-400">Deviation:</span>
+<span class="text-emerald-400">+5.2</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Empty State Demo -->
+<div class="bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-[#3b4754] p-12 text-center">
+<div class="max-w-md mx-auto flex flex-col items-center gap-6">
+<div class="h-24 w-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-slate-400 dark:text-slate-600">bar_chart_4_bars</span>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-2">Insufficient Data for Trends</h3>
+<p class="text-slate-500 dark:text-slate-400 leading-relaxed">
+                        The current cohort selection does not have enough historical records to generate an academic trend report. Please import at least 3 months of data to unlock this visualization.
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                        Import Records
+                    </button>
+<button class="px-6 py-2.5 border border-slate-300 dark:border-slate-600 font-bold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                        View Sample Data
+                    </button>
+</div>
+</div>
+</div>
+<!-- Section: Mixed State Table -->
+<div class="bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-[#3b4754] overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-[#3b4754] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h3 class="font-bold text-lg">Grade Distribution Matrix</h3>
+<p class="text-sm text-slate-500">Demonstrating partial loading states</p>
+</div>
+<div class="flex gap-2">
+<button class="h-9 px-4 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm font-medium border border-slate-200 dark:border-slate-700">Filter</button>
+<button class="h-9 px-4 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm font-medium border border-slate-200 dark:border-slate-700">Export CSV</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-[#3b4754]">
+<tr>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Department</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Class</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Mean Grade</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Efficiency</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-[#3b4754]">
+<!-- Loaded Row -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-lg flex items-center justify-center font-bold text-xs">SC</div>
+<span class="font-semibold text-sm">Science Department</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Grade 12-A</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold rounded">A- (4.2)</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2 max-w-[120px]">
+<div class="bg-primary h-2 rounded-full" style="width: 82%;"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary font-bold text-sm">View Details</button>
+</td>
+</tr>
+<!-- Skeleton Loading Row -->
+<tr>
+<td class="px-6 py-5"><div class="h-5 w-40 skeleton rounded"></div></td>
+<td class="px-6 py-5"><div class="h-5 w-24 skeleton rounded"></div></td>
+<td class="px-6 py-5"><div class="h-7 w-16 skeleton rounded"></div></td>
+<td class="px-6 py-5"><div class="h-2 w-28 skeleton rounded-full"></div></td>
+<td class="px-6 py-5 text-right"><div class="h-5 w-20 skeleton rounded ml-auto"></div></td>
+</tr>
+<!-- Loaded Row -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-lg flex items-center justify-center font-bold text-xs">HU</div>
+<span class="font-semibold text-sm">Humanities</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Grade 11-C</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-bold rounded">B+ (3.5)</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2 max-w-[120px]">
+<div class="bg-primary h-2 rounded-full" style="width: 65%;"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary font-bold text-sm">View Details</button>
+</td>
+</tr>
+<!-- Skeleton Loading Row -->
+<tr>
+<td class="px-6 py-5"><div class="h-5 w-32 skeleton rounded"></div></td>
+<td class="px-6 py-5"><div class="h-5 w-20 skeleton rounded"></div></td>
+<td class="px-6 py-5"><div class="h-7 w-12 skeleton rounded"></div></td>
+<td class="px-6 py-5"><div class="h-2 w-32 skeleton rounded-full"></div></td>
+<td class="px-6 py-5 text-right"><div class="h-5 w-20 skeleton rounded ml-auto"></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<footer class="mt-12 py-12 border-t border-slate-200 dark:border-[#283039] bg-white dark:bg-background-dark">
+<div class="max-w-[1440px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">cloud_done</span>
+<span class="text-sm font-medium">All systems operational</span>
+</div>
+<p class="text-xs text-slate-500">© 2024 EduAnalytics ERP v2.4.0. Enterprise Academic Management.</p>
+</div>
+<div class="flex gap-6">
+<a class="text-sm text-slate-500 hover:text-primary" href="#">API Status</a>
+<a class="text-sm text-slate-500 hover:text-primary" href="#">Support Center</a>
+<a class="text-sm text-slate-500 hover:text-primary" href="#">System Logs</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,1640 @@
+Great — we’ll go **very explicit and engineering-level**, so you can directly paste this into Antigravity / UML tools (PlantUML compatible).  
+This is not a toy diagram — it models behavior + ownership + permissions + academic logic.
+
+Below is a **complete backend domain class diagram**.
+
+---
+
+# 🧱 Detailed Class Diagram (PlantUML Ready)
+
+> Copy everything between the lines into Antigravity / PlantUML
+
+```
+@startuml
+
+'======================
+' BASE USER HIERARCHY
+'======================
+
+class User {
+  +ObjectId id
+  +String name
+  +String email
+  +String passwordHash
+  +Role role
+  +AccountStatus status
+  +Date lastLogin
+  +int loginAttempts
+
+  +login()
+  +logout()
+  +changePassword()
+  +resetPassword()
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+enum AccountStatus {
+  ACTIVE
+  SUSPENDED
+  LOCKED
+}
+
+class Admin {
+  +createUser()
+  +assignTeacher()
+  +archiveStudent()
+  +viewAnalytics()
+}
+
+class Teacher {
+  +markAttendance()
+  +enterMarks()
+  +createAssessment()
+  +sendAnnouncement()
+}
+
+class StudentAccount {
+  +viewDashboard()
+  +viewMarks()
+  +viewAttendance()
+  +viewFees()
+}
+
+User <|-- Admin
+User <|-- Teacher
+User <|-- StudentAccount
+
+'======================
+' STUDENT DOMAIN
+'======================
+
+class Student {
+  +ObjectId id
+  +String admissionNo
+  +String fullName
+  +Date dob
+  +String gender
+  +String phone
+  +EnrollmentStatus status
+  +ObjectId linkedUserId
+
+  +enroll()
+  +promote()
+  +archive()
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  GRADUATED
+  ARCHIVED
+  AT_RISK
+}
+
+StudentAccount "1" -- "1" Student : owns >
+
+'======================
+' CLASS & SUBJECT
+'======================
+
+class ClassRoom {
+  +ObjectId id
+  +String className
+  +String section
+  +String academicYear
+  +ObjectId classTeacherId
+}
+
+class Subject {
+  +ObjectId id
+  +String subjectName
+  +ObjectId classId
+  +ObjectId teacherId
+}
+
+Teacher "1" -- "many" Subject : teaches >
+ClassRoom "1" -- "many" Subject : contains >
+
+'======================
+' ENROLLMENT
+'======================
+
+class Enrollment {
+  +ObjectId id
+  +ObjectId studentId
+  +ObjectId classId
+  +String year
+}
+
+Student "1" -- "many" Enrollment
+ClassRoom "1" -- "many" Enrollment
+
+'======================
+' ATTENDANCE
+'======================
+
+class Attendance {
+  +ObjectId id
+  +ObjectId studentId
+  +ObjectId subjectId
+  +Date date
+  +AttendanceStatus status
+  +ObjectId markedBy
+
+  +markPresent()
+  +markAbsent()
+  +calculatePercentage()
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+}
+
+Student "1" -- "many" Attendance
+Subject "1" -- "many" Attendance
+Teacher "1" -- "many" Attendance : marks >
+
+'======================
+' ASSESSMENT & MARKS
+'======================
+
+class Assessment {
+  +ObjectId id
+  +ObjectId subjectId
+  +AssessmentType type
+  +int maxMarks
+  +float weightage
+  +Date date
+}
+
+enum AssessmentType {
+  QUIZ
+  ASSIGNMENT
+  MIDTERM
+  FINAL
+}
+
+class Marks {
+  +ObjectId id
+  +ObjectId assessmentId
+  +ObjectId studentId
+  +float obtainedMarks
+  +String grade
+  +ObjectId gradedBy
+
+  +calculateGrade()
+}
+
+Subject "1" -- "many" Assessment
+Assessment "1" -- "many" Marks
+Student "1" -- "many" Marks
+Teacher "1" -- "many" Marks : grades >
+
+'======================
+' FEES & PAYMENTS
+'======================
+
+class Fees {
+  +ObjectId id
+  +ObjectId studentId
+  +float totalAmount
+  +float paidAmount
+  +Date dueDate
+  +FeeStatus status
+
+  +calculateRemaining()
+  +markOverdue()
+}
+
+enum FeeStatus {
+  PAID
+  PENDING
+  OVERDUE
+}
+
+class Payment {
+  +ObjectId id
+  +ObjectId feeId
+  +float amount
+  +PaymentMode paymentMode
+  +String transactionRef
+  +Date date
+}
+
+enum PaymentMode {
+  CASH
+  UPI
+  CARD
+  NETBANKING
+}
+
+Student "1" -- "1" Fees
+Fees "1" -- "many" Payment
+
+'======================
+' NOTIFICATIONS
+'======================
+
+class Notification {
+  +ObjectId id
+  +ObjectId receiverId
+  +String message
+  +NotificationType type
+  +boolean readStatus
+  +Date createdAt
+}
+
+enum NotificationType {
+  WARNING
+  INFO
+  PAYMENT_DUE
+  RESULT_PUBLISHED
+}
+
+User "1" -- "many" Notification
+
+'======================
+' ACTIVITY LOGGING
+'======================
+
+class ActivityLog {
+  +ObjectId id
+  +ObjectId userId
+  +String action
+  +String targetType
+  +ObjectId targetId
+  +Date timestamp
+}
+
+User "1" -- "many" ActivityLog
+
+@enduml
+```
+
+---
+
+# What This Diagram Shows (Important)
+This diagram models:
+
+- inheritance (Admin/Teacher/Student roles)
+- ownership (student ↔ account)
+- academic structure (class → subject → assessment)
+- transactional system (fees → payments)
+- behavioral system (attendance → risk detection ready)
+- auditability (activity logs)
+- event system (notifications)
+
+This is now a **proper domain model**, not CRUD tables.
+
+---
+
+Next logical step:  
+We should now generate the **Use Case Diagram** — that will define API responsibilities and frontend screens automatically.
+
+
+Perfect — now we define **behavior** of the system.
+Class diagram told us *what exists*.
+Use-case diagram tells us *who can do what* (this will directly decide APIs + frontend pages).
+
+I’ll give you a **complete PlantUML use-case diagram** you can paste into Antigravity.
+
+---
+
+# 🎭 Detailed Use Case Diagram (PlantUML Ready)
+
+> Copy everything between the lines
+
+```
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Admin
+actor Teacher
+actor Student
+actor System
+
+rectangle "Student Academic Management Platform" {
+
+'========================
+' AUTHENTICATION
+'========================
+(Admin) --> (Login)
+(Teacher) --> (Login)
+(Student) --> (Login)
+(Login) --> (Authenticate User)
+(System) --> (Authenticate User)
+
+(Reset Password) <-- Admin
+(Reset Password) <-- Teacher
+(Reset Password) <-- Student
+
+'========================
+' USER MANAGEMENT
+'========================
+Admin --> (Create User Account)
+Admin --> (Assign Role)
+Admin --> (Suspend Account)
+Admin --> (View User Activity Logs)
+
+'========================
+' STUDENT LIFECYCLE
+'========================
+Admin --> (Register Student)
+Admin --> (Assign Class)
+Admin --> (Promote Student)
+Admin --> (Archive Student)
+Admin --> (View Student History)
+
+'========================
+' CLASS & SUBJECT
+'========================
+Admin --> (Create Class)
+Admin --> (Assign Class Teacher)
+Admin --> (Create Subject)
+Admin --> (Assign Subject Teacher)
+
+Teacher --> (View Assigned Classes)
+Teacher --> (View Student List)
+
+'========================
+' ATTENDANCE
+'========================
+Teacher --> (Mark Attendance)
+Teacher --> (Update Attendance)
+
+Student --> (View Attendance)
+
+(Mark Attendance) --> (Calculate Attendance Percentage)
+(System) --> (Detect Absence Streak)
+(Detect Absence Streak) --> (Generate Warning Notification)
+
+'========================
+' ASSESSMENT & MARKS
+'========================
+Teacher --> (Create Assessment)
+Teacher --> (Enter Marks)
+Teacher --> (Update Marks)
+
+Student --> (View Marks)
+Student --> (View Performance)
+
+(Enter Marks) --> (Calculate Grade)
+(Enter Marks) --> (Update Class Ranking)
+(System) --> (Detect Weak Students)
+
+'========================
+' FEES MANAGEMENT
+'========================
+Admin --> (Create Fee Structure)
+Admin --> (Update Fee Details)
+
+Student --> (View Fee Status)
+Student --> (Make Payment)
+
+(Make Payment) --> (Generate Receipt)
+(System) --> (Detect Overdue Fees)
+(Detect Overdue Fees) --> (Send Payment Reminder)
+
+'========================
+' COMMUNICATION
+'========================
+Admin --> (Send Global Announcement)
+Teacher --> (Send Class Announcement)
+Student --> (Send Query)
+
+(System) --> (Deliver Notification)
+Student --> (Read Notification)
+Teacher --> (Read Notification)
+
+'========================
+' ANALYTICS
+'========================
+Admin --> (View Institution Dashboard)
+Teacher --> (View Class Analytics)
+Student --> (View Personal Dashboard)
+
+(System) --> (Generate Performance Insights)
+(System) --> (Generate Risk Report)
+
+'========================
+' REPORTS
+'========================
+Admin --> (Generate Reports)
+Teacher --> (Generate Class Report)
+Student --> (Download Report Card)
+
+}
+
+@enduml
+```
+
+---
+
+# What This Use-Case Diagram Defines (Very Important)
+
+This single diagram decides:
+
+### Frontend Pages
+
+* Login
+* Dashboard (3 versions)
+* Student management
+* Attendance panel
+* Marks entry
+* Fees page
+* Notifications
+* Reports
+
+### Backend API Groups
+
+You will naturally create routes:
+
+```
+/auth
+/users
+/students
+/classes
+/subjects
+/attendance
+/assessments
+/marks
+/fees
+/payments
+/notifications
+/analytics
+/reports
+/logs
+```
+
+### Automated System Logic
+
+Now your app isn’t passive — it reacts:
+
+* absence streak → warning
+* overdue fees → reminder
+* marks low → risk student
+* payment → receipt
+
+That is the difference between CRUD vs real software.
+
+---
+
+Next step:
+We should create **ER Diagram + Data Dictionary** (this will lock your MongoDB schema so backend coding becomes straightforward).
+
+
+Good — this is the most important document for backend clarity.
+If the data dictionary is strong, your MongoDB schemas, validation, and APIs become almost automatic.
+
+Below is a **production-level detailed data dictionary** (field purpose, validation rules, relations, and system logic impact included).
+
+---
+
+# 📚 DATA DICTIONARY — Student Academic Management Platform
+
+---
+
+# 1️⃣ USERS COLLECTION (Authentication + Roles)
+
+**Purpose:** Stores login identity for every person in the system.
+
+| Field         | Type     | Required  | Constraints               | Description             | Used By       |
+| ------------- | -------- | --------- | ------------------------- | ----------------------- | ------------- |
+| _id           | ObjectId | Yes       | Unique                    | Primary identifier      | All relations |
+| name          | String   | Yes       | 2–60 chars                | Full name               | UI display    |
+| email         | String   | Yes       | Unique, valid email       | Login username          | Auth          |
+| passwordHash  | String   | Yes       | bcrypt hash               | Secure password storage | Auth          |
+| role          | Enum     | Yes       | ADMIN, TEACHER, STUDENT   | Permission control      | Authorization |
+| status        | Enum     | Yes       | ACTIVE, SUSPENDED, LOCKED | Account state           | Login control |
+| lastLogin     | Date     | No        | —                         | Last successful login   | Security logs |
+| loginAttempts | Number   | Default 0 | max 5                     | Failed login tracking   | Auto lock     |
+| createdAt     | Date     | Yes       | auto                      | Account creation        | Logs          |
+| updatedAt     | Date     | Yes       | auto                      | Last update             | Logs          |
+
+**System Behavior**
+
+* 5 failed logins → status = LOCKED
+* Suspended users cannot access APIs
+
+---
+
+# 2️⃣ STUDENTS COLLECTION (Student Identity Profile)
+
+**Purpose:** Academic identity independent from login account.
+
+| Field            | Type     | Required | Constraints                          | Description            |
+| ---------------- | -------- | -------- | ------------------------------------ | ---------------------- |
+| _id              | ObjectId | Yes      | Unique                               | Student reference      |
+| admissionNo      | String   | Yes      | Unique                               | Institute admission ID |
+| fullName         | String   | Yes      | 2–80 chars                           | Official student name  |
+| dob              | Date     | Yes      | past date                            | Date of birth          |
+| gender           | Enum     | Yes      | M/F/Other                            | Demographic            |
+| phone            | String   | Yes      | 10–15 digits                         | Contact                |
+| address          | String   | No       | max 200 chars                        | Residential info       |
+| currentClassId   | ObjectId | Yes      | ref ClassRoom                        | Active class           |
+| linkedUserId     | ObjectId | Yes      | ref Users                            | Login account          |
+| enrollmentStatus | Enum     | Yes      | ACTIVE, GRADUATED, ARCHIVED, AT_RISK | Lifecycle              |
+| createdAt        | Date     | auto     | —                                    | Admission date         |
+
+**Logic**
+
+* ARCHIVED students hidden but preserved
+* AT_RISK auto set by analytics service
+
+---
+
+# 3️⃣ CLASSROOM COLLECTION
+
+**Purpose:** Defines academic batch & grouping.
+
+| Field          | Type     | Required | Constraints | Description         |
+| -------------- | -------- | -------- | ----------- | ------------------- |
+| _id            | ObjectId | Yes      | —           | Class reference     |
+| className      | String   | Yes      | ex: "10"    | Grade               |
+| section        | String   | Yes      | A/B/C       | Division            |
+| academicYear   | String   | Yes      | YYYY-YYYY   | Session             |
+| classTeacherId | ObjectId | Yes      | ref Users   | Responsible teacher |
+
+---
+
+# 4️⃣ SUBJECTS COLLECTION
+
+**Purpose:** Subjects taught in a class.
+
+| Field       | Type     | Required | Constraints   | Description      |
+| ----------- | -------- | -------- | ------------- | ---------------- |
+| _id         | ObjectId | Yes      | —             | Subject ID       |
+| subjectName | String   | Yes      | 2–40 chars    | Name             |
+| classId     | ObjectId | Yes      | ref ClassRoom | Assigned class   |
+| teacherId   | ObjectId | Yes      | ref Users     | Teaching teacher |
+
+---
+
+# 5️⃣ ENROLLMENTS COLLECTION (History Tracking)
+
+**Purpose:** Keeps yearly academic history.
+
+| Field     | Type     | Required | Constraints   | Description   |
+| --------- | -------- | -------- | ------------- | ------------- |
+| _id       | ObjectId | Yes      | —             | Record        |
+| studentId | ObjectId | Yes      | ref Students  | Student       |
+| classId   | ObjectId | Yes      | ref ClassRoom | Class         |
+| year      | String   | Yes      | YYYY          | Academic year |
+
+---
+
+# 6️⃣ ATTENDANCE COLLECTION
+
+**Purpose:** Daily presence tracking.
+
+| Field     | Type     | Required | Constraints    | Description       |
+| --------- | -------- | -------- | -------------- | ----------------- |
+| _id       | ObjectId | Yes      | —              | Attendance record |
+| studentId | ObjectId | Yes      | ref Students   | Student           |
+| subjectId | ObjectId | Yes      | ref Subjects   | Subject           |
+| date      | Date     | Yes      | unique per day | Day               |
+| status    | Enum     | Yes      | PRESENT/ABSENT | Attendance        |
+| markedBy  | ObjectId | Yes      | ref Users      | Teacher           |
+
+**System Logic**
+
+* 3 consecutive ABSENT → risk flag
+* Attendance % auto computed
+
+---
+
+# 7️⃣ ASSESSMENTS COLLECTION (Exams)
+
+| Field     | Type     | Required | Constraints                      | Description  |
+| --------- | -------- | -------- | -------------------------------- | ------------ |
+| _id       | ObjectId | Yes      | —                                | Exam ID      |
+| subjectId | ObjectId | Yes      | ref Subjects                     | Subject      |
+| type      | Enum     | Yes      | QUIZ, ASSIGNMENT, MIDTERM, FINAL | Exam type    |
+| maxMarks  | Number   | Yes      | >0                               | Total marks  |
+| weightage | Number   | Yes      | 0–100                            | Contribution |
+| date      | Date     | Yes      | —                                | Exam date    |
+
+---
+
+# 8️⃣ MARKS COLLECTION
+
+| Field         | Type     | Required | Constraints     | Description  |
+| ------------- | -------- | -------- | --------------- | ------------ |
+| _id           | ObjectId | Yes      | —               | Marks record |
+| assessmentId  | ObjectId | Yes      | ref Assessments | Exam         |
+| studentId     | ObjectId | Yes      | ref Students    | Student      |
+| obtainedMarks | Number   | Yes      | ≤ maxMarks      | Score        |
+| grade         | String   | Auto     | A–F             | Calculated   |
+| gradedBy      | ObjectId | Yes      | ref Users       | Teacher      |
+
+**System Logic**
+
+* grade auto calculated
+* ranking recalculated
+
+---
+
+# 9️⃣ FEES COLLECTION
+
+| Field       | Type     | Required | Constraints            | Description   |
+| ----------- | -------- | -------- | ---------------------- | ------------- |
+| _id         | ObjectId | Yes      | —                      | Fee account   |
+| studentId   | ObjectId | Yes      | ref Students           | Student       |
+| totalAmount | Number   | Yes      | ≥0                     | Payable       |
+| paidAmount  | Number   | Yes      | ≥0                     | Paid          |
+| dueDate     | Date     | Yes      | —                      | Deadline      |
+| status      | Enum     | Yes      | PAID, PENDING, OVERDUE | Payment state |
+
+**System Logic**
+
+* after dueDate → OVERDUE
+
+---
+
+# 🔟 PAYMENTS COLLECTION
+
+| Field          | Type     | Required | Constraints                 | Description  |
+| -------------- | -------- | -------- | --------------------------- | ------------ |
+| _id            | ObjectId | Yes      | —                           | Transaction  |
+| feeId          | ObjectId | Yes      | ref Fees                    | Fee account  |
+| amount         | Number   | Yes      | >0                          | Paid         |
+| paymentMode    | Enum     | Yes      | CASH, UPI, CARD, NETBANKING | Method       |
+| transactionRef | String   | Yes      | unique                      | Receipt ref  |
+| date           | Date     | Yes      | —                           | Payment date |
+
+---
+
+# 11️⃣ NOTIFICATIONS COLLECTION
+
+| Field      | Type     | Required | Constraints                        | Description  |
+| ---------- | -------- | -------- | ---------------------------------- | ------------ |
+| _id        | ObjectId | Yes      | —                                  | Notification |
+| receiverId | ObjectId | Yes      | ref Users                          | User         |
+| message    | String   | Yes      | max 300 chars                      | Content      |
+| type       | Enum     | Yes      | WARNING, INFO, PAYMENT_DUE, RESULT | Category     |
+| readStatus | Boolean  | Yes      | default false                      | Seen         |
+| createdAt  | Date     | auto     | —                                  | Timestamp    |
+
+---
+
+# 12️⃣ ACTIVITY_LOGS COLLECTION
+
+| Field      | Type     | Required | Constraints       | Description   |
+| ---------- | -------- | -------- | ----------------- | ------------- |
+| _id        | ObjectId | Yes      | —                 | Log entry     |
+| userId     | ObjectId | Yes      | ref Users         | Actor         |
+| action     | String   | Yes      | —                 | What happened |
+| targetType | String   | Yes      | Student/Marks/Fee | Entity type   |
+| targetId   | ObjectId | Yes      | —                 | Entity id     |
+| timestamp  | Date     | auto     | —                 | Time          |
+
+---
+
+# What This Enables
+
+From just this dictionary you can now implement:
+
+* validation schemas (Joi/Zod)
+* Mongo models
+* service logic
+* analytics rules
+* notifications
+* audit tracking
+
+---
+
+Next step → **ER Diagram**
+That will visualize relations so queries and populate() become clear before coding.
+
+Perfect — now we lock the **database relationships**.
+Your class diagram showed object behavior,
+data dictionary showed fields,
+**ER diagram shows how Mongo collections connect** (this prevents messy queries later).
+
+I’ll give you a **very detailed ERD in PlantUML (Entity-Relationship style)** so you can paste directly into Antigravity.
+
+---
+
+# 🧬 Detailed ER Diagram (PlantUML Ready)
+
+> Copy everything between the lines
+
+```
+@startuml
+!theme plain
+hide methods
+hide stereotypes
+
+entity "USERS" as Users {
+  +_id : ObjectId <<PK>>
+  name : string
+  email : string <<unique>>
+  passwordHash : string
+  role : enum
+  status : enum
+  lastLogin : date
+  loginAttempts : int
+  createdAt : date
+}
+
+entity "STUDENTS" as Students {
+  +_id : ObjectId <<PK>>
+  admissionNo : string <<unique>>
+  fullName : string
+  dob : date
+  gender : string
+  phone : string
+  address : string
+  currentClassId : ObjectId <<FK>>
+  linkedUserId : ObjectId <<FK>>
+  enrollmentStatus : enum
+}
+
+entity "CLASSROOMS" as Classrooms {
+  +_id : ObjectId <<PK>>
+  className : string
+  section : string
+  academicYear : string
+  classTeacherId : ObjectId <<FK>>
+}
+
+entity "SUBJECTS" as Subjects {
+  +_id : ObjectId <<PK>>
+  subjectName : string
+  classId : ObjectId <<FK>>
+  teacherId : ObjectId <<FK>>
+}
+
+entity "ENROLLMENTS" as Enrollments {
+  +_id : ObjectId <<PK>>
+  studentId : ObjectId <<FK>>
+  classId : ObjectId <<FK>>
+  year : string
+}
+
+entity "ATTENDANCE" as Attendance {
+  +_id : ObjectId <<PK>>
+  studentId : ObjectId <<FK>>
+  subjectId : ObjectId <<FK>>
+  markedBy : ObjectId <<FK>>
+  date : date
+  status : enum
+}
+
+entity "ASSESSMENTS" as Assessments {
+  +_id : ObjectId <<PK>>
+  subjectId : ObjectId <<FK>>
+  type : enum
+  maxMarks : number
+  weightage : number
+  date : date
+}
+
+entity "MARKS" as Marks {
+  +_id : ObjectId <<PK>>
+  assessmentId : ObjectId <<FK>>
+  studentId : ObjectId <<FK>>
+  gradedBy : ObjectId <<FK>>
+  obtainedMarks : number
+  grade : string
+}
+
+entity "FEES" as Fees {
+  +_id : ObjectId <<PK>>
+  studentId : ObjectId <<FK>>
+  totalAmount : number
+  paidAmount : number
+  dueDate : date
+  status : enum
+}
+
+entity "PAYMENTS" as Payments {
+  +_id : ObjectId <<PK>>
+  feeId : ObjectId <<FK>>
+  amount : number
+  paymentMode : enum
+  transactionRef : string
+  date : date
+}
+
+entity "NOTIFICATIONS" as Notifications {
+  +_id : ObjectId <<PK>>
+  receiverId : ObjectId <<FK>>
+  message : string
+  type : enum
+  readStatus : boolean
+  createdAt : date
+}
+
+entity "ACTIVITY_LOGS" as Logs {
+  +_id : ObjectId <<PK>>
+  userId : ObjectId <<FK>>
+  action : string
+  targetType : string
+  targetId : ObjectId
+  timestamp : date
+}
+
+'========================
+' RELATIONSHIPS
+'========================
+
+Users ||--|| Students : "has account"
+Users ||--o{ Logs : performs
+Users ||--o{ Notifications : receives
+
+Users ||--o{ Subjects : teaches
+Users ||--o{ Attendance : marks
+Users ||--o{ Marks : grades
+Users ||--o{ Classrooms : manages
+
+Students ||--o{ Attendance : recorded
+Students ||--o{ Marks : obtains
+Students ||--|| Fees : has
+Students ||--o{ Enrollments : enrolls
+
+Classrooms ||--o{ Subjects : contains
+Classrooms ||--o{ Enrollments : includes
+Classrooms }o--|| Users : classTeacher
+
+Subjects ||--o{ Attendance : tracked
+Subjects ||--o{ Assessments : conducts
+
+Assessments ||--o{ Marks : produces
+
+Fees ||--o{ Payments : paid_by
+
+@enduml
+```
+
+---
+
+# How to Read This ERD (Important Understanding)
+
+### Identity Layer
+
+* One user account ↔ one student profile
+* Teachers/admins exist only in Users
+* Students exist in both Users + Students
+
+### Academic Layer
+
+* Class → Subjects → Assessments → Marks
+  This is your academic pipeline
+
+### Activity Layer
+
+* Attendance independent per subject per day
+* Enrollment stores yearly history
+
+### Financial Layer
+
+* Student → Fees → Payments
+  Never store payments directly on student (audit safe)
+
+### System Layer
+
+* Notifications → communication
+* Logs → audit trail
+
+---
+
+# What This ERD Prevents (real problems students face)
+
+Without this structure, projects usually break due to:
+
+* duplicated student data
+* overwriting history
+* deleting financial records
+* mixing login & student identity
+* impossible analytics queries
+
+This design avoids all of them.
+
+---
+
+Now your backend structure is fully defined.
+Next best step is: **API endpoint design (route map)** — that’s where implementation becomes straightforward instead of confusing.
+
+Perfect — now we convert all that architecture into something you’ll actually code:
+**a clean REST API contract**.
+
+If you follow this, your backend won’t turn into spaghetti.
+
+We’ll design it like a real production backend:
+
+> route → controller → service → model → event/log
+
+---
+
+# 🌐 API DESIGN PRINCIPLES (we follow these everywhere)
+
+**Base URL**
+
+```
+/api/v1
+```
+
+**Response format**
+
+```json
+{
+  "success": true,
+  "message": "Student created",
+  "data": {}
+}
+```
+
+**Error format**
+
+```json
+{
+  "success": false,
+  "error": "Unauthorized",
+  "code": "AUTH_401"
+}
+```
+
+**Auth**
+
+```
+Authorization: Bearer <access_token>
+```
+
+---
+
+# 🔐 AUTH MODULE
+
+## POST /auth/login
+
+Login user
+
+Body:
+
+```json
+{
+  "email": "teacher@mail.com",
+  "password": "123456"
+}
+```
+
+Returns: access + refresh token
+
+---
+
+## POST /auth/refresh
+
+Refresh token
+
+---
+
+## POST /auth/logout
+
+Invalidate session
+
+---
+
+## POST /auth/forgot-password
+
+Send reset token
+
+---
+
+## POST /auth/reset-password
+
+Reset password
+
+---
+
+## GET /auth/me
+
+Get current user profile
+
+---
+
+# 👤 USER MANAGEMENT (Admin only)
+
+## POST /users
+
+Create teacher/student/admin
+
+## GET /users
+
+List users (filters: role, status)
+
+## GET /users/:id
+
+User details
+
+## PATCH /users/:id/role
+
+Change role
+
+## PATCH /users/:id/status
+
+Suspend / activate
+
+## DELETE /users/:id
+
+Soft delete account
+
+---
+
+# 🎓 STUDENT MODULE
+
+## POST /students
+
+Register student
+
+Creates:
+
+* student record
+* linked account
+* fee record
+
+---
+
+## GET /students
+
+Query params:
+
+```
+?class=10A&status=active&search=rahul&page=1
+```
+
+---
+
+## GET /students/:id
+
+Full student profile
+
+---
+
+## PATCH /students/:id
+
+Update details
+
+---
+
+## PATCH /students/:id/archive
+
+Soft delete student
+
+---
+
+## PATCH /students/:id/promote
+
+Promote to next class
+
+---
+
+# 🏫 CLASS & SUBJECT MODULE
+
+## POST /classes
+
+Create class
+
+## GET /classes
+
+List classes
+
+## POST /classes/:id/assign-teacher
+
+---
+
+## POST /subjects
+
+Create subject
+
+## GET /subjects?classId=...
+
+List subjects of class
+
+## POST /subjects/:id/assign-teacher
+
+---
+
+# 🗓️ ATTENDANCE MODULE
+
+## POST /attendance/mark
+
+Bulk mark attendance
+
+Body:
+
+```json
+{
+  "subjectId": "123",
+  "date": "2026-01-10",
+  "records": [
+    {"studentId": "1", "status": "PRESENT"},
+    {"studentId": "2", "status": "ABSENT"}
+  ]
+}
+```
+
+Triggers:
+
+* absence detection
+* notifications
+
+---
+
+## GET /attendance/student/:studentId
+
+Student attendance report
+
+## GET /attendance/class/:classId
+
+Class attendance
+
+---
+
+# 📝 ASSESSMENT MODULE
+
+## POST /assessments
+
+Create exam
+
+## GET /assessments?subjectId=...
+
+---
+
+# 📊 MARKS MODULE
+
+## POST /marks/enter
+
+Enter marks (bulk)
+
+Triggers:
+
+* grade calculation
+* ranking update
+* risk detection
+
+---
+
+## GET /marks/student/:studentId
+
+## GET /marks/class/:classId
+
+---
+
+# 💰 FEES MODULE
+
+## POST /fees/structure
+
+Create fee structure (admin)
+
+## GET /fees/student/:studentId
+
+Fee details
+
+---
+
+# 💳 PAYMENTS MODULE
+
+## POST /payments/pay
+
+Record payment
+
+Triggers:
+
+* receipt generation
+* update fee status
+* notification
+
+---
+
+## GET /payments/student/:studentId
+
+Payment history
+
+---
+
+# 🔔 NOTIFICATIONS MODULE
+
+## GET /notifications
+
+My notifications
+
+## PATCH /notifications/:id/read
+
+---
+
+# 📈 ANALYTICS MODULE
+
+## GET /analytics/admin-dashboard
+
+* student counts
+* fee stats
+* risk students
+
+## GET /analytics/teacher-dashboard
+
+* class performance
+* weak students
+
+## GET /analytics/student-dashboard
+
+* performance trend
+* attendance %
+
+---
+
+# 📄 REPORT MODULE
+
+## GET /reports/student/:id/report-card
+
+## GET /reports/class/:id/performance
+
+---
+
+# 🧾 ACTIVITY LOG MODULE
+
+## GET /logs
+
+Admin audit logs
+
+Filters:
+
+```
+?user=...&action=delete&date=...
+```
+
+---
+
+# 🧠 AUTOMATED SYSTEM EVENTS (NO ROUTE)
+
+Triggered internally:
+
+* mark attendance → absence warning
+* enter marks → grade + ranking
+* overdue fees → reminder
+* login fail → lock account
+
+---
+
+# Folder Structure (Express)
+
+```
+src/
+ ├── routes/
+ ├── controllers/
+ ├── services/
+ ├── models/
+ ├── middleware/
+ ├── validators/
+ ├── events/
+ ├── utils/
+```
+
+---
+
+You now have a **complete backend contract**.
+Frontend can be built independently using this.
+
+Next best step (very useful):
+I can design **feature development order (what to build first so project never breaks)** — that saves weeks of frustration.
+
+Good — now we formalize everything into an **SRS (Software Requirements Specification)**.
+You can literally submit this in documentation, attach to GitHub, or show during interview — it signals real engineering discipline.
+
+Below is a **complete structured SRS** you can directly use.
+
+---
+
+# 📘 SOFTWARE REQUIREMENTS SPECIFICATION (SRS)
+
+## Student Academic Management Platform (MERN Based)
+
+---
+
+# 1. INTRODUCTION
+
+## 1.1 Purpose
+
+The purpose of this system is to develop a web-based academic management platform that enables an educational institution to manage students, teachers, attendance, assessments, fees, communication, and analytics through a role-based centralized application.
+
+The system replaces manual record keeping and standalone tools with a real-time, multi-user platform supporting administrative decisions and academic monitoring.
+
+---
+
+## 1.2 Scope
+
+The application provides:
+
+* Multi-role login (Admin, Teacher, Student)
+* Student lifecycle management
+* Attendance monitoring
+* Assessment and grading system
+* Fees and payments tracking
+* Notifications and announcements
+* Reports and analytics dashboards
+* Activity audit logging
+
+The system will be accessible via browser and operate as a REST-based MERN application.
+
+---
+
+## 1.3 Definitions
+
+| Term            | Meaning                                  |
+| --------------- | ---------------------------------------- |
+| RBAC            | Role Based Access Control                |
+| Assessment      | Exam/quiz/assignment                     |
+| At-Risk Student | Student with low attendance or marks     |
+| Soft Delete     | Archive without removing database record |
+| Academic Year   | Institutional session (YYYY-YYYY)        |
+
+---
+
+# 2. OVERALL DESCRIPTION
+
+## 2.1 Product Perspective
+
+The system is a standalone web application consisting of:
+
+* React Frontend (Client)
+* Node.js + Express Backend (API Server)
+* MongoDB Database
+* JWT Authentication Layer
+* Event-Driven Services (notifications & analytics)
+
+---
+
+## 2.2 User Classes
+
+| User    | Description                  |
+| ------- | ---------------------------- |
+| Admin   | Full system control          |
+| Teacher | Academic operations          |
+| Student | Self service academic access |
+
+---
+
+## 2.3 Operating Environment
+
+| Layer      | Technology           |
+| ---------- | -------------------- |
+| Frontend   | React + Tailwind     |
+| Backend    | Node.js + Express    |
+| Database   | MongoDB              |
+| Auth       | JWT + Refresh Tokens |
+| Realtime   | WebSockets           |
+| API Format | REST JSON            |
+
+---
+
+## 2.4 Constraints
+
+* Must support concurrent users
+* Must not permanently delete records
+* Must validate all user inputs
+* Must enforce role restrictions
+* Must store hashed passwords only
+
+---
+
+# 3. SYSTEM FEATURES
+
+---
+
+## 3.1 Authentication & Authorization
+
+### Description
+
+Provides secure login and role-based permissions.
+
+### Functional Requirements
+
+* Users shall login using email and password
+* System shall issue JWT access token
+* System shall lock account after multiple failed attempts
+* Users shall only access authorized APIs
+
+---
+
+## 3.2 User Management (Admin)
+
+* Create user accounts
+* Assign roles
+* Suspend/activate users
+* View login activity
+
+---
+
+## 3.3 Student Management
+
+* Register student
+* Assign class
+* Promote student
+* Archive student
+* Maintain academic history
+
+---
+
+## 3.4 Attendance Management
+
+* Teachers mark daily attendance
+* System calculates attendance percentage
+* System detects absence streak
+* Students view attendance report
+
+---
+
+## 3.5 Assessment & Marks
+
+* Teachers create exams
+* Teachers enter marks
+* System calculates grades
+* System ranks students
+* Students view performance
+
+---
+
+## 3.6 Fees & Payments
+
+* Admin defines fee structure
+* Students view dues
+* Payments recorded
+* Overdue alerts generated
+
+---
+
+## 3.7 Notification System
+
+* Announcements
+* Alerts for low attendance
+* Payment reminders
+* Result publication notice
+
+---
+
+## 3.8 Analytics Dashboard
+
+Admin Dashboard:
+
+* Student statistics
+* Fee collection summary
+* Risk students
+
+Teacher Dashboard:
+
+* Class performance
+* Weak students
+
+Student Dashboard:
+
+* Attendance %
+* Marks trend
+
+---
+
+## 3.9 Reports
+
+* Report card
+* Attendance report
+* Payment receipt
+
+---
+
+## 3.10 Activity Logging
+
+* All critical actions logged
+* Admin audit view available
+
+---
+
+# 4. EXTERNAL INTERFACE REQUIREMENTS
+
+## 4.1 User Interface
+
+* Responsive dashboard layout
+* Role-based navigation menu
+* Data tables with filters
+* Graphical analytics charts
+
+---
+
+## 4.2 API Interface
+
+REST endpoints under:
+
+```
+/api/v1/*
+```
+
+JSON request/response format.
+
+---
+
+## 4.3 Hardware Interface
+
+Runs on standard web browsers.
+
+---
+
+# 5. NON-FUNCTIONAL REQUIREMENTS
+
+---
+
+## 5.1 Performance
+
+* API response < 500ms typical
+* Support 200 concurrent users
+
+---
+
+## 5.2 Security
+
+* Password hashing (bcrypt)
+* JWT authentication
+* Input validation
+* Role authorization middleware
+
+---
+
+## 5.3 Reliability
+
+* No permanent deletion of academic records
+* Transaction logging
+
+---
+
+## 5.4 Scalability
+
+* Modular service architecture
+* Database indexing on relations
+
+---
+
+## 5.5 Maintainability
+
+* Layered backend architecture
+* Separate controllers/services/models
+
+---
+
+## 5.6 Availability
+
+System accessible 24/7 except maintenance.
+
+---
+
+# 6. DATABASE REQUIREMENTS
+
+The system must store:
+
+* User identity data
+* Student academic data
+* Attendance records
+* Assessments and marks
+* Fees and payments
+* Notifications
+* Activity logs
+
+All relations maintained using ObjectId references.
+
+---
+
+# 7. ASSUMPTIONS & DEPENDENCIES
+
+* Users have internet access
+* Institution operates yearly academic sessions
+* Teachers update data regularly
+
+---
+
+# 8. FUTURE ENHANCEMENTS
+
+* Parent portal
+* Mobile application
+* AI performance prediction
+* Email/SMS integration
+
+---
+
+# What You Now Have
+
+You now possess a full documentation stack:
+
+* Class diagram
+* Use case diagram
+* ER diagram
+* Data dictionary
+* API contract
+* SRS document
+
+This is already stronger than most final-year projects.
+
+---
+
+Next smartest move:
+I’ll help you decide **development phases (exact build order)** so you don’t get overwhelmed and abandon midway.

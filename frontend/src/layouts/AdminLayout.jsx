@@ -1,0 +1,74 @@
+import Navbar from '@/components/navigation/Navbar'
+import adminNavItems from '@/components/navigation/navItems/adminNav'
+import Sidebar from '@/components/navigation/Sidebar'
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
+
+const PAGE_TITLES = {
+    '/admin': 'Dashboard',
+    '/admin/students': 'Students',
+    '/admin/teachers': 'Teachers',
+    '/admin/classes': 'Classes',
+    '/admin/subjects': 'Subjects',
+    '/admin/events': 'Events',
+    '/admin/approvals': 'Approvals',
+}
+
+const AdminLayout = () => {
+    const [collapsed, setCollapsed] = useState(false)
+    const [mobileOpen, setMobileOpen] = useState(false)
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1024)
+    const location = useLocation()
+
+    useEffect(() => {
+        const handleResize = () => {
+            const mobile = window.innerWidth < 1024
+            setIsMobile(mobile)
+            if (!mobile) setMobileOpen(false)
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    useEffect(() => { setMobileOpen(false) }, [location.pathname])
+
+    const handleSidebarToggle = () => {
+        if (isMobile) setMobileOpen((o) => !o)
+        else setCollapsed((c) => !c)
+    }
+
+    const sidebarWidth = isMobile ? 0 : collapsed ? 64 : 240
+    const title = PAGE_TITLES[location.pathname] ?? 'Admin'
+    const user = JSON.parse(localStorage.getItem('user') || 'null')
+
+    return (
+        <div className="flex min-h-screen bg-bg">
+            <Sidebar
+                navItems={adminNavItems}
+                collapsed={collapsed}
+                onToggle={handleSidebarToggle}
+                mobileOpen={mobileOpen}
+                onMobileClose={() => setMobileOpen(false)}
+            />
+
+            {/* Main column — offset by sidebar */}
+            <div
+                className="flex flex-1 flex-col min-w-0 transition-[margin-left] duration-250 ease-in-out"
+                style={{ marginLeft: isMobile ? 0 : sidebarWidth }}
+            >
+                <Navbar
+                    onSidebarToggle={handleSidebarToggle}
+                    title={title}
+                    user={user}
+                />
+                <main className="flex-1 overflow-y-auto px-8 py-8 bg-bg">
+                    <div className="max-w-6xl mx-auto">
+                        <Outlet />
+                    </div>
+                </main>
+            </div>
+        </div>
+    )
+}
+
+export default AdminLayout

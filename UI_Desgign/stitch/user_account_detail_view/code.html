@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Account Detail View | ERP Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0f172a",
+                        "card-dark": "#1e293b",
+                        "border-dark": "#334155",
+                        "danger": "#ef4444"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .status-pulse {
+            position: relative;
+        }
+        .status-pulse::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            right: 0;
+            bottom: 4px;
+            border: 2px solid #1e293b;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-200 min-h-screen">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">shield_person</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">ERP Admin Portal</h2>
+</div>
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-400 flex border-none bg-slate-100 dark:bg-card-dark items-center justify-center pl-4 rounded-l-lg" data-icon="search">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-slate-100 dark:bg-card-dark text-slate-900 dark:text-white focus:ring-0 h-full placeholder:text-slate-500 rounded-r-lg pl-2 text-sm" placeholder="Search accounts..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6">
+<nav class="flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Users</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Academic</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Finance</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">System Logs</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-card-dark text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="Admin user profile picture circular avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD7jwKV5MG2LHBgBuRE7JWCt-Nayn9No5yreOLBtZrikvJCDJLh4IvpgsKFjwf4AlB4SXsCE2rWLfH0gsHGWEisMVGOh1KLa8gHt4rmkvEIYEtdvXMMNsPZgSoQJMlklkQoqTZx5MzTP0t5Z2OUTj5mEtoip5GyfGCFPGN1ZpQ_JDOzv-w52zBt95LWAxlNlofN34XgRKG36zQlsJVzNsT1YneN1QFYR8Brhr-jkOSkFJusnxt1-PPii9WWSn7lYXlsVM2yF9VMyt0");'></div>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto w-full px-6 py-8">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 mb-6">
+<a class="text-slate-500 dark:text-slate-400 text-sm font-medium" href="#">Dashboard</a>
+<span class="text-slate-400 text-sm font-medium">/</span>
+<a class="text-slate-500 dark:text-slate-400 text-sm font-medium" href="#">User Management</a>
+<span class="text-slate-400 text-sm font-medium">/</span>
+<span class="text-slate-900 dark:text-white text-sm font-medium">Jonathan Doe</span>
+</div>
+<!-- Profile Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 p-6 bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-center gap-6">
+<div class="status-pulse">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-24 border border-slate-200 dark:border-border-dark" data-alt="Jonathan Doe profile portrait image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDkl_xzq-mXvYCFz6npxVt4HQduRXXz08ORuyweZtFgRyZQtUjW7htotFg2jNP6w4iPMkp4S5ND1Lqbcy4UfKtc77c2he6YMjyASoyqgspsHfsHP4_muiNnAa8TilSB9Nf1tlcf-0DGv3QAAG7NPp1qJYbYm6nk99eKrxHmB6QOjfJk1ORQ_jpxr-Wk547oNBka2t_poTWe7Trled36TRz7DKuDJT5NOHwrR2oUy9wTOX-r9oqbuGC4eU3LmS5KQ5b1UhgYzWevyh8");'></div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-3">
+<h1 class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">Jonathan Doe</h1>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">ACTIVE</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 mt-1">j.doe@academy.edu • <span class="text-slate-400">System ID: #88291</span></p>
+<div class="flex gap-4 mt-3">
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-sm">badge</span> Senior Faculty
+                        </span>
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-sm">account_balance</span> Science Dept.
+                        </span>
+</div>
+</div>
+</div>
+<div class="flex gap-3 h-fit">
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-lg text-sm font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-border-dark">
+<span class="material-symbols-outlined text-lg">lock_reset</span> Reset Password
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-lg">edit</span> Edit Profile
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Details & Roles -->
+<div class="lg:col-span-2 flex flex-col gap-8">
+<!-- Account Metadata Grid -->
+<section>
+<h3 class="text-slate-900 dark:text-white text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span> Account Metadata
+                    </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">Creation Date</p>
+<p class="text-slate-900 dark:text-white font-medium">Oct 12, 2023</p>
+</div>
+<div class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">Last Login</p>
+<div class="flex items-center gap-2">
+<p class="text-slate-900 dark:text-white font-medium">2 hours ago</p>
+<span class="size-2 bg-emerald-500 rounded-full"></span>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">Last IP Address</p>
+<p class="text-slate-900 dark:text-white font-medium">192.168.1.45</p>
+</div>
+<div class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1">MFA Status</p>
+<span class="text-primary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-base">verified_user</span> Enabled
+                            </span>
+</div>
+</div>
+</section>
+<!-- Linked Reference Card -->
+<section>
+<h3 class="text-slate-900 dark:text-white text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">link</span> Linked Academic Profile
+                    </h3>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-xl p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-5">
+<div class="size-16 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-primary">school</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white font-bold text-lg">Teacher Record: T-09822</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Faculty of Advanced Sciences • Physics Department</p>
+<div class="flex gap-4 mt-2">
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">Classes: 4 Active</span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">Students: 124 Enrolled</span>
+</div>
+</div>
+</div>
+<button class="w-full md:w-auto px-6 py-2.5 bg-white dark:bg-slate-800 text-primary dark:text-white border border-primary/30 rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-all">
+                            View Academic Record
+                        </button>
+</div>
+</section>
+<!-- Roles & Permissions -->
+<section>
+<div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-border-dark bg-slate-50/50 dark:bg-slate-800/50">
+<h3 class="text-slate-900 dark:text-white font-bold">Permissions &amp; Access Control</h3>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+<div class="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+<div>
+<p class="text-slate-900 dark:text-white font-medium text-sm">Academic Registrar Access</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Can manage course enrollments and schedules</p>
+</div>
+<div class="w-10 h-5 bg-primary rounded-full relative">
+<div class="absolute right-0.5 top-0.5 size-4 bg-white rounded-full shadow"></div>
+</div>
+</div>
+<div class="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+<div>
+<p class="text-slate-900 dark:text-white font-medium text-sm">Grade Management</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Authorized to finalize end-of-term grades</p>
+</div>
+<div class="w-10 h-5 bg-primary rounded-full relative">
+<div class="absolute right-0.5 top-0.5 size-4 bg-white rounded-full shadow"></div>
+</div>
+</div>
+<div class="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+<div>
+<p class="text-slate-900 dark:text-white font-medium text-sm">Financial Data Viewer</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Read-only access to faculty payroll records</p>
+</div>
+<div class="w-10 h-5 bg-slate-300 dark:bg-slate-700 rounded-full relative">
+<div class="absolute left-0.5 top-0.5 size-4 bg-white rounded-full shadow"></div>
+</div>
+</div>
+<div class="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+<div>
+<p class="text-slate-900 dark:text-white font-medium text-sm">System Administration</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Can create new user accounts</p>
+</div>
+<div class="w-10 h-5 bg-slate-300 dark:bg-slate-700 rounded-full relative">
+<div class="absolute left-0.5 top-0.5 size-4 bg-white rounded-full shadow"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Activity Timeline & Critical Actions -->
+<div class="flex flex-col gap-8">
+<!-- Activity Timeline -->
+<section class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl flex flex-col h-full max-h-[600px]">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-border-dark flex justify-between items-center">
+<h3 class="text-slate-900 dark:text-white font-bold">Recent Activity</h3>
+<span class="material-symbols-outlined text-slate-400">history</span>
+</div>
+<div class="p-6 overflow-y-auto grow flex flex-col gap-6">
+<!-- Log Item 1 -->
+<div class="flex gap-4">
+<div class="relative flex flex-col items-center">
+<div class="size-8 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">login</span>
+</div>
+<div class="w-px h-full bg-slate-200 dark:bg-slate-800 mt-2"></div>
+</div>
+<div class="pb-2">
+<p class="text-slate-900 dark:text-white text-sm font-semibold">System Login</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Today, 08:42 AM</p>
+<p class="text-slate-400 text-xs mt-1">IP: 192.168.1.45 (Chrome/Windows)</p>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="flex gap-4">
+<div class="relative flex flex-col items-center">
+<div class="size-8 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">upload_file</span>
+</div>
+<div class="w-px h-full bg-slate-200 dark:bg-slate-800 mt-2"></div>
+</div>
+<div class="pb-2">
+<p class="text-slate-900 dark:text-white text-sm font-semibold">Grades Exported</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Yesterday, 04:15 PM</p>
+<p class="text-slate-400 text-xs mt-1">Exported Physics 101 grades to CSV</p>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="flex gap-4">
+<div class="relative flex flex-col items-center">
+<div class="size-8 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">key</span>
+</div>
+<div class="w-px h-full bg-slate-200 dark:bg-slate-800 mt-2"></div>
+</div>
+<div class="pb-2">
+<p class="text-slate-900 dark:text-white text-sm font-semibold">Password Changed</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Oct 24, 09:20 AM</p>
+<p class="text-slate-400 text-xs mt-1">Self-service password update</p>
+</div>
+</div>
+<!-- Log Item 4 -->
+<div class="flex gap-4">
+<div class="relative flex flex-col items-center">
+<div class="size-8 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">person_add</span>
+</div>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-semibold">Student Enrolled</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Oct 20, 11:05 AM</p>
+<p class="text-slate-400 text-xs mt-1">Enrolled Alice Vance (#S-201) to PHYS-101</p>
+</div>
+</div>
+</div>
+<button class="m-6 mt-0 p-3 bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs font-bold rounded-lg uppercase tracking-wider hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        View Full Audit Trail
+                    </button>
+</section>
+<!-- Critical Admin Actions -->
+<section class="bg-red-500/5 dark:bg-red-500/10 border border-red-500/20 rounded-xl p-6 flex flex-col gap-4">
+<h3 class="text-red-600 dark:text-red-400 font-bold flex items-center gap-2">
+<span class="material-symbols-outlined">warning</span> Critical Admin Actions
+                    </h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Suspending an account will immediately revoke all access sessions and prevent new logins. This action is logged for compliance.
+                    </p>
+<button class="w-full py-3 bg-danger text-white rounded-lg font-bold hover:bg-danger/90 transition-all shadow-lg shadow-danger/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">block</span> Suspend Account
+                    </button>
+<button class="w-full py-2.5 text-slate-500 dark:text-slate-400 text-sm font-semibold hover:text-red-500 dark:hover:text-red-400 transition-colors underline decoration-dotted">
+                        Force Logout All Devices
+                    </button>
+</section>
+</div>
+</div>
+</main>
+<!-- Global Footer / Sticky Status -->
+<footer class="mt-auto border-t border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark py-4 px-10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-400">
+<div class="flex items-center gap-6">
+<span>© 2024 Academic ERP Systems v4.2.0</span>
+<span class="flex items-center gap-1.5"><span class="size-2 bg-emerald-500 rounded-full"></span> All Systems Operational</span>
+</div>
+<div class="flex gap-6">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Security Audit Logs</a>
+<a class="hover:text-primary" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Institutional Fee Configuration | EduManager ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#197fe6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .soft-pearl-bg { background-color: #f9fafb; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Side Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<h1 class="font-bold text-sm tracking-tight leading-none">EduManager ERP</h1>
+<p class="text-[10px] text-slate-500 font-medium uppercase mt-1">Institutional Admin</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="text-sm font-medium">Students</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">auto_stories</span>
+<span class="text-sm font-medium">Academics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl fill-1">payments</span>
+<span class="text-sm font-semibold">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">analytics</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+<div class="pt-4 pb-2 px-3">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Settings</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="text-sm font-medium">Configuration</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden" data-alt="User profile avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDyPQ9t79itaOfnPycK0bZjTX5u8qNeR3fzPyfAqeTbYtUzIMk2T7pqbjfXvcq8vnGfVwueFT4izSS3mvslXHLrgkyg_2nMLW90udkoz7XjnOGQfPQ59429gmUeRalh-OIInqLJUGs7X1_UM2VupE5lSWKKmFDbhKNlKyTsgK383ZV3o6Ufn3PoGVBgOdDwkEcGF8Fir2X3T8pK0oL5RoVoZ6Bs_aI23EtOYyuLh5BTWbzXc9H4MV-3BeDxzXLY9tv5gEqpdgp7amI')"></div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-semibold truncate">Alex Henderson</p>
+<p class="text-[10px] text-slate-500 truncate">System Admin</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden soft-pearl-bg dark:bg-background-dark">
+<!-- Header -->
+<header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-4">
+<nav class="flex items-center text-sm font-medium text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Financials</a>
+<span class="mx-2 material-symbols-outlined text-xs leading-none">chevron_right</span>
+<span class="text-slate-900 dark:text-white">Fee Configuration</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Quick search..." type="text"/>
+</div>
+<button class="size-10 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Page Title & CTA -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Institutional Fee Configuration</h2>
+<p class="text-slate-500 mt-1 font-medium">Define and manage tuition fee structures across academic years and grade levels.</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+                            Create Fee Structure
+                        </button>
+</div>
+<!-- Summary Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Total Expected Revenue</span>
+<div class="p-2 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined leading-none">account_balance_wallet</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-900 dark:text-white leading-none">$1,250,000</span>
+<span class="text-emerald-500 text-xs font-bold flex items-center leading-none">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12.5%
+                                </span>
+</div>
+<p class="text-xs text-slate-400 mt-2">Fiscal Year 2023-2024</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Outstanding Fees</span>
+<div class="p-2 bg-orange-500/10 text-orange-600 rounded-lg">
+<span class="material-symbols-outlined leading-none">pending_actions</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-900 dark:text-white leading-none">$450,000</span>
+<span class="text-orange-500 text-xs font-bold flex items-center leading-none">
+<span class="material-symbols-outlined text-sm">trending_flat</span> 5.2%
+                                </span>
+</div>
+<p class="text-xs text-slate-400 mt-2">Requires collection attention</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Active Structures</span>
+<div class="p-2 bg-emerald-500/10 text-emerald-600 rounded-lg">
+<span class="material-symbols-outlined leading-none">category</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-900 dark:text-white leading-none">24</span>
+<span class="text-slate-400 text-xs font-bold leading-none">0% change</span>
+</div>
+<p class="text-xs text-slate-400 mt-2">Currently mapped to grades</p>
+</div>
+</div>
+<!-- Filter & Directory -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<select class="text-sm font-semibold bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary px-3 py-2">
+<option>Academic Year: 2023-24</option>
+<option>Academic Year: 2024-25</option>
+</select>
+<select class="text-sm font-semibold bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary px-3 py-2">
+<option>All Grades</option>
+<option>Primary School</option>
+<option>Secondary School</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500 border border-transparent hover:border-slate-200">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500 border border-transparent hover:border-slate-200">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-50 dark:bg-slate-800/50">
+<tr>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800">Fee Structure Name</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800">Grade / Year</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800 text-right">Total Amount</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800">Due Date</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800">Collection Progress</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-200 dark:border-slate-800 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-5">
+<p class="font-bold text-slate-900 dark:text-white">Senior Secondary - Annual Tuition</p>
+<p class="text-xs text-slate-400 mt-0.5">Core Academic Fees</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase">Grade 11-12</span>
+<p class="text-[10px] font-medium text-slate-500 mt-1">2023-2024</p>
+</td>
+<td class="px-6 py-5 text-right font-bold text-slate-900 dark:text-white">
+                                            $4,200.00
+                                        </td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Oct 15, 2023</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Upcoming</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="w-full max-w-[200px]">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs font-bold">78%</span>
+<span class="text-[10px] text-slate-400 font-medium">$327,600 / $420k</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 78%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-5">
+<p class="font-bold text-slate-900 dark:text-white">Primary School - Quarterly Fees</p>
+<p class="text-xs text-slate-400 mt-0.5">Tuition + Lab Fees</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded uppercase">Grade 1-5</span>
+<p class="text-[10px] font-medium text-slate-500 mt-1">2023-2024</p>
+</td>
+<td class="px-6 py-5 text-right font-bold text-slate-900 dark:text-white">
+                                            $1,850.00
+                                        </td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Sep 01, 2023</span>
+<span class="text-[10px] font-bold text-orange-500 uppercase">Overdue</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="w-full max-w-[200px]">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs font-bold">42%</span>
+<span class="text-[10px] text-slate-400 font-medium">$77,700 / $185k</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 rounded-full" style="width: 42%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-5">
+<p class="font-bold text-slate-900 dark:text-white">Middle School - Activity Bundle</p>
+<p class="text-xs text-slate-400 mt-0.5">Extracurricular &amp; Sports</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded uppercase">Grade 6-8</span>
+<p class="text-[10px] font-medium text-slate-500 mt-1">2023-2024</p>
+</td>
+<td class="px-6 py-5 text-right font-bold text-slate-900 dark:text-white">
+                                            $750.00
+                                        </td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Nov 30, 2023</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Upcoming</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="w-full max-w-[200px]">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs font-bold">95%</span>
+<span class="text-[10px] text-slate-400 font-medium">$71,250 / $75k</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
+<span class="text-xs font-medium text-slate-500 uppercase tracking-widest">Showing 3 of 24 structures</span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800 disabled:opacity-50">Previous</button>
+<button class="px-3 py-1 text-xs font-bold bg-primary text-white rounded-lg">1</button>
+<button class="px-3 py-1 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800">2</button>
+<button class="px-3 py-1 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800">3</button>
+<button class="px-3 py-1 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

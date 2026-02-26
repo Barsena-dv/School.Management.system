@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard - Academic ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1a242d",
+                        "border-dark": "#283039",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #283039;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 bg-white dark:bg-surface-dark border-r border-slate-200 dark:border-border-dark flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Academic <span class="text-primary">ERP</span></h1>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+<div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Main Menu</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-border-dark transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Students</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-border-dark transition-colors" href="#">
+<span class="material-symbols-outlined">school</span>
+<span>Classes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-border-dark transition-colors" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span>Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-border-dark transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Fee Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-border-dark transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Exams &amp; Results</span>
+</a>
+<div class="pt-6">
+<div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Support</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-border-dark transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-border-dark transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help Center</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-border-dark">
+<div class="bg-slate-100 dark:bg-border-dark rounded-xl p-4">
+<p class="text-xs font-medium text-slate-500 mb-2">Storage Usage</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mb-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 65%"></div>
+</div>
+<p class="text-[10px] text-slate-400">6.5 GB of 10 GB used</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Top Navigation -->
+<header class="h-16 flex items-center justify-between px-8 bg-white dark:bg-surface-dark border-b border-slate-200 dark:border-border-dark">
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full bg-slate-50 dark:bg-border-dark border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 text-slate-200" placeholder="Search student records, classes, or invoices..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-border-dark rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-surface-dark"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-border-dark rounded-lg transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:border-border-dark mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold leading-none">Dr. Sarah Jenkins</p>
+<p class="text-xs text-slate-500 mt-1">Super Admin</p>
+</div>
+<div class="size-10 rounded-full bg-primary/20 border-2 border-primary/10 overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Professional female admin avatar icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxtl1SpaGmMOAo4OZKCmr2l36fLgbS-CDGozDgwL3zN-Sc0TEwXAderB_LbwG9m4Z2toKIuekFslg6d455Db4jBXxkIC26B0sWBg7cTwC6F8Gb3BtVanFLWoVafn7pxQAEItFOZdusx5NyszMipf822bBOpb4ojfJEP3XTtf5WenwbArA-gdG1Dgq-BAxbUd9IBrZYk1j1jZw5JgKbEr0_RJCUi-Rj5d1fxQESLszzVBKqZOQ3cVX0BOBUdNsEjhD-vzf9-gC_Koc"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<div class="max-w-7xl mx-auto">
+<!-- Welcome Section -->
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white">Good Morning, Admin</h2>
+<div class="flex items-center gap-2 text-slate-500 text-sm mt-1">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Dashboard</span>
+</div>
+</div>
+<!-- Statistics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-blue-500/10 text-blue-500 rounded-lg">
+<span class="material-symbols-outlined">school</span>
+</div>
+<span class="text-emerald-500 text-sm font-medium flex items-center">+12.5% <span class="material-symbols-outlined text-xs ml-1">trending_up</span></span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Students</p>
+<h3 class="text-2xl font-bold mt-1 tracking-tight">1,240</h3>
+<div class="mt-4 flex gap-3 text-xs">
+<span class="text-emerald-500">1,100 Active</span>
+<span class="text-slate-400">140 Archived</span>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-amber-500/10 text-amber-500 rounded-lg">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<span class="text-rose-500 text-sm font-medium flex items-center">-2.1% <span class="material-symbols-outlined text-xs ml-1">trending_down</span></span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Attendance Rate</p>
+<h3 class="text-2xl font-bold mt-1 tracking-tight">94.2%</h3>
+<div class="mt-4 w-full bg-slate-100 dark:bg-border-dark h-1.5 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full" style="width: 94%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-emerald-500/10 text-emerald-500 rounded-lg">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="text-emerald-500 text-sm font-medium flex items-center">+8.4% <span class="material-symbols-outlined text-xs ml-1">trending_up</span></span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Fees Collected</p>
+<h3 class="text-2xl font-bold mt-1 tracking-tight">$45,200</h3>
+<p class="mt-4 text-xs text-slate-400">Target: <span class="text-slate-200 font-medium">$50,000</span></p>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-rose-500/10 text-rose-500 rounded-lg">
+<span class="material-symbols-outlined">report_problem</span>
+</div>
+<span class="px-2 py-0.5 bg-rose-500/10 text-rose-500 rounded text-[10px] font-bold uppercase">High Priority</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">At-Risk Students</p>
+<h3 class="text-2xl font-bold mt-1 tracking-tight">18</h3>
+<p class="mt-4 text-xs text-slate-400">Action required for <span class="text-rose-500 font-medium">8 cases</span></p>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="lg:col-span-2 bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-lg">Student Enrollment Growth</h3>
+<select class="bg-slate-50 dark:bg-border-dark border-none rounded-lg text-xs font-medium py-1.5 focus:ring-1 focus:ring-primary">
+<option>Last 6 Months</option>
+<option>Last Year</option>
+</select>
+</div>
+<div class="h-[300px] w-full relative flex items-end justify-between gap-4 px-2">
+<!-- Mock Data Visualization -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-300 group-hover:bg-primary/40" style="height: 40%"></div>
+<span class="text-[10px] text-slate-500">Jan</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-300 group-hover:bg-primary/40" style="height: 55%"></div>
+<span class="text-[10px] text-slate-500">Feb</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-300 group-hover:bg-primary/40" style="height: 45%"></div>
+<span class="text-[10px] text-slate-500">Mar</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-300 group-hover:bg-primary/40" style="height: 70%"></div>
+<span class="text-[10px] text-slate-500">Apr</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg transition-all duration-300 group-hover:bg-primary/40" style="height: 85%"></div>
+<span class="text-[10px] text-slate-500">May</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary rounded-t-lg shadow-[0_0_20px_rgba(19,127,236,0.3)]" style="height: 95%"></div>
+<span class="text-[10px] text-primary font-bold">Jun</span>
+</div>
+<!-- Background grid lines -->
+<div class="absolute inset-x-0 top-0 bottom-6 flex flex-col justify-between -z-10 opacity-20">
+<div class="border-b border-slate-500 w-full"></div>
+<div class="border-b border-slate-500 w-full"></div>
+<div class="border-b border-slate-500 w-full"></div>
+<div class="border-b border-slate-500 w-full"></div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<h3 class="font-bold text-lg mb-6">Revenue Streams</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-slate-400">Tuition Fees</span>
+<span class="font-semibold">$32,000</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-border-dark h-2 rounded-full">
+<div class="bg-primary h-2 rounded-full" style="width: 70%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-slate-400">Lab &amp; Activities</span>
+<span class="font-semibold">$8,400</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-border-dark h-2 rounded-full">
+<div class="bg-emerald-500 h-2 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-slate-400">Transport</span>
+<span class="font-semibold">$4,800</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-border-dark h-2 rounded-full">
+<div class="bg-amber-500 h-2 rounded-full" style="width: 30%"></div>
+</div>
+</div>
+</div>
+<div class="mt-10 p-4 rounded-lg bg-primary/5 border border-primary/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">insights</span>
+<p class="text-xs text-slate-400 leading-relaxed">Revenue is projected to grow by <span class="text-primary font-bold">14%</span> next month based on new enrollments.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Table & Recent Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+<!-- At-Risk Table -->
+<div class="lg:col-span-3 bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
+<h3 class="font-bold text-lg">Attention Required: Low Attendance</h3>
+<button class="text-primary text-sm font-semibold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-border-dark/30">
+<tr>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Student Name</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Class</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Attendance</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-border-dark">
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-rose-500/10 text-rose-500 flex items-center justify-center font-bold text-xs">AJ</div>
+<div>
+<div class="text-sm font-semibold">Alex Johnson</div>
+<div class="text-[10px] text-slate-500">ID: #23049</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">10th Grade - Sec A</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-rose-500">68%</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-rose-500/10 text-rose-500 text-[10px] font-bold rounded uppercase">Critical</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-border-dark rounded transition-colors">
+<span class="material-symbols-outlined text-xl">mail</span>
+</button>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold text-xs">SM</div>
+<div>
+<div class="text-sm font-semibold">Sarah Miller</div>
+<div class="text-[10px] text-slate-500">ID: #23112</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">11th Grade - Sec C</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-amber-500">75%</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-amber-500/10 text-amber-500 text-[10px] font-bold rounded uppercase">Warning</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-border-dark rounded transition-colors">
+<span class="material-symbols-outlined text-xl">mail</span>
+</button>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-rose-500/10 text-rose-500 flex items-center justify-center font-bold text-xs">BT</div>
+<div>
+<div class="text-sm font-semibold">Ben Thompson</div>
+<div class="text-[10px] text-slate-500">ID: #23088</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">9th Grade - Sec B</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-rose-500">62%</span>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-rose-500/10 text-rose-500 text-[10px] font-bold rounded uppercase">Critical</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-border-dark rounded transition-colors">
+<span class="material-symbols-outlined text-xl">mail</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
+<h3 class="font-bold text-lg mb-6">Recent Activity</h3>
+<div class="space-y-6 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-px before:bg-slate-200 dark:before:bg-border-dark">
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-primary/20 flex items-center justify-center">
+<div class="size-2 rounded-full bg-primary"></div>
+</div>
+<p class="text-sm font-semibold">New student enrolled</p>
+<p class="text-xs text-slate-500">Jamie Smith added to 8th Grade</p>
+<p class="text-[10px] text-slate-400 mt-1">2 mins ago</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
+<div class="size-2 rounded-full bg-emerald-500"></div>
+</div>
+<p class="text-sm font-semibold">Fee payment received</p>
+<p class="text-xs text-slate-500">Invoice #INV-0024 paid by Liam T.</p>
+<p class="text-[10px] text-slate-400 mt-1">45 mins ago</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-amber-500/20 flex items-center justify-center">
+<div class="size-2 rounded-full bg-amber-500"></div>
+</div>
+<p class="text-sm font-semibold">Attendance marked</p>
+<p class="text-xs text-slate-500">Morning session for Grade 12 completed</p>
+<p class="text-[10px] text-slate-400 mt-1">2 hours ago</p>
+</div>
+</div>
+<button class="w-full mt-8 py-2 text-xs font-bold text-slate-400 hover:text-primary transition-colors border border-slate-200 dark:border-border-dark rounded-lg">View Audit Log</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

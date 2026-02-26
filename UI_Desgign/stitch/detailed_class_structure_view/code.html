@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detailed Class Structure View | AcademicERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0D1117",
+                        "surface-dark": "#161B22",
+                        "border-dark": "#30363d",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-border-dark bg-white/80 dark:bg-surface-dark/80 backdrop-blur-md px-4 lg:px-10 py-3">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between gap-8">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">account_balance</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">AcademicERP</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-semibold border-b-2 border-primary py-1" href="#">Academic Structure</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Students</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Faculty</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden sm:flex items-center relative w-full max-w-xs">
+<span class="material-symbols-outlined absolute left-3 text-slate-400 text-xl">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-background-dark border-none rounded-lg text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-primary/50" placeholder="Search records..." type="text"/>
+</label>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-border-dark text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-border-dark text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-9 w-9 rounded-full bg-gradient-to-tr from-primary to-blue-400 border-2 border-white dark:border-border-dark overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPcLvCyipb_neC6z1oURJ6Dawm0jNXJtlvg66Kra3Fi0h60v2O455wIveOeNgdxRDxZi9eXt60KGNJNiWZ0d4aYDyZ684dLVFbKC4aBBcIn4k6q6xQiKiETeeWlD0LnxCLMqQNOOxpiK2q_VcCm5hUhD9wgQXtD4c4cyh1vPNUc7LpUcm70Bz3zvMqmr-Kw5t4-4dUnsAU3A6XOsttNExHvmuaTTZmKJuOzVbmL9WXwftR-rG9--Sp7fJ4qLIihwQb7SwU9mZW7fk"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-[1440px] mx-auto px-4 lg:px-10 py-8">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-6 text-sm">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Academic Structure</a>
+<span class="material-symbols-outlined text-xs text-slate-400">chevron_right</span>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Grade 11</a>
+<span class="material-symbols-outlined text-xs text-slate-400">chevron_right</span>
+<span class="text-primary font-medium">Section B</span>
+</nav>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h1 class="text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Grade 11 - Section B</h1>
+<div class="flex items-center gap-3 mt-2 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="font-medium">Academic Year 2023-2024</span>
+<span class="mx-1">•</span>
+<span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full">In Session</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-slate-200 dark:border-border-dark font-semibold text-sm hover:bg-slate-50 dark:hover:bg-surface-dark transition-all">
+<span class="material-symbols-outlined text-xl">print</span>
+                        Print Roster
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:bg-blue-600 transition-all">
+<span class="material-symbols-outlined text-xl">edit_note</span>
+                        Manage Subjects
+                    </button>
+</div>
+</div>
+<!-- Overview Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Total Students</span>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">groups</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold text-slate-900 dark:text-white">32</p>
+<span class="text-xs text-slate-400 font-normal">Capacity: 40</span>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Class Advisor</span>
+<span class="material-symbols-outlined text-purple-500 bg-purple-500/10 p-2 rounded-lg">verified_user</span>
+</div>
+<p class="text-xl font-bold text-slate-900 dark:text-white truncate">Dr. Emily Stone</p>
+<p class="text-xs text-slate-400 mt-1">Senior Faculty Member</p>
+</div>
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Room Number</span>
+<span class="material-symbols-outlined text-orange-500 bg-orange-500/10 p-2 rounded-lg">meeting_room</span>
+</div>
+<p class="text-3xl font-bold text-slate-900 dark:text-white">B-204</p>
+<p class="text-xs text-slate-400 mt-1">Science &amp; Tech Block</p>
+</div>
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Avg. Attendance</span>
+<span class="material-symbols-outlined text-green-500 bg-green-500/10 p-2 rounded-lg">monitoring</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold text-slate-900 dark:text-white">94.2%</p>
+<span class="text-xs text-green-500 font-medium">↑ 1.2%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Student List Section -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-border-dark flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person_search</span>
+                                Student List
+                            </h3>
+<div class="flex items-center gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg">filter_list</span>
+<select class="pl-9 pr-8 py-1.5 bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-lg text-xs font-medium appearance-none focus:ring-primary">
+<option>All Status</option>
+<option>Active</option>
+<option>On Leave</option>
+</select>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-background-dark/50 border-b border-slate-200 dark:border-border-dark">
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Student Name</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">ID</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest text-center">Gender</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest text-center">Attendance</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-border-dark">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4 font-semibold text-slate-900 dark:text-slate-200">Alexander Wright</td>
+<td class="px-6 py-4 text-sm text-primary font-mono font-medium">#ST-2023081</td>
+<td class="px-6 py-4 text-sm text-center text-slate-500 dark:text-slate-400">Male</td>
+<td class="px-6 py-4 text-center">
+<div class="w-full bg-slate-100 dark:bg-border-dark rounded-full h-1.5 max-w-[80px] mx-auto">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 96%"></div>
+</div>
+<span class="text-[10px] text-slate-400 mt-1">96%</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 tracking-wider">Active</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4 font-semibold text-slate-900 dark:text-slate-200">Sophia Martinez</td>
+<td class="px-6 py-4 text-sm text-primary font-mono font-medium">#ST-2023094</td>
+<td class="px-6 py-4 text-sm text-center text-slate-500 dark:text-slate-400">Female</td>
+<td class="px-6 py-4 text-center">
+<div class="w-full bg-slate-100 dark:bg-border-dark rounded-full h-1.5 max-w-[80px] mx-auto">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 89%"></div>
+</div>
+<span class="text-[10px] text-slate-400 mt-1">89%</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 tracking-wider">Active</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4 font-semibold text-slate-900 dark:text-slate-200">Liam Gallagher</td>
+<td class="px-6 py-4 text-sm text-primary font-mono font-medium">#ST-2023112</td>
+<td class="px-6 py-4 text-sm text-center text-slate-500 dark:text-slate-400">Male</td>
+<td class="px-6 py-4 text-center">
+<div class="w-full bg-slate-100 dark:bg-border-dark rounded-full h-1.5 max-w-[80px] mx-auto">
+<div class="bg-orange-500 h-1.5 rounded-full" style="width: 72%"></div>
+</div>
+<span class="text-[10px] text-slate-400 mt-1">72%</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 tracking-wider">On Leave</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4 font-semibold text-slate-900 dark:text-slate-200">Isabella Rossi</td>
+<td class="px-6 py-4 text-sm text-primary font-mono font-medium">#ST-2023125</td>
+<td class="px-6 py-4 text-sm text-center text-slate-500 dark:text-slate-400">Female</td>
+<td class="px-6 py-4 text-center">
+<div class="w-full bg-slate-100 dark:bg-border-dark rounded-full h-1.5 max-w-[80px] mx-auto">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 98%"></div>
+</div>
+<span class="text-[10px] text-slate-400 mt-1">98%</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 tracking-wider">Active</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4 font-semibold text-slate-900 dark:text-slate-200">Julian Thorne</td>
+<td class="px-6 py-4 text-sm text-primary font-mono font-medium">#ST-2023142</td>
+<td class="px-6 py-4 text-sm text-center text-slate-500 dark:text-slate-400">Male</td>
+<td class="px-6 py-4 text-center">
+<div class="w-full bg-slate-100 dark:bg-border-dark rounded-full h-1.5 max-w-[80px] mx-auto">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 92%"></div>
+</div>
+<span class="text-[10px] text-slate-400 mt-1">92%</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 tracking-wider">Active</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-background-dark/50 flex items-center justify-between border-t border-slate-200 dark:border-border-dark">
+<span class="text-xs text-slate-500 font-medium">Showing 1-5 of 32 students</span>
+<div class="flex gap-2">
+<button class="p-1 px-3 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded text-xs font-bold disabled:opacity-50" disabled="">Prev</button>
+<button class="p-1 px-3 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded text-xs font-bold hover:bg-slate-50 dark:hover:bg-background-dark">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Subjects Grid Section -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden flex flex-col min-h-full">
+<div class="p-6 border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+                                Subjects (12)
+                            </h3>
+<button class="text-primary hover:underline text-xs font-bold uppercase tracking-wider">View All</button>
+</div>
+<div class="p-4 space-y-4">
+<!-- Subject Card 1 -->
+<div class="p-4 rounded-lg border border-slate-100 dark:border-border-dark bg-slate-50/50 dark:bg-background-dark/30 hover:border-primary/50 transition-all group">
+<div class="flex justify-between items-start mb-3">
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Advanced Mathematics</h4>
+<span class="text-[10px] font-bold text-slate-400 uppercase">5 Credits</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200 dark:border-border-dark">
+<img class="w-full h-full object-cover" data-alt="Portrait of math teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgZAtMLlovL54ZXBr7t2lYCtvaHcUglsybGgTd7hpuAPyQBc86UDXh3WqQhBvTmCz8BeVMdmCbaf0VgSMlIl3upBXvQOeoOZtbbOFakkzw9r03IGuNHuIacrYxSCbPkEqaHQqjO4wCpH1N9v8m3MAqNEHPwRWihGydkEsDMnbzTTp887Z0VPmxVW30O8NJ0U1qJsOAW2a_yxS90eGL6TD3NB_A_agbzfmhF_9wR7g_0q5lU4ByC18mZfxvRbc0AbiO-FxDARbiKpo"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Prof. Sarah Jenkins</span>
+<span class="text-[10px] text-slate-500">6 Weekly Hours</span>
+</div>
+</div>
+</div>
+<!-- Subject Card 2 -->
+<div class="p-4 rounded-lg border border-slate-100 dark:border-border-dark bg-slate-50/50 dark:bg-background-dark/30 hover:border-primary/50 transition-all group">
+<div class="flex justify-between items-start mb-3">
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Theoretical Physics</h4>
+<span class="text-[10px] font-bold text-slate-400 uppercase">4 Credits</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200 dark:border-border-dark">
+<img class="w-full h-full object-cover" data-alt="Portrait of physics teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9UAlrp2lcvSyX3yD_B3X0mTfUxlDYE6Gvq2D9v3a85Ja8jBqI6SJ-HKIdrH2UC2zfnNn_f_WnV-3FxAQIMZlMLMNDaZ8vcdNMY1c5stt2eo6HTq6rCdk0Veq9esAWSSlAOtid-keR7GYSHT9h9T2Zq6J5brIp3P4knRSSifMN1xXaIoWv6R4I-2Nv3s9xkBBd3RQQhkHDLXv-Cooggl7KGBSOPrA1PvRpBU3MBcTwmbI2_yZEwT6miwTXlAR59hOTBbQpUSHl1n0"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Dr. Robert Chen</span>
+<span class="text-[10px] text-slate-500">4 Weekly Hours</span>
+</div>
+</div>
+</div>
+<!-- Subject Card 3 -->
+<div class="p-4 rounded-lg border border-slate-100 dark:border-border-dark bg-slate-50/50 dark:bg-background-dark/30 hover:border-primary/50 transition-all group">
+<div class="flex justify-between items-start mb-3">
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">English Literature</h4>
+<span class="text-[10px] font-bold text-slate-400 uppercase">3 Credits</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200 dark:border-border-dark">
+<img class="w-full h-full object-cover" data-alt="Portrait of literature teacher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp30dhBLoPpSmmlnB9GA_wuy06cQfD_AQUS17EguP-46wVx_L64oR5YVHUdjDIc8HMdmvr5dQoJkpTV9-IEGnNII7_hmDTDwbSLFzrU9jssrxT_JEq55c-5QgiuhkY6-imC72IhcTmhmReC_QcPHws0nbG0yQtoa1eqOuZoF0NCaLRsJ7uLr5ogIyNLfrrlQBBMa9XPmReTzMc0UEX5w-tyfq0tTdy_8Xiv8NyjQPuDvLnDpfnQTkFHMJnISn9gvICzWPu8t_Jj7o"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Ms. Elena Gilbert</span>
+<span class="text-[10px] text-slate-500">3 Weekly Hours</span>
+</div>
+</div>
+</div>
+<!-- Subject Card 4 -->
+<div class="p-4 rounded-lg border border-slate-100 dark:border-border-dark bg-slate-50/50 dark:bg-background-dark/30 hover:border-primary/50 transition-all group">
+<div class="flex justify-between items-start mb-3">
+<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">Computer Science</h4>
+<span class="text-[10px] font-bold text-slate-400 uppercase">4 Credits</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200 dark:border-border-dark">
+<div class="w-full h-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">person</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-400 italic">No Teacher Assigned</span>
+<span class="text-[10px] text-slate-500">5 Weekly Hours</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto p-4 border-t border-slate-100 dark:border-border-dark bg-slate-50/50 dark:bg-background-dark/20">
+<button class="w-full py-3 rounded-lg border-2 border-dashed border-slate-300 dark:border-border-dark text-slate-400 hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center gap-2 font-medium text-sm">
+<span class="material-symbols-outlined">add_circle</span>
+                                Add New Subject
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Stats/Meta -->
+<footer class="mt-12 py-6 border-t border-slate-200 dark:border-border-dark flex flex-col sm:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-500 font-medium tracking-wide">
+                    Last modified by <span class="text-slate-700 dark:text-slate-300">Admin</span> on Oct 12, 2023 at 09:14 AM
+                </p>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-primary"></span>
+<span class="text-[10px] font-bold uppercase text-slate-500 tracking-tighter">System Health: Optimal</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-green-500"></span>
+<span class="text-[10px] font-bold uppercase text-slate-500 tracking-tighter">Sync: Cloud Active</span>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

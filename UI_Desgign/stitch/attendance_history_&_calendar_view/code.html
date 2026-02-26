@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Attendance History &amp; Calendar View - Academia ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "obsidian": "#0f0f0f",
+                        "surface": "#1a1a1a",
+                        "surface-lighter": "#262626",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 lg:px-10 py-3 bg-white dark:bg-obsidian sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Academia ERP</h2>
+</div>
+<div class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Classes</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Attendance</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
+<label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-400 dark:text-slate-500 flex border-none bg-slate-100 dark:bg-surface-lighter items-center justify-center pl-4 rounded-l-lg" data-icon="search">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-surface-lighter focus:border-none h-full placeholder:text-slate-400 dark:placeholder:text-slate-500 px-4 rounded-l-none pl-2 text-sm font-normal" placeholder="Search students, records..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-surface-lighter hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-surface-lighter hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-200 dark:border-slate-700" data-alt="Teacher profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5S5ClF4OMiO3nKnHJSbqWV8q3f4lOnX8rTlrac1bCnl9uUMBewawdLtP-wDjDavOAo6zaTWw5JkDNq_I2SkKQ8Ua1UNTuIhhMRDjSSaeD6h_C3JXVcOmHCqloAPMgYLUYNYLm2XqMc52NbWIZ0o0Z_dQDmGxH3v-axHmvztr3XpFz9k6iJTFgF2hcNjPwmLQKXaBAFngH9Xi69Xf9bOf9mI1UbMZY7uwelOv6ptiWW-mlqWeJ2XmpBVK_dFRumgYulEld8D1fwDU");'></div>
+</div>
+</header>
+<main class="flex-1 p-4 lg:p-8 max-w-[1440px] mx-auto w-full">
+<!-- Page Title & Quick Stats -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h1 class="text-2xl lg:text-3xl font-bold tracking-tight mb-1">Attendance History</h1>
+<p class="text-slate-500 dark:text-slate-400">Academic Year 2023-24 • Faculty of Science</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-surface border border-slate-200 dark:border-slate-800 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-surface-lighter transition-all">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Export Report
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            Mark Attendance
+                        </button>
+</div>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-surface border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Days Taught</p>
+<span class="material-symbols-outlined text-primary">school</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold">124</p>
+<p class="text-emerald-500 text-sm font-semibold">+5% vs last sem</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-surface border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Pending Submissions</p>
+<span class="material-symbols-outlined text-amber-500">pending_actions</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold">3</p>
+<p class="text-rose-500 text-sm font-semibold">Needs attention</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-surface border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">On-time Rate</p>
+<span class="material-symbols-outlined text-emerald-500">check_circle</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold">98.2%</p>
+<p class="text-emerald-500 text-sm font-semibold">Exemplary</p>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Calendar Section -->
+<div class="lg:col-span-2 flex flex-col bg-white dark:bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold">October 2023</h2>
+<div class="flex items-center border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden bg-slate-50 dark:bg-surface-lighter">
+<button class="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<div class="w-[1px] h-4 bg-slate-200 dark:border-slate-800"></div>
+<button class="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-4 text-xs font-medium uppercase tracking-wider text-slate-500">
+<div class="flex items-center gap-1.5">
+<span class="size-2.5 rounded-full bg-emerald-500/20 border border-emerald-500"></span>
+                                    Submitted
+                                </div>
+<div class="flex items-center gap-1.5">
+<span class="size-2.5 rounded-full bg-amber-500/20 border border-amber-500"></span>
+                                    Pending
+                                </div>
+<div class="flex items-center gap-1.5">
+<span class="size-2.5 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                                    Holiday
+                                </div>
+</div>
+</div>
+<div class="p-4 sm:p-6 bg-slate-50/50 dark:bg-obsidian/40">
+<div class="calendar-grid mb-2">
+<div class="text-center text-xs font-bold text-slate-400 py-2">MON</div>
+<div class="text-center text-xs font-bold text-slate-400 py-2">TUE</div>
+<div class="text-center text-xs font-bold text-slate-400 py-2">WED</div>
+<div class="text-center text-xs font-bold text-slate-400 py-2">THU</div>
+<div class="text-center text-xs font-bold text-slate-400 py-2">FRI</div>
+<div class="text-center text-xs font-bold text-slate-400 py-2">SAT</div>
+<div class="text-center text-xs font-bold text-slate-400 py-2">SUN</div>
+</div>
+<div class="calendar-grid gap-2 md:gap-3">
+<!-- Placeholders for start of month -->
+<div class="aspect-square bg-transparent"></div>
+<div class="aspect-square bg-transparent"></div>
+<div class="aspect-square bg-transparent"></div>
+<div class="aspect-square bg-transparent"></div>
+<div class="aspect-square bg-transparent"></div>
+<!-- Oct 1 - Oct 31 -->
+<!-- Submitted -->
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border-2 border-emerald-500 bg-emerald-500/5 cursor-pointer hover:scale-105 transition-transform group relative">
+<span class="text-sm font-bold text-slate-900 dark:text-white">1</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">lock</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border-2 border-emerald-500 bg-emerald-500/5 cursor-pointer hover:scale-105 transition-transform group">
+<span class="text-sm font-bold text-slate-900 dark:text-white">2</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">lock</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border-2 border-emerald-500 bg-emerald-500/5 cursor-pointer hover:scale-105 transition-transform">
+<span class="text-sm font-bold text-slate-900 dark:text-white">3</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">lock</span>
+</div>
+<!-- Holiday -->
+<div class="aspect-square flex flex-col items-center justify-center p-2 rounded-lg bg-slate-200 dark:bg-surface-lighter text-slate-400">
+<span class="text-sm font-bold">4</span>
+<span class="text-[10px] mt-1 font-medium">NATL HOL</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border-2 border-emerald-500 bg-emerald-500/5 cursor-pointer hover:scale-105 transition-transform">
+<span class="text-sm font-bold text-slate-900 dark:text-white">5</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">lock</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border-2 border-emerald-500 bg-emerald-500/5 cursor-pointer hover:scale-105 transition-transform">
+<span class="text-sm font-bold text-slate-900 dark:text-white">6</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">lock</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border-2 border-emerald-500 bg-emerald-500/5 cursor-pointer hover:scale-105 transition-transform">
+<span class="text-sm font-bold text-slate-900 dark:text-white">7</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">lock</span>
+</div>
+<!-- Pending (Selected) -->
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border-2 border-primary bg-primary/10 shadow-[0_0_15px_rgba(19,127,236,0.3)] ring-2 ring-primary ring-offset-2 ring-offset-white dark:ring-offset-obsidian cursor-pointer transition-transform">
+<span class="text-sm font-bold text-slate-900 dark:text-white">8</span>
+<span class="material-symbols-outlined text-[16px] text-amber-500">priority_high</span>
+</div>
+<!-- Normal entries following -->
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="text-sm font-bold text-slate-900 dark:text-white">9</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border-2 border-amber-500 bg-amber-500/5 cursor-pointer hover:scale-105 transition-transform">
+<span class="text-sm font-bold text-slate-900 dark:text-white">10</span>
+<span class="material-symbols-outlined text-[16px] text-amber-500">warning</span>
+</div>
+<!-- Fill with basic tiles -->
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">11</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">12</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">13</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">14</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">15</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">16</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">17</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">18</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">19</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">20</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-between p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-surface">
+<span class="text-sm font-bold text-slate-900 dark:text-white">21</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Details Panel -->
+<div class="flex flex-col gap-6 sticky top-24">
+<div class="bg-white dark:bg-surface border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-surface-lighter/50">
+<div>
+<h3 class="font-bold text-lg">Sunday, Oct 8</h3>
+<p class="text-xs text-slate-500 font-medium">SELECTED DATE</p>
+</div>
+<div class="tooltip relative">
+<span class="material-symbols-outlined text-slate-400 cursor-help">lock</span>
+<div class="tooltip-text invisible opacity-0 absolute right-0 top-full mt-2 w-48 p-3 bg-slate-900 text-white text-[11px] rounded shadow-xl transition-all z-10">
+                                        This record is finalized. Contact your Administrator to request an override for past attendance.
+                                    </div>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<div class="relative pl-6 border-l-2 border-emerald-500">
+<div class="mb-1 flex items-center justify-between">
+<h4 class="font-bold text-sm">Advanced Mathematics 101</h4>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-500">SUBMITTED</span>
+</div>
+<p class="text-xs text-slate-500 flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                        09:00 AM - 10:30 AM
+                                    </p>
+<div class="flex items-center justify-between text-xs font-medium">
+<span class="text-slate-400">28/30 Students</span>
+<span class="text-slate-400">Oct 8, 10:45 AM</span>
+</div>
+</div>
+<div class="relative pl-6 border-l-2 border-amber-500">
+<div class="mb-1 flex items-center justify-between">
+<h4 class="font-bold text-sm">Particle Physics II</h4>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-500">PENDING</span>
+</div>
+<p class="text-xs text-slate-500 flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                        11:00 AM - 12:30 PM
+                                    </p>
+<div class="flex items-center justify-between text-xs font-medium">
+<span class="text-slate-400">32 Students enrolled</span>
+<span class="text-amber-500 italic flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                                            Overdue
+                                        </span>
+</div>
+<button class="mt-3 w-full py-2 bg-primary/10 text-primary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">
+                                        Submit Attendance Now
+                                    </button>
+</div>
+<div class="relative pl-6 border-l-2 border-emerald-500">
+<div class="mb-1 flex items-center justify-between">
+<h4 class="font-bold text-sm">Lab: Quantum Computing</h4>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-500">SUBMITTED</span>
+</div>
+<p class="text-xs text-slate-500 flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                        02:00 PM - 04:00 PM
+                                    </p>
+<div class="flex items-center justify-between text-xs font-medium">
+<span class="text-slate-400">15/15 Students</span>
+<span class="text-slate-400">Oct 8, 4:15 PM</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-surface-lighter/30 border-t border-slate-200 dark:border-slate-800">
+<p class="text-[10px] text-center text-slate-500 leading-relaxed uppercase tracking-tighter font-bold">
+                                    Historical Records are Read-Only
+                                </p>
+</div>
+</div>
+<!-- Info Card -->
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-6">
+<div class="flex items-start gap-4">
+<div class="p-2 bg-primary/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">info</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">Administrative Note</h4>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        Attendance for past months is locked by system policy. If you discovered an error in a finalized submission, please raise a ticket for the Academic Coordinator.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

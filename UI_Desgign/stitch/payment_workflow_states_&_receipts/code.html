@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Workflow &amp; Receipts | EduERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#197fe6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white !important; }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+        .dark .skeleton {
+            background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%);
+            background-size: 200% 100%;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 md:px-10 py-3 flex items-center justify-between sticky top-0 z-50 no-print">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+</div>
+<h2 class="text-lg font-bold leading-tight hidden md:block">EduERP</h2>
+</div>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Academics</a>
+<a class="text-sm font-medium text-primary border-b-2 border-primary pb-0.5" href="#">Fees &amp; Payments</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Profile</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search transactions..." type="text"/>
+</div>
+<button class="text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover" data-alt="Student profile avatar placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAVtBU7ESWzms9DfOGJwelrspNUS6hxAkz-k1KvzOGlQnPecwgPabFWCZAA1SQFCtw2WeK1uSsMt3sE2lYAP5pqz4S2uFi46_AfpxQgRyYPXEsNeJBQG5O6omBl7_PRiCkce0Z-ONhD9CpQXWhUZeidFsQq0IYT5U9WnstDSKpMd2L9__T9WpYC-ww-mxG7rh55thkHrCc5mh06NBTkwlmp9Z50rfbHDV5AWfpWNHYeq_NmwXvSME2rLNWOSrZ6D46GPAuT_oZlygA')"></div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 py-8 space-y-12">
+<!-- Section 1: Loading Skeletons for Financial Ledger -->
+<section class="no-print">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-xl font-bold">Transaction History</h3>
+<p class="text-sm text-slate-500">Syncing with bank records...</p>
+</div>
+<div class="h-10 w-32 skeleton rounded-lg"></div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+<div class="grid grid-cols-5 gap-4 p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
+<div class="h-4 w-20 bg-slate-200 dark:bg-slate-700 rounded"></div>
+<div class="h-4 w-32 bg-slate-200 dark:bg-slate-700 rounded"></div>
+<div class="h-4 w-24 bg-slate-200 dark:bg-slate-700 rounded ml-auto"></div>
+<div class="h-4 w-16 bg-slate-200 dark:bg-slate-700 rounded ml-auto"></div>
+<div class="h-4 w-12 bg-slate-200 dark:bg-slate-700 rounded ml-auto"></div>
+</div>
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Repeated Skeleton Rows -->
+<div class="grid grid-cols-5 gap-4 p-5 items-center">
+<div class="h-4 w-24 skeleton rounded"></div>
+<div class="h-4 w-48 skeleton rounded"></div>
+<div class="h-4 w-20 skeleton rounded ml-auto"></div>
+<div class="h-6 w-20 skeleton rounded-full ml-auto"></div>
+<div class="h-8 w-8 skeleton rounded ml-auto"></div>
+</div>
+<div class="grid grid-cols-5 gap-4 p-5 items-center">
+<div class="h-4 w-24 skeleton rounded"></div>
+<div class="h-4 w-40 skeleton rounded"></div>
+<div class="h-4 w-20 skeleton rounded ml-auto"></div>
+<div class="h-6 w-20 skeleton rounded-full ml-auto"></div>
+<div class="h-8 w-8 skeleton rounded ml-auto"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Empty State & Toast Notification -->
+<section class="relative no-print">
+<!-- Toast Example -->
+<div class="absolute -top-4 right-0 z-10 flex items-center gap-3 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-white/10">
+<span class="material-symbols-outlined text-green-400">check_circle</span>
+<span class="text-sm font-medium">Receipt generated successfully</span>
+<button class="ml-2 text-slate-400 hover:text-white"><span class="material-symbols-outlined text-lg">close</span></button>
+</div>
+<div class="flex flex-col items-center justify-center py-16 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+<div class="size-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-slate-400">payments</span>
+</div>
+<h3 class="text-lg font-bold mb-2">No payment history yet</h3>
+<p class="text-slate-500 dark:text-slate-400 text-center max-w-sm mb-8">
+                    Your financial ledger is currently empty. Once you make your first payment, your receipts and transaction history will appear here.
+                </p>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-xl">add_card</span>
+                    Make a Payment
+                </button>
+</div>
+</section>
+<!-- Section 3: Payment Successful Confirmation -->
+<section class="no-print">
+<div class="max-w-2xl mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+<div class="bg-green-500 h-2"></div>
+<div class="p-10 text-center">
+<div class="size-16 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-4xl font-bold">check</span>
+</div>
+<h2 class="text-3xl font-black tracking-tight mb-2">Payment Successful!</h2>
+<p class="text-slate-500 dark:text-slate-400 mb-8">Reference ID: TXN-2938475510</p>
+<div class="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-6 text-left mb-8 border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between py-2 border-b border-slate-200 dark:border-slate-700">
+<span class="text-slate-500">Student Name</span>
+<span class="font-semibold">Alex Johnston</span>
+</div>
+<div class="flex justify-between py-2 border-b border-slate-200 dark:border-slate-700">
+<span class="text-slate-500">Allocation</span>
+<span class="font-semibold">Fall 2023 Tuition</span>
+</div>
+<div class="flex justify-between py-2 mt-2">
+<span class="text-slate-500 font-bold">Total Amount Paid</span>
+<span class="text-xl font-black text-primary">$4,500.00</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex-1 bg-primary text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90">
+<span class="material-symbols-outlined">download</span>
+                            Download Receipt
+                        </button>
+<button class="flex-1 bg-slate-100 dark:bg-slate-800 font-bold py-3 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700">
+                            Return to Dashboard
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Receipt Preview Modal (Printable) -->
+<section class="relative">
+<div class="max-w-4xl mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl p-8 md:p-12 receipt-container">
+<!-- Branding Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-slate-100 dark:border-slate-800 pb-8 mb-8 gap-6">
+<div class="flex items-center gap-4">
+<div class="size-16 bg-slate-900 dark:bg-slate-100 flex items-center justify-center rounded-xl overflow-hidden">
+<div class="bg-primary size-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-4xl">school</span>
+</div>
+</div>
+<div>
+<h1 class="text-2xl font-black">ST. ANDREW UNIVERSITY</h1>
+<p class="text-xs uppercase tracking-widest text-slate-500 font-bold">Office of the Registrar • Financial Services</p>
+</div>
+</div>
+<div class="text-right md:text-right">
+<h2 class="text-xl font-bold text-primary">OFFICIAL RECEIPT</h2>
+<p class="text-sm font-mono text-slate-500">#REC-2023-99210</p>
+<p class="text-sm text-slate-500">Date: Oct 24, 2023</p>
+</div>
+</div>
+<!-- Info Grid -->
+<div class="grid md:grid-cols-2 gap-12 mb-12">
+<div>
+<h4 class="text-xs uppercase font-black text-slate-400 mb-3 tracking-widest">Billed To</h4>
+<div class="space-y-1">
+<p class="font-bold text-lg">Alex Johnston</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Student ID: 202300451</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">B.Sc Computer Science</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">alex.j@standrew.edu</p>
+</div>
+</div>
+<div>
+<h4 class="text-xs uppercase font-black text-slate-400 mb-3 tracking-widest">Institution Details</h4>
+<div class="space-y-1">
+<p class="font-bold">Main Campus Finance Office</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">123 Education Square, NY 10001</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">VAT ID: 99-88776655</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Tel: +1 (555) 012-3456</p>
+</div>
+</div>
+</div>
+<!-- Itemized Table -->
+<table class="w-full text-left mb-12">
+<thead>
+<tr class="border-b border-slate-200 dark:border-slate-700">
+<th class="py-4 text-xs uppercase font-black text-slate-400 tracking-widest">Description</th>
+<th class="py-4 text-xs uppercase font-black text-slate-400 tracking-widest text-right">Academic Year</th>
+<th class="py-4 text-xs uppercase font-black text-slate-400 tracking-widest text-right">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="py-4 font-medium">Fall Semester Tuition Fees</td>
+<td class="py-4 text-right">2023 - 2024</td>
+<td class="py-4 text-right font-semibold">$4,250.00</td>
+</tr>
+<tr>
+<td class="py-4 font-medium">Library &amp; Digital Resources Access</td>
+<td class="py-4 text-right">2023 - 2024</td>
+<td class="py-4 text-right font-semibold">$150.00</td>
+</tr>
+<tr>
+<td class="py-4 font-medium">Student Activity Fund</td>
+<td class="py-4 text-right">2023 - 2024</td>
+<td class="py-4 text-right font-semibold">$100.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="border-t-2 border-slate-900 dark:border-slate-100">
+<td class="py-6 text-right font-black uppercase tracking-widest" colspan="2">Total Received</td>
+<td class="py-6 text-right text-2xl font-black text-primary">$4,500.00</td>
+</tr>
+</tfoot>
+</table>
+<!-- Footer & Verification -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-8 pt-8 border-t border-slate-100 dark:border-slate-800">
+<div class="max-w-xs">
+<p class="text-xs text-slate-400 leading-relaxed italic">
+                            This is a computer-generated document and does not require a physical signature. For verification, please scan the QR code or visit the student portal.
+                        </p>
+</div>
+<div class="flex items-center gap-6 no-print">
+<button class="flex items-center gap-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity" onclick="window.print()">
+<span class="material-symbols-outlined">print</span>
+                            Print Receipt
+                        </button>
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined">download</span>
+                            Save as PDF
+                        </button>
+</div>
+<div class="hidden print:block text-right">
+<div class="size-24 bg-slate-100 ml-auto flex items-center justify-center p-2 rounded">
+<span class="material-symbols-outlined text-6xl text-slate-900">qr_code_2</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-2">Verify at standrew.edu/verify/99210</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="max-w-7xl mx-auto px-4 py-12 border-t border-slate-200 dark:border-slate-800 no-print">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-slate-500">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+<span class="text-sm">Secure Payment Gateway • PCI-DSS Compliant</span>
+</div>
+<div class="flex gap-8">
+<a class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-primary" href="#">Help Center</a>
+<a class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-primary" href="#">Terms of Service</a>
+<a class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-primary" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</body></html>

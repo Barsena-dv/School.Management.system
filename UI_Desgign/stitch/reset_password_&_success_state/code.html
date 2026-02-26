@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reset Password - EduManage ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1c2127",
+                        "border-dark": "#3b4754",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>body {
+    font-family: "Lexend", sans-serif
+    }
+.checkbox-custom:checked {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuA8pXuC19krBMMOLQbyBUeEZQT6RW6f6HfsFAVHlgSRzPp4be7PNNYoMtgcvFRB0U8Br4OJUlopwrHpXNSq4bKsgjdFkW90tJuKuvqxRN8aqxg8xVl7HF0xMtkcgQFKkUf_fbAStosBuF4xCgWbg311AjCekOOCP5PgDgwKuwjJOdAAJ6qjpfvnCvZ7v289yspX7Xn76SrRriVL8bYnWDsoVC_qrtMCtzuWC0FdhPQCV9TZS9rgTd79LifbHNc87QgsMYlf8laFNOE)
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col transition-colors duration-300">
+<!-- Top Navigation Bar -->
+<header class="w-full px-6 lg:px-10 py-4 flex items-center justify-between border-b border-slate-200 dark:border-border-dark bg-white/50 dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">school</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">EduManage <span class="text-primary">ERP</span></h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">help</span>
+                Support
+            </button>
+<div class="h-6 w-px bg-slate-200 dark:border-border-dark mx-2"></div>
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined block dark:hidden text-slate-600">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block text-yellow-400">light_mode</span>
+</button>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center p-6">
+<div class="w-full max-w-[1100px] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<!-- Left Side: Branding/Visual -->
+<div class="hidden lg:flex flex-col gap-6 pr-12">
+<div class="space-y-4">
+<span class="px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 rounded-full">Security Hub</span>
+<h1 class="text-5xl font-black leading-tight">Secure your <br/><span class="text-primary">Academic Journey.</span></h1>
+<p class="text-lg text-slate-500 dark:text-slate-400 max-w-md leading-relaxed">
+                        Access your global academic dashboard with enhanced security. Our encrypted ERP ensures student records and administrative data remain private.
+                    </p>
+</div>
+<div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-slate-200 dark:border-border-dark shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent z-10"></div>
+<img class="w-full h-full object-cover grayscale opacity-50 dark:opacity-40" data-alt="Abstract visualization of data security and dashboard analytics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPlYrnX4y9B6NG4PWpyGTdbtOpr1-XP0lYR-OU4eumWjUrLXJTAefXwzfbz-DER4q5ho_APsu_KJg8E2kVid0Pr_I7y_-xPz-1XFAy9ozCom3Gmi3gPfJPDEqcJTQfXdorfd6BX_uyKfB_RlPI5o7iei2SMfx1_HxkSVMavoQzZOY8iwitQ9Pot0yAHXy7XAsj_e8q6vtSK2jFK5Ot5BUux1f27-S9nrRp0P0yuUtAjg9-bKHCTBAghju234_YltjPwXRTBcsJSlk"/>
+<div class="absolute bottom-6 left-6 z-20 flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/20">
+<div class="p-2 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">shield_lock</span>
+</div>
+<div>
+<p class="text-white text-xs font-bold uppercase">SSL Encrypted</p>
+<p class="text-white/70 text-[10px]">256-bit bank grade security</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Reset Password Form -->
+<div class="bg-white dark:bg-surface-dark p-8 lg:p-10 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm" id="reset-form-container">
+<div class="mb-8">
+<div class="flex justify-between items-start mb-4">
+<h2 class="text-2xl font-bold tracking-tight">Set New Password</h2>
+<span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded">Step 3 of 3</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Please choose a password that you haven't used before for this account.</p>
+</div>
+<form class="space-y-6" onsubmit="event.preventDefault(); document.getElementById('reset-form-container').classList.add('hidden'); document.getElementById('success-container').classList.remove('hidden');">
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="text-sm font-semibold block text-slate-700 dark:text-slate-300">New Password</label>
+<div class="relative group">
+<input class="w-full h-12 bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-lg px-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<!-- Confirmation Field -->
+<div class="space-y-2">
+<label class="text-sm font-semibold block text-slate-700 dark:text-slate-300">Confirm New Password</label>
+<div class="relative group">
+<input class="w-full h-12 bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-lg px-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<!-- Real-time Validation Rules -->
+<div class="bg-slate-50 dark:bg-background-dark/50 p-4 rounded-xl space-y-3 border border-slate-100 dark:border-border-dark">
+<p class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Password Requirements</p>
+<div class="flex items-center gap-3 group">
+<div class="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center text-primary group-data-[valid=true]:bg-green-500 group-data-[valid=true]:text-white">
+<span class="material-symbols-outlined text-xs font-bold">check</span>
+</div>
+<span class="text-sm text-slate-600 dark:text-slate-400">At least 8 characters long</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-xs font-bold">check</span>
+</div>
+<span class="text-sm text-slate-600 dark:text-slate-400">Includes at least one number</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-xs font-bold">check</span>
+</div>
+<span class="text-sm text-slate-600 dark:text-slate-400">Includes one special character</span>
+</div>
+</div>
+<div class="pt-4 flex flex-col gap-4">
+<button class="w-full h-12 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2" type="submit">
+                            Reset Password
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<button class="w-full h-12 bg-transparent text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white font-medium rounded-lg transition-all flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                            Back to previous step
+                        </button>
+</div>
+</form>
+</div>
+<!-- Success State (Initially Hidden) -->
+<div class="hidden bg-white dark:bg-surface-dark p-8 lg:p-12 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm text-center" id="success-container">
+<div class="mb-8 flex flex-col items-center">
+<div class="w-20 h-20 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mb-6 animate-pulse">
+<span class="material-symbols-outlined text-5xl">check_circle</span>
+</div>
+<h2 class="text-3xl font-black tracking-tight mb-3">All Set!</h2>
+<p class="text-slate-500 dark:text-slate-400 text-base leading-relaxed max-w-xs mx-auto">
+                        Your password has been reset successfully. You can now log in with your new credentials.
+                    </p>
+</div>
+<div class="p-6 bg-slate-50 dark:bg-background-dark/50 rounded-xl mb-8 border border-dashed border-slate-200 dark:border-border-dark">
+<div class="flex items-center justify-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined">security_update_good</span>
+<span>Identity Re-verified</span>
+</div>
+<p class="text-xs text-slate-400 mt-2">Update logged: <span id="timestamp">Just now</span></p>
+</div>
+<div class="space-y-3">
+<a class="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined">login</span>
+                        Proceed to Login
+                    </a>
+<p class="text-xs text-slate-400 pt-4">
+                        Redirecting automatically in 5 seconds...
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Information -->
+<footer class="w-full px-6 py-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-500 border-t border-slate-200 dark:border-border-dark mt-auto">
+<div class="flex items-center gap-4 mb-4 sm:mb-0">
+<span>© 2024 EduManage ERP Solutions</span>
+<div class="h-3 w-px bg-slate-300 dark:bg-slate-700"></div>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<div class="h-3 w-px bg-slate-300 dark:bg-slate-700"></div>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">language</span>
+<span>English (US)</span>
+</div>
+</footer>
+<script>
+        // Simple timestamp update for the success screen
+        const now = new Date();
+        document.getElementById('timestamp').innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    </script>
+</body></html>

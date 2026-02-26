@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin User Management Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1a232e",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-size: 20px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 10px; }
+        .mono { font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<!-- Top Navigation Bar -->
+<header class="border-b border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight">ERP Admin</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-semibold text-primary border-b-2 border-primary py-5" href="#">Users</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Academics</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 flex-1 justify-end">
+<div class="relative max-w-xs w-full hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-100 dark:bg-surface-dark border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/50 placeholder:text-slate-500" placeholder="Global search..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-surface-dark rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-border-dark mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold">Alex Rivers</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">Super Admin</p>
+</div>
+<div class="size-9 rounded-full bg-slate-200 dark:bg-surface-dark bg-cover bg-center border border-slate-300 dark:border-border-dark" data-alt="User profile avatar of Alex Rivers" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8AX_MtvhRmOwA06zj3e7aJLiH2vnFaCIkGxwl8Yi09c6Ip0Vbx9lLCk4SxFbD6rySjxUgD27xuOr46fpR8-m7F4HAy8csk7P9eD00y9ABHygvH1doFhv-pv3E0F-Rh3vLJLo0r3lefwarJZMKJr9s_06xpF_TRpJCBO9Sy9GsbH_KDvfsp_almOb382YgF5aoWcMHceBQzOuv9ccWns_c6NPtIOY8ehrR2t81oWCOtfwHvgayg5bmxASGyPtd7KxG2DHTuX45jdM')"></div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1400px] mx-auto w-full px-6 py-8 flex-1 flex flex-col gap-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2 text-xs font-medium text-slate-500 uppercase tracking-widest mb-1">
+<span>System</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary">User Management</span>
+</div>
+<h2 class="text-3xl font-extrabold tracking-tight">Staff Directory</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm max-w-md leading-relaxed">
+                    Manage system access, monitor security logs, and provision new accounts for faculty and administrative personnel.
+                </p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-surface-dark hover:bg-slate-200 dark:hover:bg-border-dark text-sm font-semibold rounded-lg transition-all border border-slate-200 dark:border-border-dark">
+<span class="material-symbols-outlined">file_download</span>
+                    Export CSV
+                </button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">person_add</span>
+                    Create Staff User
+                </button>
+</div>
+</div>
+<!-- Filter Toolbar -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all" placeholder="Search name or email..." type="text"/>
+</div>
+<div class="relative">
+<select class="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-lg py-2 px-4 text-sm appearance-none focus:ring-2 focus:ring-primary/40">
+<option value="">All Roles</option>
+<option value="admin">Admin</option>
+<option value="teacher">Teacher</option>
+<option value="registrar">Registrar</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+</div>
+<div class="relative">
+<select class="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-lg py-2 px-4 text-sm appearance-none focus:ring-2 focus:ring-primary/40">
+<option value="">Status: All</option>
+<option value="active">Active</option>
+<option value="suspended">Suspended</option>
+<option value="pending">Pending Invitation</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">
+                    Clear Filters
+                </button>
+<button class="p-2 bg-slate-100 dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-lg text-slate-500">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="flex-1 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse min-w-[900px]">
+<thead>
+<tr class="bg-slate-50 dark:bg-background-dark/50 border-b border-slate-200 dark:border-border-dark">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 w-12">
+<input class="rounded border-slate-300 dark:border-border-dark text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">User Details</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Role</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Last Login</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-border-dark">
+<!-- User Row 1 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4">
+<input class="rounded border-slate-300 dark:border-border-dark text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm">
+                                        SJ
+                                    </div>
+<div>
+<p class="font-bold text-sm">Sarah Jenkins</p>
+<p class="text-xs text-slate-500">s.jenkins@academy.edu</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded bg-primary text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">Admin</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+                                    Active
+                                </div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs mono text-slate-400">12m ago</p>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-border-dark rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 2 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4">
+<input class="rounded border-slate-300 dark:border-border-dark text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border border-slate-200 dark:border-border-dark" data-alt="User profile avatar of Marcus Thorne" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAXGF2DDlIC5zNJiXFdNtpMvi-xd8XXXSYqTxli72batgFjMB-O2H-xayNXmZSs1HRD4vLbfe8QskMFGL1cOnsvpfuEifYtu6MWK9_AvTxaf4ptKnz2AEYmMoruIuON3MvuL4Y3xiE79990dXuB2YBsADPMAoo4YyYAAXZvJ6Ng278pEXiEbbAq6zzwqEPPkLw-Ht1vGWOYsIkHL1V0MgMaYDS4mq3ok8zXigtRzEjgjAdgh6zotI9nYL_fWh13vqi1TLDrlPRGRwE')"></div>
+<div>
+<p class="font-bold text-sm">Marcus Thorne</p>
+<p class="text-xs text-slate-500">m.thorne@academy.edu</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded border border-primary/30 text-primary text-[10px] font-bold uppercase tracking-wider">Teacher</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+                                    Active
+                                </div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs mono text-slate-400">2h ago</p>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-border-dark rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 3 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors bg-red-50/10 dark:bg-red-900/5">
+<td class="px-6 py-4">
+<input class="rounded border-slate-300 dark:border-border-dark text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-border-dark border border-slate-300 dark:border-border-dark flex items-center justify-center text-slate-500 font-bold text-sm">
+                                        LD
+                                    </div>
+<div>
+<p class="font-bold text-sm text-slate-400 line-through">Lila Davis</p>
+<p class="text-xs text-slate-500">lila.d@academy.edu</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded bg-slate-200 dark:bg-border-dark text-slate-500 text-[10px] font-bold uppercase tracking-wider">Registrar</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-xs font-semibold text-rose-500">
+<span class="size-2 rounded-full bg-rose-500 animate-pulse"></span>
+                                    Suspended
+                                </div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs mono text-slate-500 italic">3 days ago</p>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors" title="Activate">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-border-dark rounded-lg transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User Row 4 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4">
+<input class="rounded border-slate-300 dark:border-border-dark text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border border-slate-200 dark:border-border-dark" data-alt="User profile avatar of David Chen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuArcIAwoA3QVKhY3-sTfPN05PqiY8v-em7gEy6S3PImUhs-WkwrRI4YjXjvgSFZJ7veAGbKO8HQTuToT1Iwca3CoNvmE80euhskKVsvp9NKu-kbezhDCs3ItF-C1M_sYJ1PUDuOewMTYQe2J64AHI1TSiHPRHU_9I29sxJDnwxj5IMFR0LDw-3_HNyvYSq0nogCu4-s7flGC3u4hCP-fmENvp74glNhfRJ7CZxxddA-TFzO9MOdXR_Dw9JqJZaRmKxAURB3S6IFODA')"></div>
+<div>
+<p class="font-bold text-sm">David Chen</p>
+<p class="text-xs text-slate-500">d.chen@academy.edu</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded border border-primary/30 text-primary text-[10px] font-bold uppercase tracking-wider">Teacher</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-xs font-semibold text-amber-500">
+<span class="size-2 rounded-full bg-amber-500"></span>
+                                    Pending
+                                </div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs mono text-slate-500">Never</p>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-border-dark rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 5 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-background-dark/30 transition-colors">
+<td class="px-6 py-4">
+<input class="rounded border-slate-300 dark:border-border-dark text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm">
+                                        ER
+                                    </div>
+<div>
+<p class="font-bold text-sm">Elena Rodriguez</p>
+<p class="text-xs text-slate-500">e.rodriguez@academy.edu</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded border border-primary/30 text-primary text-[10px] font-bold uppercase tracking-wider">Teacher</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+                                    Active
+                                </div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs mono text-slate-400">8h ago</p>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-border-dark rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-4 bg-slate-50 dark:bg-background-dark border-t border-slate-200 dark:border-border-dark flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
+<div class="flex items-center gap-4 text-xs font-medium text-slate-500">
+<p>Showing <span class="text-slate-900 dark:text-slate-100 font-bold">1-10</span> of <span class="text-slate-900 dark:text-slate-100 font-bold">148</span> users</p>
+<div class="h-4 w-[1px] bg-slate-300 dark:border-border-dark"></div>
+<div class="flex items-center gap-1">
+<span>Show:</span>
+<select class="bg-transparent border-none py-0 pl-1 pr-6 text-xs font-bold text-primary focus:ring-0 cursor-pointer">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">first_page</span>
+</button>
+<button class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center px-1">
+<button class="size-8 rounded-lg bg-primary text-white text-xs font-bold flex items-center justify-center">1</button>
+<button class="size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-border-dark text-slate-500 text-xs font-bold flex items-center justify-center">2</button>
+<button class="size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-border-dark text-slate-500 text-xs font-bold flex items-center justify-center">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-border-dark text-slate-500 text-xs font-bold flex items-center justify-center">15</button>
+</div>
+<button class="p-1.5 text-slate-500 hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="p-1.5 text-slate-500 hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined">last_page</span>
+</button>
+</div>
+</div>
+</div>
+<!-- System Stats Cards (Optional Accessory) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-5 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Active Licenses</p>
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-black">124</span>
+<span class="text-xs text-emerald-500 font-bold mb-1">+2 this month</span>
+</div>
+</div>
+<div class="p-5 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Security Flags</p>
+<span class="material-symbols-outlined text-rose-500">warning</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-black">0</span>
+<span class="text-xs text-slate-500 font-bold mb-1">Last 24 hours</span>
+</div>
+</div>
+<div class="p-5 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Avg. Login Frequency</p>
+<span class="material-symbols-outlined text-amber-500">query_stats</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-black">4.2</span>
+<span class="text-xs text-slate-500 font-bold mb-1">times / day</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual Action Menu (Mock Example - usually toggled by JS) -->
+<!-- Hidden by default, shown here as reference if it was positioned -->
+<div class="hidden absolute top-0 left-0 w-48 bg-white dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-lg shadow-xl z-50 p-1">
+<button class="w-full flex items-center gap-3 px-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-surface-dark rounded transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+            Edit Details
+        </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-surface-dark rounded transition-colors">
+<span class="material-symbols-outlined text-lg">key</span>
+            Reset Password
+        </button>
+<div class="h-[1px] bg-slate-100 dark:bg-border-dark my-1 mx-2"></div>
+<button class="w-full flex items-center gap-3 px-3 py-2 text-sm text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 rounded transition-colors font-semibold">
+<span class="material-symbols-outlined text-lg">block</span>
+            Suspend Account
+        </button>
+</div>
+</body></html>

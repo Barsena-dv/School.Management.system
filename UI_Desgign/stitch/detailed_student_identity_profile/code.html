@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Identity Profile | AcademicERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "obsidian": "#0b1015",
+                        "surface": "#1a222c",
+                        "border-dark": "#2d3748"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0b1015;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2d3748;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between border-b border-solid border-slate-200 dark:border-border-dark bg-white dark:bg-obsidian px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">database</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">AcademicERP</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1" href="#">Students</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Faculty</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<div class="relative w-64 hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-100 dark:bg-surface border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-white" placeholder="Search student records..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-surface text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-surface"></span>
+</button>
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-surface text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-slate-200 dark:border-border-dark"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-slate-900 dark:text-white leading-none">Admin User</p>
+<p class="text-[10px] text-slate-500 dark:text-slate-400">Super Administrator</p>
+</div>
+<div class="size-9 bg-primary/20 rounded-full flex items-center justify-center text-primary font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Admin user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO7jXwXOhCDMEwBR4Qys-4e9ZLGDjlLYglLSTuNwcSaY3y9p4D6rdJYC9NyfCBxKlPR77KXCEp6x9_LSNRwSDcEoa5ss3GgBZPwrwT8il_4Rtg2jGLiP8Z9dfZs5vJn8ekPjM39uYZoBsJ2mlpTkoMzF8uBDkSGFdU5669ZUrGxjfYAVkP83ydAiJGGlOTUyFCpx5TIywNhWo9-fJ_i4o9XQqy-sCXl0UGEMWtafwaH57iJ6Kfz9hvfQCQOYdBUKmUYbao8Rz42iY"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex overflow-hidden">
+<!-- Sidebar Profile Card -->
+<aside class="w-80 border-r border-slate-200 dark:border-border-dark bg-white dark:bg-obsidian overflow-y-auto custom-scrollbar flex flex-col">
+<div class="p-6 flex flex-col items-center text-center">
+<div class="relative group">
+<div class="size-32 rounded-xl overflow-hidden ring-4 ring-primary/10 mb-4 transition-transform group-hover:scale-105">
+<img class="w-full h-full object-cover" data-alt="Student profile photograph of Johnathan Doe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs7vbRyftFZYbj5qXDvfBe1J-DvBO7SjpRk3kLM_qogCbb44R_ehkFxvmDiYXcKrp9saFOuyZ-ckfM7F5NDI79O6S_G5mQ7RTq7N8M1Jj_aIxwOAWC-hFsjvpaRhOn-igKZ9HHN21sbYafK8E7AMsRUWZp5Z3_ouNB5gFHeFAYZZ-jmksh7DJOKVVeu5KImdlWCeGXeMX2a8ajcPJT3jKfRgjhIa33xYkSltzn0zaaDo53sdcSRGENpu922XbfBMFv2M58Tpj-jqE"/>
+</div>
+<span class="absolute bottom-6 right-0 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full ring-4 ring-white dark:ring-obsidian">ACTIVE</span>
+</div>
+<h1 class="text-xl font-bold text-slate-900 dark:text-white">Johnathan Doe</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-4">ID: STU-98234-2024</p>
+<div class="flex gap-2 mb-6">
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">trending_up</span> Promote
+                    </button>
+<button class="flex items-center gap-2 bg-slate-100 dark:bg-surface text-slate-700 dark:text-slate-300 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-border-dark">
+<span class="material-symbols-outlined text-sm">archive</span> Archive
+                    </button>
+</div>
+<div class="w-full space-y-4 text-left border-t border-slate-100 dark:border-border-dark pt-6">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg">mail</span>
+<div>
+<p class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Email Address</p>
+<p class="text-sm font-medium dark:text-slate-200">j.doe@university.edu</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg">call</span>
+<div>
+<p class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Phone Number</p>
+<p class="text-sm font-medium dark:text-slate-200">+1 (555) 012-3456</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-lg">calendar_month</span>
+<div>
+<p class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Enrollment Date</p>
+<p class="text-sm font-medium dark:text-slate-200">August 15, 2023</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto p-6 bg-slate-50 dark:bg-surface/30">
+<div class="flex justify-between items-center mb-2">
+<p class="text-xs font-bold text-slate-500 dark:text-slate-400">Profile Completion</p>
+<p class="text-xs font-bold text-primary">85%</p>
+</div>
+<div class="w-full bg-slate-200 dark:bg-border-dark h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50 dark:bg-background-dark p-8">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-xs font-medium text-slate-400 mb-6">
+<span>Students</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span>Undergraduate</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-600 dark:text-slate-200">Johnathan Doe Profile</span>
+</div>
+<!-- Page Title & Quick Stats -->
+<div class="flex flex-wrap items-end justify-between gap-6 mb-8">
+<div>
+<h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Student Identity Profile</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Lifecycle management and unified academic records.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-white dark:bg-surface p-4 rounded-xl border border-slate-200 dark:border-border-dark min-w-[120px]">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Current GPA</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">3.82</p>
+</div>
+<div class="bg-white dark:bg-surface p-4 rounded-xl border border-slate-200 dark:border-border-dark min-w-[120px]">
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Credits Earned</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">64 / 120</p>
+</div>
+</div>
+</div>
+<!-- Tab Navigation -->
+<div class="flex border-b border-slate-200 dark:border-border-dark mb-8 gap-10">
+<button class="pb-4 border-b-2 border-primary text-primary text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">person</span> Overview
+                </button>
+<button class="pb-4 border-b-2 border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-bold flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-lg">history_edu</span> Academic History
+                </button>
+<button class="pb-4 border-b-2 border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-bold flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-lg">timeline</span> Activity Timeline
+                </button>
+<button class="pb-4 border-b-2 border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-bold flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-lg">folder_open</span> Documents
+                </button>
+</div>
+<!-- Content Grid (Overview Tab View) -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Enrollment Details -->
+<div class="xl:col-span-2 space-y-8">
+<div class="bg-white dark:bg-obsidian rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-border-dark flex justify-between items-center">
+<h3 class="font-bold text-slate-900 dark:text-white">Current Placement</h3>
+<button class="text-primary text-xs font-bold hover:underline">Edit Details</button>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Academic Program</p>
+<p class="text-sm font-semibold dark:text-slate-200">B.Sc. in Computer Science &amp; Engineering</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Current Grade/Level</p>
+<p class="text-sm font-semibold dark:text-slate-200">Year 3 - Semester 1</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Section / Group</p>
+<p class="text-sm font-semibold dark:text-slate-200">A-2 (Artificial Intelligence Track)</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Academic Advisor</p>
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover" data-alt="Advisor headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTnp3-4p3KQ0BFUyCtMWyMfSeG7yvNgPf-UBk0ehT5FF3MfPnIwRUW54gPF9SZAAwMQJlMa4FQVFuNXf7P-Qx2-XPZL-3cvYyEu_emX0SZTkx0syzLSyT3cAidfoJ_I4bcpbCPq9YCeFwbJ-VsXlV2bj6p4refBsS_9IxGUkc9l44-dj3YucWw_8-HosupZpGzflSdlJYr3kt6GfxZzALple9QgnuSk4la9GMtRrmY9jvQtqCLF4fTuIipZCX_QbcnmdG8YhyaNGY"/>
+</div>
+<p class="text-sm font-semibold dark:text-slate-200">Dr. Sarah Kensington</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Demographic Info -->
+<div class="bg-white dark:bg-obsidian rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-border-dark flex justify-between items-center">
+<h3 class="font-bold text-slate-900 dark:text-white">Demographic Snapshot</h3>
+</div>
+<div class="p-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Date of Birth</p>
+<p class="text-sm font-semibold dark:text-slate-200">May 12, 2002 (22 years)</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Gender</p>
+<p class="text-sm font-semibold dark:text-slate-200">Male</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Nationality</p>
+<p class="text-sm font-semibold dark:text-slate-200">United States</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Home Address</p>
+<p class="text-sm font-semibold dark:text-slate-200 leading-relaxed">42 Oak Avenue, Seattle,<br/>WA 98101, USA</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase font-bold text-slate-400">Language Proficiencies</p>
+<div class="flex flex-wrap gap-1 mt-1">
+<span class="px-2 py-0.5 bg-slate-100 dark:bg-surface rounded text-[10px] font-bold">English (Native)</span>
+<span class="px-2 py-0.5 bg-slate-100 dark:bg-surface rounded text-[10px] font-bold">Spanish (B2)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Emergency Contacts & Sidebar Content -->
+<div class="space-y-8">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20 p-6">
+<h3 class="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500">emergency</span> Emergency Contacts
+                        </h3>
+<div class="space-y-6">
+<div class="relative pl-4 border-l-2 border-primary/30">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">Robert Doe</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold">Father</p>
+<p class="text-xs mt-2 text-primary font-medium">+1 (555) 012-9876</p>
+</div>
+<div class="relative pl-4 border-l-2 border-slate-300 dark:border-border-dark">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">Martha Doe</p>
+<p class="text-[10px] text-slate-500 uppercase font-bold">Mother</p>
+<p class="text-xs mt-2 text-primary font-medium">+1 (555) 012-9877</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-obsidian rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-border-dark">
+<h3 class="font-bold text-slate-900 dark:text-white text-sm">System Access Logs</h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-slate-500">Last Login</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">2 hours ago</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-slate-500">Portal Status</span>
+<span class="text-green-500 font-bold flex items-center gap-1">
+<span class="size-1.5 bg-green-500 rounded-full animate-pulse"></span> Enabled
+                                </span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-slate-500">Account Managed By</span>
+<span class="font-bold text-slate-700 dark:text-slate-300">Admin_92</span>
+</div>
+<button class="w-full mt-4 py-2 bg-slate-100 dark:bg-surface rounded-lg text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                                View Security Logs
+                            </button>
+</div>
+</div>
+</div>
+<!-- Academic History (Full Width Section - Preview) -->
+<div class="xl:col-span-3">
+<div class="bg-white dark:bg-obsidian rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-border-dark flex justify-between items-center bg-slate-50/50 dark:bg-surface/50">
+<h3 class="font-bold text-slate-900 dark:text-white">Recent Academic History</h3>
+<button class="flex items-center gap-2 bg-slate-200 dark:bg-surface text-slate-700 dark:text-slate-200 px-3 py-1.5 rounded-lg text-[10px] font-bold">
+<span class="material-symbols-outlined text-sm">download</span> Export Transcript
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-surface/30 border-b border-slate-100 dark:border-border-dark">
+<tr>
+<th class="px-6 py-3 text-[10px] uppercase font-bold text-slate-400">Academic Year</th>
+<th class="px-6 py-3 text-[10px] uppercase font-bold text-slate-400">Level</th>
+<th class="px-6 py-3 text-[10px] uppercase font-bold text-slate-400">School/Institute</th>
+<th class="px-6 py-3 text-[10px] uppercase font-bold text-slate-400 text-center">GPA</th>
+<th class="px-6 py-3 text-[10px] uppercase font-bold text-slate-400 text-right">Result</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-border-dark">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-surface/20 transition-colors">
+<td class="px-6 py-4 text-xs font-medium dark:text-slate-200">2022 - 2023</td>
+<td class="px-6 py-4 text-xs font-bold dark:text-slate-200">Year 2</td>
+<td class="px-6 py-4 text-xs dark:text-slate-300">Central University of Tech</td>
+<td class="px-6 py-4 text-xs font-black text-center dark:text-slate-200">3.91</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2 py-1 rounded-md bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold">PASSED</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-surface/20 transition-colors">
+<td class="px-6 py-4 text-xs font-medium dark:text-slate-200">2021 - 2022</td>
+<td class="px-6 py-4 text-xs font-bold dark:text-slate-200">Year 1</td>
+<td class="px-6 py-4 text-xs dark:text-slate-300">Central University of Tech</td>
+<td class="px-6 py-4 text-xs font-black text-center dark:text-slate-200">3.75</td>
+<td class="px-6 py-4 text-right">
+<span class="px-2 py-1 rounded-md bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold">PASSED</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-3 border-t border-slate-100 dark:border-border-dark text-center">
+<button class="text-xs font-bold text-primary hover:underline">View All Historical Records</button>
+</div>
+</div>
+</div>
+<!-- Activity Timeline (Full Width Section - Preview) -->
+<div class="xl:col-span-3">
+<div class="bg-white dark:bg-obsidian rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-border-dark">
+<h3 class="font-bold text-slate-900 dark:text-white">Recent Activity Timeline</h3>
+</div>
+<div class="p-8">
+<div class="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary before:via-slate-200 dark:before:via-border-dark before:to-transparent">
+<!-- Timeline Item -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white dark:border-obsidian bg-primary text-white shadow md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shrink-0 z-10">
+<span class="material-symbols-outlined text-base">check_circle</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-surface shadow-sm">
+<div class="flex items-center justify-between space-x-2 mb-1">
+<div class="font-bold text-slate-900 dark:text-white text-xs">Status Changed: Active</div>
+<time class="font-bold text-[10px] text-primary italic">Oct 12, 2023</time>
+</div>
+<div class="text-slate-500 dark:text-slate-400 text-[11px]">Admin <span class="text-primary font-bold">Jessica Smith</span> updated the status from 'Pending' to 'Active'.</div>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white dark:border-obsidian bg-slate-200 dark:bg-border-dark text-slate-500 shadow md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shrink-0 z-10">
+<span class="material-symbols-outlined text-base">person_add</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-surface shadow-sm">
+<div class="flex items-center justify-between space-x-2 mb-1">
+<div class="font-bold text-slate-900 dark:text-white text-xs">Profile Created</div>
+<time class="font-bold text-[10px] text-slate-500 italic">Aug 15, 2023</time>
+</div>
+<div class="text-slate-500 dark:text-slate-400 text-[11px]">System generated profile via <span class="font-bold">Admissions Module</span>. Initial ID STU-98234 assigned.</div>
+</div>
+</div>
+</div>
+<div class="mt-10 text-center">
+<button class="px-6 py-2 border border-slate-200 dark:border-border-dark rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-surface transition-colors">
+                                    Load Older Activities
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Action Bar (Contextual) -->
+<footer class="bg-white dark:bg-obsidian border-t border-slate-200 dark:border-border-dark px-10 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2 overflow-hidden">
+<img class="inline-block size-6 rounded-full ring-2 ring-white dark:ring-obsidian" data-alt="Reviewer 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB85-QYorxlbj62_CFy3EPgw0KXLNRhmDz6rGHrSSA3YbDKO2y0C24e6X8q6KWmMY-H9XTeKEQf_ogruqQnySl5prn4YthKp_8__BGyiXC52J6y_OUYDLebhvLpPD-iGQN8w9mYZ_R8Yt7NoCW6OmLsvFI7yLo7eg_Bs0xd6OXGRxPV__UHk7bneTyQguybcklEx-k1FML2K-DvhEVmhYFzNmCd46Kxj1DrTZ8kSdc0gcut8CK_QldMn-RsfCdEYWWJNTpCgKFq4mg"/>
+<img class="inline-block size-6 rounded-full ring-2 ring-white dark:ring-obsidian" data-alt="Reviewer 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaXXOISPa0bAy8d-bwze-ursydA-S8BRAJlV2JHc4YH1Mua4_Oj-tHFy2AKVxD0rN72JOQPcd1KvINSmzyVFEE1iH08TONby0vBdFJLefASXBB-lq96cq8lszXjm-ca3LTAf3JDdOtq3kJ-iynT-9kjK2VagB1nCeH_WRNO34d_9H8I5EncOZ9RE65I8HjzOhuB6fXu5XLDhrizn_cZcZqqRQKw598ty-9XYlzp2IWKmRcIMcdUuL_Z1atOy1ZQhOIxMuR8mdco5k"/>
+<div class="inline-flex items-center justify-center size-6 rounded-full ring-2 ring-white dark:ring-obsidian bg-slate-100 dark:bg-surface text-[8px] font-bold">+3</div>
+</div>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">This profile is currently being reviewed by the Academic Board.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-xs font-bold text-slate-500 hover:text-red-500 transition-colors">Flag For Revision</button>
+<div class="h-4 w-[1px] bg-slate-200 dark:bg-border-dark"></div>
+<button class="bg-primary text-white px-6 py-2 rounded-lg text-xs font-bold hover:bg-primary/90 shadow-lg shadow-primary/20">Finalize &amp; Approve</button>
+</div>
+</footer>
+</body></html>

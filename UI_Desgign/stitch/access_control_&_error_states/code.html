@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduERP - Access Control &amp; Error States</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .sidebar-item-active { background-color: #137fec33; border-left: 4px solid #137fec; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Toast Notification (Session Expired) -->
+<div class="fixed top-6 right-6 z-50 animate-bounce-in">
+<div class="bg-white dark:bg-[#1e293b] border-l-4 border-amber-500 rounded-lg shadow-2xl p-4 flex items-center gap-4 max-w-sm">
+<div class="bg-amber-100 dark:bg-amber-900/30 p-2 rounded-full">
+<span class="material-symbols-outlined text-amber-500">timer_off</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Session Expired</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Your session has timed out. Please log in again to continue.</p>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-white dark:bg-[#111418] border-r border-slate-200 dark:border-slate-800 flex flex-col shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary rounded-lg p-1">
+<span class="material-symbols-outlined text-white">school</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold leading-none tracking-tight">EduERP</h1>
+<span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Academic Admin</span>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto mt-4">
+<p class="px-3 text-[10px] font-bold text-slate-400 uppercase mb-2">Main Menu</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="text-sm font-medium">Student Records</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Faculty</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="text-sm font-medium">Course Mgmt</span>
+</a>
+<div class="pt-6">
+<p class="px-3 text-[10px] font-bold text-slate-400 uppercase mb-2">Administration</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary border-r-4 border-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-primary">admin_panel_settings</span>
+<span class="text-sm font-semibold">Access Control</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium">Finance</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 py-2 rounded-lg flex items-center justify-center gap-2 text-sm font-semibold">
+<span class="material-symbols-outlined text-sm">settings</span>
+                    System Status
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- Navbar -->
+<header class="h-16 bg-white dark:bg-[#111418] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-sm font-medium text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100">Restricted Access</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="bg-slate-100 dark:bg-[#283039] border-none rounded-lg py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-primary placeholder:text-slate-500" placeholder="Search modules..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#111418]"></span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1"></div>
+<div class="flex items-center gap-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 p-1.5 rounded-lg transition-colors">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold leading-none">Admin User</p>
+<p class="text-[10px] text-slate-500">System Admin</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-slate-300 overflow-hidden ring-2 ring-primary/20">
+<img class="w-full h-full object-cover" data-alt="User profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC50hJAnhh2zZPxmUNonFK2xZTeSzzPJIHjCQrDKJKszUMRhJoQZihJDVlNsYhJaMOtfdLbztHmdcqfRUF65w-HUD_BESDc_xf80w11lSugpYSwF3kU-085DWOtQrCH4Y-cmlBgH5oka0MxtH2SQd8f5P07HlUZUQ01yk50SKGFWMJMiZ-jzDHUCp4tPmkSLWUzeFM5X-0862ZQP83hgnxG2indFs-dTi9AEYd24b9fWHthNqo-9GgNr8oSQPTRo05p8IVSQ3RPhg"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Error States Content Container -->
+<div class="flex-1 overflow-y-auto p-12 flex flex-col items-center justify-center">
+<!-- 403 Access Denied State -->
+<div class="max-w-2xl w-full text-center space-y-8 animate-fade-in">
+<!-- Illustration Placeholder -->
+<div class="relative flex justify-center">
+<div class="absolute -z-10 w-64 h-64 bg-primary/10 dark:bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+<div class="w-80 h-48 bg-slate-200/50 dark:bg-slate-800/50 rounded-2xl flex items-center justify-center relative border border-slate-300 dark:border-slate-700 shadow-sm">
+<div class="flex flex-col items-center gap-4">
+<div class="w-16 h-16 bg-white dark:bg-[#1e293b] rounded-2xl shadow-lg flex items-center justify-center border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-4xl text-primary">lock</span>
+</div>
+<div class="flex gap-2">
+<div class="w-12 h-2 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+<div class="w-20 h-2 bg-primary/40 rounded-full"></div>
+<div class="w-8 h-2 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -top-4 -right-4 text-5xl text-red-500 animate-bounce opacity-75">gpp_maybe</span>
+</div>
+</div>
+<div class="space-y-4">
+<h2 class="text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Restricted Access</h2>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-lg mx-auto leading-relaxed">
+                            You do not have the necessary permissions to view this module. Your account role <span class="text-primary font-semibold">"System Admin"</span> requires specific elevation for financial records.
+                        </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto px-8 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg shadow-lg shadow-primary/25 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">dashboard</span>
+                            Return to Dashboard
+                        </button>
+<button class="w-full sm:w-auto px-8 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">support_agent</span>
+                            Contact Administrator
+                        </button>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-500 pt-8 uppercase tracking-widest font-semibold">Error Reference: 403-AUTH-EDU-0922</p>
+</div>
+<!-- 404 Visual Divider for Preview -->
+<div class="w-full h-px bg-slate-200 dark:bg-slate-800 my-16 flex items-center justify-center">
+<span class="bg-background-light dark:bg-background-dark px-4 text-[10px] text-slate-400 font-bold uppercase tracking-widest">Other states</span>
+</div>
+<!-- 404 Not Found Small Preview -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+<div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">search_off</span>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">404 State</h3>
+<p class="text-xs text-slate-500">Resource missing or moved</p>
+</div>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-400">Preview of the "Page Not Found" layout when a student ID or course record is invalid.</p>
+<button class="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
+                            Preview Full View <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+<div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-500">wifi_off</span>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Offline State</h3>
+<p class="text-xs text-slate-500">Network connection lost</p>
+</div>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-400">Preview of the "System Disconnected" state during real-time attendance sync.</p>
+<button class="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
+                            Preview Full View <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="p-6 text-center text-[10px] text-slate-400 uppercase tracking-widest shrink-0 border-t border-slate-200 dark:border-slate-800">
+                © 2024 EduERP Cloud Services • Built for High Performance Academic Management
+            </footer>
+</main>
+</div>
+</body></html>

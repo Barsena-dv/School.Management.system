@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teacher Query Inbox | AcademicERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #283039;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Toast Notification (Top Right) -->
+<div class="fixed top-6 right-6 z-50 flex items-center gap-4 bg-white dark:bg-[#1c2632] border-l-4 border-primary p-4 rounded-lg shadow-2xl max-w-md">
+<div class="flex-shrink-0 bg-primary/20 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-semibold dark:text-white">New Announcement Published</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">'Semester Schedule Update' is now live for all students.</p>
+</div>
+<button class="text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-20 lg:w-64 bg-white dark:bg-[#0b1118] border-r border-slate-200 dark:border-[#1e2936] flex flex-col items-center lg:items-start py-6 transition-all">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined font-bold">school</span>
+</div>
+<h1 class="hidden lg:block text-xl font-bold tracking-tight">Academic<span class="text-primary">ERP</span></h1>
+</div>
+<nav class="w-full space-y-2 px-3">
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e2936] transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="hidden lg:block text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e2936] transition-all" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="hidden lg:block text-sm font-medium">Academics</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">chat_bubble</span>
+<span class="hidden lg:block text-sm font-bold">Communication</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e2936] transition-all" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="hidden lg:block text-sm font-medium">Schedule</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1e2936] transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="hidden lg:block text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="mt-auto w-full px-3">
+<div class="flex items-center gap-3 p-3 bg-slate-100 dark:bg-[#1e2936] rounded-xl overflow-hidden">
+<div class="size-10 rounded-full bg-cover bg-center shrink-0" data-alt="Teacher profile photo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBj2pPcb-WhFo16YgRgFJ5Whll97Ij7QIerEo_hRPezL3eZlRcDlAlTmYKgyD0i9WjctjQQHj_TeMKpKIm6Np0x8cOamluWdm7cXtiWbwHMCyHNf3CTXxw4RAdx8YLql4W8WPuNa6NvwabN1tQ2t5y9eBc0uk8OQLIoPlfzJK4ZGlrA_GvVyMtpHzn0mgrcyI7KXft2cnEp5TEmHZSzKhGr6S7O3HyFsoQkc0nUuFhd9uXxO6lwzq8gzUvEnJOahZoPb8E1J-phH1Q')"></div>
+<div class="hidden lg:block overflow-hidden">
+<p class="text-xs font-bold truncate">Dr. Sarah Miller</p>
+<p class="text-[10px] text-slate-400 truncate">Senior Lecturer</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Top Header -->
+<header class="h-16 border-b border-slate-200 dark:border-[#1e2936] bg-white dark:bg-background-dark px-8 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 material-symbols-outlined">forum</span>
+<h2 class="text-lg font-semibold">Teacher Portal</h2>
+<span class="text-slate-400 mx-2">/</span>
+<span class="text-slate-400 text-sm">Communication Hub</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<input class="bg-slate-100 dark:bg-[#1c2632] border-none rounded-lg text-sm px-4 py-2 w-64 focus:ring-1 focus:ring-primary placeholder:text-slate-500" placeholder="Search queries..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2 text-slate-500 text-xl">search</span>
+</div>
+<button class="size-10 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-[#1c2632] hover:bg-primary/10 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-[#1c2632] hover:bg-primary/10 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<div class="flex-1 flex overflow-hidden">
+<!-- Query Inbox Panel -->
+<section class="w-full max-w-md border-r border-slate-200 dark:border-[#1e2936] flex flex-col bg-slate-50 dark:bg-[#0d141c]">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-xl font-bold">Query Inbox</h3>
+<p class="text-xs text-primary font-medium mt-1">12 Unread Student Queries</p>
+</div>
+<button class="p-2 bg-white dark:bg-[#1c2632] rounded-lg border border-slate-200 dark:border-[#283039] text-xs font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                                Filter
+                            </button>
+</div>
+<div class="flex gap-2 p-1 bg-slate-200 dark:bg-[#1c2632] rounded-lg mb-4">
+<button class="flex-1 py-1.5 text-xs font-bold rounded-md bg-white dark:bg-[#283039] shadow-sm">Unread</button>
+<button class="flex-1 py-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">All</button>
+<button class="flex-1 py-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">Pending</button>
+</div>
+</div>
+<!-- Scrollable List -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-4 pb-6 space-y-3">
+<!-- Query Item 1 -->
+<div class="bg-white dark:bg-[#16202a] p-4 rounded-xl border-l-4 border-primary shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-xs font-bold">JD</div>
+<span class="text-sm font-bold">John Doe</span>
+</div>
+<span class="text-[10px] text-slate-400 font-medium uppercase">10m ago</span>
+</div>
+<p class="text-[11px] text-primary font-semibold mb-1 truncate">Midterm Syllabus Update</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">Professor Miller, will the midterm exam cover the topics mentioned in Chapter 5, specifically the case studies?</p>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 bg-primary text-white text-[10px] font-bold py-1.5 rounded-lg hover:bg-primary/90 transition-colors">REPLY</button>
+<button class="px-3 bg-slate-100 dark:bg-[#283039] text-slate-500 dark:text-slate-300 text-[10px] font-bold py-1.5 rounded-lg">READ</button>
+</div>
+</div>
+<!-- Query Item 2 -->
+<div class="bg-white dark:bg-[#16202a] p-4 rounded-xl border-l-4 border-primary shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-pink-500/20 text-pink-500 flex items-center justify-center text-xs font-bold">AS</div>
+<span class="text-sm font-bold">Alice Smith</span>
+</div>
+<span class="text-[10px] text-slate-400 font-medium uppercase">42m ago</span>
+</div>
+<p class="text-[11px] text-primary font-semibold mb-1 truncate">Project Deadline Extension</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">I'm having issues with the portal upload. Is there a grace period for the project submission due tonight?</p>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 bg-primary text-white text-[10px] font-bold py-1.5 rounded-lg hover:bg-primary/90 transition-colors">REPLY</button>
+<button class="px-3 bg-slate-100 dark:bg-[#283039] text-slate-500 dark:text-slate-300 text-[10px] font-bold py-1.5 rounded-lg">READ</button>
+</div>
+</div>
+<!-- Query Item 3 -->
+<div class="bg-white dark:bg-[#16202a] p-4 rounded-xl border-l-4 border-primary/40 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-xs font-bold">ML</div>
+<span class="text-sm font-bold">Marcus Lee</span>
+</div>
+<span class="text-[10px] text-slate-400 font-medium uppercase">2h ago</span>
+</div>
+<p class="text-[11px] text-primary font-semibold mb-1 truncate">Lab Groups Assignment</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">Can I switch groups for the chemistry lab? My commute makes the Friday session difficult to attend.</p>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 bg-primary text-white text-[10px] font-bold py-1.5 rounded-lg hover:bg-primary/90 transition-colors">REPLY</button>
+<button class="px-3 bg-slate-100 dark:bg-[#283039] text-slate-500 dark:text-slate-300 text-[10px] font-bold py-1.5 rounded-lg">READ</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Center Message Detail Area (Active State) -->
+<section class="flex-1 flex flex-col bg-white dark:bg-background-dark">
+<div class="p-8 h-full flex flex-col items-center justify-center text-center">
+<div class="w-64 h-64 relative mb-6">
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="relative flex flex-col items-center justify-center h-full">
+<span class="material-symbols-outlined text-8xl text-slate-200 dark:text-slate-700">mark_email_unread</span>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-20 border-2 border-dashed border-primary/30 rounded-full animate-spin-slow"></div>
+</div>
+</div>
+<h4 class="text-xl font-bold mb-2">Select a query to view details</h4>
+<p class="text-slate-500 dark:text-slate-400 max-w-sm">Choose a student query from the left panel to start a conversation or resolve academic questions.</p>
+<div class="mt-8 flex gap-4">
+<button class="px-6 py-2.5 bg-primary/10 text-primary border border-primary/20 rounded-lg text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">history</span>
+                                View Archived
+                            </button>
+<button class="px-6 py-2.5 bg-slate-900 dark:bg-white text-white dark:text-black rounded-lg text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add</span>
+                                New Announcement
+                            </button>
+</div>
+</div>
+</section>
+<!-- Empty State Side (Example for another category) -->
+<!-- This would usually be shown when a tab like 'Pending' is clicked and has no items -->
+<section class="hidden w-full max-w-md border-r border-slate-200 dark:border-[#1e2936] flex flex-col bg-slate-50 dark:bg-[#0d141c]">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-xl font-bold">Pending Queries</h3>
+<p class="text-xs text-slate-400 font-medium mt-1">All caught up!</p>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center p-8 text-center opacity-60">
+<div class="size-24 bg-slate-200 dark:bg-[#1c2632] rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-4xl text-slate-400">task_alt</span>
+</div>
+<p class="text-sm font-bold">No Pending Messages</p>
+<p class="text-xs text-slate-500 mt-1">You've responded to all student queries in this category.</p>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

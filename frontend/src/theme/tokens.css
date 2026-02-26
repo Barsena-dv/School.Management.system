@@ -1,0 +1,67 @@
+/* ═══════════════════════════════════════════════════════════════
+   Design Tokens — Apple-inspired Academic Light System
+   Source of Truth for the entire application.
+═══════════════════════════════════════════════════════════════ */
+
+:root {
+    /* ── Backgrounds & Surfaces ─────────────────────────────── */
+    --bg: #F9F9F7;               /* warm off-white page background */
+    --bg-subtle: #F2F2F0;        /* subtle distinction for sections */
+    --surface: #FFFFFF;          /* pure white surfaces (cards, panels) */
+    --surface-raised: #FFFFFF;   /* elevated surfaces */
+
+    /* ── Brand Colors ─────────────────────────────────────────── */
+    --primary: #1D3461;          /* deep academic blue */
+    --primary-hover: #16284A;
+    --primary-subtle: #EEF2F7;   /* light tint for highlights */
+
+    --accent: #2F8585;           /* muted teal */
+    --accent-hover: #266B6B;
+    --accent-subtle: #EAF4F4;
+
+    /* ── State Colors ─────────────────────────────────────────── */
+    --danger: #E53E3E;           /* soft academic red */
+    --danger-hover: #C53030;
+    --danger-subtle: #FFF5F5;
+
+    --success: #38A169;
+    --success-subtle: #F0FFF4;
+    
+    --warning: #D69E2E;
+    --warning-subtle: #FFFFF0;
+
+    /* ── Typography ───────────────────────────────────────────── */
+    --text-primary: #1A1A1A;     /* near black for high contrast */
+    --text-secondary: #4A5568;   /* slate gray for body text */
+    --text-muted: #718096;       /* muted text for captions */
+    --text-inverse: #FFFFFF;
+
+    /* ── Borders & Shadows ────────────────────────────────────── */
+    --border: #E2E8F0;           /* hairline border for surfaces */
+    --border-strong: #CBD5E0;    /* inputs / active borders */
+
+    --shadow-soft: 
+        0 1px 2px rgba(0, 0, 0, 0.04), 
+        0 4px 12px rgba(0, 0, 0, 0.05);
+    
+    --shadow-md: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+        0 2px 4px -1px rgba(0, 0, 0, 0.03);
+
+    /* ── Radii ────────────────────────────────────────────────── */
+    --radius: 12px;              /* primary surface radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* ── Layout Dimensions ────────────────────────────────────── */
+    --sidebar-width: 240px;
+    --sidebar-collapsed: 68px;
+    --navbar-height: 64px;
+
+    /* ── Glass Utility ───────────────────────────────────────── */
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-blur: blur(12px) saturate(1.8);
+    --glass-border: rgba(255, 255, 255, 0.5);
+}

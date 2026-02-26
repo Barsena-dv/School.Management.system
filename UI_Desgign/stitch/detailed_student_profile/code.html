@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detailed Student Profile | EduSync ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex flex-col w-full min-h-screen overflow-x-hidden">
+<!-- Header Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111418] px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">EduSync ERP</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Students</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Faculty</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Finance</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-slate-100 dark:bg-[#283039] border-none rounded-lg pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary outline-none" placeholder="Search student ID or name..."/>
+</div>
+<button class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600">
+<img class="w-full h-full object-cover" data-alt="Administrator profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvT8HBxN6o2uSA8L8fhsbw3yxVx01fnDFuHBYdUf-fxe5-GavL7TWT0X8K2zdLCcXmhHRr-uOY1gRhAa7jVDPF9yL4PgktHI9KjMhlg_CxYDeOCW3erbAmOLSZleyAPw2i-EHa1vOX3AI0ulqoILcI7n-AJADXbSTFhugQEBfE1V2BRbz_j_nlawxTgiNgMni3M1mPlW33VQSTOrtXiKR9rFrq_w-AF08wFmH_ozKjAZ5lx01Ogt5TYnFT0ycRX2K1A2bi00VaYA0"/>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto w-full px-6 py-8">
+<!-- Breadcrumbs & Actions -->
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary" href="#">Student Directory</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-medium">Alex Johnson</span>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-slate-200 dark:bg-[#283039] hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white text-sm font-bold rounded-lg flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">mail</span> Message
+                </button>
+<button class="px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">edit</span> Edit Profile
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-6">
+<!-- Left Column: Personal Info Card -->
+<aside class="col-span-12 lg:col-span-3 space-y-6">
+<div class="bg-white dark:bg-[#1c2229] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden p-6">
+<div class="flex flex-col items-center text-center pb-6 border-b border-slate-100 dark:border-slate-800">
+<div class="relative">
+<div class="size-32 rounded-xl overflow-hidden border-4 border-slate-50 dark:border-slate-800 mb-4 shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Student profile headshot portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsTgDnAdGPjhVmUbSQZWygwVqJHGL6yxbWsT1O765xRY4iWLu9bTR8adSwHnaShj7HtqxNc2OInNYXNz7qbkk30x09SjQ7KQAbR0il4pLhBkAaTzlI2cP5gGO4mfRqTR0An2wwiyjT9oMPAABLddpfLg5tH80QgHGzKddtq_qH7VgFS1SAhidnlUuFSaNv__gqSE2Ow79HiBbeHy4zfssxtw4LB8Ee5AmZRS8-iyHeLewgmxjDUZJ2BWfxt6GyXViuzod8HTOSd8U"/>
+</div>
+<span class="absolute bottom-6 right-0 bg-green-500 size-4 rounded-full border-2 border-white dark:border-[#1c2229]"></span>
+</div>
+<h1 class="text-xl font-bold dark:text-white">Alex Johnson</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm">ID: STU-88492</p>
+<div class="mt-3 flex gap-2">
+<span class="px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold uppercase rounded tracking-wider border border-amber-200 dark:border-amber-800">At Risk</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded tracking-wider border border-primary/20">Scholarship</span>
+</div>
+</div>
+<div class="py-6 space-y-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-slate-400 text-lg">school</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Major</p>
+<p class="text-sm dark:text-slate-200 font-medium">Computer Science</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-slate-400 text-lg">calendar_today</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Current Semester</p>
+<p class="text-sm dark:text-slate-200 font-medium">Semester 5 (Junior)</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-slate-400 text-lg">alternate_email</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Email</p>
+<p class="text-sm dark:text-slate-200 font-medium">alex.j@university.edu</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-slate-400 text-lg">call</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Phone</p>
+<p class="text-sm dark:text-slate-200 font-medium">+1 (555) 234-8892</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-slate-400 text-lg">person</span>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Advisor</p>
+<p class="text-sm dark:text-slate-200 font-medium">Dr. Sarah Thompson</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl p-4 flex items-center gap-4">
+<div class="size-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Overdue Fees</p>
+<p class="text-lg font-bold dark:text-white">$1,250.00</p>
+</div>
+</div>
+</aside>
+<!-- Main Area: Tabs and Content -->
+<div class="col-span-12 lg:col-span-6 space-y-6">
+<!-- Academic Stats Row -->
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-white dark:bg-[#1c2229] border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+<p class="text-xs font-medium text-slate-500 mb-1">Current GPA</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold dark:text-white">3.82</span>
+<span class="text-green-500 text-xs font-bold pb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 0.1
+                            </span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1c2229] border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+<p class="text-xs font-medium text-slate-500 mb-1">Attendance</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold dark:text-white">92.5%</span>
+<span class="text-red-500 text-xs font-bold pb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">trending_down</span> 2%
+                            </span>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1c2229] border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+<p class="text-xs font-medium text-slate-500 mb-1">Credits Earned</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold dark:text-white">84 / 120</span>
+</div>
+</div>
+</div>
+<!-- Tabs Navigation -->
+<div class="bg-white dark:bg-[#1c2229] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+<div class="flex border-b border-slate-200 dark:border-slate-800 px-6 overflow-x-auto no-scrollbar">
+<button class="py-4 px-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-bold whitespace-nowrap transition-all border-b-2 border-transparent">
+                            Academic History
+                        </button>
+<button class="py-4 px-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-bold whitespace-nowrap transition-all border-b-2 border-transparent mx-4">
+                            Attendance
+                        </button>
+<button class="py-4 px-2 text-primary text-sm font-bold whitespace-nowrap transition-all border-b-2 border-primary mx-4">
+                            Marks &amp; Performance
+                        </button>
+<button class="py-4 px-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-bold whitespace-nowrap transition-all border-b-2 border-transparent">
+                            Fees &amp; Ledger
+                        </button>
+</div>
+<div class="p-6">
+<!-- Marks Content -->
+<div class="space-y-8">
+<div>
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold dark:text-white">GPA Trend Analysis</h3>
+<select class="bg-slate-100 dark:bg-[#283039] border-none rounded-lg text-xs font-bold px-3 py-1 outline-none text-slate-600 dark:text-slate-300">
+<option>All Semesters</option>
+<option>Last 12 Months</option>
+</select>
+</div>
+<!-- Mock Line Chart -->
+<div class="h-64 w-full relative group">
+<div class="absolute inset-0 flex items-end justify-between px-2 pt-4">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-1">
+<div class="border-t border-slate-100 dark:border-slate-800 w-full h-0"></div>
+<div class="border-t border-slate-100 dark:border-slate-800 w-full h-0"></div>
+<div class="border-t border-slate-100 dark:border-slate-800 w-full h-0"></div>
+<div class="border-t border-slate-100 dark:border-slate-800 w-full h-0"></div>
+<div class="border-t border-slate-500/20 w-full h-0"></div>
+</div>
+<!-- Chart Line (SVG) -->
+<svg class="absolute inset-0 w-full h-full drop-shadow-lg" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M 0 80 L 20 60 L 40 70 L 60 30 L 80 40 L 100 10" fill="none" stroke="#137fec" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<path class="opacity-20" d="M 0 80 L 20 60 L 40 70 L 60 30 L 80 40 L 100 10 L 100 100 L 0 100 Z" fill="url(#gradient)" vector-effect="non-scaling-stroke"></path>
+<defs>
+<lineargradient id="gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#137fec;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#137fec;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Data Points -->
+<div class="w-[10%] flex flex-col items-center group/dot" style="margin-bottom: 20%;">
+<div class="size-3 bg-primary rounded-full border-2 border-white dark:border-[#1c2229] transition-transform group-hover/dot:scale-150 cursor-pointer"></div>
+</div>
+<div class="w-[10%] flex flex-col items-center group/dot" style="margin-bottom: 40%;">
+<div class="size-3 bg-primary rounded-full border-2 border-white dark:border-[#1c2229] transition-transform group-hover/dot:scale-150 cursor-pointer"></div>
+</div>
+<div class="w-[10%] flex flex-col items-center group/dot" style="margin-bottom: 30%;">
+<div class="size-3 bg-primary rounded-full border-2 border-white dark:border-[#1c2229] transition-transform group-hover/dot:scale-150 cursor-pointer"></div>
+</div>
+<div class="w-[10%] flex flex-col items-center group/dot" style="margin-bottom: 70%;">
+<div class="size-3 bg-primary rounded-full border-2 border-white dark:border-[#1c2229] transition-transform group-hover/dot:scale-150 cursor-pointer"></div>
+</div>
+<div class="w-[10%] flex flex-col items-center group/dot" style="margin-bottom: 60%;">
+<div class="size-3 bg-primary rounded-full border-2 border-white dark:border-[#1c2229] transition-transform group-hover/dot:scale-150 cursor-pointer"></div>
+</div>
+<div class="w-[10%] flex flex-col items-center group/dot" style="margin-bottom: 90%;">
+<div class="size-3 bg-primary rounded-full border-2 border-white dark:border-[#1c2229] transition-transform group-hover/dot:scale-150 cursor-pointer"></div>
+</div>
+</div>
+<div class="absolute -bottom-6 left-0 right-0 flex justify-between px-2 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+<span>Sem 1</span>
+<span>Sem 2</span>
+<span>Sem 3</span>
+<span>Sem 4</span>
+<span>Sem 5</span>
+<span>Current</span>
+</div>
+</div>
+</div>
+<!-- Recent Marks Table -->
+<div>
+<div class="flex justify-between items-center mb-4">
+<h4 class="text-sm font-bold dark:text-white uppercase tracking-wider">Recent Assessment Scores</h4>
+<button class="text-primary text-xs font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-hidden border border-slate-100 dark:border-slate-800 rounded-lg">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-[#283039] text-slate-500 dark:text-slate-400 font-bold uppercase text-[10px] tracking-widest">
+<tr>
+<th class="px-4 py-3">Course Code</th>
+<th class="px-4 py-3">Assessment</th>
+<th class="px-4 py-3">Score</th>
+<th class="px-4 py-3 text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="dark:text-slate-300">
+<td class="px-4 py-3 font-medium">CS-301</td>
+<td class="px-4 py-3">Midterm Exam</td>
+<td class="px-4 py-3">88/100</td>
+<td class="px-4 py-3 text-right"><span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 rounded text-xs font-bold">Passed</span></td>
+</tr>
+<tr class="dark:text-slate-300">
+<td class="px-4 py-3 font-medium">CS-305</td>
+<td class="px-4 py-3">Project Alpha</td>
+<td class="px-4 py-3">94/100</td>
+<td class="px-4 py-3 text-right"><span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 rounded text-xs font-bold">Excellent</span></td>
+</tr>
+<tr class="dark:text-slate-300">
+<td class="px-4 py-3 font-medium">MATH-202</td>
+<td class="px-4 py-3">Quiz 3</td>
+<td class="px-4 py-3 text-red-500 font-bold">58/100</td>
+<td class="px-4 py-3 text-right"><span class="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 rounded text-xs font-bold">Review</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Activity Timeline -->
+<aside class="col-span-12 lg:col-span-3 space-y-6">
+<div class="bg-white dark:bg-[#1c2229] border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold dark:text-white">Recent Activity</h3>
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded">
+<span class="material-symbols-outlined text-slate-400">filter_list</span>
+</button>
+</div>
+<div class="relative space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100 dark:before:bg-slate-800">
+<!-- Activity Item 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 size-6 rounded-full bg-primary flex items-center justify-center text-white z-10">
+<span class="material-symbols-outlined text-sm">grade</span>
+</div>
+<div>
+<p class="text-sm dark:text-slate-200">Grade updated for <strong>CS-301</strong></p>
+<p class="text-[10px] text-slate-500 font-bold uppercase mt-1">Today, 2:14 PM</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 size-6 rounded-full bg-amber-500 flex items-center justify-center text-white z-10">
+<span class="material-symbols-outlined text-sm">warning</span>
+</div>
+<div>
+<p class="text-sm dark:text-slate-200">Flagged: <span class="text-amber-500 font-bold">Late for Class</span> (Advanced AI)</p>
+<p class="text-[10px] text-slate-500 font-bold uppercase mt-1">Yesterday, 9:05 AM</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 size-6 rounded-full bg-green-500 flex items-center justify-center text-white z-10">
+<span class="material-symbols-outlined text-sm">payments</span>
+</div>
+<div>
+<p class="text-sm dark:text-slate-200">Partial payment received</p>
+<p class="text-sm font-bold text-green-600 dark:text-green-400">+$450.00</p>
+<p class="text-[10px] text-slate-500 font-bold uppercase mt-1">Oct 12, 11:30 AM</p>
+</div>
+</div>
+<!-- Activity Item 4 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 size-6 rounded-full bg-slate-400 flex items-center justify-center text-white z-10">
+<span class="material-symbols-outlined text-sm">description</span>
+</div>
+<div>
+<p class="text-sm dark:text-slate-200">Submitted assignment <strong>Lab #4</strong></p>
+<p class="text-[10px] text-slate-500 font-bold uppercase mt-1">Oct 10, 11:59 PM</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-2 text-primary text-xs font-bold border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors">
+                        Load More Activity
+                    </button>
+</div>
+<!-- Secondary Info -->
+<div class="bg-primary/5 border border-primary/10 rounded-xl p-6">
+<h3 class="font-bold dark:text-white text-sm mb-4">Quick Shortcuts</h3>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex flex-col items-center gap-2 p-3 bg-white dark:bg-[#1c2229] rounded-lg border border-slate-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Reports</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 bg-white dark:bg-[#1c2229] rounded-lg border border-slate-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Schedule</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer Status Bar -->
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111418] px-10 py-2 flex justify-between items-center">
+<div class="flex gap-4">
+<span class="text-[10px] text-slate-500 uppercase font-bold flex items-center gap-1">
+<span class="size-2 bg-green-500 rounded-full"></span> System Online
+            </span>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Last Sync: 2 mins ago</span>
+</div>
+<p class="text-[10px] text-slate-500">© 2024 EduSync ERP v4.2.0</p>
+</footer>
+</div>
+</body></html>

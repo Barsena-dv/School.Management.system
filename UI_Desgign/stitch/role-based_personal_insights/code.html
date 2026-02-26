@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Role-Based Personal Insights - EduManage ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .chart-grid {
+            background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-slate-200 antialiased transition-colors duration-300">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col hidden lg:flex">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">school</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight dark:text-white">EduManage</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg cursor-pointer">
+<span class="material-symbols-outlined font-fill">analytics</span>
+<span class="text-sm font-medium">Academic Insights</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm font-medium">Students</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm font-medium">Schedules</span>
+</div>
+<div class="pt-4 pb-2">
+<p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Reports</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">Term Reports</span>
+</div>
+</nav>
+<div class="p-4 mt-auto border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="User profile avatar of a teacher" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD08v5NRBJ5p_2mYtmDj1JizTjkwnMdQu2E62SPNXetHd_VcQ76EA17L2ie88UwrAW51ziWfQKhM9yfW7UbZZH-yvaOPb63Ooyfu2YwQZiRwFjlCV1vh4pT0_h1A_fFgQM3YoudDQhMELug5ypaUgXloLGgyBNs96g0EUApgTHlac0GQDhsJzy14O4HSUiUssTNouxoyf109335LTdRTPiCSH5r5e4baB3-lVs-xMjNSm61LCOzuvKgP0Za4eNBYEo4jDkxPxPe3SA')"></div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-semibold truncate dark:text-white">Prof. Anderson</p>
+<p class="text-[10px] text-slate-500">Science Dept.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold dark:text-white">Role-Based Insights</h2>
+<div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-lg ml-4">
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm text-primary">Teacher View</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Student View</button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/20" placeholder="Search insights..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 space-y-8 max-w-7xl mx-auto w-full">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h3 class="text-2xl font-black text-slate-900 dark:text-white">Class Performance Analytics</h3>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Academic Year 2023-24 • Semester 2</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+                        Last 30 Days
+                        <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg">
+<span class="material-symbols-outlined">bar_chart</span>
+</div>
+<span class="text-[10px] font-bold text-green-600 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded-full">+5.2%</span>
+</div>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Class Average</p>
+<p class="text-2xl font-bold dark:text-white mt-1">84.2%</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-lg">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<span class="text-[10px] font-bold text-green-600 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded-full">+12%</span>
+</div>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Concept Mastery</p>
+<p class="text-2xl font-bold dark:text-white mt-1">78.5%</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-lg">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<span class="text-[10px] font-bold text-red-600 bg-red-50 dark:bg-red-900/30 px-2 py-1 rounded-full">-2m</span>
+</div>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Avg. Completion Time</p>
+<p class="text-2xl font-bold dark:text-white mt-1">42m</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg">
+<span class="material-symbols-outlined">group_add</span>
+</div>
+<span class="text-[10px] font-bold text-green-600 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded-full">Optimal</span>
+</div>
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Active Participation</p>
+<p class="text-2xl font-bold dark:text-white mt-1">92.0%</p>
+</div>
+</div>
+<!-- Visualization Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Multi-series Trend Lines -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-lg font-bold dark:text-white">Class Average Trend</h4>
+<p class="text-xs text-slate-500">Comparison across subjects over the semester</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Science</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-slate-300"></span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">History</span>
+</div>
+</div>
+</div>
+<div class="relative h-64 chart-grid rounded-xl border border-slate-50 dark:border-slate-800/50 p-4">
+<!-- Simplified SVG Trend Line -->
+<svg class="w-full h-full preserve-3d" viewbox="0 0 1000 300">
+<!-- Science Line -->
+<path d="M0,250 Q100,220 200,230 T400,180 T600,140 T800,90 T1000,60" fill="none" stroke="#137fec" stroke-linecap="round" stroke-width="4"></path>
+<!-- History Line -->
+<path d="M0,280 Q100,260 200,250 T400,260 T600,220 T800,240 T1000,200" fill="none" stroke="#94a3b8" stroke-dasharray="8 4" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<!-- Axis Labels -->
+<div class="flex justify-between mt-4 px-2">
+<span class="text-[10px] text-slate-400">Week 1</span>
+<span class="text-[10px] text-slate-400">Week 4</span>
+<span class="text-[10px] text-slate-400">Week 8</span>
+<span class="text-[10px] text-slate-400">Week 12</span>
+<span class="text-[10px] text-slate-400">Current</span>
+</div>
+</div>
+</div>
+<!-- Subject Difficulty Radar -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col items-center">
+<div class="w-full mb-6">
+<h4 class="text-lg font-bold dark:text-white">Subject Difficulty</h4>
+<p class="text-xs text-slate-500">Resource allocation vs. student struggle</p>
+</div>
+<div class="relative w-full aspect-square flex items-center justify-center">
+<div class="absolute inset-0 flex items-center justify-center opacity-20 dark:opacity-10">
+<!-- Radar Hexagon BG -->
+<svg class="w-full h-full text-slate-400" viewbox="0 0 100 100">
+<polygon fill="none" points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="currentColor" stroke-width="1"></polygon>
+<polygon fill="none" points="50,20 80,35 80,65 50,80 20,65 20,35" stroke="currentColor" stroke-width="1"></polygon>
+<polygon fill="none" points="50,35 65,42.5 65,57.5 50,65 35,57.5 35,42.5" stroke="currentColor" stroke-width="1"></polygon>
+</svg>
+</div>
+<!-- Radar Fill Shape -->
+<svg class="w-full h-full relative z-10 drop-shadow-lg" viewbox="0 0 100 100">
+<polygon fill="#137fec" fill-opacity="0.3" points="50,15 85,30 75,70 50,90 20,60 15,35" stroke="#137fec" stroke-width="2"></polygon>
+<!-- Point markers -->
+<circle cx="50" cy="15" fill="#137fec" r="2"></circle>
+<circle cx="85" cy="30" fill="#137fec" r="2"></circle>
+<circle cx="75" cy="70" fill="#137fec" r="2"></circle>
+<circle cx="50" cy="90" fill="#137fec" r="2"></circle>
+<circle cx="20" cy="60" fill="#137fec" r="2"></circle>
+<circle cx="15" cy="35" fill="#137fec" r="2"></circle>
+</svg>
+<!-- Labels -->
+<div class="absolute top-0 text-[10px] font-bold dark:text-slate-300">Physics</div>
+<div class="absolute right-0 top-1/4 translate-x-4 text-[10px] font-bold dark:text-slate-300">Math</div>
+<div class="absolute right-0 bottom-1/4 translate-x-4 text-[10px] font-bold dark:text-slate-300">Chem</div>
+<div class="absolute bottom-0 text-[10px] font-bold dark:text-slate-300">English</div>
+<div class="absolute left-0 bottom-1/4 -translate-x-4 text-[10px] font-bold dark:text-slate-300">History</div>
+<div class="absolute left-0 top-1/4 -translate-x-4 text-[10px] font-bold dark:text-slate-300">Bio</div>
+</div>
+<div class="mt-8 text-center bg-blue-50 dark:bg-blue-900/10 p-4 rounded-xl w-full">
+<p class="text-xs text-primary font-bold">Insight</p>
+<p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Physics requires 15% more remedial attention this month.</p>
+</div>
+</div>
+</div>
+<!-- Student View (Alternative View Mock) -->
+<div class="pt-8 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-xl font-bold dark:text-white">Student Personal Dashboard</h3>
+<p class="text-sm text-slate-500">Alex Johnson • Grade 11-B</p>
+</div>
+<div class="flex items-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-lg">
+<span class="text-xs font-semibold text-slate-500">Global Rank:</span>
+<span class="text-sm font-bold text-primary">#14 / 280</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- My Progress (Trend) -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h4 class="text-lg font-bold dark:text-white">My Progress</h4>
+<div class="flex items-center gap-2 text-green-600 font-bold text-sm">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+                                +5% from last month
+                            </div>
+</div>
+<div class="h-48 flex items-end gap-2 px-4">
+<!-- Bar chart visual -->
+<div class="flex-1 bg-primary/10 rounded-t-lg h-[40%] group relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">62%</div>
+</div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[55%] group relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">70%</div>
+</div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[65%] group relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">78%</div>
+</div>
+<div class="flex-1 bg-primary/60 rounded-t-lg h-[80%] group relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">85%</div>
+</div>
+<div class="flex-1 bg-primary rounded-t-lg h-[90%] group relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">92%</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-4">
+<span class="text-[10px] font-medium text-slate-400">Jan</span>
+<span class="text-[10px] font-medium text-slate-400">Feb</span>
+<span class="text-[10px] font-medium text-slate-400">Mar</span>
+<span class="text-[10px] font-medium text-slate-400">Apr</span>
+<span class="text-[10px] font-medium text-slate-700 dark:text-slate-300 font-bold">May</span>
+</div>
+</div>
+<!-- Subject Strength/Weakness -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h4 class="text-lg font-bold mb-6 dark:text-white">Subject Mastery</h4>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-medium mb-1.5">
+<span class="dark:text-slate-300">Mathematics</span>
+<span class="text-primary font-bold">94%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-medium mb-1.5">
+<span class="dark:text-slate-300">Social Studies</span>
+<span class="text-primary font-bold">88%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-medium mb-1.5">
+<span class="dark:text-slate-300">Chemistry</span>
+<span class="text-orange-500 font-bold">65%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-medium mb-1.5">
+<span class="dark:text-slate-300">French Literature</span>
+<span class="text-red-500 font-bold">42%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-red-500 rounded-full" style="width: 42%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State for New Students -->
+<div class="py-16 flex flex-col items-center justify-center text-center max-w-md mx-auto">
+<div class="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">query_stats</span>
+</div>
+<h4 class="text-xl font-bold dark:text-white">Awaiting Assessment Data</h4>
+<p class="text-slate-500 mt-2 text-sm">Welcome! Complete your first term quizzes or bridge assessments to unlock your personal progress insights.</p>
+<button class="mt-6 px-6 py-2.5 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-lg text-sm font-bold hover:opacity-90 transition-opacity">
+                    Take Initial Assessment
+                </button>
+</div>
+</div>
+<!-- Footer -->
+<footer class="p-8 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-400">© 2024 EduManage Academic Systems. All Rights Reserved.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-400 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-400 hover:text-primary transition-colors" href="#">Platform Status</a>
+<a class="text-xs text-slate-400 hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

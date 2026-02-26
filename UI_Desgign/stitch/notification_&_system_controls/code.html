@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notification &amp; System Controls - EduSaaS ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#197fe6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                        "pearl": "#fdfdfe",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .pearl-bg {
+            background-color: #f6f7f8;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] bg-white dark:bg-background-dark px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#111418] dark:text-white">
+<div class="size-6 text-primary">
+<span class="material-symbols-outlined text-3xl">school</span>
+</div>
+<h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">EduSaaS ERP</h2>
+</div>
+<nav class="flex items-center gap-9">
+<a class="text-[#637588] dark:text-gray-400 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-[#637588] dark:text-gray-400 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Students</a>
+<a class="text-[#637588] dark:text-gray-400 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Academics</a>
+<a class="text-[#637588] dark:text-gray-400 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Finance</a>
+<a class="text-[#111418] dark:text-white text-sm font-bold leading-normal border-b-2 border-primary" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#637588] flex border-none bg-[#f0f2f4] dark:bg-gray-800 items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-[#f0f2f4] dark:bg-gray-800 text-[#111418] dark:text-white focus:ring-0 h-full placeholder:text-[#637588] px-4 rounded-r-lg text-sm font-normal" placeholder="Search settings..." value=""/>
+</div>
+</label>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#637588] cursor-pointer hover:text-primary">notifications</span>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-white shadow-sm" data-alt="User profile avatar of the administrator" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBCze7-O2J3D1Tkt7MaykV1CVmInYEqK1I56k7GBHdFp5ohhR37VPHMZ6SVkDeTy_xBodSk_H4a9sEnIwit_mx6zxmkdM3po4y0ey6pB14HxLLcWihR3d4apoNhKbwp0zCYnX7085cQbYUmyZ8hXPGNF-rzvBBW7BechffxjjKur7MbgbZbPSOE-QSt_lqEdmEReQyQE7YaxB0AGKnQ9PHT93yxvFqpbwU3mNoWXTbIWtKt74Bz30TRSbNxWwRqN22YTnF0OcYn2yE");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center py-10 px-6">
+<div class="w-full max-w-[1024px]">
+<div class="flex flex-wrap justify-between items-end gap-3 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Institutional Controls</h1>
+<p class="text-[#637588] dark:text-gray-400 text-base font-normal leading-normal">Configure automated communication and system-level administrative tasks.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-[#dce0e5] dark:border-gray-700 rounded-lg text-sm font-semibold text-[#111418] dark:text-white shadow-sm hover:bg-gray-50 transition-all">
+<span class="material-symbols-outlined text-lg">history</span>
+                                View Audit Log
+                             </button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="mb-8">
+<div class="flex border-b border-[#dce0e5] dark:border-gray-700 gap-8">
+<a class="flex items-center gap-2 border-b-[3px] border-primary text-primary pb-4 pt-2 transition-all" href="#">
+<span class="material-symbols-outlined text-lg">notifications_active</span>
+<span class="text-sm font-bold tracking-[0.015em]">Notifications</span>
+</a>
+<a class="flex items-center gap-2 border-b-[3px] border-transparent text-[#637588] hover:text-[#111418] dark:text-gray-400 pb-4 pt-2 transition-all" href="#system-section">
+<span class="material-symbols-outlined text-lg">settings_applications</span>
+<span class="text-sm font-bold tracking-[0.015em]">System</span>
+</a>
+</div>
+</div>
+<!-- Notifications Tab Content -->
+<section class="space-y-6">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-[#111418] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Automated Alerts</h2>
+<span class="text-xs font-semibold px-2 py-1 bg-primary/10 text-primary rounded-full uppercase tracking-wider">3 Triggers Active</span>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Attendance Alert -->
+<div class="group flex flex-1 flex-col items-start justify-between gap-4 rounded-xl border border-[#dce0e5] dark:border-gray-700 bg-white dark:bg-gray-800/50 p-6 hover:shadow-md transition-all sm:flex-row sm:items-center">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg text-primary">
+<span class="material-symbols-outlined">how_to_reg</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#111418] dark:text-white text-base font-bold leading-tight">Daily Attendance Notifications</p>
+<p class="text-[#637588] dark:text-gray-400 text-sm font-normal leading-normal">Automatically notify parents via SMS/App when a student is marked absent.</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#f0f2f4] dark:bg-gray-700 p-0.5 transition-colors has-[:checked]:justify-end has-[:checked]:bg-primary">
+<div class="h-full w-[27px] rounded-full bg-white shadow-lg"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<!-- Performance Alert -->
+<div class="group flex flex-1 flex-col items-start justify-between gap-4 rounded-xl border border-[#dce0e5] dark:border-gray-700 bg-white dark:bg-gray-800/50 p-6 hover:shadow-md transition-all sm:flex-row sm:items-center">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-orange-50 dark:bg-orange-900/30 rounded-lg text-orange-600">
+<span class="material-symbols-outlined">trending_down</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#111418] dark:text-white text-base font-bold leading-tight">Grade Threshold Warnings</p>
+<p class="text-[#637588] dark:text-gray-400 text-sm font-normal leading-normal">Send alerts to counselors if a student's GPA drops below the 2.0 institutional threshold.</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#f0f2f4] dark:bg-gray-700 p-0.5 transition-colors has-[:checked]:justify-end has-[:checked]:bg-primary">
+<div class="h-full w-[27px] rounded-full bg-white shadow-lg"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<!-- Payment Alert -->
+<div class="group flex flex-1 flex-col items-start justify-between gap-4 rounded-xl border border-[#dce0e5] dark:border-gray-700 bg-white dark:bg-gray-800/50 p-6 hover:shadow-md transition-all sm:flex-row sm:items-center">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-green-50 dark:bg-green-900/30 rounded-lg text-green-600">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#111418] dark:text-white text-base font-bold leading-tight">Invoice Due Reminders</p>
+<p class="text-[#637588] dark:text-gray-400 text-sm font-normal leading-normal">Automated payment reminders 5 days before tuition deadlines.</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#f0f2f4] dark:bg-gray-700 p-0.5 transition-colors has-[:checked]:justify-end has-[:checked]:bg-primary">
+<div class="h-full w-[27px] rounded-full bg-white shadow-lg"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</section>
+<!-- System Section -->
+<section class="mt-12 space-y-6" id="system-section">
+<div class="flex items-center gap-2 px-2">
+<h2 class="text-[#111418] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">System Maintenance</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Archive Year Card -->
+<div class="bg-white dark:bg-gray-800 border border-[#dce0e5] dark:border-gray-700 rounded-xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">inventory_2</span>
+<h3 class="text-lg font-bold text-[#111418] dark:text-white">Archive Academic Year</h3>
+</div>
+<p class="text-sm text-[#637588] dark:text-gray-400 mb-6">Compress and move the current year's records to the archives. This allows starting a fresh session while keeping historical data accessible.</p>
+</div>
+<button class="w-full py-2.5 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-lg transition-colors">Start Archival Process</button>
+</div>
+<!-- Export Data Card -->
+<div class="bg-white dark:bg-gray-800 border border-[#dce0e5] dark:border-gray-700 rounded-xl p-6 flex flex-col">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">download_for_offline</span>
+<h3 class="text-lg font-bold text-[#111418] dark:text-white">Request Data Export</h3>
+</div>
+<p class="text-sm text-[#637588] dark:text-gray-400 mb-4">Generate a full institutional backup in JSON and CSV formats.</p>
+<!-- Progress Bar State -->
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-semibold text-primary">Exporting: 64%</span>
+<span class="text-xs text-[#637588] dark:text-gray-400">Estimated 2 mins left</span>
+</div>
+<div class="w-full bg-[#f0f2f4] dark:bg-gray-700 h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full transition-all duration-1000" style="width: 64%"></div>
+</div>
+<p class="mt-3 text-[11px] italic text-[#637588] dark:text-gray-500">Preparing CSV/JSON package for 'Institutional_Records_2023.zip'</p>
+</div>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="mt-8 rounded-xl border border-red-100 dark:border-red-900/30 bg-red-50/50 dark:bg-red-900/10 p-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-red-600">warning</span>
+<h3 class="text-lg font-bold text-red-700 dark:text-red-400">Danger Zone</h3>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<p class="text-sm text-red-600/80 dark:text-red-300/60 max-w-xl">
+                                    The following action is irreversible. It will wipe all mock student profiles, historical grades, and dummy transaction data from the platform.
+                                </p>
+<button class="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-sm transition-colors whitespace-nowrap">
+                                    Reset Demo Data
+                                </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</div>
+<!-- Confirmation Modal (Mockup State) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+<div class="bg-white dark:bg-gray-900 w-full max-w-md rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+<div class="p-6 text-center">
+<div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-4xl">error_outline</span>
+</div>
+<h3 class="text-xl font-bold text-[#111418] dark:text-white mb-2">Are you absolutely sure?</h3>
+<p class="text-[#637588] dark:text-gray-400 text-sm mb-6">
+                    This will delete all current student records and transaction history from the demonstration environment. This action <span class="text-red-600 font-bold uppercase underline">cannot be undone</span>.
+                </p>
+<div class="space-y-4">
+<div class="text-left">
+<label class="text-xs font-bold text-[#111418] dark:text-white uppercase tracking-wider mb-2 block">Type "RESET" to confirm</label>
+<input class="w-full px-4 py-2 bg-[#f0f2f4] dark:bg-gray-800 border-none rounded-lg focus:ring-2 focus:ring-red-600 transition-all text-center font-bold tracking-widest text-red-600" placeholder="RESET" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-3 px-4 bg-gray-100 dark:bg-gray-800 text-[#111418] dark:text-white font-bold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                            Cancel
+                        </button>
+<button class="py-3 px-4 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 shadow-lg shadow-red-200 dark:shadow-none transition-colors">
+                            Yes, Reset Now
+                        </button>
+</div>
+</div>
+</div>
+<div class="bg-gray-50 dark:bg-gray-800/50 px-6 py-3 border-t border-gray-100 dark:border-gray-800">
+<p class="text-[10px] text-center text-[#637588] dark:text-gray-500 uppercase tracking-tighter">
+                    Authorization ID: SYS-99-ARC-442
+                </p>
+</div>
+</div>
+</div>
+</body></html>

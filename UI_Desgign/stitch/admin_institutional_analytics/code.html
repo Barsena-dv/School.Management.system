@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Institutional Analytics | Institutional Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#db143c",
+              "background-light": "#f8f6f6",
+              "background-dark": "#121212", // Obsidian Dark
+              "obsidian-card": "#1e1e1e",
+              "obsidian-border": "#2d2d2d",
+            },
+            fontFamily: {
+              "display": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #39282c;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Main Layout Container -->
+<div class="flex flex-col h-screen overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between px-8 py-4 border-b border-obsidian-border bg-background-light dark:bg-background-dark z-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-white text-2xl">insights</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Institutional Intelligence</h1>
+</div>
+<!-- Global Filters -->
+<div class="hidden md:flex items-center gap-4 ml-4">
+<div class="flex items-center gap-2 bg-obsidian-card border border-obsidian-border px-3 py-1.5 rounded-lg cursor-pointer hover:border-primary transition-colors">
+<span class="text-xs text-slate-400 font-medium">AY:</span>
+<span class="text-sm font-semibold">2023-2024</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+<div class="flex items-center gap-2 bg-obsidian-card border border-obsidian-border px-3 py-1.5 rounded-lg cursor-pointer hover:border-primary transition-colors">
+<span class="text-xs text-slate-400 font-medium">Semester:</span>
+<span class="text-sm font-semibold">Fall Term</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined text-slate-400 hover:text-primary cursor-pointer transition-colors">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full border-2 border-background-dark"></span>
+</div>
+<button class="flex items-center gap-2 bg-transparent border border-primary text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+<span>Download Report</span>
+</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary/30 p-0.5">
+<img alt="Admin Profile" class="w-full h-full rounded-full object-cover" data-alt="Profile picture of a professional male administrator" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXL7sdui-zJrKDDxBS-824s6oPB0PM2q0srBr6gWonuuSADoGzj3yEJx_1F0qGMVnyM3OsA08pvFEgILEYX2yIbDkTicw-nBd-CijVk7mfrT5wTYXNCIdFIsAdXiXCjE4ODQ5u05bB07L7EHOvqqwOakhaq0_S7zBms_NFoTOQMn0gPvPrzPMOroW9xfZjk4m-HdSHivRF85DI22YXpDC7GzaINtJmIdnEaX_YOq6tG1cu6h2Y3wiuvls0fhiYB8JRmqdIUK8-oaA"/>
+</div>
+</div>
+</header>
+<!-- Main Dashboard Content -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Scrollable Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-8">
+<!-- Metric Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- Metric Card 1 -->
+<div class="bg-obsidian-card border border-obsidian-border p-6 rounded-xl hover:border-primary/50 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-slate-400 text-sm font-medium">Institutional GPA</span>
+<div class="bg-emerald-500/10 text-emerald-500 p-1 rounded">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+</div>
+</div>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold">3.42</h3>
+<span class="text-emerald-500 text-sm font-bold mb-1">+0.12%</span>
+</div>
+<p class="text-xs text-slate-500 mt-2">vs. Previous Semester (3.30)</p>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-obsidian-card border border-obsidian-border p-6 rounded-xl hover:border-primary/50 transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="text-slate-400 text-sm font-medium">Avg Attendance</span>
+<div class="bg-slate-500/10 text-slate-500 p-1 rounded">
+<span class="material-symbols-outlined text-sm">horizontal_rule</span>
+</div>
+</div>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold">94.1%</h3>
+<span class="text-slate-500 text-sm font-bold mb-1">Stable</span>
+</div>
+<p class="text-xs text-slate-500 mt-2">Daily presence across departments</p>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-obsidian-card border border-obsidian-border p-6 rounded-xl hover:border-primary/50 transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="text-slate-400 text-sm font-medium">Enrollment Trend</span>
+<div class="bg-emerald-500/10 text-emerald-500 p-1 rounded">
+<span class="material-symbols-outlined text-sm">person_add</span>
+</div>
+</div>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold">+240</h3>
+<span class="text-emerald-500 text-sm font-bold mb-1">+4.2%</span>
+</div>
+<p class="text-xs text-slate-500 mt-2">New student intake this year</p>
+</div>
+<!-- Metric Card 4 -->
+<div class="bg-obsidian-card border border-obsidian-border p-6 rounded-xl hover:border-primary/50 transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="text-slate-400 text-sm font-medium">Active Faculty</span>
+<div class="bg-primary/10 text-primary p-1 rounded">
+<span class="material-symbols-outlined text-sm">groups</span>
+</div>
+</div>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-bold">1,250</h3>
+<span class="text-primary text-sm font-bold mb-1">+1.1%</span>
+</div>
+<p class="text-xs text-slate-500 mt-2">Onboarded professional staff</p>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Bar Chart: Class Performance -->
+<div class="lg:col-span-2 bg-obsidian-card border border-obsidian-border p-6 rounded-xl">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-lg font-bold">Class Performance Comparison</h3>
+<p class="text-sm text-slate-400">Average GPA across Grade Levels</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-primary text-xs font-bold rounded">Bar</button>
+<button class="px-3 py-1 bg-obsidian-border text-xs font-bold rounded">Line</button>
+</div>
+</div>
+<!-- Simplified Bar Chart Visual -->
+<div class="flex items-end justify-between h-64 px-4 gap-4">
+<div class="flex flex-col items-center gap-3 flex-1 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative h-48 transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-3/4"></div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black border border-obsidian-border text-[10px] px-2 py-1 rounded">3.2</div>
+</div>
+<span class="text-xs text-slate-400 font-bold">Grade 9</span>
+</div>
+<div class="flex flex-col items-center gap-3 flex-1 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative h-48 transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-5/6"></div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black border border-obsidian-border text-[10px] px-2 py-1 rounded">3.6</div>
+</div>
+<span class="text-xs text-slate-400 font-bold">Grade 10</span>
+</div>
+<div class="flex flex-col items-center gap-3 flex-1 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative h-48 transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-[90%]"></div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black border border-obsidian-border text-[10px] px-2 py-1 rounded">3.8</div>
+</div>
+<span class="text-xs text-slate-400 font-bold">Grade 11</span>
+</div>
+<div class="flex flex-col items-center gap-3 flex-1 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative h-48 transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-2/3"></div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black border border-obsidian-border text-[10px] px-2 py-1 rounded">2.9</div>
+</div>
+<span class="text-xs text-slate-400 font-bold">Grade 12</span>
+</div>
+</div>
+</div>
+<!-- Pie Chart: Attendance Distribution -->
+<div class="bg-obsidian-card border border-obsidian-border p-6 rounded-xl">
+<h3 class="text-lg font-bold mb-1">Attendance Distribution</h3>
+<p class="text-sm text-slate-400 mb-8">Daily Term Average</p>
+<div class="relative flex justify-center items-center py-4">
+<!-- SVG Donut Chart -->
+<svg class="w-48 h-48 transform -rotate-90">
+<circle cx="96" cy="96" fill="transparent" r="70" stroke="#2d2d2d" stroke-width="18"></circle>
+<circle cx="96" cy="96" fill="transparent" r="70" stroke="#db143c" stroke-dasharray="440" stroke-dashoffset="44" stroke-linecap="round" stroke-width="20"></circle>
+<circle cx="96" cy="96" fill="transparent" r="70" stroke="#6b7280" stroke-dasharray="440" stroke-dashoffset="380" stroke-linecap="round" stroke-width="20"></circle>
+</svg>
+<div class="absolute text-center">
+<span class="block text-2xl font-bold">94.1%</span>
+<span class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Present</span>
+</div>
+</div>
+<div class="space-y-3 mt-6">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-xs font-medium">Present</span>
+</div>
+<span class="text-xs font-bold text-slate-400">94.1%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-slate-500"></div>
+<span class="text-xs font-medium">Excused</span>
+</div>
+<span class="text-xs font-bold text-slate-400">4.2%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-slate-700"></div>
+<span class="text-xs font-medium">Unexcused</span>
+</div>
+<span class="text-xs font-bold text-slate-400">1.7%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Lists / Table (Optional) -->
+<div class="mt-8 bg-obsidian-card border border-obsidian-border rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold">Department Performance Ranking</h3>
+<a class="text-primary text-xs font-bold hover:underline" href="#">View All Departments</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="text-slate-500 font-medium border-b border-obsidian-border">
+<tr>
+<th class="pb-3 px-2">Department</th>
+<th class="pb-3 px-2">Dean</th>
+<th class="pb-3 px-2">Students</th>
+<th class="pb-3 px-2">Avg. GPA</th>
+<th class="pb-3 px-2 text-right">Trend</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-obsidian-border">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-4 px-2 font-semibold">Science &amp; Technology</td>
+<td class="py-4 px-2 text-slate-400">Dr. Elena Vance</td>
+<td class="py-4 px-2">450</td>
+<td class="py-4 px-2">3.72</td>
+<td class="py-4 px-2 text-right text-emerald-500">+4%</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-4 px-2 font-semibold">Business Administration</td>
+<td class="py-4 px-2 text-slate-400">Prof. Marcus Cole</td>
+<td class="py-4 px-2">320</td>
+<td class="py-4 px-2">3.45</td>
+<td class="py-4 px-2 text-right text-emerald-500">+2%</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-4 px-2 font-semibold">Fine Arts &amp; Design</td>
+<td class="py-4 px-2 text-slate-400">Ms. Sarah Jenkins</td>
+<td class="py-4 px-2">180</td>
+<td class="py-4 px-2">3.21</td>
+<td class="py-4 px-2 text-right text-primary">-1%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: At-Risk Watchlists -->
+<aside class="w-80 bg-obsidian-card border-l border-obsidian-border flex flex-col hidden xl:flex">
+<div class="p-6 border-b border-obsidian-border">
+<h2 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">warning</span>
+                        At-Risk Watchlists
+                    </h2>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<!-- Academic Watchlist -->
+<section class="p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500">Academic Critical</h3>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold">12 Total</span>
+</div>
+<div class="space-y-3">
+<!-- Watchlist Item -->
+<div class="p-3 rounded-lg border border-obsidian-border bg-background-dark/50 hover:border-primary/40 transition-all cursor-pointer">
+<div class="flex items-center gap-3 mb-2">
+<img alt="Student Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="Close-up portrait of a young male student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQbLqyiPf3mIsXDVMgx83lTQ__2BftGZdfE-nkOeoGBRGSGLLhPSkRKTTix9yDKeH3iBEIC4yJuZ2rtb-G6dByvagbJ0CJE7hJzRoDvTTrPiZT3AWXx31tvsnIVf4f8HRVj5kQEPNRqx8bu7GzEjDKvoMB6LSHZ-YEZkgcuXA1lxDeuv_vHJdqHX2VD052zFcoCSdkyuOv9O31p1jceyOx0qhVR9LvYdBmUMviLzjzOo9Ljwa-iiQ5SSCzc0RYvtak2mIH7aAOAcA"/>
+<div class="flex-1">
+<h4 class="text-xs font-bold">Julian Foster</h4>
+<p class="text-[10px] text-slate-500">ID: #ST-8821</p>
+</div>
+<span class="bg-primary/20 text-primary px-2 py-1 rounded text-[10px] font-bold">1.8 GPA</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[45%]"></div>
+</div>
+</div>
+<!-- Watchlist Item -->
+<div class="p-3 rounded-lg border border-obsidian-border bg-background-dark/50 hover:border-primary/40 transition-all cursor-pointer">
+<div class="flex items-center gap-3 mb-2">
+<img alt="Student Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="Close-up portrait of a young female student with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBydBmy9C2I5ayL3vybFE60-G9Q_rRQlIviACCgNzP2P7izD1NUldyOhA12Ji5LmFPIFe7rDc37HW8twRS0hsL8ScE0EFm2J5xg-wIDQ0kskWIRQYhem5qYRexZffxdok2cNOLur2BTJdp9TIny0AFr74jYQu2XEFpTODyfwbqq1NKMh4icKkotPSMCtXxhRGBrBdBxpHhD3LqGlsF--z5jMh-WkrwdqwG2N2oxZa386Tmw75-wNaIYfQOZV9ZYnAsjMp-vt0sVMtg"/>
+<div class="flex-1">
+<h4 class="text-xs font-bold">Amara Okafor</h4>
+<p class="text-[10px] text-slate-500">ID: #ST-9012</p>
+</div>
+<span class="bg-primary/20 text-primary px-2 py-1 rounded text-[10px] font-bold">2.1 GPA</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[52%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Attendance Watchlist -->
+<section class="p-6 pt-2">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500">Attendance Issues</h3>
+<span class="bg-orange-500/20 text-orange-500 text-[10px] px-2 py-0.5 rounded-full font-bold">8 Total</span>
+</div>
+<div class="space-y-3">
+<!-- Watchlist Item -->
+<div class="p-3 rounded-lg border border-obsidian-border bg-background-dark/50 hover:border-orange-500/40 transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center">
+<span class="text-xs font-bold text-orange-500">LC</span>
+</div>
+<div class="flex-1">
+<h4 class="text-xs font-bold">Liam Chen</h4>
+<p class="text-[10px] text-slate-500">Comp. Science</p>
+</div>
+<div class="text-right">
+<span class="block text-xs font-bold text-orange-500">65%</span>
+<span class="text-[8px] text-slate-600 uppercase">Presence</span>
+</div>
+</div>
+</div>
+<!-- Watchlist Item -->
+<div class="p-3 rounded-lg border border-obsidian-border bg-background-dark/50 hover:border-orange-500/40 transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="text-xs font-bold text-primary">SG</span>
+</div>
+<div class="flex-1">
+<h4 class="text-xs font-bold">Sofia Garcia</h4>
+<p class="text-[10px] text-slate-500">Liberal Arts</p>
+</div>
+<div class="text-right">
+<span class="block text-xs font-bold text-primary">48%</span>
+<span class="text-[8px] text-slate-600 uppercase">Presence</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar Footer Action -->
+<div class="p-6 mt-auto border-t border-obsidian-border bg-background-dark">
+<button class="w-full bg-obsidian-border text-white text-xs font-bold py-3 rounded-lg hover:bg-obsidian-border/70 transition-colors">
+                        GENERATE INTERVENTION PLAN
+                    </button>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

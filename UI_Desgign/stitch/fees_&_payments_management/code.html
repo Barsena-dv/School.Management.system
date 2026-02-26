@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fees &amp; Payments Management | Academia ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3b4754; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 lg:px-10 py-3 bg-white dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Academia ERP</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-400 flex border-none bg-slate-100 dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-sm focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-slate-800 placeholder:text-slate-500 px-4 rounded-l-none pl-2 h-full" placeholder="Search transactions..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden xl:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Students</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Academic</a>
+<a class="text-sm font-medium text-primary" href="#">Finance</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Staff</a>
+</nav>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-all hover:bg-primary/90 shadow-lg shadow-primary/20">
+<span class="truncate">Record Payment</span>
+</button>
+<div class="relative group">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20 cursor-pointer" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAK8dIloD-yNDN8M4hFpGfaw2uLuVt4iPPbpdg42Hw7f8fH2VeIpRQDnBPsaPkT_iVomDXTtPA2fs3XraFFQE00NwbvKYC5XTyJu8uTZ15wAJ9-Z2j2NgpykVG9K6FfurlwrR7bWE7QNrMUrx5C06bJ2qCe4willCjcAunzuQOkWMngGo2RbZ1zwkwNZ41J2wYHQYhVa2fYn1S5L8yoGKQnMONMffscaHAhJ8lw11kvzI9-x-hDhQ04NW5JMhFyPGSI_g-q9zkck6Y");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<!-- Page Title & Global Actions -->
+<div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl font-black leading-tight tracking-tight">Fees &amp; Payments Management</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base">Comprehensive financial oversight for the 2023-2024 Academic Year.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 rounded-lg h-10 px-4 bg-slate-100 dark:bg-slate-800 text-sm font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+                            Last 30 Days
+                        </button>
+<button class="flex items-center gap-2 rounded-lg h-10 px-4 bg-slate-100 dark:bg-slate-800 text-sm font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Generate Report
+                        </button>
+</div>
+</div>
+<!-- KPI Metric Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-5xl">payments</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider">Total Revenue</p>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold leading-tight">$1,240,000</p>
+<span class="text-emerald-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>12.5%
+                            </span>
+</div>
+<p class="text-xs text-slate-400">Projected for current semester</p>
+</div>
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-5xl">check_circle</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider">Total Paid</p>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold leading-tight">$980,500</p>
+<span class="text-rose-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>2.4%
+                            </span>
+</div>
+<p class="text-xs text-slate-400">Successfully processed payments</p>
+</div>
+<!-- Warning Highlight Card -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white dark:bg-slate-800/50 border-l-4 border-l-rose-500 border-y border-r border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-5xl">warning</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider">Pending Dues</p>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold leading-tight">$259,500</p>
+<span class="text-amber-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>18.2%
+                            </span>
+</div>
+<p class="text-xs text-rose-500 font-medium">Critical: 42 Overdue accounts</p>
+</div>
+</div>
+<!-- Main Layout Grid (Transactions + Defaulters) -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Transaction History (Left Column) -->
+<div class="xl:col-span-2 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-xl font-bold leading-tight tracking-tight">Transaction History</h2>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500">
+<span class="material-symbols-outlined">ios_share</span>
+</button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="border-b border-slate-200 dark:border-slate-800">
+<div class="flex gap-8">
+<a class="border-b-2 border-primary text-primary pb-3 pt-2 text-sm font-bold flex items-center gap-2" href="#">
+                                    All <span class="bg-primary/10 text-primary text-[10px] px-1.5 py-0.5 rounded-full">1.2k</span>
+</a>
+<a class="border-b-2 border-transparent text-slate-500 pb-3 pt-2 text-sm font-bold hover:text-slate-300 transition-colors" href="#">Success</a>
+<a class="border-b-2 border-transparent text-slate-500 pb-3 pt-2 text-sm font-bold hover:text-slate-300 transition-colors" href="#">Pending</a>
+<a class="border-b-2 border-transparent text-slate-500 pb-3 pt-2 text-sm font-bold hover:text-slate-300 transition-colors" href="#">Failed</a>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-white dark:bg-slate-800/30 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-xs font-bold uppercase tracking-wider">
+<th class="px-6 py-4">Transaction ID</th>
+<th class="px-6 py-4">Student</th>
+<th class="px-6 py-4">Type</th>
+<th class="px-6 py-4">Amount</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium">#TXN-88210</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="" class="w-full h-full" data-alt="Student avatar Jordan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkyXrVK5zH60H44skgyeWJ9p0flKwVIYCPh8PEIRD8OSqGCbV9wb_fyY9Cr31Yctn-HhYtJ-biRHdZc8KnRJMkmVA_7eVbGoyoRIxye84AiGo8X_tljl4Ye-ivGPRJbkAllvH1RxSN0uHIBnwjNd0ucKy7rC3CNOFoH44RLQYHYdaSPSlaCKGE97ZmLYXpiy_60BgYLKGNos7a2nL9nes581UYlk4iFl1XQPjPRWbBZj9ea0OdC_jLf76_jTkx8PQwpOmB6abDtVY"/>
+</div>
+<div>
+<p class="text-sm font-bold">Jordan Henderson</p>
+<p class="text-[10px] text-slate-500">ID: 2024-0012</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Tuition Fee</td>
+<td class="px-6 py-4 text-sm font-bold">$2,500.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Success
+                                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1" title="View Receipt">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium">#TXN-88209</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="" class="w-full h-full" data-alt="Student avatar Misty" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMtjZiHODqYzE7WNWH-soXHpCGFsP1qvSNAittiRQiVshrRsWEfIMuLRHsmVXRQfAyGJ9R7lFgK0Bbu-0MVtB7AAb88Ta8QQyyPtYSmkMUquVb63vMafp3Z0fvkBN5UoOeOvryktOMJfsaU_6rEVB6abbTijNUgJEIAJgYbFdZ1OnF5a84_xMgvD_C-SANmpxOvlc0VMssLZyAnUcX1IRFmaDxThi_Toxb4PZzkPw80xHmdyfSBqCLKJ11x8AnZRGP2htwbz5O5Fo"/>
+</div>
+<div>
+<p class="text-sm font-bold">Misty Williams</p>
+<p class="text-[10px] text-slate-500">ID: 2024-0098</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Library Fine</td>
+<td class="px-6 py-4 text-sm font-bold">$15.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Pending
+                                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium">#TXN-88208</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="" class="w-full h-full" data-alt="Student avatar Alex" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPgbctMJ_dxlvzwYqWzAxy25_QTy6Bd5oxIzdfMQvikrQnUc2Olyl0ck4GQ9iQtt95UmLfCxQ0tFgskm7WegMzOeY3phXZJX4Lm3dTxdLerIMRGaxfZKi-OpnULIUBJq-gm2tvHj0HjrPBbyuM6Yhw2KwZOVkWmzie2NOJZeeuHqltVZo-cI-nDcToFqzvyD8WGORHQlMSYsiYmYFn5c61I3qRYlHufKdehzGwt6LE_pKMDUaW9YXukTQ-Jaj39pjlq8LzaK-Gh9w"/>
+</div>
+<div>
+<p class="text-sm font-bold">Alex Thorne</p>
+<p class="text-[10px] text-slate-500">ID: 2024-0442</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Sports Club</td>
+<td class="px-6 py-4 text-sm font-bold">$120.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-700 dark:bg-rose-500/10 dark:text-rose-400">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> Failed
+                                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium">#TXN-88207</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="" class="w-full h-full" data-alt="Student avatar Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8CLi-hOj0kmkzRHwrOXE2JPDV6LOF8B_Bl9IczHRf_wLVNBUaNZITmzyI__ahMVFvPxHpvHs-YmfhzdBH4LW03P7l-dVazTy-2uTnbvAMnvH-zb4goHKh5Hys557v53gF9nSkys7zhr8F7eMQp7qM7n6qTwFTZhRHtgqUKk8eDJtMmTgop7CFc_6hf6a5-jpvk0DLn76oeDXOjGHPH0xovcODHGcSZ9rumovcZH3L1uOUknWFnqIx6_TJFWhSwOpYp-8s05IGnvc"/>
+</div>
+<div>
+<p class="text-sm font-bold">Sarah Jenkins</p>
+<p class="text-[10px] text-slate-500">ID: 2024-0211</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Exam Fee</td>
+<td class="px-6 py-4 text-sm font-bold">$450.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Success
+                                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<p class="text-xs text-slate-500">Showing 1 to 10 of 1,240 results</p>
+<div class="flex gap-2">
+<button class="p-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-base">chevron_left</span>
+</button>
+<button class="p-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Defaulters List (Right Column) -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-xl font-bold leading-tight tracking-tight">Defaulters List</h2>
+<span class="bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">42 Total</span>
+</div>
+<div class="bg-white dark:bg-slate-800/30 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col p-2 h-full shadow-sm">
+<div class="flex flex-col gap-2 overflow-y-auto custom-scrollbar max-h-[600px] p-2">
+<!-- Defaulter 1 -->
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex flex-col gap-3 group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold">DB</div>
+<div>
+<p class="text-sm font-bold">David Beckham</p>
+<p class="text-[11px] text-slate-500">Grade 10-B • 45 days overdue</p>
+</div>
+</div>
+<p class="text-sm font-bold text-rose-500">$3,450.00</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg hover:border-primary transition-all">Profile</button>
+<button class="flex-1 py-2 text-xs font-bold bg-primary text-white rounded-lg hover:opacity-90 shadow-sm shadow-primary/20">Remind</button>
+</div>
+</div>
+<!-- Defaulter 2 -->
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex flex-col gap-3 group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold">AL</div>
+<div>
+<p class="text-sm font-bold">Alice Lovelace</p>
+<p class="text-[11px] text-slate-500">Grade 12-A • 32 days overdue</p>
+</div>
+</div>
+<p class="text-sm font-bold text-rose-500">$1,200.00</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg hover:border-primary transition-all">Profile</button>
+<button class="flex-1 py-2 text-xs font-bold bg-primary text-white rounded-lg hover:opacity-90 shadow-sm shadow-primary/20">Remind</button>
+</div>
+</div>
+<!-- Defaulter 3 -->
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex flex-col gap-3 group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold">MK</div>
+<div>
+<p class="text-sm font-bold">Marcus Kane</p>
+<p class="text-[11px] text-slate-500">Grade 9-C • 28 days overdue</p>
+</div>
+</div>
+<p class="text-sm font-bold text-rose-500">$850.00</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg hover:border-primary transition-all">Profile</button>
+<button class="flex-1 py-2 text-xs font-bold bg-primary text-white rounded-lg hover:opacity-90 shadow-sm shadow-primary/20">Remind</button>
+</div>
+</div>
+</div>
+<div class="mt-auto p-4 border-t border-slate-100 dark:border-slate-700">
+<button class="w-full py-2.5 text-sm font-bold text-primary hover:bg-primary/5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                                    View All Defaulters
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Preview Modal (Static Presentation) -->
+<div class="fixed inset-0 z-[100] bg-background-dark/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+<div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="text-xl font-bold">Receipt Preview</h3>
+<button class="text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-8 flex flex-col gap-6">
+<div class="flex flex-col items-center gap-2">
+<div class="size-16 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-500 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-4xl">check_circle</span>
+</div>
+<h4 class="text-2xl font-bold">$2,500.00</h4>
+<p class="text-slate-500 text-sm">Payment Successful</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4 grid grid-cols-2 gap-y-4 gap-x-2">
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400">Student</p>
+<p class="text-sm font-semibold">Jordan Henderson</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400">Date</p>
+<p class="text-sm font-semibold">Oct 24, 2023</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400">Reference</p>
+<p class="text-sm font-semibold">#TXN-88210</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400">Payment Method</p>
+<p class="text-sm font-semibold">Credit Card (**** 4242)</p>
+</div>
+</div>
+<div class="flex gap-4 pt-4">
+<button class="flex-1 h-12 rounded-lg border border-slate-200 dark:border-slate-700 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base">print</span> Print
+                            </button>
+<button class="flex-1 h-12 rounded-lg bg-primary text-white font-bold text-sm hover:opacity-90 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base">download</span> Download PDF
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-auto px-10 py-6 border-t border-slate-200 dark:border-slate-800 text-slate-400 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
+<p>© 2024 Academia ERP. All financial data is encrypted and secured.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</footer>
+</div>
+</div>
+</body></html>
