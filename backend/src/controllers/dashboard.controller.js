@@ -35,7 +35,7 @@ const getStudentDashboard = async (req, res, next) => {
 
     // Upcoming assessments
     const assessmentDocs = await Assessment.find({
-      subject: { $in: await getStudentSubjectIds(student._id) },
+      subject: { $in: await getStudentSubjectIds(req.user.id) },
       date: { $gte: new Date() },
     })
       .populate("subject", "name")
