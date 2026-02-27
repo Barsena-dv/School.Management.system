@@ -19,7 +19,8 @@ const markAttendance = async (req, res, next) => {
         if (!student) throw new AppError("Student not found", 404);
 
         // Validation: Verify student is enrolled in the subject
-        const enrollment = await StudentSubject.findOne({ student: student.user, subject: subjectId });
+        // student.user was previously used (User ID), now using student._id (Student ID)
+        const enrollment = await StudentSubject.findOne({ student: student._id, subject: subjectId });
         if (!enrollment) throw new AppError("Student is not enrolled in this subject", 400);
 
         const attendanceDate = new Date(date);
@@ -82,31 +83,34 @@ const getAttendanceByStudent = async (req, res, next) => {
 };
 
 const getAllAttendance = async (req, res, next) => {
-  try {
-    let filter = {};
+    try {
+        let filter = {};
 
-    if (req.user.role === "teacher") {
-      filter.markedBy = req.user.id;
+        if (req.user.role === "teacher") {
+            filter.markedBy = req.user.id;
+        }
+
+        if (req.user.role === "student") {
+            const student = await Student.findOne({ user: req.user.id });
+            if (!student) throw new AppError("Student profile not found", 404);
+
+            const enrollments = await StudentSubject.find({ student: student._id });
+            const subjectIds = enrollments.map(e => e.subject);
+            filter.subject = { $in: subjectIds };
+        }
+
+        const records = await Attendance.find(filter)
+            .populate("subject", "name")
+            .populate({
+                path: "student",
+                populate: { path: "user", select: "name email" }
+            })
+            .sort({ date: -1 });
+
+        return sendResponse(res, 200, true, "Attendance records fetched", { attendance: records });
+
+    } catch (error) {
+        next(error);
     }
-
-    if (req.user.role === "student") {
-      const enrollments = await StudentSubject.find({ student: req.user.id });
-      const subjectIds = enrollments.map(e => e.subject);
-      filter.subject = { $in: subjectIds };
-    }
-
-    const records = await Attendance.find(filter)
-      .populate("subject", "name")
-      .populate({
-         path: "student",
-         populate: { path: "user", select: "name email" }
-      })
-      .sort({ date: -1 });
-
-    return sendResponse(res, 200, true, "Attendance records fetched", { attendance: records });
-
-  } catch (error) {
-    next(error);
-  }
 };
 module.exports = { markAttendance, getAttendanceBySubject, getAttendanceByStudent, getAllAttendance };

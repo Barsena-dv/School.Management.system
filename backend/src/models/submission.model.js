@@ -26,6 +26,11 @@ const submissionSchema = new mongoose.Schema(
         feedback: {
             type: String,
         },
+        status: {
+            type: String,
+            enum: ["submitted", "graded"],
+            default: "submitted",
+        },
     },
     {
         timestamps: true,

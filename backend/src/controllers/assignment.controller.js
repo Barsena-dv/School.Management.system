@@ -64,8 +64,12 @@ const getAssignmentsBySubject = async (req, res, next) => {
         }
 
         if (role === "student") {
-            // Validation: Verify student is enrolled in the subject
-            const enrollment = await StudentSubject.findOne({ student: id, subject: subjectId });
+            // Fetch student profile
+            const student = await Student.findOne({ user: id });
+            if (!student) throw new AppError("Student profile not found", 404);
+
+            // Validation: Verify student is enrolled in the subject using Student._id
+            const enrollment = await StudentSubject.findOne({ student: student._id, subject: subjectId });
             if (!enrollment) throw new AppError("Access forbidden: you are not enrolled in this subject", 403);
         }
 
@@ -80,29 +84,34 @@ const getAssignmentsBySubject = async (req, res, next) => {
 };
 
 const getAllAssignments = async (req, res, next) => {
-  try {
-    let filter = {};
+    try {
+        let filter = {};
 
-    if (req.user.role === "teacher") {
-      filter.createdBy = req.user.id;
+        if (req.user.role === "teacher") {
+            filter.createdBy = req.user.id;
+        }
+
+        if (req.user.role === "student") {
+            // Fetch student profile
+            const student = await Student.findOne({ user: req.user.id });
+            if (!student) throw new AppError("Student profile not found", 404);
+
+            // Fetch enrollments using Student._id
+            const enrollments = await StudentSubject.find({ student: student._id });
+            const subjectIds = enrollments.map(e => e.subject);
+            filter.subject = { $in: subjectIds };
+        }
+
+        const assignments = await Assignment.find(filter)
+            .populate("subject", "name")
+            .populate("createdBy", "name email")
+            .sort({ deadline: 1 });
+
+        return sendResponse(res, 200, true, "Assignments fetched", { assignments });
+
+    } catch (error) {
+        next(error);
     }
-
-    if (req.user.role === "student") {
-      const enrollments = await StudentSubject.find({ student: req.user.id });
-      const subjectIds = enrollments.map(e => e.subject);
-      filter.subject = { $in: subjectIds };
-    }
-
-    const assignments = await Assignment.find(filter)
-      .populate("subject", "name")
-      .populate("createdBy", "name email")
-      .sort({ deadline: 1 });
-
-    return sendResponse(res, 200, true, "Assignments fetched", { assignments });
-
-  } catch (error) {
-    next(error);
-  }
 };
 
-module.exports = { createAssignment, getAssignmentsBySubject,getAllAssignments };
+module.exports = { createAssignment, getAssignmentsBySubject, getAllAssignments };

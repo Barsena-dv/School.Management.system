@@ -1,5 +1,5 @@
 const express = require("express");
-const { createSubmission, getSubmissionsByAssignment, gradeSubmission } = require("../controllers/submission.controller");
+const { createSubmission, getSubmissionsByAssignment, gradeSubmission, getMySubmissions } = require("../controllers/submission.controller");
 const { verifyToken, authorizeRoles } = require("../middleware/auth.middleware");
 const upload = require("../config/upload");
 
@@ -20,6 +20,14 @@ router.get(
     verifyToken,
     authorizeRoles("admin", "teacher"),
     getSubmissionsByAssignment
+);
+
+// GET /api/submissions/my — student only
+router.get(
+    "/my",
+    verifyToken,
+    authorizeRoles("student"),
+    getMySubmissions
 );
 
 // PUT /api/submissions/:submissionId/grade — teacher only

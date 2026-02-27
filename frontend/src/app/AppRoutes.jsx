@@ -5,10 +5,11 @@ import PublicLayout from '@/layouts/PublicLayout'
 import StudentLayout from '@/layouts/StudentLayout'
 import TeacherLayout from '@/layouts/TeacherLayout'
 
-import Login from '../pages/auth/LoginPage'
 import AdminDashboard from '../pages/admin/AdminDashboard'
-import TeacherDashboard from '../pages/teacher/TeacherDashboard'
+import Login from '../pages/auth/LoginPage'
+import StudentAssignments from '../pages/student/StudentAssignments'
 import StudentDashboard from '../pages/student/StudentDashboard'
+import TeacherDashboard from '../pages/teacher/TeacherDashboard'
 
 
 // Pages — replace Placeholder with real imports as pages are built
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
         path: '/admin',
         element: <AdminLayout />,
         children: [
-            { index: true, element: <AdminDashboard/> },
+            { index: true, element: <AdminDashboard /> },
             { path: 'students', element: <Placeholder label="Students" /> },
             { path: 'teachers', element: <Placeholder label="Teachers" /> },
             { path: 'classes', element: <Placeholder label="Classes" /> },
@@ -70,7 +71,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <StudentDashboard /> },
             { path: 'attendance', element: <Placeholder label="Attendance" /> },
-            { path: 'assignments', element: <Placeholder label="Assignments" /> },
+            { path: 'assignments', element: <StudentAssignments /> },
             { path: 'marks', element: <Placeholder label="Marks" /> },
             { path: 'events', element: <Placeholder label="Events" /> },
             { path: 'notifications', element: <Placeholder label="Notifications" /> },

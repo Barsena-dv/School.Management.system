@@ -23,7 +23,7 @@ const addMark = async (req, res, next) => {
         if (!student) throw new AppError("Student not found", 404);
 
         // Validation: Verify student is enrolled in the subject
-        const enrollment = await StudentSubject.findOne({ student: student.user, subject: subject._id });
+        const enrollment = await StudentSubject.findOne({ student: student._id, subject: subject._id });
         if (!enrollment) throw new AppError("Student is not enrolled in this subject", 400);
 
         if (marksObtained > assessment.maxMarks)

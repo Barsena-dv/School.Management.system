@@ -22,9 +22,9 @@ const Navbar = ({ onSidebarToggle, title = 'Dashboard', user, unreadCount = 0 })
                 >
                     <Menu size={20} />
                 </button>
-                <h1 className="text-[1rem] font-semibold text-text-primary whitespace-nowrap">
+                {/* <h1 className="text-[1rem] font-semibold text-text-primary whitespace-nowrap">
                     {title}
-                </h1>
+                </h1> */}
             </div>
 
             {/* Right: bell + divider + user + logout */}

@@ -5,6 +5,7 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import Spinner from '@/components/ui/Spinner'
 import { getStudentDashboard } from '@/services/dashboardService'
 import { showError } from '@/utils/toast'
+import { clsx } from 'clsx'
 import {
     Bell,
     Calendar,
@@ -48,7 +49,7 @@ const StudentDashboard = () => {
         )
     }
 
-    const { profile, attendancePercentage, upcomingAssessments, recentMarks, unreadNotifications } = stats || {}
+    const { profile, attendance, upcomingAssessments, recentMarks, summary } = stats || {}
 
     return (
         <div className="max-w-7xl mx-auto space-y-10 py-6 px-4 sm:px-6 lg:px-8">
@@ -56,13 +57,13 @@ const StudentDashboard = () => {
             <div className="flex items-center justify-between border-b border-neutral-100 pb-8">
                 <div>
                     <h1 className="text-3xl font-extrabold text-neutral-900 tracking-tight">Student Hub</h1>
-                    <p className="text-neutral-500 mt-1 font-medium">Welcome back, {profile?.user?.name || 'Explorer'}.</p>
+                    <p className="text-neutral-500 mt-1 font-medium">Welcome back, {profile?.name || 'Explorer'}.</p>
                 </div>
                 <div className="relative p-2.5 bg-white rounded-2xl border border-neutral-200 shadow-sm hover:bg-neutral-50 transition-colors cursor-pointer group">
                     <Bell className="w-6 h-6 text-neutral-600 group-hover:text-neutral-900 transition-colors" />
-                    {unreadNotifications > 0 && (
+                    {(summary?.unreadNotificationsCount || 0) > 0 && (
                         <span className="absolute -top-1.5 -right-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-neutral-900 text-[10px] font-bold text-white border-2 border-white shadow-sm">
-                            {unreadNotifications}
+                            {summary.unreadNotificationsCount}
                         </span>
                     )}
                 </div>
@@ -78,17 +79,17 @@ const StudentDashboard = () => {
                 >
                     <div className="flex items-center gap-5 mt-2">
                         <div className="w-16 h-16 rounded-2xl bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-400 font-bold text-xl shadow-inner">
-                            {profile?.user?.name?.charAt(0) || 'S'}
+                            {profile?.name?.charAt(0) || 'S'}
                         </div>
                         <div>
-                            <p className="text-lg font-bold text-neutral-900 leading-tight">{profile?.user?.name}</p>
-                            <p className="text-sm text-neutral-500 font-medium">{profile?.user?.email}</p>
+                            <p className="text-lg font-bold text-neutral-900 leading-tight">{profile?.name}</p>
+                            <p className="text-sm text-neutral-500 font-medium">{profile?.email}</p>
                             <div className="flex gap-2 mt-2">
                                 <Badge variant="navy" className="rounded-lg shadow-sm">
-                                    Grade {profile?.class?.grade}
+                                    {profile?.className || 'No Class'}
                                 </Badge>
                                 <Badge variant="info" className="rounded-lg shadow-sm">
-                                    Section {profile?.class?.section}
+                                    ID: {profile?.rollNumber || 'N/A'}
                                 </Badge>
                             </div>
                         </div>
@@ -103,15 +104,24 @@ const StudentDashboard = () => {
                 >
                     <div className="mt-2 text-center py-2">
                         <div className="text-5xl font-black text-neutral-900 tracking-tighter">
-                            {attendancePercentage}<span className="text-2xl text-neutral-400 ml-1">%</span>
+                            {attendance?.percentage || 0}<span className="text-2xl text-neutral-400 ml-1">%</span>
                         </div>
                         <div className="mt-4 w-full h-3 bg-neutral-100 rounded-full overflow-hidden border border-neutral-200 shadow-inner">
                             <div
-                                className="h-full bg-neutral-900 rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(0,0,0,0.1)]"
-                                style={{ width: `${attendancePercentage}%` }}
+                                className={clsx(
+                                    "h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(0,0,0,0.1)]",
+                                    attendance?.status === 'Excellent' ? 'bg-green-600' :
+                                        attendance?.status === 'Warning' ? 'bg-amber-500' : 'bg-red-600'
+                                )}
+                                style={{ width: `${attendance?.percentage || 0}%` }}
                             />
                         </div>
-                        <p className="text-xs text-neutral-500 mt-3 font-semibold uppercase tracking-widest">Enrollment Status: Satisfactory</p>
+                        <p className="text-xs text-neutral-500 mt-3 font-semibold uppercase tracking-widest">
+                            Attendance Status: <span className={clsx(
+                                attendance?.status === 'Excellent' ? 'text-green-600' :
+                                    attendance?.status === 'Warning' ? 'text-amber-600' : 'text-red-600'
+                            )}>{attendance?.status || 'Unknown'}</span>
+                        </p>
                     </div>
                 </DashboardCard>
             </div>
@@ -137,7 +147,7 @@ const StudentDashboard = () => {
                                     <p className="text-xs text-neutral-500 font-bold uppercase tracking-widest mt-1 mb-4">{assessment.subject}</p>
                                     <div className="flex items-center text-xs text-neutral-600 bg-neutral-50 p-2.5 rounded-xl border border-neutral-100">
                                         <Clock className="w-3.5 h-3.5 mr-2" />
-                                        <span className="font-medium">{assessment.date}</span>
+                                        <span className="font-medium">{new Date(assessment.date).toLocaleDateString()}</span>
                                     </div>
                                 </div>
                             ))}
@@ -178,21 +188,21 @@ const StudentDashboard = () => {
                                                     <div className="w-8 h-8 rounded-lg bg-neutral-100 mr-3 flex items-center justify-center text-neutral-500 group-hover:bg-white transition-colors">
                                                         <FileText size={14} />
                                                     </div>
-                                                    <span className="text-sm font-bold text-neutral-900">{mark.title}</span>
+                                                    <span className="text-sm font-bold text-neutral-900">{mark.assessmentTitle}</span>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">
                                                 <span className="text-xs font-semibold text-neutral-500 tracking-tight">{mark.subject}</span>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className="text-sm font-black text-neutral-900">{mark.score}%</span>
+                                                <span className="text-sm font-black text-neutral-900">{mark.percentage}%</span>
                                             </td>
                                             <td className="px-6 py-4">
                                                 <Badge
-                                                    variant={mark.score >= 80 ? 'success' : mark.score >= 60 ? 'info' : 'warning'}
+                                                    variant={mark.result === 'Pass' ? 'success' : 'danger'}
                                                     className="rounded-lg px-3 py-1 font-bold tracking-tight shadow-sm"
                                                 >
-                                                    {mark.score >= 40 ? 'Passed' : 'Failed'}
+                                                    {mark.result}
                                                 </Badge>
                                             </td>
                                         </tr>

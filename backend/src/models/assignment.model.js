@@ -11,6 +11,10 @@ const assignmentSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        maxMarks: {
+            type: Number,
+            required: true,
+        },
         subject: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Subject",

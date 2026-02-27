@@ -1,6 +1,7 @@
 const StudentSubject = require("../models/studentSubject.model");
 const Subject = require("../models/subject.model");
 const User = require("../models/user.model");
+const Student = require("../models/student.model");
 const { sendResponse } = require("../utils/apiResponse");
 
 /**
@@ -9,16 +10,16 @@ const { sendResponse } = require("../utils/apiResponse");
  */
 const enrollStudent = async (req, res) => {
     try {
-        const { studentId, subjectId } = req.body;
+        const { studentId, subjectId } = req.body; // studentId here is the User ID
 
         if (!studentId || !subjectId) {
             return sendResponse(res, 400, false, "studentId and subjectId are required");
         }
 
-        // Verify student exists and is a student
-        const student = await User.findById(studentId);
-        if (!student || student.role !== "student") {
-            return sendResponse(res, 404, false, "Student not found or user is not a student");
+        // Verify Student profile exists for this User ID
+        const studentProfile = await Student.findOne({ user: studentId });
+        if (!studentProfile) {
+            return sendResponse(res, 404, false, "Student profile not found for this user");
         }
 
         // Verify subject exists
@@ -27,14 +28,14 @@ const enrollStudent = async (req, res) => {
             return sendResponse(res, 404, false, "Subject not found");
         }
 
-        // Check if already enrolled
-        const existingEnrollment = await StudentSubject.findOne({ student: studentId, subject: subjectId });
+        // Check if already enrolled using Student ID
+        const existingEnrollment = await StudentSubject.findOne({ student: studentProfile._id, subject: subjectId });
         if (existingEnrollment) {
             return sendResponse(res, 400, false, "Student is already enrolled in this subject");
         }
 
         const enrollment = await StudentSubject.create({
-            student: studentId,
+            student: studentProfile._id,
             subject: subjectId
         });
 
@@ -60,12 +61,17 @@ const getSubjectStudents = async (req, res) => {
         }
 
         // If teacher, verify they are assigned to this subject
-        if (user.role === "teacher" && subject.assignedTeacher.toString() !== user.id) {
+        // Note: subject.teacher is used now after previous refactor
+        const teacherId = subject.teacher || subject.assignedTeacher;
+        if (user.role === "teacher" && teacherId.toString() !== user.id) {
             return sendResponse(res, 403, false, "Access denied: You are not the teacher for this subject");
         }
 
         const enrollments = await StudentSubject.find({ subject: subjectId })
-            .populate("student", "name email status")
+            .populate({
+                path: "student",
+                populate: { path: "user", select: "name email status" }
+            })
             .sort({ enrolledAt: -1 });
 
         return sendResponse(res, 200, true, "Subject students fetched successfully", enrollments);
@@ -81,14 +87,20 @@ const getSubjectStudents = async (req, res) => {
  */
 const getMySubjects = async (req, res) => {
     try {
-        const studentId = req.user.id;
+        const userId = req.user.id;
 
-        const enrollments = await StudentSubject.find({ student: studentId })
+        // Fetch student profile first
+        const studentProfile = await Student.findOne({ user: userId });
+        if (!studentProfile) {
+            return sendResponse(res, 404, false, "Student profile not found");
+        }
+
+        const enrollments = await StudentSubject.find({ student: studentProfile._id })
             .populate({
                 path: "subject",
-                select: "name class assignedTeacher",
+                select: "name class teacher",
                 populate: {
-                    path: "assignedTeacher",
+                    path: "teacher",
                     select: "name email"
                 }
             })
