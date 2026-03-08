@@ -8,7 +8,7 @@ const { createNotification } = require("./notification.controller");
 
 const createAssignment = async (req, res, next) => {
     try {
-        const { title, description, subjectId, deadline } = req.body;
+        const { title, description, subjectId, deadline, maxMarks } = req.body;
         const teacherId = req.user.id;
 
         // Subject must exist
@@ -23,9 +23,14 @@ const createAssignment = async (req, res, next) => {
         if (new Date(deadline) <= new Date())
             throw new AppError("Deadline must be a future date", 400);
 
+        // maxMarks must be a positive number
+        if (!maxMarks || maxMarks <= 0)
+            throw new AppError("maxMarks must be a positive number", 400);
+
         const assignment = await Assignment.create({
             title,
             description,
+            maxMarks,
             subject: subjectId,
             deadline,
             createdBy: teacherId,

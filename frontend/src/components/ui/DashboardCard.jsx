@@ -29,7 +29,7 @@ const DashboardCard = ({
                     )}
                 </div>
             )}
-            <div className={clsx(padding && 'p-6 Pt-0')}>
+            <div className={clsx(padding && 'p-6 pt-0')}>
                 {children}
             </div>
         </div>

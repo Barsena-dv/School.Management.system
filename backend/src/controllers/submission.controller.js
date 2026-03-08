@@ -70,6 +70,7 @@ const getSubmissionsByAssignment = async (req, res, next) => {
 
         const submissions = await Submission.find({ assignment: assignmentId })
             .populate({ path: "student", populate: { path: "user", select: "name email" } })
+            .populate({ path: "assignment", select: "title maxMarks deadline" })
             .sort({ submittedAt: -1 });
 
         return sendResponse(res, 200, true, "Submissions fetched successfully", { submissions });

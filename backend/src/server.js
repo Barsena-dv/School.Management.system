@@ -24,6 +24,7 @@ const eventRoutes = require("./routes/event.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const studentSubjectRoutes = require("./routes/studentSubject.routes");
 const assessmentRoutes = require("./routes/assessment.routes");
+const debugRoutes = require("./routes/debug.routes");
 
 
 
@@ -46,6 +47,8 @@ app.use("/api/events", eventRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/student-subjects", studentSubjectRoutes);
 app.use("/api/assessments", assessmentRoutes);
+app.use("/api/debug", debugRoutes);
+
 
 
 app.use("/uploads", express.static("uploads"));

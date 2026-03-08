@@ -33,4 +33,38 @@ const approveUser = async (req, res, next) => {
     }
 };
 
-module.exports = { approveUser };
+const getPendingUsers = async (req, res, next) => {
+    try {
+        const users = await User.find({ status: "pending", role: { $ne: "admin" } })
+            .select("-password")
+            .sort({ createdAt: -1 });
+        return sendResponse(res, 200, true, "Pending users fetched", { users });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const rejectUser = async (req, res, next) => {
+    try {
+        const target = await User.findById(req.params.id);
+        if (!target) throw new AppError("User not found", 404);
+        if (target.role === "admin") throw new AppError("Cannot reject admin users", 403);
+
+        target.status = "rejected";
+        await target.save();
+
+        await createNotification(
+            target._id,
+            "Account Rejected",
+            "Your account registration has been rejected. Please contact support.",
+            "approval"
+        );
+
+        const { password: _, ...userWithoutPassword } = target.toObject();
+        return sendResponse(res, 200, true, "User rejected", { user: userWithoutPassword });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { approveUser, rejectUser, getPendingUsers };

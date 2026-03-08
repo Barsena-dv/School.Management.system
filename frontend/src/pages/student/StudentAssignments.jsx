@@ -25,15 +25,18 @@ const StudentAssignments = () => {
     const [searchQuery, setSearchQuery] = useState('')
 
     const fetchData = async () => {
+        setLoading(true)
         try {
-            const [assignRes, subRes] = await Promise.all([
-                api.get('/assignments'),
-                api.get('/submissions/my')
-            ])
-
+            const assignRes = await api.get('/assignments')
             if (assignRes.data.success) {
                 setAssignments(assignRes.data.data?.assignments || [])
             }
+        } catch (error) {
+            showError("Failed to load assignments")
+        }
+
+        try {
+            const subRes = await api.get('/submissions/my')
             if (subRes.data.success) {
                 const subs = subRes.data.data?.submissions || []
                 const map = {}
@@ -45,7 +48,7 @@ const StudentAssignments = () => {
                 setSubmissionMap(map)
             }
         } catch (error) {
-            showError("Failed to load academic data")
+            console.warn("Could not load submission statuses:", error)
         } finally {
             setLoading(false)
         }

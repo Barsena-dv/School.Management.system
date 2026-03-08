@@ -52,18 +52,40 @@ const getAllSubjects = async (req, res, next) => {
             Subject.countDocuments(filter),
         ]);
 
+        // Enrich each subject with counts for the teacher view
+        const Assignment = require("../models/assignment.model");
+        const Assessment = require("../models/assessment.model");
+
+        const enrichedSubjects = await Promise.all(
+            subjects.map(async (s) => {
+                const subjectId = s._id;
+                const [studentCount, assignmentCount, assessmentCount] = await Promise.all([
+                    StudentSubject.countDocuments({ subject: subjectId }),
+                    Assignment.countDocuments({ subject: subjectId }),
+                    Assessment.countDocuments({ subject: subjectId }),
+                ]);
+                return {
+                    ...s.toObject(),
+                    studentCount,
+                    assignmentCount,
+                    assessmentCount,
+                };
+            })
+        );
+
         return sendResponse(
             res,
             200,
             true,
             "Subjects fetched successfully",
-            { subjects },
+            { subjects: enrichedSubjects },
             paginationMeta(total, page, limit)
         );
     } catch (error) {
         next(error);
     }
 };
+
 
 const getSubjectById = async (req, res, next) => {
     try {
@@ -96,4 +118,41 @@ const getSubjectById = async (req, res, next) => {
     }
 };
 
-module.exports = { createSubject, getAllSubjects, getSubjectById };
+const getStudentsBySubject = async (req, res, next) => {
+    try {
+        const { subjectId } = req.params;
+
+        // 1. Validate subject exists
+        const subject = await Subject.findById(subjectId)
+            .populate("class", "grade section");
+        if (!subject) throw new AppError("Subject not found", 404);
+
+        // 2. Authorization: only assigned teacher or admin
+        if (req.user.role === "teacher" && subject.teacher.toString() !== req.user.id) {
+            throw new AppError("Access denied: you are not the assigned teacher for this subject", 403);
+        }
+
+        // 3. Fetch enrolled students via StudentSubject
+        const enrollments = await StudentSubject.find({ subject: subjectId })
+            .populate({
+                path: "student",
+                select: "rollNumber user",
+                populate: { path: "user", select: "name email" },
+            });
+
+        // 4. Shape the response
+        const students = enrollments.map(e => ({
+            studentId: e.student?._id,
+            name: e.student?.user?.name || "—",
+            email: e.student?.user?.email || "—",
+            rollNumber: e.student?.rollNumber || "—",
+        }));
+
+        return sendResponse(res, 200, true, "Students fetched successfully", { students });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { createSubject, getAllSubjects, getSubjectById, getStudentsBySubject };
+

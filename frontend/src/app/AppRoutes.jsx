@@ -9,7 +9,13 @@ import AdminDashboard from '../pages/admin/AdminDashboard'
 import Login from '../pages/auth/LoginPage'
 import StudentAssignments from '../pages/student/StudentAssignments'
 import StudentDashboard from '../pages/student/StudentDashboard'
+import TeacherAssignments from '../pages/teacher/TeacherAssignments'
+import TeacherAttendance from '../pages/teacher/TeacherAttendance'
 import TeacherDashboard from '../pages/teacher/TeacherDashboard'
+import TeacherSubjectDashboard from '../pages/teacher/TeacherSubjectDashboard'
+import TeacherSubjectStudents from '../pages/teacher/TeacherSubjectStudents'
+import TeacherSubjects from '../pages/teacher/TeacherSubjects'
+import TeacherSubmissions from '../pages/teacher/TeacherSubmissions'
 
 
 // Pages — replace Placeholder with real imports as pages are built
@@ -57,9 +63,13 @@ const router = createBrowserRouter([
         element: <TeacherLayout />,
         children: [
             { index: true, element: <TeacherDashboard /> },
-            { path: 'subjects', element: <Placeholder label="My Subjects" /> },
+            { path: 'subjects', element: <TeacherSubjects /> },
+            { path: 'subjects/:subjectId', element: <TeacherSubjectDashboard /> },
+            { path: 'subjects/:subjectId/students', element: <TeacherSubjectStudents /> },
             { path: 'attendance', element: <Placeholder label="Attendance" /> },
-            { path: 'assignments', element: <Placeholder label="Assignments" /> },
+            { path: 'subjects/:subjectId/attendance', element: <TeacherAttendance /> },
+            { path: 'assignments', element: <TeacherAssignments /> },
+            { path: 'assignments/:assignmentId/submissions', element: <TeacherSubmissions /> },
             { path: 'marks', element: <Placeholder label="Marks" /> },
         ],
     },
