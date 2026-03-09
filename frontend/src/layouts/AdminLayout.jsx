@@ -6,6 +6,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 
 const PAGE_TITLES = {
     '/admin': 'Dashboard',
+    '/admin/users': 'Users',
     '/admin/students': 'Students',
     '/admin/teachers': 'Teachers',
     '/admin/classes': 'Classes',

@@ -45,4 +45,40 @@ const getClassById = async (req, res, next) => {
     }
 };
 
-module.exports = { createClass, getAllClasses, getClassById };
+const updateClass = async (req, res, next) => {
+    try {
+        const { grade, section, academicYear, classTeacher } = req.body;
+        const found = await Class.findById(req.params.id);
+        if (!found) throw new AppError("Class not found", 404);
+
+        if (classTeacher) {
+            const teacher = await User.findById(classTeacher);
+            if (!teacher) throw new AppError("Teacher not found", 404);
+            if (teacher.role !== "teacher") throw new AppError("Assigned user must have the 'teacher' role", 400);
+        }
+
+        if (grade !== undefined) found.grade = grade;
+        if (section !== undefined) found.section = section;
+        if (academicYear !== undefined) found.academicYear = academicYear;
+        if (classTeacher !== undefined) found.classTeacher = classTeacher || null;
+
+        await found.save();
+        await found.populate("classTeacher", "name email");
+        return sendResponse(res, 200, true, "Class updated successfully", { class: found });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deleteClass = async (req, res, next) => {
+    try {
+        const found = await Class.findById(req.params.id);
+        if (!found) throw new AppError("Class not found", 404);
+        await found.deleteOne();
+        return sendResponse(res, 200, true, "Class deleted successfully", {});
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { createClass, getAllClasses, getClassById, updateClass, deleteClass };

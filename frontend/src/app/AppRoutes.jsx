@@ -5,7 +5,12 @@ import PublicLayout from '@/layouts/PublicLayout'
 import StudentLayout from '@/layouts/StudentLayout'
 import TeacherLayout from '@/layouts/TeacherLayout'
 
+import AdminApprovals from '../pages/admin/AdminApprovals'
+import AdminClasses from '../pages/admin/AdminClasses'
 import AdminDashboard from '../pages/admin/AdminDashboard'
+import AdminEnrollments from '../pages/admin/AdminEnrollments'
+import AdminSubjects from '../pages/admin/AdminSubjects'
+import AdminUsers from '../pages/admin/AdminUsers'
 import Login from '../pages/auth/LoginPage'
 import StudentAssignments from '../pages/student/StudentAssignments'
 import StudentDashboard from '../pages/student/StudentDashboard'
@@ -48,12 +53,14 @@ const router = createBrowserRouter([
         element: <AdminLayout />,
         children: [
             { index: true, element: <AdminDashboard /> },
-            { path: 'students', element: <Placeholder label="Students" /> },
-            { path: 'teachers', element: <Placeholder label="Teachers" /> },
-            { path: 'classes', element: <Placeholder label="Classes" /> },
-            { path: 'subjects', element: <Placeholder label="Subjects" /> },
+            { path: 'users', element: <AdminUsers /> },
+            { path: 'students', element: <AdminUsers defaultRole="student" /> },
+            { path: 'teachers', element: <AdminUsers defaultRole="teacher" /> },
+            { path: 'classes', element: <AdminClasses /> },
+            { path: 'subjects', element: <AdminSubjects /> },
+            { path: 'enrollments', element: <AdminEnrollments /> },
             { path: 'events', element: <Placeholder label="Events" /> },
-            { path: 'approvals', element: <Placeholder label="Approvals" /> },
+            { path: 'approvals', element: <AdminApprovals /> },
         ],
     },
 

@@ -113,8 +113,88 @@ const getMySubjects = async (req, res) => {
     }
 };
 
+
+/**
+ * Get all enrollments (Admin only)
+ * GET /api/student-subjects
+ */
+const getAllEnrollments = async (req, res) => {
+    try {
+        const enrollments = await StudentSubject.find()
+            .populate({
+                path: "student",
+                select: "rollNumber user class",
+                populate: [
+                    { path: "user", select: "name email" },
+                    { path: "class", select: "grade section academicYear" },
+                ],
+            })
+            .populate({
+                path: "subject",
+                select: "name class teacher",
+                populate: [
+                    { path: "class", select: "grade section" },
+                    { path: "teacher", select: "name" },
+                ],
+            })
+            .sort({ enrolledAt: -1 });
+
+        return sendResponse(res, 200, true, "All enrollments fetched", { enrollments });
+    } catch (error) {
+        console.error("Error in getAllEnrollments:", error);
+        return sendResponse(res, 500, false, "Internal server error");
+    }
+};
+
+/**
+ * Delete an enrollment (Admin only)
+ * DELETE /api/student-subjects/:id
+ */
+const deleteEnrollment = async (req, res) => {
+    try {
+        const enrollment = await StudentSubject.findById(req.params.id);
+        if (!enrollment) {
+            return sendResponse(res, 404, false, "Enrollment not found");
+        }
+        await enrollment.deleteOne();
+        return sendResponse(res, 200, true, "Enrollment deleted successfully", {});
+    } catch (error) {
+        console.error("Error in deleteEnrollment:", error);
+        return sendResponse(res, 500, false, "Internal server error");
+    }
+};
+
+/**
+ * Get all student profiles with user info (Admin only — for enrollment dropdown)
+ * GET /api/student-subjects/students
+ */
+const getStudentProfiles = async (req, res) => {
+    try {
+        const students = await Student.find()
+            .populate("user", "name email status")
+            .populate("class", "grade section")
+            .sort({ createdAt: -1 });
+
+        const result = students.map(s => ({
+            _id: s._id,
+            userId: s.user?._id,
+            name: s.user?.name || "—",
+            email: s.user?.email || "—",
+            rollNumber: s.rollNumber,
+            class: s.class,
+        }));
+        return sendResponse(res, 200, true, "Student profiles fetched", { students: result });
+    } catch (error) {
+        console.error("Error in getStudentProfiles:", error);
+        return sendResponse(res, 500, false, "Internal server error");
+    }
+};
+
 module.exports = {
     enrollStudent,
     getSubjectStudents,
-    getMySubjects
+    getMySubjects,
+    getAllEnrollments,
+    deleteEnrollment,
+    getStudentProfiles,
 };

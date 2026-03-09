@@ -154,5 +154,45 @@ const getStudentsBySubject = async (req, res, next) => {
     }
 };
 
-module.exports = { createSubject, getAllSubjects, getSubjectById, getStudentsBySubject };
+const updateSubject = async (req, res, next) => {
+    try {
+        const { name, classId, teacherId } = req.body;
+        const subject = await Subject.findById(req.params.id);
+        if (!subject) throw new AppError("Subject not found", 404);
+
+        if (classId) {
+            const classDoc = await Class.findById(classId);
+            if (!classDoc) throw new AppError("Class not found", 404);
+            subject.class = classId;
+        }
+        if (teacherId) {
+            const teacher = await User.findById(teacherId);
+            if (!teacher) throw new AppError("Teacher not found", 404);
+            if (teacher.role !== "teacher") throw new AppError("Assigned user must have the 'teacher' role", 400);
+            if (teacher.status !== "approved") throw new AppError("Teacher account must be approved", 400);
+            subject.teacher = teacherId;
+        }
+        if (name !== undefined) subject.name = name;
+
+        await subject.save();
+        await subject.populate("class", "grade section academicYear");
+        await subject.populate("teacher", "name email");
+        return sendResponse(res, 200, true, "Subject updated successfully", { subject });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deleteSubject = async (req, res, next) => {
+    try {
+        const subject = await Subject.findById(req.params.id);
+        if (!subject) throw new AppError("Subject not found", 404);
+        await subject.deleteOne();
+        return sendResponse(res, 200, true, "Subject deleted successfully", {});
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { createSubject, getAllSubjects, getSubjectById, getStudentsBySubject, updateSubject, deleteSubject };
 

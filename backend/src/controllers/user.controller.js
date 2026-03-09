@@ -67,4 +67,38 @@ const rejectUser = async (req, res, next) => {
     }
 };
 
-module.exports = { approveUser, rejectUser, getPendingUsers };
+const getAllUsers = async (req, res, next) => {
+    try {
+        const filter = {};
+        if (req.query.role) filter.role = req.query.role;
+        const users = await User.find(filter)
+            .select("-password")
+            .sort({ createdAt: -1 });
+        return sendResponse(res, 200, true, "Users fetched", { users });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const updateUserStatus = async (req, res, next) => {
+    try {
+        const { status } = req.body;
+        const allowed = ["approved", "suspended", "rejected", "pending"];
+        if (!allowed.includes(status)) throw new AppError("Invalid status value", 400);
+
+        const target = await User.findById(req.params.id);
+        if (!target) throw new AppError("User not found", 404);
+        if (target.role === "admin") throw new AppError("Cannot change status of admin users", 403);
+
+        target.status = status;
+        await target.save();
+
+        const { password: _, ...userWithoutPassword } = target.toObject();
+        return sendResponse(res, 200, true, `User status updated to ${status}`, { user: userWithoutPassword });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { approveUser, rejectUser, getPendingUsers, getAllUsers, updateUserStatus };
+
