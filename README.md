@@ -1,72 +1,108 @@
-# EduPortal - Student Dashboard
+# 🎓 EduPortal: The Next-Gen Academic OS
 
-A modern, academic-themed student information system built with a React frontend and an Express backend.
+[![Vercel](https://img.shields.io/badge/Frontend-Vercel-black?style=for-the-badge&logo=vercel)](https://school-management-system-three-theta.vercel.app/)
+[![Render](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render)](https://school-management-system-j3kf.onrender.com/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Tailwind](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-## Architecture
+**EduPortal** is a state-of-the-art School Management System designed with a focus on speed, aesthetics, and institutional efficiency. Built on the high-performance MERN stack, it features a professional "Hybrid Tech" design system that balances a deep-space aesthetic with studious legibility.
 
-This project follows a monorepo-style structure:
+---
 
-- **Frontend**: Located in the `/frontend` directory. Built with React, Vite, and Tailwind CSS (v4). It uses an Apple-inspired academic design with a light-first theme.
-- **Backend**: Located in the `/backend` directory. Built with Express and Node.js. Handles authentication, user management, and dashboard data.
+## 🌐 Live Demo
 
-## Getting Started
+- **Frontend (SPA):** [school-management-system-three-theta.vercel.app](https://school-management-system-three-theta.vercel.app/)
+- **Backend (API):** [school-management-system-j3kf.onrender.com](https://school-management-system-j3kf.onrender.com/api/health)
+
+---
+
+## ✨ Key Features
+
+### 🏢 Administrator Portal
+- **User Orchestration:** Approve or reject new registrations with a streamlined workflow.
+- **Institutional Guardrails:** Manage classes, subjects, and global enrollments.
+- **Live Stats:** Real-time visibility into student and teacher populations.
+
+### 🍎 Teacher Dashboard
+- **Attendance Engine:** Rapid subject-wise attendance marking with historical tracking.
+- **Academic Pipeline:** Create assignments and review submissions with in-system grading.
+- **Student Analytics:** Monitor class performance through visual dashboards.
+
+### 🎓 Student Experience
+- **Submission Hub:** Advanced assignment tracking with file upload capabilities.
+- **Performance Tracking:** Visual marks breakdown with glowing progress indicators.
+- **Campus Connectivity:** Stay updated via the Events calendar and personal Notifications.
+
+---
+
+## 🎨 Design Philosophy: "Hybrid Tech"
+
+The UI is engineered for clarity and "wow" factor, featuring:
+- **Deep Space Navigation:** A high-contrast `#090A0F` sidebar with glowing indigo active states.
+- **Glassmorphism:** Frosted-glass navbars with `20px` background blur for a premium feel.
+- **Modern Typography:** `Outfit` for geometric headings and `Inter` for crisp body text.
+- **Dynamic Feedback:** Micro-animations, glowing progress bars, and scroll-triggered fade-ins.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React 19, Vite, Tailwind CSS v4, Lucide React, Axios, Recharts |
+| **Backend** | Node.js, Express 5, JWT Authentication, Multer (File Handling) |
+| **Database** | MongoDB Atlas, Mongoose ODM |
+| **Deployment** | Vercel (Frontend), Render (Backend) |
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
+- Node.js (v20+)
+- MongoDB (Local or Atlas)
 
-- Node.js (v18+)
-- npm or yarn
+### Local Development
 
-### Installation
-
-1. Clone the repository.
-2. Install root dependencies (if any):
+1. **Clone & Install:**
    ```bash
-   npm install
-   ```
-3. Install frontend dependencies:
-   ```bash
-   cd frontend
-   npm install
-   ```
-4. Install backend dependencies:
-   ```bash
-   cd ../backend
-   npm install
+   git clone https://github.com/your-username/EduPortal.git
+   cd EduPortal
+   npm install  # Install root dev dependencies
    ```
 
-### Running the Application
+2. **Setup Backend:**
+   ```bash
+   cd backend
+   npm install
+   # Create a .env file with: PORT, MONGO_URI, JWT_SECRET
+   npm run dev
+   ```
 
-To run the project in development mode:
+3. **Setup Frontend:**
+   ```bash
+   cd ../frontend
+   npm install
+   # Create a .env file with: VITE_API_BASE_URL (points to backend /api)
+   npm run dev
+   ```
 
-#### Start the Backend
-```bash
-cd backend
-npm run dev
-```
+---
 
-#### Start the Frontend
-```bash
-cd frontend
-npm run dev
-```
+## 📦 Deployment Configuration
 
-The frontend will be available at `http://localhost:5173`.
+### Frontend (Vercel)
+- **Framework Preset:** Vite
+- **Build Command:** `npm run build`
+- **Output Directory:** `dist`
+- **Frontend Rewrite:** Includes `vercel.json` for SPA support.
 
-## Design System
+### Backend (Render)
+- **Root Directory:** `backend`
+- **Build Command:** `npm install`
+- **Start Command:** `npm start` (Standardized production entry)
 
-The UI uses a custom design system defined in `frontend/src/theme/tokens.css` and integrated via Tailwind CSS v4 in `frontend/src/index.css`.
+---
 
-- **Primary Color**: Academic Blue (`#1D3461`)
-- **Accent Color**: Muted Teal (`#1B7A78`)
-- **Background**: Warm Off-white (`#F7F7F5`)
-
-## Features
-
-- **Dashboard**: Role-based views for Admin, Student, and Teacher.
-- **Authentication**: Secure login and registration flow.
-- **Grid Layouts**: Responsive cards for metrics and notifications.
-- **Sidebar**: Modern light-surface navigation with collapsed states.
-
-## License
-
-Personal project by [User Name].
+## 📜 License
+Personal project created with precision. For licensing inquiries, please contact the developer.
