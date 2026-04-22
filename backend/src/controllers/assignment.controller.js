@@ -1,53 +1,12 @@
-const Assignment = require("../models/assignment.model");
-const Subject = require("../models/subject.model");
-const Student = require("../models/student.model");
-const StudentSubject = require("../models/studentSubject.model");
 const { sendResponse } = require("../utils/apiResponse");
-const AppError = require("../utils/appError");
-const { createNotification } = require("./notification.controller");
+const assignmentService = require("../services/assignment.service");
 
 const createAssignment = async (req, res, next) => {
     try {
-        const { title, description, subjectId, deadline, maxMarks } = req.body;
         const teacherId = req.user.id;
-
-        // Subject must exist
-        const subject = await Subject.findById(subjectId);
-        if (!subject) throw new AppError("Subject not found", 404);
-
-        // Teacher must be the assigned teacher of the subject
-        if (subject.teacher.toString() !== teacherId)
-            throw new AppError("You are not the assigned teacher for this subject", 403);
-
-        // Deadline must be in the future
-        if (new Date(deadline) <= new Date())
-            throw new AppError("Deadline must be a future date", 400);
-
-        // maxMarks must be a positive number
-        if (!maxMarks || maxMarks <= 0)
-            throw new AppError("maxMarks must be a positive number", 400);
-
-        const assignment = await Assignment.create({
-            title,
-            description,
-            maxMarks,
-            subject: subjectId,
-            deadline,
-            createdBy: teacherId,
-        });
-
-        // Notify all students in the subject's class (non-blocking)
-        const students = await Student.find({ class: subject.class }).select("user");
-        await Promise.all(
-            students.map((s) =>
-                createNotification(
-                    s.user,
-                    "New Assignment",
-                    "A new assignment has been posted for your subject.",
-                    "assignment"
-                )
-            )
-        );
+        
+        // Pass to service logic
+        const assignment = await assignmentService.createAssignmentService(req.body, teacherId);
 
         return sendResponse(res, 201, true, "Assignment created successfully", { assignment });
     } catch (error) {
@@ -60,27 +19,8 @@ const getAssignmentsBySubject = async (req, res, next) => {
         const { subjectId } = req.params;
         const { role, id } = req.user;
 
-        const subject = await Subject.findById(subjectId);
-        if (!subject) throw new AppError("Subject not found", 404);
-
-        if (role === "teacher") {
-            if (subject.teacher.toString() !== id)
-                throw new AppError("Access forbidden: you are not the assigned teacher for this subject", 403);
-        }
-
-        if (role === "student") {
-            // Fetch student profile
-            const student = await Student.findOne({ user: id });
-            if (!student) throw new AppError("Student profile not found", 404);
-
-            // Validation: Verify student is enrolled in the subject using Student._id
-            const enrollment = await StudentSubject.findOne({ student: student._id, subject: subjectId });
-            if (!enrollment) throw new AppError("Access forbidden: you are not enrolled in this subject", 403);
-        }
-
-        const assignments = await Assignment.find({ subject: subjectId })
-            .populate("createdBy", "name email")
-            .sort({ deadline: 1 }); // ascending — soonest deadline first
+        // Pass to service logic
+        const assignments = await assignmentService.getAssignmentsBySubjectService(subjectId, role, id);
 
         return sendResponse(res, 200, true, "Assignments fetched successfully", { assignments });
     } catch (error) {
@@ -90,27 +30,10 @@ const getAssignmentsBySubject = async (req, res, next) => {
 
 const getAllAssignments = async (req, res, next) => {
     try {
-        let filter = {};
+        const { role, id } = req.user;
 
-        if (req.user.role === "teacher") {
-            filter.createdBy = req.user.id;
-        }
-
-        if (req.user.role === "student") {
-            // Fetch student profile
-            const student = await Student.findOne({ user: req.user.id });
-            if (!student) throw new AppError("Student profile not found", 404);
-
-            // Fetch enrollments using Student._id
-            const enrollments = await StudentSubject.find({ student: student._id });
-            const subjectIds = enrollments.map(e => e.subject);
-            filter.subject = { $in: subjectIds };
-        }
-
-        const assignments = await Assignment.find(filter)
-            .populate("subject", "name")
-            .populate("createdBy", "name email")
-            .sort({ deadline: 1 });
+        // Pass to service logic
+        const assignments = await assignmentService.getAllAssignmentsService(role, id);
 
         return sendResponse(res, 200, true, "Assignments fetched", { assignments });
 

@@ -82,11 +82,11 @@ const StudentAssignments = () => {
 
     if (loading) {
         return (
-            <div className="max-w-7xl mx-auto space-y-8 py-6 px-4 sm:px-6 lg:px-8">
-                <div className="h-20 bg-neutral-50 rounded-3xl animate-pulse" />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="max-w-7xl mx-auto space-y-6 py-6 px-4 sm:px-6 lg:px-8">
+                <div className="h-16 bg-bg-subtle rounded-lg animate-pulse" />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[1, 2, 3, 4, 5, 6].map(i => (
-                        <div key={i} className="h-64 bg-neutral-50 rounded-3xl animate-pulse" />
+                        <div key={i} className="h-56 bg-bg-subtle rounded-lg animate-pulse" />
                     ))}
                 </div>
             </div>
@@ -94,29 +94,27 @@ const StudentAssignments = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto space-y-8 py-6 px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-neutral-100 pb-8">
+        <div className="max-w-7xl mx-auto space-y-6 py-6 px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-5">
                 <div>
-                    <h1 className="text-3xl font-extrabold text-neutral-900 tracking-tight">Academic Tasks</h1>
-                    <p className="text-neutral-500 mt-1 font-medium">Manage your assignments and track submission progress.</p>
+                    <h1 className="text-xl font-bold text-text-primary tracking-tight font-heading">Academic Tasks</h1>
+                    <p className="text-text-muted mt-1 text-sm">Manage your assignments and track submission progress.</p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                    <div className="relative group">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 w-4 h-4 group-focus-within:text-neutral-900 transition-colors" />
-                        <input
-                            type="text"
-                            placeholder="Find a task..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="pl-10 pr-4 py-2 bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all w-full md:w-64"
-                        />
-                    </div>
+                <div className="relative group">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted w-4 h-4 group-focus-within:text-primary transition-colors" />
+                    <input
+                        type="text"
+                        placeholder="Find a task..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="pl-9 pr-4 py-2 bg-surface border border-border rounded-lg text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary focus:shadow-glow transition-all w-full md:w-56"
+                    />
                 </div>
             </div>
 
             {filteredAssignments.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {filteredAssignments.map((assignment) => {
                         const submission = submissionMap[assignment._id]
                         const statusLabel = getStatusLabel(assignment._id)
@@ -129,50 +127,50 @@ const StudentAssignments = () => {
                             <DashboardCard
                                 key={assignment._id}
                                 padding={false}
-                                className="hover:shadow-lg transition-all duration-300 group flex flex-col h-full bg-white border-neutral-200"
+                                className="flex flex-col h-full group"
                             >
-                                <div className="p-6 flex-1">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="p-2.5 bg-neutral-50 rounded-2xl group-hover:bg-neutral-100 transition-colors">
-                                            <FileText className="w-5 h-5 text-neutral-600" />
+                                <div className="p-5 flex-1">
+                                    <div className="flex items-start justify-between mb-3">
+                                        <div className="p-2 bg-primary-subtle rounded-lg group-hover:bg-primary/10 transition-colors">
+                                            <FileText className="w-4 h-4 text-primary" />
                                         </div>
                                         <StatusBadge status={statusLabel} />
                                     </div>
 
-                                    <h3 className="text-lg font-bold text-neutral-900 leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-1">
+                                    <h3 className="text-sm font-bold text-text-primary font-heading leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-1">
                                         {assignment.title}
                                     </h3>
-                                    <p className="text-xs text-neutral-400 font-bold uppercase tracking-widest mb-4">
+                                    <p className="text-[10px] text-text-muted font-semibold uppercase tracking-widest mb-3 font-heading">
                                         {assignment.subject?.name}
                                     </p>
 
-                                    <p className="text-sm text-neutral-600 line-clamp-2 font-medium leading-relaxed mb-6">
+                                    <p className="text-sm text-text-secondary line-clamp-2 leading-relaxed mb-4">
                                         {assignment.description}
                                     </p>
 
-                                    <div className="flex items-center gap-4 py-3 px-4 bg-neutral-50 rounded-2xl border border-neutral-100/50">
-                                        <div className="flex items-center text-xs font-bold text-neutral-500">
-                                            <Calendar className="w-3.5 h-3.5 mr-2" />
+                                    <div className="flex items-center gap-4 py-2.5 px-3 bg-bg-subtle rounded-md border border-border">
+                                        <div className="flex items-center text-xs font-medium text-text-muted">
+                                            <Calendar className="w-3.5 h-3.5 mr-1.5" />
                                             {deadlineDate.toLocaleDateString()}
                                         </div>
                                         <div className={clsx(
-                                            "flex items-center text-[10px] font-black uppercase tracking-wider",
-                                            isExpired ? "text-red-500" : isUrgent ? "text-red-600 animate-pulse" : "text-amber-600"
+                                            "flex items-center text-[10px] font-bold uppercase tracking-wider font-heading",
+                                            isExpired ? "text-danger" : isUrgent ? "text-danger animate-pulse" : "text-warning"
                                         )}>
-                                            <Clock className="w-3 h-3 mr-1.5" />
+                                            <Clock className="w-3 h-3 mr-1" />
                                             {isExpired ? "Closed" : isUrgent ? "Due Soon" : "Active"}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="px-6 py-4 bg-neutral-50/30 border-t border-neutral-100 flex items-center justify-between mt-auto">
+                                <div className="px-5 py-3.5 bg-bg-subtle/30 border-t border-border flex items-center justify-between mt-auto">
                                     {submission?.status === "graded" ? (
                                         <div className="flex items-center gap-2">
-                                            <GraduationCap className="w-4 h-4 text-neutral-400" />
-                                            <span className="text-sm font-black text-neutral-900">Result: {submission.grade}</span>
+                                            <GraduationCap className="w-4 h-4 text-text-muted" />
+                                            <span className="text-sm font-bold text-text-primary font-heading">Result: {submission.grade}</span>
                                         </div>
                                     ) : (
-                                        <div className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">
+                                        <div className="text-[10px] font-semibold text-text-muted uppercase tracking-widest font-heading">
                                             {statusLabel === "Submitted" ? "Review Pending" : isExpired ? "Expired" : "Ready for Submission"}
                                         </div>
                                     )}
@@ -183,9 +181,9 @@ const StudentAssignments = () => {
                                                 setSelectedAssignment(assignment)
                                                 setIsModalOpen(true)
                                             }}
-                                            className="flex items-center gap-2 text-xs font-black text-neutral-900 hover:text-neutral-600 transition-colors uppercase tracking-widest group/btn"
+                                            className="flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-hover transition-colors uppercase tracking-widest group/btn font-heading"
                                         >
-                                            Upload <Upload size={14} strokeWidth={3} className="group-hover/btn:-translate-y-0.5 transition-transform" />
+                                            Upload <Upload size={13} strokeWidth={2.5} className="group-hover/btn:-translate-y-0.5 transition-transform" />
                                         </button>
                                     )}
                                 </div>

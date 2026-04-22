@@ -16,9 +16,9 @@ import { useEffect, useState } from 'react'
 // ─── Status badge ──────────────────────────────────────────────────────────
 const StatusBadge = ({ status }) => {
     const map = {
-        pending: 'bg-amber-50 text-amber-700 border-amber-200',
-        approved: 'bg-green-50 text-green-700 border-green-200',
-        rejected: 'bg-red-50 text-red-600 border-red-200',
+        pending: 'bg-warning-subtle text-warning border-warning/20',
+        approved: 'bg-success-subtle text-success border-green-200',
+        rejected: 'bg-danger-subtle text-danger border-red-200',
     }
     const icons = {
         pending: <Clock size={11} strokeWidth={3} />,
@@ -26,7 +26,7 @@ const StatusBadge = ({ status }) => {
         rejected: <X size={11} strokeWidth={3} />,
     }
     return (
-        <span className={clsx('inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-[11px] font-black uppercase tracking-wider', map[status] || map.pending)}>
+        <span className={clsx('inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-[11px] font-bold uppercase tracking-wider', map[status] || map.pending)}>
             {icons[status]}
             {status}
         </span>
@@ -36,9 +36,9 @@ const StatusBadge = ({ status }) => {
 // ─── Role badge ────────────────────────────────────────────────────────────
 const RoleBadge = ({ role }) => {
     const map = {
-        student: { cls: 'bg-blue-50 text-blue-700 border-blue-200', icon: <GraduationCap size={11} /> },
-        teacher: { cls: 'bg-purple-50 text-purple-700 border-purple-200', icon: <ShieldCheck size={11} /> },
-        admin: { cls: 'bg-neutral-100 text-neutral-600 border-neutral-200', icon: <UserCheck size={11} /> },
+        student: { cls: 'bg-primary-subtle text-primary border-blue-200', icon: <GraduationCap size={11} /> },
+        teacher: { cls: 'bg-accent-subtle text-purple-700 border-purple-200', icon: <ShieldCheck size={11} /> },
+        admin: { cls: 'bg-bg-subtle text-text-secondary border-border', icon: <UserCheck size={11} /> },
     }
     const cfg = map[role] || map.student
     return (
@@ -52,11 +52,11 @@ const RoleBadge = ({ role }) => {
 // ─── Skeleton row ──────────────────────────────────────────────────────────
 const SkeletonRow = () => (
     <tr>
-        <td className="px-5 py-4"><div className="flex items-center gap-3"><div className="w-8 h-8 rounded-xl bg-neutral-100 animate-pulse" /><div className="h-4 w-28 bg-neutral-100 rounded-full animate-pulse" /></div></td>
+        <td className="px-5 py-4"><div className="flex items-center gap-3"><div className="w-8 h-8 rounded-xl bg-bg-subtle animate-pulse" /><div className="h-4 w-28 bg-bg-subtle rounded-full animate-pulse" /></div></td>
         {[60, 45, 50].map((w, i) => (
-            <td key={i} className="px-5 py-4"><div className={`h-4 bg-neutral-100 rounded-full animate-pulse`} style={{ width: `${w}%` }} /></td>
+            <td key={i} className="px-5 py-4"><div className={`h-4 bg-bg-subtle rounded-full animate-pulse`} style={{ width: `${w}%` }} /></td>
         ))}
-        <td className="px-5 py-4"><div className="flex gap-2"><div className="h-8 w-20 bg-neutral-100 rounded-xl animate-pulse" /><div className="h-8 w-16 bg-neutral-100 rounded-xl animate-pulse" /></div></td>
+        <td className="px-5 py-4"><div className="flex gap-2"><div className="h-8 w-20 bg-bg-subtle rounded-xl animate-pulse" /><div className="h-8 w-16 bg-bg-subtle rounded-xl animate-pulse" /></div></td>
     </tr>
 )
 
@@ -114,16 +114,16 @@ const AdminApprovals = () => {
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 space-y-6">
 
             {/* ── Header ─────────────────────────────────────────────────── */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neutral-100">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-border">
                 <div>
-                    <h1 className="text-3xl font-extrabold text-neutral-900 tracking-tight">User Approvals</h1>
-                    <p className="text-neutral-500 mt-1 font-medium">Review and approve pending account registrations.</p>
+                    <h1 className="text-xl font-bold font-heading text-text-primary tracking-tight">User Approvals</h1>
+                    <p className="text-text-muted mt-1 font-medium">Review and approve pending account registrations.</p>
                 </div>
                 {!loading && (
-                    <div className="flex items-center gap-2 px-4 py-2.5 bg-amber-50 border border-amber-200 rounded-2xl text-sm">
-                        <Clock size={15} className="text-amber-500" />
+                    <div className="flex items-center gap-2 px-4 py-2.5 bg-warning-subtle border border-warning/20 rounded-lg text-sm">
+                        <Clock size={15} className="text-warning" />
                         <span className="font-bold text-amber-800">{users.length}</span>
-                        <span className="text-amber-600 font-medium">pending approval{users.length !== 1 ? 's' : ''}</span>
+                        <span className="text-warning font-medium">pending approval{users.length !== 1 ? 's' : ''}</span>
                     </div>
                 )}
             </div>
@@ -140,13 +140,13 @@ const AdminApprovals = () => {
                             'inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold border transition-all',
                             filter === key
                                 ? 'bg-neutral-900 text-white border-neutral-900'
-                                : 'bg-white text-neutral-500 border-neutral-200 hover:border-neutral-300 hover:text-neutral-900'
+                                : 'bg-surface text-text-muted border-border hover:border-border-strong hover:text-text-primary'
                         )}>
                         <Icon size={13} strokeWidth={2.5} />
                         {label}
                         {!loading && (
-                            <span className={clsx('ml-0.5 px-1.5 py-0.5 rounded-md text-[10px] font-black',
-                                filter === key ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-500')}>
+                            <span className={clsx('ml-0.5 px-1.5 py-0.5 rounded-md text-[10px] font-bold',
+                                filter === key ? 'bg-white/20 text-white' : 'bg-bg-subtle text-text-muted')}>
                                 {key === 'all' ? users.length : users.filter(u => u.role === key).length}
                             </span>
                         )}
@@ -155,55 +155,55 @@ const AdminApprovals = () => {
             </div>
 
             {/* ── Table card ─────────────────────────────────────────────── */}
-            <div className="bg-white border border-neutral-200 rounded-3xl shadow-sm overflow-hidden">
+            <div className="bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
                 {loading ? (
                     <table className="w-full text-left">
-                        <thead className="bg-neutral-50/80 border-b border-neutral-100">
+                        <thead className="bg-bg-subtle/50 border-b border-border">
                             <tr>
                                 {['Name', 'Email', 'Role', 'Status', 'Actions'].map(h => (
-                                    <th key={h} className="px-5 py-4 text-[10px] font-black text-neutral-400 uppercase tracking-[0.15em]">{h}</th>
+                                    <th key={h} className="px-5 py-4 text-[10px] font-bold text-text-muted uppercase tracking-[0.15em]">{h}</th>
                                 ))}
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-neutral-50">
+                        <tbody className="divide-y divide-border">
                             <SkeletonRow /><SkeletonRow /><SkeletonRow />
                         </tbody>
                     </table>
                 ) : filtered.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-20 text-center">
-                        <div className="w-16 h-16 bg-green-50 rounded-3xl flex items-center justify-center mb-4 border border-green-100">
+                        <div className="w-16 h-16 bg-success-subtle rounded-lg flex items-center justify-center mb-4 border border-success/20">
                             <UserCheck className="w-7 h-7 text-green-400" />
                         </div>
-                        <h3 className="text-base font-bold text-neutral-900">
+                        <h3 className="text-base font-bold text-text-primary">
                             {filter === 'all' ? 'No pending approvals' : `No pending ${filter}s`}
                         </h3>
-                        <p className="text-sm text-neutral-400 font-medium mt-1">All caught up! New registrations will appear here.</p>
+                        <p className="text-sm text-text-muted font-medium mt-1">All caught up! New registrations will appear here.</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-neutral-50/80 border-b border-neutral-100">
+                            <thead className="bg-bg-subtle/50 border-b border-border">
                                 <tr>
                                     {['Name', 'Email', 'Role', 'Status', 'Actions'].map(h => (
-                                        <th key={h} className="px-5 py-4 text-[10px] font-black text-neutral-400 uppercase tracking-[0.15em] whitespace-nowrap">{h}</th>
+                                        <th key={h} className="px-5 py-4 text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] whitespace-nowrap">{h}</th>
                                     ))}
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-neutral-50">
+                            <tbody className="divide-y divide-border">
                                 {filtered.map(user => {
                                     const busy = actionLoading[user._id]
                                     return (
-                                        <tr key={user._id} className="hover:bg-neutral-50/60 transition-colors group">
+                                        <tr key={user._id} className="hover:bg-bg-subtle/30 transition-colors group">
 
                                             {/* Name */}
                                             <td className="px-5 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-9 h-9 rounded-2xl bg-neutral-100 group-hover:bg-white border border-neutral-100 transition-colors flex items-center justify-center text-sm font-black text-neutral-600 flex-shrink-0">
+                                                    <div className="w-9 h-9 rounded-lg bg-bg-subtle group-hover:bg-surface border border-border transition-colors flex items-center justify-center text-sm font-bold text-text-secondary flex-shrink-0">
                                                         {user.name?.charAt(0)?.toUpperCase() || '?'}
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm font-bold text-neutral-900 whitespace-nowrap">{user.name}</p>
-                                                        <p className="text-[11px] text-neutral-400 font-medium">
+                                                        <p className="text-sm font-bold text-text-primary whitespace-nowrap">{user.name}</p>
+                                                        <p className="text-[11px] text-text-muted font-medium">
                                                             Registered {new Date(user.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                                                         </p>
                                                     </div>
@@ -212,7 +212,7 @@ const AdminApprovals = () => {
 
                                             {/* Email */}
                                             <td className="px-5 py-4">
-                                                <span className="text-sm text-neutral-500 font-medium">{user.email}</span>
+                                                <span className="text-sm text-text-muted font-medium">{user.email}</span>
                                             </td>
 
                                             {/* Role */}
@@ -242,7 +242,7 @@ const AdminApprovals = () => {
                                                     <button
                                                         onClick={() => handleReject(user._id, user.name)}
                                                         disabled={!!busy}
-                                                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                                        className="inline-flex items-center gap-1.5 px-3 py-2 bg-danger-subtle hover:bg-red-100 text-danger border border-red-200 text-xs font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                                     >
                                                         {busy === 'rejecting'
                                                             ? <span className="w-3 h-3 border-2 border-red-300 border-t-red-600 rounded-full animate-spin" />

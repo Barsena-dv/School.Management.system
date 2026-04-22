@@ -1,18 +1,19 @@
 import { clsx } from 'clsx'
 
 const variantClasses = {
-    default: 'bg-[#e2e8f0] text-[#475569]',
-    success: 'bg-[#dcfce7] text-[#16a34a]',
-    warning: 'bg-[#fef9c3] text-[#ca8a04]',
-    danger: 'bg-[#fee2e2] text-[#dc2626]',
-    info: 'bg-[#dbeafe] text-[#2563eb]',
-    navy: 'bg-[#0f1f3d] text-white',
+    default: 'bg-bg-subtle text-text-secondary border-border',
+    success: 'bg-success-subtle text-success border-success/20',
+    warning: 'bg-warning-subtle text-warning border-warning/20',
+    danger: 'bg-danger-subtle text-danger border-danger/20',
+    info: 'bg-primary-subtle text-primary border-primary/20',
+    navy: 'bg-sidebar-bg text-white border-sidebar-border',
 }
 
 const Badge = ({ children, variant = 'default', className, ...props }) => (
     <span
         className={clsx(
-            'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+            'inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border',
+            'font-heading tracking-tight',
             variantClasses[variant],
             className
         )}

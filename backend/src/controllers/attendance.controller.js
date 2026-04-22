@@ -92,7 +92,7 @@ const getAllAttendance = async (req, res, next) => {
 
         if (req.user.role === "student") {
             const student = await Student.findOne({ user: req.user.id });
-            if (!student) throw new AppError("Student profile not found", 404);
+            if (!student) return sendResponse(res, 200, true, "Attendance records fetched", { attendance: [] });
 
             const enrollments = await StudentSubject.find({ student: student._id });
             const subjectIds = enrollments.map(e => e.subject);

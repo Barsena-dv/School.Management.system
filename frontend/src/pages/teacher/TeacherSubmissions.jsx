@@ -16,7 +16,7 @@ const SkeletonRow = () => (
     <tr>
         {[1, 2, 3, 4, 5, 6, 7].map((i) => (
             <td key={i} className="px-5 py-4">
-                <div className="h-4 bg-neutral-100 rounded-full animate-pulse" style={{ width: `${60 + i * 8}%` }} />
+                <div className="h-4 bg-bg-subtle rounded-full animate-pulse" style={{ width: `${60 + i * 8}%` }} />
             </td>
         ))}
     </tr>
@@ -71,19 +71,19 @@ const TeacherSubmissions = () => {
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 space-y-6">
 
             {/* ── Header ────────────────────────────────────────────────── */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neutral-100">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-border">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => navigate(-1)}
-                        className="p-2.5 rounded-2xl border border-neutral-200 hover:bg-neutral-50 transition-colors text-neutral-500 hover:text-neutral-900"
+                        className="p-2.5 rounded-lg border border-border hover:bg-bg-subtle transition-colors text-text-muted hover:text-text-primary"
                     >
                         <ArrowLeft size={18} />
                     </button>
                     <div>
-                        <h1 className="text-2xl font-extrabold text-neutral-900 tracking-tight">
+                        <h1 className="text-xl font-bold font-heading text-text-primary tracking-tight">
                             Assignment Submissions
                         </h1>
-                        <p className="text-sm text-neutral-500 font-medium mt-0.5">
+                        <p className="text-sm text-text-muted font-medium mt-0.5">
                             Review and grade student work
                         </p>
                     </div>
@@ -92,56 +92,56 @@ const TeacherSubmissions = () => {
                 {/* Stats pills */}
                 {!loading && (
                     <div className="flex gap-3">
-                        <div className="flex items-center gap-2 px-4 py-2.5 bg-white border border-neutral-200 rounded-2xl shadow-sm text-sm">
-                            <Users size={15} className="text-neutral-400" />
-                            <span className="font-bold text-neutral-900">{submissions.length}</span>
-                            <span className="text-neutral-500 font-medium">Total</span>
+                        <div className="flex items-center gap-2 px-4 py-2.5 bg-surface border border-border rounded-lg shadow-sm text-sm">
+                            <Users size={15} className="text-text-muted" />
+                            <span className="font-bold text-text-primary">{submissions.length}</span>
+                            <span className="text-text-muted font-medium">Total</span>
                         </div>
-                        <div className="flex items-center gap-2 px-4 py-2.5 bg-green-50 border border-green-100 rounded-2xl shadow-sm text-sm">
-                            <GraduationCap size={15} className="text-green-600" />
-                            <span className="font-bold text-green-700">{gradedCount}</span>
-                            <span className="text-green-600 font-medium">Graded</span>
+                        <div className="flex items-center gap-2 px-4 py-2.5 bg-success-subtle border border-success/20 rounded-lg shadow-sm text-sm">
+                            <GraduationCap size={15} className="text-success" />
+                            <span className="font-bold text-success">{gradedCount}</span>
+                            <span className="text-success font-medium">Graded</span>
                         </div>
                     </div>
                 )}
             </div>
 
             {/* ── Table card ────────────────────────────────────────────── */}
-            <div className="bg-white border border-neutral-200 rounded-3xl shadow-sm overflow-hidden">
+            <div className="bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
                 {loading ? (
                     <table className="w-full text-left">
-                        <thead className="bg-neutral-50/80 border-b border-neutral-100">
+                        <thead className="bg-bg-subtle/50 border-b border-border">
                             <tr>
                                 {['Student', 'Email', 'File', 'Submitted At', 'Status', 'Grade', 'Action'].map(h => (
-                                    <th key={h} className="px-5 py-4 text-[10px] font-black text-neutral-400 uppercase tracking-[0.15em]">{h}</th>
+                                    <th key={h} className="px-5 py-4 text-[10px] font-bold text-text-muted uppercase tracking-[0.15em]">{h}</th>
                                 ))}
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-neutral-50">
+                        <tbody className="divide-y divide-border">
                             <SkeletonRow /><SkeletonRow /><SkeletonRow />
                         </tbody>
                     </table>
                 ) : submissions.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-20 text-center">
-                        <div className="w-16 h-16 bg-neutral-50 rounded-3xl flex items-center justify-center mb-4 border border-neutral-100">
-                            <GraduationCap className="w-7 h-7 text-neutral-300" />
+                        <div className="w-16 h-16 bg-bg-subtle rounded-lg flex items-center justify-center mb-4 border border-border">
+                            <GraduationCap className="w-7 h-7 text-text-muted/40" />
                         </div>
-                        <h3 className="text-base font-bold text-neutral-900">No submissions yet</h3>
-                        <p className="text-sm text-neutral-500 font-medium mt-1 max-w-xs">
+                        <h3 className="text-base font-bold text-text-primary">No submissions yet</h3>
+                        <p className="text-sm text-text-muted font-medium mt-1 max-w-xs">
                             Students haven't submitted their work for this assignment yet.
                         </p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-neutral-50/80 border-b border-neutral-100">
+                            <thead className="bg-bg-subtle/50 border-b border-border">
                                 <tr>
                                     {['Student', 'Email', 'Download', 'Submitted At', 'Status', 'Grade', 'Action'].map(h => (
-                                        <th key={h} className="px-5 py-4 text-[10px] font-black text-neutral-400 uppercase tracking-[0.15em] whitespace-nowrap">{h}</th>
+                                        <th key={h} className="px-5 py-4 text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] whitespace-nowrap">{h}</th>
                                     ))}
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-neutral-50">
+                            <tbody className="divide-y divide-border">
                                 {submissions.map((sub) => {
                                     const studentName = sub.student?.user?.name || '—'
                                     const studentEmail = sub.student?.user?.email || '—'
@@ -151,20 +151,20 @@ const TeacherSubmissions = () => {
                                     const statusLabel = sub.status === 'graded' ? 'Graded' : 'Submitted'
 
                                     return (
-                                        <tr key={sub._id} className="hover:bg-neutral-50/60 transition-colors group">
+                                        <tr key={sub._id} className="hover:bg-bg-subtle/30 transition-colors group">
                                             {/* Student Name */}
                                             <td className="px-5 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-8 h-8 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-500 text-xs font-black flex-shrink-0 group-hover:bg-white transition-colors border border-neutral-100">
+                                                    <div className="w-8 h-8 rounded-xl bg-bg-subtle flex items-center justify-center text-text-muted text-xs font-bold flex-shrink-0 group-hover:bg-surface transition-colors border border-border">
                                                         {studentName.charAt(0).toUpperCase()}
                                                     </div>
-                                                    <span className="text-sm font-bold text-neutral-900 whitespace-nowrap">{studentName}</span>
+                                                    <span className="text-sm font-bold text-text-primary whitespace-nowrap">{studentName}</span>
                                                 </div>
                                             </td>
 
                                             {/* Email */}
                                             <td className="px-5 py-4">
-                                                <span className="text-sm text-neutral-500 font-medium">{studentEmail}</span>
+                                                <span className="text-sm text-text-muted font-medium">{studentEmail}</span>
                                             </td>
 
                                             {/* Download */}
@@ -175,19 +175,19 @@ const TeacherSubmissions = () => {
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         download
-                                                        className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-700 hover:text-neutral-900 bg-neutral-100 hover:bg-neutral-200 px-3 py-1.5 rounded-xl transition-colors"
+                                                        className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-700 hover:text-text-primary bg-bg-subtle hover:bg-neutral-200 px-3 py-1.5 rounded-xl transition-colors"
                                                     >
                                                         <Download size={13} strokeWidth={2.5} />
                                                         File
                                                     </a>
                                                 ) : (
-                                                    <span className="text-xs text-neutral-400 font-medium">No file</span>
+                                                    <span className="text-xs text-text-muted font-medium">No file</span>
                                                 )}
                                             </td>
 
                                             {/* Submitted At */}
                                             <td className="px-5 py-4">
-                                                <span className="text-xs text-neutral-500 font-medium whitespace-nowrap">{submittedAt}</span>
+                                                <span className="text-xs text-text-muted font-medium whitespace-nowrap">{submittedAt}</span>
                                             </td>
 
                                             {/* Status */}
@@ -198,14 +198,14 @@ const TeacherSubmissions = () => {
                                             {/* Grade */}
                                             <td className="px-5 py-4">
                                                 {sub.status === 'graded' ? (
-                                                    <span className="text-sm font-black text-neutral-900">
+                                                    <span className="text-sm font-bold text-text-primary">
                                                         {sub.grade}
                                                         {sub.assignment?.maxMarks && (
-                                                            <span className="text-xs text-neutral-400 font-medium ml-1">/ {sub.assignment.maxMarks}</span>
+                                                            <span className="text-xs text-text-muted font-medium ml-1">/ {sub.assignment.maxMarks}</span>
                                                         )}
                                                     </span>
                                                 ) : (
-                                                    <span className="text-xs text-neutral-400 font-medium">—</span>
+                                                    <span className="text-xs text-text-muted font-medium">—</span>
                                                 )}
                                             </td>
 
@@ -214,7 +214,7 @@ const TeacherSubmissions = () => {
                                                 <button
                                                     onClick={() => openGradeModal(sub)}
                                                     className={`text-xs font-bold px-4 py-2 rounded-xl transition-colors whitespace-nowrap ${sub.status === 'graded'
-                                                            ? 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                                                            ? 'bg-bg-subtle text-text-secondary hover:bg-neutral-200'
                                                             : 'bg-neutral-900 text-white hover:bg-neutral-800'
                                                         }`}
                                                 >

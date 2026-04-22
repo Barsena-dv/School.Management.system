@@ -88,4 +88,19 @@ const getMarksByStudent = async (req, res, next) => {
     }
 };
 
-module.exports = { addMark, getMarksByAssessment, getMarksByStudent };
+const getMyMarks = async (req, res, next) => {
+    try {
+        const student = await Student.findOne({ user: req.user.id }).populate("class");
+        if (!student) return sendResponse(res, 200, true, "Personal marks fetched successfully", { marks: [] });
+
+        const marks = await Mark.find({ student: student._id })
+            .populate({ path: "assessment", select: "title maxMarks date", populate: { path: "subject", select: "name" } })
+            .sort({ createdAt: -1 });
+
+        return sendResponse(res, 200, true, "Personal marks fetched successfully", { marks });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { addMark, getMarksByAssessment, getMarksByStudent, getMyMarks };

@@ -59,16 +59,24 @@ const getEvents = async (req, res, next) => {
         if (role === "student") {
             // Find the student's class
             const student = await Student.findOne({ user: id }).select("class");
-            if (!student) throw new AppError("Student profile not found", 404);
-
-            // Show global events (no targetClass) OR events for their class
-            query = {
-                $or: [
-                    { targetClass: { $exists: false } },
-                    { targetClass: null },
-                    { targetClass: student.class },
-                ],
-            };
+            if (!student) {
+                // If profile not setup, only show global events
+                query = {
+                    $or: [
+                        { targetClass: { $exists: false } },
+                        { targetClass: null },
+                    ],
+                };
+            } else {
+                // Show global events (no targetClass) OR events for their class
+                query = {
+                    $or: [
+                        { targetClass: { $exists: false } },
+                        { targetClass: null },
+                        { targetClass: student.class },
+                    ],
+                };
+            }
         }
         // admin/teacher see all — query stays {}
 

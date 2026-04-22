@@ -7,26 +7,44 @@
 
 /* ── Tailwind v4: map CSS vars → Tailwind utility classes ────── */
 @theme {
-  /* Colors */
+  /* Colors — Surface */
   --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
   --color-surface: var(--surface);
 
+  /* Colors — Brand */
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-subtle: var(--primary-subtle);
 
   --color-accent: var(--accent);
+  --color-accent-subtle: var(--accent-subtle);
   --color-danger: var(--danger);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
+  --color-warning: var(--warning);
+  --color-warning-subtle: var(--warning-subtle);
 
+  /* Colors — Text */
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-text-inverse: var(--text-inverse);
 
+  /* Colors — Border */
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  /* Colors — Sidebar */
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-text: var(--sidebar-text);
 
   /* Shadows */
   --shadow-soft: var(--shadow-soft);
+  --shadow-glow: var(--shadow-glow);
 
   /* Border radius */
   --radius-sm: var(--radius-sm);
@@ -35,6 +53,7 @@
   --radius-lg: var(--radius-lg);
   --radius-full: var(--radius-full);
 
-  /* Font */
+  /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
 }

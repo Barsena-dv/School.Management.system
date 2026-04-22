@@ -6,6 +6,7 @@ const Student = require("../models/student.model");
 const StudentSubject = require("../models/studentSubject.model");
 const AppError = require("../utils/appError");
 const { sendResponse } = require("../utils/apiResponse");
+const User = require("../models/user.model");
 
 const getStudentDashboard = async (req, res, next) => {
   try {
@@ -18,13 +19,37 @@ const getStudentDashboard = async (req, res, next) => {
       .populate("class", "name")
       .populate("user", "name email avatar");
 
-    if (!student) throw new AppError("Student profile not found", 404);
+    let studentId = null;
+    let subjectIds = [];
 
-    const studentId = student._id;
+    if (!student) {
+      // If student profile not setup yet, return default dashboard using User data
+      const user = await User.findById(userId);
+      return sendResponse(res, 200, true, "Student dashboard (profile pending setup)", {
+        profile: {
+          name: user?.name || 'Student',
+          email: user?.email,
+          avatar: user?.avatar,
+          rollNumber: 'Pending Setup',
+          className: 'Not Assigned',
+        },
+        attendance: { percentage: 0, status: 'Unknown', totalClasses: 0, presentCount: 0 },
+        upcomingAssessments: [],
+        recentMarks: [],
+        summary: {
+          totalEnrolledSubjects: 0,
+          totalAssessments: 0,
+          totalMarksGiven: 0,
+          unreadNotificationsCount: 0
+        }
+      });
+    } else {
+      studentId = student._id;
+    }
 
     // 2. Fetch Enrolled Subject IDs
     const enrollmentDocs = await StudentSubject.find({ student: studentId }).select("subject");
-    const subjectIds = enrollmentDocs.map(doc => doc.subject);
+    subjectIds = enrollmentDocs.map(doc => doc.subject);
 
     // 3. Fetch Dashboard Data in Parallel
     const [

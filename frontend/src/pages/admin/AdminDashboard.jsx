@@ -13,54 +13,83 @@ import {
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// ─── Stat card ─────────────────────────────────────────────────────────────
+const StatPill = ({ icon: Icon, label, value, color }) => {
+    const colors = {
+        neutral: { bg: 'var(--bg-subtle)', text: 'var(--text-secondary)', border: 'var(--border)' },
+        blue: { bg: 'var(--primary-subtle)', text: 'var(--primary)', border: 'rgba(79,70,229,0.15)' },
+        purple: { bg: 'var(--accent-subtle)', text: 'var(--accent)', border: 'rgba(6,182,212,0.15)' },
+        amber: { bg: 'var(--warning-subtle)', text: 'var(--warning)', border: 'rgba(245,158,11,0.15)' },
+    }
+    const c = colors[color] || colors.neutral
+    return (
+        <div className="bg-surface border border-border rounded-lg p-4 flex items-center gap-3.5 hover:border-primary/20 hover:shadow-md transition-all">
+            <div
+                className="p-2.5 rounded-lg flex-shrink-0"
+                style={{ background: c.bg, color: c.text, border: `1px solid ${c.border}` }}
+            >
+                <Icon size={17} strokeWidth={2} />
+            </div>
+            <div>
+                <p className="text-xl font-bold font-heading text-text-primary leading-none font-heading">{value}</p>
+                <p className="text-[10px] font-semibold text-text-muted uppercase tracking-widest mt-0.5 font-heading">{label}</p>
+            </div>
+        </div>
+    )
+}
+
 // ─── Quick access card ─────────────────────────────────────────────────────
 const QuickCard = ({ icon: Icon, label, description, badge, badgeColor = 'neutral', to, color = 'neutral' }) => {
     const navigate = useNavigate()
     const iconColors = {
-        blue: 'bg-blue-50 text-blue-600 border-blue-100',
-        purple: 'bg-purple-50 text-purple-600 border-purple-100',
-        amber: 'bg-amber-50 text-amber-600 border-amber-100',
-        green: 'bg-green-50 text-green-600 border-green-100',
-        neutral: 'bg-neutral-50 text-neutral-600 border-neutral-100',
+        blue: { bg: 'var(--primary-subtle)', text: 'var(--primary)' },
+        purple: { bg: 'var(--accent-subtle)', text: 'var(--accent)' },
+        amber: { bg: 'var(--warning-subtle)', text: 'var(--warning)' },
+        green: { bg: 'var(--success-subtle)', text: 'var(--success)' },
+        neutral: { bg: 'var(--bg-subtle)', text: 'var(--text-secondary)' },
     }
     const badgeColors = {
-        amber: 'bg-amber-100 text-amber-700',
-        green: 'bg-green-100 text-green-700',
-        blue: 'bg-blue-100 text-blue-700',
-        red: 'bg-red-100 text-red-600',
-        neutral: 'bg-neutral-100 text-neutral-600',
+        amber: 'bg-warning-subtle text-warning border-warning/20',
+        green: 'bg-success-subtle text-success border-success/20',
+        blue: 'bg-primary-subtle text-primary border-primary/20',
+        red: 'bg-danger-subtle text-danger border-danger/20',
+        neutral: 'bg-bg-subtle text-text-muted border-border',
     }
+    const ic = iconColors[color] || iconColors.neutral
     return (
         <button
             onClick={() => navigate(to)}
-            className="group flex items-center gap-4 bg-white border border-neutral-200 rounded-2xl p-5 hover:shadow-md hover:border-neutral-300 transition-all text-left w-full"
+            className="group flex items-center gap-3.5 bg-surface border border-border rounded-lg p-4 hover:border-primary/30 hover:shadow-md transition-all text-left w-full"
         >
-            <div className={clsx('p-3 rounded-2xl border flex-shrink-0', iconColors[color])}>
-                <Icon size={20} strokeWidth={2} />
+            <div
+                className="p-2.5 rounded-lg flex-shrink-0 transition-colors"
+                style={{ background: ic.bg, color: ic.text }}
+            >
+                <Icon size={17} strokeWidth={2} />
             </div>
             <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                    <p className="text-sm font-bold text-neutral-900">{label}</p>
+                    <p className="text-sm font-semibold text-text-primary font-heading">{label}</p>
                     {badge !== undefined && (
-                        <span className={clsx('text-[10px] font-black px-1.5 py-0.5 rounded-full', badgeColors[badgeColor])}>
+                        <span className={clsx('text-[10px] font-bold px-1.5 py-0.5 rounded-md border', badgeColors[badgeColor])}>
                             {badge}
                         </span>
                     )}
                 </div>
-                <p className="text-xs text-neutral-400 font-medium mt-0.5">{description}</p>
+                <p className="text-xs text-text-muted mt-0.5">{description}</p>
             </div>
-            <ArrowRight size={15} className="text-neutral-300 group-hover:text-neutral-600 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+            <ArrowRight size={14} className="text-text-muted/40 group-hover:text-primary group-hover:translate-x-0.5 transition-all flex-shrink-0" />
         </button>
     )
 }
 
 // ─── Skeleton stat ─────────────────────────────────────────────────────────
 const SkeletonStat = () => (
-    <div className="bg-white border border-neutral-200 rounded-2xl p-5 flex items-center gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-neutral-100 animate-pulse flex-shrink-0" />
+    <div className="bg-surface border border-border rounded-lg p-4 flex items-center gap-3.5">
+        <div className="w-10 h-10 rounded-lg bg-bg-subtle animate-pulse flex-shrink-0" />
         <div className="space-y-2">
-            <div className="h-6 w-10 bg-neutral-100 rounded-full animate-pulse" />
-            <div className="h-3 w-20 bg-neutral-100 rounded-full animate-pulse" />
+            <div className="h-6 w-10 bg-bg-subtle rounded animate-pulse" />
+            <div className="h-3 w-20 bg-bg-subtle rounded animate-pulse" />
         </div>
     </div>
 )
@@ -98,11 +127,11 @@ const AdminDashboard = () => {
     }, [])
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-7">
             {/* Header */}
-            <div>
-                <h2 className="text-2xl font-extrabold tracking-tight text-neutral-900">Admin Overview</h2>
-                <p className="text-neutral-500 mt-1 font-medium">Manage institutional operations and user accounts.</p>
+            <div className="border-b border-border pb-5">
+                <h2 className="text-xl font-bold tracking-tight text-text-primary font-heading">Admin Overview</h2>
+                <p className="text-text-muted mt-1 text-sm">Manage institutional operations and user accounts.</p>
             </div>
 
             {/* Live stat row */}
@@ -121,80 +150,44 @@ const AdminDashboard = () => {
 
             {/* Quick access */}
             <div>
-                <h3 className="text-xs font-black text-neutral-400 uppercase tracking-[0.15em] mb-3">Quick Access</h3>
+                <h3 className="text-[10px] font-bold text-text-muted uppercase tracking-widest mb-3 font-heading">Quick Access</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <QuickCard
-                        icon={UserCog}
-                        label="Manage All Users"
+                        icon={UserCog} label="Manage All Users"
                         description="Search, suspend, or activate any account"
-                        badge={loading ? '···' : stats?.total}
-                        badgeColor="blue"
-                        to="/admin/users"
-                        color="neutral"
+                        badge={loading ? '···' : stats?.total} badgeColor="blue"
+                        to="/admin/users" color="neutral"
                     />
                     <QuickCard
-                        icon={GraduationCap}
-                        label="Students"
+                        icon={GraduationCap} label="Students"
                         description="View and manage all student accounts"
-                        badge={loading ? '···' : stats?.students}
-                        badgeColor="blue"
-                        to="/admin/students"
-                        color="blue"
+                        badge={loading ? '···' : stats?.students} badgeColor="blue"
+                        to="/admin/students" color="blue"
                     />
                     <QuickCard
-                        icon={Users}
-                        label="Teachers"
+                        icon={Users} label="Teachers"
                         description="View and manage all teacher accounts"
-                        badge={loading ? '···' : stats?.teachers}
-                        badgeColor="neutral"
-                        to="/admin/teachers"
-                        color="purple"
+                        badge={loading ? '···' : stats?.teachers} badgeColor="neutral"
+                        to="/admin/teachers" color="purple"
                     />
                     <QuickCard
-                        icon={CheckSquare}
-                        label="Pending Approvals"
+                        icon={CheckSquare} label="Pending Approvals"
                         description="Review new registration requests"
                         badge={loading ? '···' : stats?.pending}
                         badgeColor={stats?.pending > 0 ? 'amber' : 'neutral'}
-                        to="/admin/approvals"
-                        color="amber"
+                        to="/admin/approvals" color="amber"
                     />
                     <QuickCard
-                        icon={Calendar}
-                        label="Events"
+                        icon={Calendar} label="Events"
                         description="Manage academic events and schedules"
-                        to="/admin/events"
-                        color="green"
+                        to="/admin/events" color="green"
                     />
                     <QuickCard
-                        icon={Shield}
-                        label="Classes"
+                        icon={Shield} label="Classes"
                         description="Manage class groups and sections"
-                        to="/admin/classes"
-                        color="neutral"
+                        to="/admin/classes" color="neutral"
                     />
                 </div>
-            </div>
-        </div>
-    )
-}
-
-// ─── Stat pill ─────────────────────────────────────────────────────────────
-const StatPill = ({ icon: Icon, label, value, color }) => {
-    const colors = {
-        neutral: 'bg-neutral-50 text-neutral-600 border-neutral-100',
-        blue: 'bg-blue-50 text-blue-600 border-blue-100',
-        purple: 'bg-purple-50 text-purple-600 border-purple-100',
-        amber: 'bg-amber-50 text-amber-600 border-amber-100',
-    }
-    return (
-        <div className="bg-white border border-neutral-200 rounded-2xl p-5 flex items-center gap-4 shadow-sm">
-            <div className={clsx('p-3 rounded-2xl border flex-shrink-0', colors[color])}>
-                <Icon size={18} strokeWidth={2} />
-            </div>
-            <div>
-                <p className="text-2xl font-extrabold text-neutral-900 leading-none">{value}</p>
-                <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest mt-0.5">{label}</p>
             </div>
         </div>
     )

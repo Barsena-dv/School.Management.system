@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import LandingPage from '../pages/LandingPage'
 
 import AdminLayout from '@/layouts/AdminLayout'
 import PublicLayout from '@/layouts/PublicLayout'
@@ -9,14 +10,23 @@ import AdminApprovals from '../pages/admin/AdminApprovals'
 import AdminClasses from '../pages/admin/AdminClasses'
 import AdminDashboard from '../pages/admin/AdminDashboard'
 import AdminEnrollments from '../pages/admin/AdminEnrollments'
+import AdminEvents from '../pages/admin/AdminEvents'
 import AdminSubjects from '../pages/admin/AdminSubjects'
 import AdminUsers from '../pages/admin/AdminUsers'
 import Login from '../pages/auth/LoginPage'
+import Register from '../pages/auth/RegisterPage'
 import StudentAssignments from '../pages/student/StudentAssignments'
+import StudentAttendance from '../pages/student/StudentAttendance'
 import StudentDashboard from '../pages/student/StudentDashboard'
+import StudentEvents from '../pages/student/StudentEvents'
+import StudentMarks from '../pages/student/StudentMarks'
+import StudentNotifications from '../pages/student/StudentNotifications'
+import StudentAnalytics from '../pages/student/StudentAnalytics'
 import TeacherAssignments from '../pages/teacher/TeacherAssignments'
 import TeacherAttendance from '../pages/teacher/TeacherAttendance'
+import TeacherAttendanceOverview from '../pages/teacher/TeacherAttendanceOverview'
 import TeacherDashboard from '../pages/teacher/TeacherDashboard'
+import TeacherMarksOverview from '../pages/teacher/TeacherMarksOverview'
 import TeacherSubjectDashboard from '../pages/teacher/TeacherSubjectDashboard'
 import TeacherSubjectStudents from '../pages/teacher/TeacherSubjectStudents'
 import TeacherSubjects from '../pages/teacher/TeacherSubjects'
@@ -32,10 +42,10 @@ const Placeholder = ({ label }) => (
 )
 
 const router = createBrowserRouter([
-    // ── Default redirect ──────────────────────────────────────────
+    // ── Landing page ─────────────────────────────────────────────
     {
         path: '/',
-        element: <Navigate to="/login" replace />,
+        element: <LandingPage />,
     },
 
     // ── Public / Auth ─────────────────────────────────────────────
@@ -43,7 +53,7 @@ const router = createBrowserRouter([
         element: <PublicLayout />,
         children: [
             { path: '/login', element: <Login /> },
-            { path: '/register', element: <Placeholder label="Register" /> },
+            { path: '/register', element: <Register /> },
         ],
     },
 
@@ -59,7 +69,7 @@ const router = createBrowserRouter([
             { path: 'classes', element: <AdminClasses /> },
             { path: 'subjects', element: <AdminSubjects /> },
             { path: 'enrollments', element: <AdminEnrollments /> },
-            { path: 'events', element: <Placeholder label="Events" /> },
+            { path: 'events', element: <AdminEvents /> },
             { path: 'approvals', element: <AdminApprovals /> },
         ],
     },
@@ -73,11 +83,11 @@ const router = createBrowserRouter([
             { path: 'subjects', element: <TeacherSubjects /> },
             { path: 'subjects/:subjectId', element: <TeacherSubjectDashboard /> },
             { path: 'subjects/:subjectId/students', element: <TeacherSubjectStudents /> },
-            { path: 'attendance', element: <Placeholder label="Attendance" /> },
+            { path: 'attendance', element: <TeacherAttendanceOverview /> },
             { path: 'subjects/:subjectId/attendance', element: <TeacherAttendance /> },
             { path: 'assignments', element: <TeacherAssignments /> },
             { path: 'assignments/:assignmentId/submissions', element: <TeacherSubmissions /> },
-            { path: 'marks', element: <Placeholder label="Marks" /> },
+            { path: 'marks', element: <TeacherMarksOverview /> },
         ],
     },
 
@@ -87,11 +97,12 @@ const router = createBrowserRouter([
         element: <StudentLayout />,
         children: [
             { index: true, element: <StudentDashboard /> },
-            { path: 'attendance', element: <Placeholder label="Attendance" /> },
+            { path: 'analytics', element: <StudentAnalytics /> },
+            { path: 'attendance', element: <StudentAttendance /> },
             { path: 'assignments', element: <StudentAssignments /> },
-            { path: 'marks', element: <Placeholder label="Marks" /> },
-            { path: 'events', element: <Placeholder label="Events" /> },
-            { path: 'notifications', element: <Placeholder label="Notifications" /> },
+            { path: 'marks', element: <StudentMarks /> },
+            { path: 'events', element: <StudentEvents /> },
+            { path: 'notifications', element: <StudentNotifications /> },
         ],
     },
 

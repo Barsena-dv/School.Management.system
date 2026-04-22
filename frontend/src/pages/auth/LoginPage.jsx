@@ -47,10 +47,28 @@ const Login = () => {
     }
 
     return (
-        <div className="surface p-8">
-            <div className="mb-6">
-                <h1 className="text-[1.25rem] font-bold text-text-primary tracking-tight">Sign In</h1>
-                <p className="text-sm text-text-secondary mt-1">Access your academic portal</p>
+        <div style={{
+            background: 'rgba(255,255,255,0.04)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '16px',
+            padding: '2rem',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+        }}>
+            <div style={{ marginBottom: '1.5rem' }}>
+                <h1 style={{
+                    fontFamily: "'Outfit', system-ui, sans-serif",
+                    fontSize: '1.25rem',
+                    fontWeight: 700,
+                    color: '#FFFFFF',
+                    letterSpacing: '-0.02em',
+                }}>Sign In</h1>
+                <p style={{
+                    fontSize: '0.875rem',
+                    color: '#9CA3AF',
+                    marginTop: '0.25rem',
+                }}>Access your academic portal</p>
             </div>
 
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
@@ -65,6 +83,11 @@ const Login = () => {
                     onChange={handleChange}
                     error={errors.email}
                     required
+                    style={{
+                        background: 'rgba(255,255,255,0.06)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        color: '#FFFFFF',
+                    }}
                 />
                 <Input
                     label="Password"
@@ -77,14 +100,29 @@ const Login = () => {
                     onChange={handleChange}
                     error={errors.password}
                     required
+                    style={{
+                        background: 'rgba(255,255,255,0.06)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        color: '#FFFFFF',
+                    }}
                 />
 
                 <div className="flex items-center justify-between text-xs py-1">
-                    <label className="flex items-center gap-2 text-text-secondary cursor-pointer">
-                        <input type="checkbox" className="w-4 h-4 rounded border-border text-primary focus:ring-primary" />
+                    <label className="flex items-center gap-2 cursor-pointer" style={{ color: '#9CA3AF' }}>
+                        <input type="checkbox" style={{
+                            width: '14px', height: '14px', borderRadius: '4px',
+                            accentColor: 'var(--primary)',
+                        }} />
                         Stay signed in
                     </label>
-                    <button type="button" className="font-semibold text-primary hover:text-primary-hover">
+                    <button type="button" style={{
+                        fontWeight: 600,
+                        color: 'var(--primary)',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '0.75rem',
+                    }}>
                         Forgot password?
                     </button>
                 </div>
@@ -100,12 +138,23 @@ const Login = () => {
                 </Button>
             </form>
 
-            <div className="mt-8 pt-6 border-t border-border text-center">
-                <p className="text-xs text-text-secondary">
+            <div style={{
+                marginTop: '2rem',
+                paddingTop: '1.5rem',
+                borderTop: '1px solid rgba(255,255,255,0.08)',
+                textAlign: 'center',
+            }}>
+                <p style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>
                     Don't have an account?{' '}
                     <button
                         onClick={() => navigate('/register')}
-                        className="font-bold text-primary hover:text-primary-hover"
+                        style={{
+                            fontWeight: 700,
+                            color: 'var(--primary)',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                        }}
                     >
                         Request Access
                     </button>

@@ -15,19 +15,19 @@ import { useEffect, useState } from 'react'
 // ─── Shared field wrapper ──────────────────────────────────────────────────
 const Field = ({ label, children }) => (
     <div>
-        <label className="block text-xs font-black text-neutral-500 uppercase tracking-widest mb-1.5">{label}</label>
+        <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5">{label}</label>
         {children}
     </div>
 )
 
-const inputCls = "w-full px-4 py-3 border border-neutral-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all"
-const selectCls = "w-full px-4 py-3 border border-neutral-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all bg-white appearance-none pr-10"
+const inputCls = "w-full px-4 py-3 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all"
+const selectCls = "w-full px-4 py-3 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all bg-surface appearance-none pr-10"
 
 // ─── Select wrapper (adds chevron) ────────────────────────────────────────
 const SelectWrap = ({ children }) => (
     <div className="relative">
         {children}
-        <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+        <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" />
     </div>
 )
 
@@ -75,16 +75,16 @@ const SubjectModal = ({ isOpen, onClose, onSaved, editing, classes, teachers }) 
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-            <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden">
-                <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
+            <div className="bg-surface w-full max-w-md rounded-lg shadow-2xl overflow-hidden">
+                <div className="flex items-center justify-between px-6 py-5 border-b border-border">
                     <div>
-                        <h3 className="text-lg font-bold text-neutral-900">{isEdit ? 'Edit Subject' : 'Create Subject'}</h3>
-                        <p className="text-xs text-neutral-500 font-medium mt-0.5">
+                        <h3 className="text-lg font-bold text-text-primary">{isEdit ? 'Edit Subject' : 'Create Subject'}</h3>
+                        <p className="text-xs text-text-muted font-medium mt-0.5">
                             {isEdit ? 'Update subject details below.' : 'Add a new subject to the system.'}
                         </p>
                     </div>
-                    <button onClick={onClose} className="p-2 hover:bg-neutral-100 rounded-xl transition-colors">
-                        <X size={20} className="text-neutral-400" />
+                    <button onClick={onClose} className="p-2 hover:bg-bg-subtle rounded-xl transition-colors">
+                        <X size={20} className="text-text-muted" />
                     </button>
                 </div>
 
@@ -123,11 +123,11 @@ const SubjectModal = ({ isOpen, onClose, onSaved, editing, classes, teachers }) 
 
                     <div className="flex gap-3 pt-2">
                         <button type="button" onClick={onClose} disabled={loading}
-                            className="flex-1 py-3 rounded-2xl border border-neutral-200 text-sm font-bold text-neutral-700 hover:bg-neutral-50 transition-colors disabled:opacity-50">
+                            className="flex-1 py-3 rounded-lg border border-border text-sm font-bold text-neutral-700 hover:bg-bg-subtle transition-colors disabled:opacity-50">
                             Cancel
                         </button>
                         <button type="submit" disabled={loading}
-                            className="flex-1 py-3 rounded-2xl bg-neutral-900 text-sm font-bold text-white hover:bg-neutral-800 transition-colors disabled:opacity-50">
+                            className="flex-1 py-3 rounded-lg bg-neutral-900 text-sm font-bold text-white hover:bg-neutral-800 transition-colors disabled:opacity-50">
                             {loading ? (isEdit ? 'Saving…' : 'Creating…') : (isEdit ? 'Save Changes' : 'Create Subject')}
                         </button>
                     </div>
@@ -158,23 +158,23 @@ const DeleteModal = ({ subject, onClose, onDeleted }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-            <div className="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 space-y-5">
+            <div className="bg-surface w-full max-w-sm rounded-lg shadow-2xl p-6 space-y-5">
                 <div className="flex flex-col items-center text-center">
-                    <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-3xl flex items-center justify-center mb-4">
-                        <Trash2 className="w-6 h-6 text-red-500" />
+                    <div className="w-14 h-14 bg-danger-subtle border border-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <Trash2 className="w-6 h-6 text-danger" />
                     </div>
-                    <h3 className="text-lg font-bold text-neutral-900">Delete Subject?</h3>
-                    <p className="text-sm text-neutral-500 font-medium mt-1">
+                    <h3 className="text-lg font-bold text-text-primary">Delete Subject?</h3>
+                    <p className="text-sm text-text-muted font-medium mt-1">
                         <span className="font-bold text-neutral-700">{subject.name}</span> will be permanently removed. This cannot be undone.
                     </p>
                 </div>
                 <div className="flex gap-3">
                     <button onClick={onClose} disabled={loading}
-                        className="flex-1 py-3 rounded-2xl border border-neutral-200 text-sm font-bold text-neutral-700 hover:bg-neutral-50 transition-colors disabled:opacity-50">
+                        className="flex-1 py-3 rounded-lg border border-border text-sm font-bold text-neutral-700 hover:bg-bg-subtle transition-colors disabled:opacity-50">
                         Cancel
                     </button>
                     <button onClick={handleDelete} disabled={loading}
-                        className="flex-1 py-3 rounded-2xl bg-red-600 text-sm font-bold text-white hover:bg-red-700 transition-colors disabled:opacity-50">
+                        className="flex-1 py-3 rounded-lg bg-red-600 text-sm font-bold text-white hover:bg-red-700 transition-colors disabled:opacity-50">
                         {loading ? 'Deleting…' : 'Delete'}
                     </button>
                 </div>
@@ -188,13 +188,13 @@ const SkeletonRow = () => (
     <tr>
         {[40, 35, 30].map((w, i) => (
             <td key={i} className="px-5 py-4">
-                <div className="h-4 bg-neutral-100 rounded-full animate-pulse" style={{ width: `${w}%` }} />
+                <div className="h-4 bg-bg-subtle rounded-full animate-pulse" style={{ width: `${w}%` }} />
             </td>
         ))}
         <td className="px-5 py-4">
             <div className="flex gap-2">
-                <div className="h-8 w-16 bg-neutral-100 rounded-xl animate-pulse" />
-                <div className="h-8 w-16 bg-neutral-100 rounded-xl animate-pulse" />
+                <div className="h-8 w-16 bg-bg-subtle rounded-xl animate-pulse" />
+                <div className="h-8 w-16 bg-bg-subtle rounded-xl animate-pulse" />
             </div>
         </td>
     </tr>
@@ -202,10 +202,10 @@ const SkeletonRow = () => (
 
 // ─── Table header ──────────────────────────────────────────────────────────
 const THead = () => (
-    <thead className="bg-neutral-50/80 border-b border-neutral-100">
+    <thead className="bg-bg-subtle/50 border-b border-border">
         <tr>
             {['Subject Name', 'Class', 'Teacher', 'Actions'].map(h => (
-                <th key={h} className="px-5 py-4 text-[10px] font-black text-neutral-400 uppercase tracking-[0.15em] whitespace-nowrap">{h}</th>
+                <th key={h} className="px-5 py-4 text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] whitespace-nowrap">{h}</th>
             ))}
         </tr>
     </thead>
@@ -257,20 +257,20 @@ const AdminSubjects = () => {
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 space-y-6">
 
             {/* ── Header ─────────────────────────────────────────────────── */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neutral-100">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-border">
                 <div>
-                    <h1 className="text-3xl font-extrabold text-neutral-900 tracking-tight">Subjects</h1>
-                    <p className="text-neutral-500 mt-1 font-medium">Manage all subjects, their classes, and assigned teachers.</p>
+                    <h1 className="text-xl font-bold font-heading text-text-primary tracking-tight">Subjects</h1>
+                    <p className="text-text-muted mt-1 font-medium">Manage all subjects, their classes, and assigned teachers.</p>
                 </div>
 
                 <div className="flex items-center gap-3 flex-shrink-0">
                     {!loading && (
-                        <span className="px-3 py-1.5 bg-white border border-neutral-200 rounded-xl text-xs font-bold text-neutral-600">
+                        <span className="px-3 py-1.5 bg-surface border border-border rounded-xl text-xs font-bold text-text-secondary">
                             {subjects.length} subject{subjects.length !== 1 ? 's' : ''}
                         </span>
                     )}
                     <button onClick={openCreate}
-                        className="inline-flex items-center gap-2 px-5 py-3 bg-neutral-900 text-white text-sm font-bold rounded-2xl hover:bg-neutral-800 transition-colors shadow-sm">
+                        className="inline-flex items-center gap-2 px-5 py-3 bg-neutral-900 text-white text-sm font-bold rounded-lg hover:bg-neutral-800 transition-colors shadow-sm">
                         <Plus size={16} strokeWidth={2.5} />
                         Create Subject
                     </button>
@@ -279,34 +279,34 @@ const AdminSubjects = () => {
 
             {/* ── Search ─────────────────────────────────────────────────── */}
             <div className="relative max-w-sm">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 w-4 h-4" />
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted w-4 h-4" />
                 <input
                     type="text"
                     placeholder="Search by name, class, or teacher…"
                     value={search}
                     onChange={e => setSearch(e.target.value)}
-                    className="pl-10 pr-4 py-2.5 w-full bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all"
+                    className="pl-10 pr-4 py-2.5 w-full bg-surface border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all"
                 />
             </div>
 
             {/* ── Table card ─────────────────────────────────────────────── */}
-            <div className="bg-white border border-neutral-200 rounded-3xl shadow-sm overflow-hidden">
+            <div className="bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
                 {loading ? (
                     <table className="w-full text-left">
                         <THead />
-                        <tbody className="divide-y divide-neutral-50">
+                        <tbody className="divide-y divide-border">
                             <SkeletonRow /><SkeletonRow /><SkeletonRow />
                         </tbody>
                     </table>
                 ) : filtered.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-20 text-center">
-                        <div className="w-16 h-16 bg-neutral-50 rounded-3xl flex items-center justify-center mb-4 border border-neutral-100">
-                            <BookOpen className="w-7 h-7 text-neutral-300" />
+                        <div className="w-16 h-16 bg-bg-subtle rounded-lg flex items-center justify-center mb-4 border border-border">
+                            <BookOpen className="w-7 h-7 text-text-muted/40" />
                         </div>
-                        <h3 className="text-base font-bold text-neutral-900">
+                        <h3 className="text-base font-bold text-text-primary">
                             {search ? 'No subjects match your search' : 'No subjects yet'}
                         </h3>
-                        <p className="text-sm text-neutral-400 font-medium mt-1">
+                        <p className="text-sm text-text-muted font-medium mt-1">
                             {search ? 'Try different keywords.' : 'Click "Create Subject" to add the first one.'}
                         </p>
                         {!search && (
@@ -320,17 +320,17 @@ const AdminSubjects = () => {
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
                             <THead />
-                            <tbody className="divide-y divide-neutral-50">
+                            <tbody className="divide-y divide-border">
                                 {filtered.map(s => (
-                                    <tr key={s._id} className="hover:bg-neutral-50/60 transition-colors group">
+                                    <tr key={s._id} className="hover:bg-bg-subtle/30 transition-colors group">
 
                                         {/* Subject name */}
                                         <td className="px-5 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-9 h-9 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-100 transition-colors">
-                                                    <BookOpen size={14} className="text-purple-600" />
+                                                <div className="w-9 h-9 rounded-lg bg-accent-subtle border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-100 transition-colors">
+                                                    <BookOpen size={14} className="text-accent" />
                                                 </div>
-                                                <span className="text-sm font-bold text-neutral-900">{s.name}</span>
+                                                <span className="text-sm font-bold text-text-primary">{s.name}</span>
                                             </div>
                                         </td>
 
@@ -338,14 +338,14 @@ const AdminSubjects = () => {
                                         <td className="px-5 py-4">
                                             {s.class ? (
                                                 <div className="flex items-center gap-1.5">
-                                                    <GraduationCap size={13} className="text-neutral-400" />
+                                                    <GraduationCap size={13} className="text-text-muted" />
                                                     <span className="text-sm text-neutral-700 font-medium">
                                                         {s.class.grade} – {s.class.section}
                                                     </span>
-                                                    <span className="text-[11px] text-neutral-400 font-medium">({s.class.academicYear})</span>
+                                                    <span className="text-[11px] text-text-muted font-medium">({s.class.academicYear})</span>
                                                 </div>
                                             ) : (
-                                                <span className="text-xs text-neutral-300">—</span>
+                                                <span className="text-xs text-text-muted/40">—</span>
                                             )}
                                         </td>
 
@@ -353,13 +353,13 @@ const AdminSubjects = () => {
                                         <td className="px-5 py-4">
                                             {s.teacher ? (
                                                 <div className="flex items-center gap-2">
-                                                    <div className="w-6 h-6 rounded-lg bg-neutral-100 flex items-center justify-center text-[10px] font-black text-neutral-600 flex-shrink-0">
+                                                    <div className="w-6 h-6 rounded-lg bg-bg-subtle flex items-center justify-center text-[10px] font-bold text-text-secondary flex-shrink-0">
                                                         {s.teacher.name?.charAt(0)?.toUpperCase()}
                                                     </div>
                                                     <span className="text-sm text-neutral-700 font-medium">{s.teacher.name}</span>
                                                 </div>
                                             ) : (
-                                                <span className="text-xs text-neutral-300">Unassigned</span>
+                                                <span className="text-xs text-text-muted/40">Unassigned</span>
                                             )}
                                         </td>
 
@@ -367,11 +367,11 @@ const AdminSubjects = () => {
                                         <td className="px-5 py-4">
                                             <div className="flex items-center gap-2">
                                                 <button onClick={() => openEdit(s)}
-                                                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-white border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 text-neutral-700 text-xs font-bold rounded-xl transition-colors">
+                                                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-surface border border-border hover:border-border-strong hover:bg-bg-subtle text-neutral-700 text-xs font-bold rounded-xl transition-colors">
                                                     <Edit2 size={12} strokeWidth={2.5} /> Edit
                                                 </button>
                                                 <button onClick={() => setDeleting(s)}
-                                                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-red-50 hover:bg-red-100 border border-red-200 text-red-600 text-xs font-bold rounded-xl transition-colors">
+                                                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-danger-subtle hover:bg-red-100 border border-red-200 text-danger text-xs font-bold rounded-xl transition-colors">
                                                     <Trash2 size={12} strokeWidth={2.5} /> Delete
                                                 </button>
                                             </div>

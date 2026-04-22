@@ -46,7 +46,12 @@ const Modal = ({
         >
             {/* Backdrop */}
             <div
-                className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                className="absolute inset-0"
+                style={{
+                    background: 'rgba(0, 0, 0, 0.5)',
+                    backdropFilter: 'blur(4px)',
+                    WebkitBackdropFilter: 'blur(4px)',
+                }}
                 onClick={closeOnBackdrop ? onClose : undefined}
                 aria-hidden="true"
             />
@@ -55,27 +60,30 @@ const Modal = ({
             <div
                 ref={dialogRef}
                 className={clsx(
-                    'relative z-10 w-full bg-white rounded-xl shadow-xl',
-                    'flex flex-col max-h-[90vh]',
+                    'relative z-10 w-full bg-surface rounded-lg border border-border',
+                    'shadow-xl flex flex-col max-h-[90vh]',
                     sizeClasses[size],
                     className
                 )}
+                style={{
+                    animation: 'modalIn 200ms ease-out forwards',
+                }}
             >
                 {/* Header */}
                 {title && (
-                    <div className="flex items-center justify-between px-5 py-4 border-b border-[#e2e8f0] shrink-0">
+                    <div className="flex items-center justify-between px-5 py-4 border-b border-border shrink-0">
                         <h2
                             id="modal-title"
-                            className="text-base font-semibold text-[#0f1f3d]"
+                            className="text-base font-bold text-text-primary font-heading tracking-tight"
                         >
                             {title}
                         </h2>
                         <button
                             onClick={onClose}
-                            className="p-1.5 rounded-lg text-[#94a3b8] hover:text-[#0f1f3d] hover:bg-[#f5f5f0] transition-colors"
+                            className="p-1.5 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-subtle transition-colors"
                             aria-label="Close modal"
                         >
-                            <X size={18} />
+                            <X size={16} />
                         </button>
                     </div>
                 )}
@@ -87,11 +95,18 @@ const Modal = ({
 
                 {/* Footer */}
                 {footer && (
-                    <div className="flex items-center justify-end gap-2 px-5 py-4 border-t border-[#e2e8f0] shrink-0">
+                    <div className="flex items-center justify-end gap-2 px-5 py-4 border-t border-border shrink-0">
                         {footer}
                     </div>
                 )}
             </div>
+
+            <style>{`
+                @keyframes modalIn {
+                    from { opacity: 0; transform: scale(0.97) translateY(8px); }
+                    to { opacity: 1; transform: scale(1) translateY(0); }
+                }
+            `}</style>
         </div>
     )
 }

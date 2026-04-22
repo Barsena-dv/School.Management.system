@@ -152,7 +152,7 @@ const getMySubmissions = async (req, res, next) => {
     try {
         const userId = req.user.id;
         const student = await Student.findOne({ user: userId });
-        if (!student) throw new AppError("Student profile not found", 404);
+        if (!student) return sendResponse(res, 200, true, "Your submissions fetched successfully", { submissions: [] });
 
         const submissions = await Submission.find({ student: student._id })
             .populate({

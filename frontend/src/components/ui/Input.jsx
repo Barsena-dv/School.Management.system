@@ -16,34 +16,68 @@ const Input = ({
             {label && (
                 <label
                     htmlFor={inputId}
-                    className="text-[0.8125rem] font-semibold text-text-primary/90 ml-0.5"
+                    style={{
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        fontFamily: "'Outfit', 'Inter', system-ui, sans-serif",
+                        color: 'var(--text-secondary)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        paddingLeft: '2px',
+                    }}
                 >
                     {label}
-                    {required && <span className="text-danger ml-0.5">*</span>}
+                    {required && <span style={{ color: 'var(--danger)', marginLeft: '3px' }}>*</span>}
                 </label>
             )}
 
             <input
                 id={inputId}
                 required={required}
-                className={clsx(
-                    'w-full rounded-xl border px-3.5 py-2.5 text-sm text-text-primary',
-                    'bg-surface placeholder:text-text-muted/60',
-                    'outline-none transition-all duration-200',
-                    error
-                        ? 'border-danger focus:ring-2 focus:ring-danger/10'
-                        : 'border-border focus:border-primary focus:ring-4 focus:ring-primary/5',
-                    'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-bg-subtle',
-                    className
-                )}
+                className={clsx(className)}
+                style={{
+                    width: '100%',
+                    borderRadius: '8px',
+                    border: error ? '1px solid var(--danger)' : '1px solid var(--border)',
+                    padding: '0.625rem 0.875rem',
+                    fontSize: '0.875rem',
+                    color: 'var(--text-primary)',
+                    background: 'var(--surface)',
+                    outline: 'none',
+                    transition: 'all 200ms ease',
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                }}
+                onFocus={(e) => {
+                    if (!error) {
+                        e.currentTarget.style.borderColor = 'var(--primary)'
+                        e.currentTarget.style.boxShadow = '0 0 0 3px var(--primary-subtle), var(--shadow-glow)'
+                    } else {
+                        e.currentTarget.style.boxShadow = '0 0 0 3px var(--danger-subtle)'
+                    }
+                }}
+                onBlur={(e) => {
+                    e.currentTarget.style.borderColor = error ? 'var(--danger)' : 'var(--border)'
+                    e.currentTarget.style.boxShadow = 'none'
+                }}
                 {...props}
             />
 
             {error && (
-                <p className="text-xs font-medium text-danger mt-0.5 ml-0.5">{error}</p>
+                <p style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 500,
+                    color: 'var(--danger)',
+                    marginTop: '2px',
+                    paddingLeft: '2px',
+                }}>{error}</p>
             )}
             {hint && !error && (
-                <p className="text-xs text-text-muted mt-0.5 ml-0.5">{hint}</p>
+                <p style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-muted)',
+                    marginTop: '2px',
+                    paddingLeft: '2px',
+                }}>{hint}</p>
             )}
         </div>
     )

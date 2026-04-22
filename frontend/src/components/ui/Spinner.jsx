@@ -12,10 +12,14 @@ const Spinner = ({ size = 'md', className }) => (
         role="status"
         aria-label="Loading"
         className={clsx(
-            'inline-block rounded-full border-[#e2e8f0] border-t-[#0f1f3d] animate-spin',
+            'inline-block rounded-full animate-spin',
             sizeMap[size],
             className
         )}
+        style={{
+            borderColor: 'var(--border)',
+            borderTopColor: 'var(--primary)',
+        }}
     />
 )
 
@@ -23,7 +27,7 @@ const Spinner = ({ size = 'md', className }) => (
 Spinner.Page = ({ message = 'Loading...' }) => (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
         <Spinner size="lg" />
-        <p className="text-sm text-[#475569]">{message}</p>
+        <p className="text-sm text-text-muted font-medium font-heading">{message}</p>
     </div>
 )
 
@@ -31,7 +35,7 @@ Spinner.Page = ({ message = 'Loading...' }) => (
 Spinner.Inline = ({ message }) => (
     <div className="flex items-center gap-2">
         <Spinner size="sm" />
-        {message && <span className="text-sm text-[#475569]">{message}</span>}
+        {message && <span className="text-sm text-text-muted">{message}</span>}
     </div>
 )
 

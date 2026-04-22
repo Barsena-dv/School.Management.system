@@ -18,14 +18,14 @@ import { useEffect, useMemo, useState } from 'react'
 // ─── Status badge ──────────────────────────────────────────────────────────
 const StatusBadge = ({ status }) => {
     const map = {
-        pending: { cls: 'bg-amber-50 text-amber-700 border-amber-200', icon: <Clock size={11} strokeWidth={3} /> },
-        approved: { cls: 'bg-green-50 text-green-700 border-green-200', icon: <Check size={11} strokeWidth={3} /> },
-        rejected: { cls: 'bg-red-50 text-red-600 border-red-200', icon: <X size={11} strokeWidth={3} /> },
-        suspended: { cls: 'bg-neutral-100 text-neutral-500 border-neutral-200', icon: <ShieldOff size={11} strokeWidth={3} /> },
+        pending: { cls: 'bg-warning-subtle text-warning border-warning/20', icon: <Clock size={11} strokeWidth={3} /> },
+        approved: { cls: 'bg-success-subtle text-success border-green-200', icon: <Check size={11} strokeWidth={3} /> },
+        rejected: { cls: 'bg-danger-subtle text-danger border-red-200', icon: <X size={11} strokeWidth={3} /> },
+        suspended: { cls: 'bg-bg-subtle text-text-muted border-border', icon: <ShieldOff size={11} strokeWidth={3} /> },
     }
     const cfg = map[status] || map.pending
     return (
-        <span className={clsx('inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-[11px] font-black uppercase tracking-wider', cfg.cls)}>
+        <span className={clsx('inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-[11px] font-bold uppercase tracking-wider', cfg.cls)}>
             {cfg.icon}{status}
         </span>
     )
@@ -34,9 +34,9 @@ const StatusBadge = ({ status }) => {
 // ─── Role badge ────────────────────────────────────────────────────────────
 const RoleBadge = ({ role }) => {
     const map = {
-        student: { cls: 'bg-blue-50 text-blue-700 border-blue-200', icon: <GraduationCap size={11} /> },
-        teacher: { cls: 'bg-purple-50 text-purple-700 border-purple-200', icon: <ShieldCheck size={11} /> },
-        admin: { cls: 'bg-neutral-100 text-neutral-600 border-neutral-200', icon: <UserCheck size={11} /> },
+        student: { cls: 'bg-primary-subtle text-primary border-blue-200', icon: <GraduationCap size={11} /> },
+        teacher: { cls: 'bg-accent-subtle text-purple-700 border-purple-200', icon: <ShieldCheck size={11} /> },
+        admin: { cls: 'bg-bg-subtle text-text-secondary border-border', icon: <UserCheck size={11} /> },
     }
     const cfg = map[role] || map.student
     return (
@@ -51,22 +51,22 @@ const SkeletonRow = () => (
     <tr>
         <td className="px-5 py-4">
             <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-2xl bg-neutral-100 animate-pulse flex-shrink-0" />
+                <div className="w-9 h-9 rounded-lg bg-bg-subtle animate-pulse flex-shrink-0" />
                 <div className="space-y-1.5">
-                    <div className="h-3.5 w-28 bg-neutral-100 rounded-full animate-pulse" />
-                    <div className="h-3 w-20 bg-neutral-100 rounded-full animate-pulse" />
+                    <div className="h-3.5 w-28 bg-bg-subtle rounded-full animate-pulse" />
+                    <div className="h-3 w-20 bg-bg-subtle rounded-full animate-pulse" />
                 </div>
             </div>
         </td>
         {[55, 40, 45].map((w, i) => (
             <td key={i} className="px-5 py-4">
-                <div className="h-4 bg-neutral-100 rounded-full animate-pulse" style={{ width: `${w}%` }} />
+                <div className="h-4 bg-bg-subtle rounded-full animate-pulse" style={{ width: `${w}%` }} />
             </td>
         ))}
         <td className="px-5 py-4">
             <div className="flex gap-2">
-                <div className="h-8 w-20 bg-neutral-100 rounded-xl animate-pulse" />
-                <div className="h-8 w-16 bg-neutral-100 rounded-xl animate-pulse" />
+                <div className="h-8 w-20 bg-bg-subtle rounded-xl animate-pulse" />
+                <div className="h-8 w-16 bg-bg-subtle rounded-xl animate-pulse" />
             </div>
         </td>
     </tr>
@@ -79,7 +79,7 @@ const FilterTab = ({ active, onClick, children }) => (
             'px-4 py-2 rounded-xl text-xs font-bold border transition-all',
             active
                 ? 'bg-neutral-900 text-white border-neutral-900'
-                : 'bg-white text-neutral-500 border-neutral-200 hover:border-neutral-300 hover:text-neutral-900'
+                : 'bg-surface text-text-muted border-border hover:border-border-strong hover:text-text-primary'
         )}>
         {children}
     </button>
@@ -147,16 +147,16 @@ const AdminUsers = ({ defaultRole = 'all' }) => {
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 space-y-6">
 
             {/* ── Header ─────────────────────────────────────────────────── */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neutral-100">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-border">
                 <div>
-                    <h1 className="text-3xl font-extrabold text-neutral-900 tracking-tight">Users</h1>
-                    <p className="text-neutral-500 mt-1 font-medium">Manage all registered users — students, teachers, and admins.</p>
+                    <h1 className="text-xl font-bold font-heading text-text-primary tracking-tight">Users</h1>
+                    <p className="text-text-muted mt-1 font-medium">Manage all registered users — students, teachers, and admins.</p>
                 </div>
                 {!loading && (
-                    <div className="flex items-center gap-2 px-4 py-2.5 bg-white border border-neutral-200 rounded-2xl shadow-sm text-sm">
-                        <Users size={15} className="text-neutral-400" />
-                        <span className="font-bold text-neutral-900">{users.length}</span>
-                        <span className="text-neutral-500 font-medium">total users</span>
+                    <div className="flex items-center gap-2 px-4 py-2.5 bg-surface border border-border rounded-lg shadow-sm text-sm">
+                        <Users size={15} className="text-text-muted" />
+                        <span className="font-bold text-text-primary">{users.length}</span>
+                        <span className="text-text-muted font-medium">total users</span>
                     </div>
                 )}
             </div>
@@ -165,13 +165,13 @@ const AdminUsers = ({ defaultRole = 'all' }) => {
             <div className="flex flex-col sm:flex-row gap-3">
                 {/* Search */}
                 <div className="relative flex-1 max-w-sm">
-                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 w-4 h-4" />
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted w-4 h-4" />
                     <input
                         type="text"
                         placeholder="Search by name or email..."
                         value={search}
                         onChange={e => setSearch(e.target.value)}
-                        className="pl-10 pr-4 py-2.5 w-full bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all"
+                        className="pl-10 pr-4 py-2.5 w-full bg-surface border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all"
                     />
                 </div>
 
@@ -186,8 +186,8 @@ const AdminUsers = ({ defaultRole = 'all' }) => {
                         <FilterTab key={key} active={roleFilter === key} onClick={() => setRoleFilter(key)}>
                             {label}
                             {!loading && (
-                                <span className={clsx('ml-1.5 px-1.5 py-0.5 rounded-md text-[10px] font-black',
-                                    roleFilter === key ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-500')}>
+                                <span className={clsx('ml-1.5 px-1.5 py-0.5 rounded-md text-[10px] font-bold',
+                                    roleFilter === key ? 'bg-white/20 text-white' : 'bg-bg-subtle text-text-muted')}>
                                     {roleCounts[key]}
                                 </span>
                             )}
@@ -211,44 +211,44 @@ const AdminUsers = ({ defaultRole = 'all' }) => {
             </div>
 
             {/* ── Table card ─────────────────────────────────────────────── */}
-            <div className="bg-white border border-neutral-200 rounded-3xl shadow-sm overflow-hidden">
+            <div className="bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
                 {loading ? (
                     <table className="w-full text-left">
                         <THead />
-                        <tbody className="divide-y divide-neutral-50">
+                        <tbody className="divide-y divide-border">
                             <SkeletonRow /><SkeletonRow /><SkeletonRow /><SkeletonRow />
                         </tbody>
                     </table>
                 ) : filtered.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-20 text-center">
-                        <div className="w-16 h-16 bg-neutral-50 rounded-3xl flex items-center justify-center mb-4 border border-neutral-100">
-                            <Users className="w-7 h-7 text-neutral-300" />
+                        <div className="w-16 h-16 bg-bg-subtle rounded-lg flex items-center justify-center mb-4 border border-border">
+                            <Users className="w-7 h-7 text-text-muted/40" />
                         </div>
-                        <h3 className="text-base font-bold text-neutral-900">No users found</h3>
-                        <p className="text-sm text-neutral-400 font-medium mt-1">Try adjusting your search or filters.</p>
+                        <h3 className="text-base font-bold text-text-primary">No users found</h3>
+                        <p className="text-sm text-text-muted font-medium mt-1">Try adjusting your search or filters.</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
                             <THead />
-                            <tbody className="divide-y divide-neutral-50">
+                            <tbody className="divide-y divide-border">
                                 {filtered.map(user => {
                                     const busy = actionLoading[user._id]
                                     const isApproved = user.status === 'approved'
                                     const isSuspended = user.status === 'suspended'
 
                                     return (
-                                        <tr key={user._id} className="hover:bg-neutral-50/60 transition-colors group">
+                                        <tr key={user._id} className="hover:bg-bg-subtle/30 transition-colors group">
 
                                             {/* Name + date */}
                                             <td className="px-5 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-9 h-9 rounded-2xl bg-neutral-100 group-hover:bg-white border border-neutral-100 transition-colors flex items-center justify-center text-sm font-black text-neutral-600 flex-shrink-0">
+                                                    <div className="w-9 h-9 rounded-lg bg-bg-subtle group-hover:bg-surface border border-border transition-colors flex items-center justify-center text-sm font-bold text-text-secondary flex-shrink-0">
                                                         {user.name?.charAt(0)?.toUpperCase() || '?'}
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm font-bold text-neutral-900 whitespace-nowrap">{user.name}</p>
-                                                        <p className="text-[11px] text-neutral-400 font-medium">
+                                                        <p className="text-sm font-bold text-text-primary whitespace-nowrap">{user.name}</p>
+                                                        <p className="text-[11px] text-text-muted font-medium">
                                                             {new Date(user.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                                                         </p>
                                                     </div>
@@ -257,7 +257,7 @@ const AdminUsers = ({ defaultRole = 'all' }) => {
 
                                             {/* Email */}
                                             <td className="px-5 py-4">
-                                                <span className="text-sm text-neutral-500 font-medium">{user.email}</span>
+                                                <span className="text-sm text-text-muted font-medium">{user.email}</span>
                                             </td>
 
                                             {/* Role */}
@@ -269,7 +269,7 @@ const AdminUsers = ({ defaultRole = 'all' }) => {
                                             {/* Actions */}
                                             <td className="px-5 py-4">
                                                 {user.role === 'admin' ? (
-                                                    <span className="text-xs text-neutral-300 font-medium">—</span>
+                                                    <span className="text-xs text-text-muted/40 font-medium">—</span>
                                                 ) : (
                                                     <div className="flex items-center gap-2">
                                                         {isSuspended || !isApproved ? (
@@ -306,10 +306,10 @@ const AdminUsers = ({ defaultRole = 'all' }) => {
 
 // ─── Table header ──────────────────────────────────────────────────────────
 const THead = () => (
-    <thead className="bg-neutral-50/80 border-b border-neutral-100">
+    <thead className="bg-bg-subtle/50 border-b border-border">
         <tr>
             {['Name', 'Email', 'Role', 'Status', 'Actions'].map(h => (
-                <th key={h} className="px-5 py-4 text-[10px] font-black text-neutral-400 uppercase tracking-[0.15em] whitespace-nowrap">{h}</th>
+                <th key={h} className="px-5 py-4 text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] whitespace-nowrap">{h}</th>
             ))}
         </tr>
     </thead>
@@ -319,7 +319,7 @@ const THead = () => (
 const ActionBtn = ({ icon: Icon, label, onClick, busy, color = 'neutral' }) => {
     const colors = {
         green: 'bg-green-600 hover:bg-green-700 text-white',
-        red: 'bg-red-50 hover:bg-red-100 text-red-600 border border-red-200',
+        red: 'bg-danger-subtle hover:bg-red-100 text-danger border border-red-200',
     }
     return (
         <button onClick={onClick} disabled={busy}

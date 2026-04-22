@@ -42,4 +42,5 @@ export const registerValidators = {
     name: [(v) => required(v, 'Name'), (v) => minLength(v, 2, 'Name')],
     email: [(v) => required(v, 'Email'), isEmail],
     password: [(v) => required(v, 'Password'), (v) => minLength(v, 6, 'Password')],
+    role: [(v) => required(v, 'Role')],
 }

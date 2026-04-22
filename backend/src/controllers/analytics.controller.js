@@ -221,4 +221,137 @@ const getTeacherOverview = async (req, res, next) => {
     }
 };
 
-module.exports = { getStudentAnalytics, getAdminOverview, getTeacherOverview };
+const getLoggedInStudentAnalytics = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+
+        // Fetch logged-in student using req.user.id
+        const student = await Student.findOne({ user: userId });
+        if (!student) {
+            throw new AppError("Student profile not found", 404);
+        }
+
+        // Marks Aggregation with Facet
+        const marksAggregation = await Mark.aggregate([
+            { $match: { student: student._id } },
+            {
+                $lookup: {
+                    from: "assessments",
+                    localField: "assessment",
+                    foreignField: "_id",
+                    as: "assessment"
+                }
+            },
+            { $unwind: "$assessment" },
+            {
+                $lookup: {
+                    from: "subjects",
+                    localField: "assessment.subject",
+                    foreignField: "_id",
+                    as: "assessment.subject"
+                }
+            },
+            { $unwind: "$assessment.subject" },
+            {
+                $facet: {
+                    allMarks: [
+                        {
+                            $project: {
+                                _id: 1,
+                                marksObtained: 1,
+                                "assessment._id": 1,
+                                "assessment.title": 1,
+                                "assessment.maxMarks": 1,
+                                "assessment.subject._id": 1,
+                                "assessment.subject.name": 1
+                            }
+                        }
+                    ],
+                    subjectStats: [
+                        {
+                            $group: {
+                                _id: "$assessment.subject._id",
+                                subjectName: { $first: "$assessment.subject.name" },
+                                totalObtained: { $sum: "$marksObtained" },
+                                totalMax: { $sum: "$assessment.maxMarks" }
+                            }
+                        },
+                        {
+                            $project: {
+                                subjectName: 1,
+                                average: {
+                                    $cond: [
+                                        { $gt: ["$totalMax", 0] },
+                                        { $multiply: [{ $divide: ["$totalObtained", "$totalMax"] }, 100] },
+                                        0
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    overallStats: [
+                        {
+                            $group: {
+                                _id: null,
+                                totalObtained: { $sum: "$marksObtained" },
+                                totalMax: { $sum: "$assessment.maxMarks" }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]);
+
+        const result = marksAggregation[0];
+        const allMarks = result.allMarks || [];
+
+        const overallStats = result.overallStats[0] || { totalObtained: 0, totalMax: 0 };
+        const overallPercentage = overallStats.totalMax > 0
+            ? parseFloat(((overallStats.totalObtained / overallStats.totalMax) * 100).toFixed(2))
+            : 0;
+
+        const subjectAverages = result.subjectStats || [];
+        const formattedSubjectAverages = subjectAverages.map(s => ({
+            ...s,
+            average: parseFloat(s.average.toFixed(2))
+        }));
+
+        const weakSubjects = formattedSubjectAverages.filter(s => s.average < 40);
+        const strongSubjects = formattedSubjectAverages.filter(s => s.average > 75);
+
+        // Attendance Aggregation
+        const attendanceAgg = await Attendance.aggregate([
+            { $match: { student: student._id } },
+            {
+                $group: {
+                    _id: null,
+                    totalClasses: { $sum: 1 },
+                    presentCount: {
+                        $sum: { $cond: [{ $eq: ["$status", "present"] }, 1, 0] }
+                    }
+                }
+            }
+        ]);
+
+        const attData = attendanceAgg[0] || { totalClasses: 0, presentCount: 0 };
+        const attendancePercentage = attData.totalClasses > 0
+            ? parseFloat(((attData.presentCount / attData.totalClasses) * 100).toFixed(2))
+            : 0;
+
+        const responseData = {
+            studentId: student._id,
+            marks: allMarks,
+            overallPercentage,
+            subjectAverages: formattedSubjectAverages,
+            weakSubjects,
+            strongSubjects,
+            attendancePercentage
+        };
+
+        return sendResponse(res, 200, true, "Student personal analytics fetched successfully", responseData);
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { getStudentAnalytics, getAdminOverview, getTeacherOverview, getLoggedInStudentAnalytics };

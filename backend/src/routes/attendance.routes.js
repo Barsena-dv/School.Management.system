@@ -8,4 +8,6 @@ router.post("/", verifyToken, authorizeRoles("teacher"), markAttendance);
 router.get("/subject/:subjectId", verifyToken, authorizeRoles("admin", "teacher"), getAttendanceBySubject);
 router.get("/student/:studentId", verifyToken, authorizeRoles("admin", "teacher", "student"), getAttendanceByStudent);
 
+router.get("/", verifyToken, authorizeRoles("admin", "teacher", "student"), getAllAttendance);
+
 module.exports = router;

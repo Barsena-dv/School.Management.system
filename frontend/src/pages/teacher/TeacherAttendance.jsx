@@ -133,63 +133,63 @@ const TeacherAttendance = () => {
         <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8 space-y-6">
 
             {/* ── Header ─────────────────────────────────────────────────── */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-neutral-100">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-border">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => navigate(-1)}
-                        className="p-2.5 rounded-2xl border border-neutral-200 hover:bg-neutral-50 transition-colors text-neutral-500 hover:text-neutral-900 flex-shrink-0"
+                        className="p-2.5 rounded-lg border border-border hover:bg-bg-subtle transition-colors text-text-muted hover:text-text-primary flex-shrink-0"
                     >
                         <ArrowLeft size={18} />
                     </button>
                     <div>
                         <div className="flex items-center gap-2 mb-0.5">
-                            <BookOpen size={13} className="text-neutral-400" />
-                            <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">
+                            <BookOpen size={13} className="text-text-muted" />
+                            <span className="text-xs font-bold text-text-muted uppercase tracking-widest">
                                 {loading ? '···' : subjectName}
                             </span>
                             {!loading && className && (
                                 <><span className="text-neutral-200">·</span>
-                                    <span className="text-xs font-medium text-neutral-400">{className}</span></>
+                                    <span className="text-xs font-medium text-text-muted">{className}</span></>
                             )}
                         </div>
-                        <h1 className="text-2xl font-extrabold text-neutral-900 tracking-tight">Mark Attendance</h1>
+                        <h1 className="text-xl font-bold font-heading text-text-primary tracking-tight">Mark Attendance</h1>
                     </div>
                 </div>
 
                 {/* Student count */}
                 {!loading && (
-                    <div className="flex items-center gap-2 px-4 py-2.5 bg-white border border-neutral-200 rounded-2xl shadow-sm text-sm">
-                        <Users size={15} className="text-neutral-400" />
-                        <span className="font-bold text-neutral-900">{students.length}</span>
-                        <span className="text-neutral-500 font-medium">student{students.length !== 1 ? 's' : ''}</span>
+                    <div className="flex items-center gap-2 px-4 py-2.5 bg-surface border border-border rounded-lg shadow-sm text-sm">
+                        <Users size={15} className="text-text-muted" />
+                        <span className="font-bold text-text-primary">{students.length}</span>
+                        <span className="text-text-muted font-medium">student{students.length !== 1 ? 's' : ''}</span>
                     </div>
                 )}
             </div>
 
             {/* ── Controls bar ───────────────────────────────────────────── */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-neutral-200 rounded-2xl px-5 py-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface border border-border rounded-lg px-5 py-4 shadow-sm">
                 {/* Date picker */}
                 <div className="flex items-center gap-3">
-                    <Calendar size={16} className="text-neutral-400 flex-shrink-0" />
-                    <label className="text-xs font-black text-neutral-500 uppercase tracking-widest">Date</label>
+                    <Calendar size={16} className="text-text-muted flex-shrink-0" />
+                    <label className="text-xs font-bold text-text-muted uppercase tracking-widest">Date</label>
                     <input
                         type="date"
                         value={selectedDate}
                         max={toDateInputValue(new Date())}
                         onChange={e => setSelectedDate(e.target.value)}
-                        className="px-3 py-2 border border-neutral-200 rounded-xl text-sm font-semibold text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all"
+                        className="px-3 py-2 border border-border rounded-xl text-sm font-semibold text-text-primary focus:outline-none focus:ring-2 focus:ring-neutral-900/10 transition-all"
                     />
                 </div>
 
                 {/* Live summary */}
                 {!loading && students.length > 0 && (
                     <div className="flex items-center gap-3 text-xs font-bold">
-                        <span className="flex items-center gap-1.5 text-green-600">
-                            <span className="w-2 h-2 rounded-full bg-green-500 inline-block" />
+                        <span className="flex items-center gap-1.5 text-success">
+                            <span className="w-2 h-2 rounded-full bg-success-subtle0 inline-block" />
                             {presentCount} Present
                         </span>
                         <span className="text-neutral-200">|</span>
-                        <span className="flex items-center gap-1.5 text-red-500">
+                        <span className="flex items-center gap-1.5 text-danger">
                             <span className="w-2 h-2 rounded-full bg-red-400 inline-block" />
                             {absentCount} Absent
                         </span>
@@ -199,7 +199,7 @@ const TeacherAttendance = () => {
 
             {/* ── Table card ─────────────────────────────────────────────── */}
             <form onSubmit={handleSubmit}>
-                <div className="bg-white border border-neutral-200 rounded-3xl shadow-sm overflow-hidden">
+                <div className="bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
                     <AttendanceTable
                         students={students}
                         attendance={attendance}
@@ -210,8 +210,8 @@ const TeacherAttendance = () => {
 
                 {/* ── Submit bar ─────────────────────────────────────────── */}
                 {!loading && students.length > 0 && (
-                    <div className="flex items-center justify-between mt-4 bg-white border border-neutral-200 rounded-2xl px-5 py-4 shadow-sm">
-                        <p className="text-xs text-neutral-500 font-medium">
+                    <div className="flex items-center justify-between mt-4 bg-surface border border-border rounded-lg px-5 py-4 shadow-sm">
+                        <p className="text-xs text-text-muted font-medium">
                             Review attendance before submitting. Already-marked records will be skipped.
                         </p>
                         <button
